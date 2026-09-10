@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#11162d">
+  <meta name="description" content="Blind Spot: a colorful physics-destruction puzzle about smashing fictional surveillance cameras.">
+  <title>Blind Spot — Region 1</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" aria-label="Blind Spot game">
+    <canvas id="game" width="1280" height="720" aria-label="Physics puzzle playfield"></canvas>
+    <div id="hud" class="hud hidden" aria-live="polite">
+      <button id="backBtn" class="icon-btn" aria-label="Back to level select">←</button>
+      <div class="hud-title"><strong id="levelLabel">01 · SAY CHEESE</strong><span id="hintLabel"></span></div>
+      <div class="hud-stat"><span>CAMERAS</span><strong id="cameraCount">1</strong></div>
+      <div class="hud-stat"><span>STONES</span><strong id="shotCount">3</strong></div>
+      <button id="restartBtn" class="icon-btn" aria-label="Restart level">↻</button>
+      <button id="muteBtn" class="icon-btn" aria-label="Mute sound">♪</button>
+    </div>
+
+    <section id="menu" class="screen active" aria-labelledby="title">
+      <div class="menu-art" aria-hidden="true"><span class="scanline"></span><span class="lens"></span><span class="slash"></span></div>
+      <p class="eyebrow">AN IMPROVISED PHYSICS PUZZLE</p>
+      <h1 id="title">BLIND<br><em>SPOT</em></h1>
+      <p class="menu-copy">The Ministry is watching. Mara brought a sling and some very persuasive rubble.</p>
+      <div class="menu-actions">
+        <button id="playBtn" class="primary">PLAY REGION 1 <span>→</span></button>
+        <button id="howBtn" class="secondary">HOW TO PLAY</button>
+      </div>
+      <p class="fineprint">No people. No weapons. Just cartoon cameras with terrible warranties.</p>
+    </section>
+
+    <section id="levels" class="screen" aria-labelledby="levelsTitle">
+      <div class="panel wide">
+        <div class="panel-head"><div><p class="eyebrow">REGION 01 · STARTER CITY</p><h2 id="levelsTitle">Pick an installation</h2></div><button id="levelsBack" class="icon-btn" aria-label="Back to title">×</button></div>
+        <div id="levelGrid" class="level-grid"></div>
+        <div class="region-note"><span>MARA</span><b>STREET STONE</b><small>Heavy impact · no special ability</small></div>
+      </div>
+    </section>
+
+    <section id="how" class="screen" aria-labelledby="howTitle">
+      <div class="panel compact">
+        <button id="howClose" class="close" aria-label="Close instructions">×</button>
+        <p class="eyebrow">FIELD NOTES</p><h2 id="howTitle">Make a blind spot.</h2>
+        <ol><li><b>Drag</b> the stone backward from the sling.</li><li>Use the dots to <b>read the arc</b>.</li><li><b>Release</b>, then let the collapse finish.</li><li>Disable <b>every red camera</b> with limited stones.</li></ol>
+        <div class="materials"><span class="wood">WOOD<br><small>breaks</small></span><span class="glass">GLASS<br><small>shatters</small></span><span class="heavy">HEAVY<br><small>falls</small></span></div>
+        <p class="keys"><kbd>R</kbd> restart &nbsp; <kbd>M</kbd> mute &nbsp; <kbd>Esc</kbd> pause</p>
+        <button id="howPlay" class="primary">GOT IT</button>
+      </div>
+    </section>
+
+    <section id="result" class="screen" aria-live="assertive">
+      <div class="panel compact result-panel">
+        <p id="resultEyebrow" class="eyebrow">INSTALLATION OFFLINE</p>
+        <h2 id="resultTitle">Blind spot created.</h2>
+        <div id="resultStars" class="big-stars" aria-label="Score"></div>
+        <p id="resultDetail"></p>
+        <div class="result-actions"><button id="retryBtn" class="secondary">RETRY</button><button id="nextBtn" class="primary">NEXT LEVEL →</button></div>
+        <button id="resultLevels" class="text-btn">LEVEL SELECT</button>
+      </div>
+    </section>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="vendor/matter.min.js"></script>
+  <script src="game-data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
