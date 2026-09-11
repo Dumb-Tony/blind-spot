@@ -1,2 +1,4 @@
 .sites-runtime/
 tests/smoke.png
+node_modules/
+tests/screenshots/

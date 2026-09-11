@@ -1,18 +1,13 @@
-import fs from "node:fs";
-import path from "node:path";
-import {fileURLToPath} from "node:url";
-
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const dist=path.join(root,"dist");
-const html=fs.readFileSync(path.join(dist,"index.html"),"utf8");
-const css=fs.readFileSync(path.join(dist,"styles.css"),"utf8");
-const matter=fs.readFileSync(path.join(dist,"vendor/matter.min.js"),"utf8");
-const data=fs.readFileSync(path.join(dist,"game-data.js"),"utf8");
-const game=fs.readFileSync(path.join(dist,"game.js"),"utf8");
-const standalone=html
-  .replace(/<link rel="stylesheet" href="styles\.css(?:\?v=\d+)?">/,`<style>\n${css}\n</style>`)
-  .replace(/<script src="vendor\/matter\.min\.js(?:\?v=\d+)?"><\/script>/,`<script>\n${matter}\n</script>`)
-  .replace(/<script src="game-data\.js(?:\?v=\d+)?"><\/script>/,`<script>\n${data}\n</script>`)
-  .replace(/<script src="game\.js(?:\?v=\d+)?"><\/script>/,`<script>\n${game}\n</script>`);
-fs.writeFileSync(path.join(dist,"blind-spot-standalone.html"),standalone);
-console.log(`Built ${path.join(dist,"blind-spot-standalone.html")} (${standalone.length} bytes)`);
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),dist=path.join(root,'dist');
+const atlas=fs.readFileSync(path.join(dist,'assets/region-one-atlas.png'));
+const assets=`window.BlindSpotAssets={atlas:"data:image/png;base64,${atlas.toString('base64')}"};\n`;
+fs.writeFileSync(path.join(dist,'assets.js'),assets);
+let html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
+html=html.replace(/<link rel="stylesheet" href="styles\.css[^\"]*">/,()=>`<style>${fs.readFileSync(path.join(dist,'styles.css'),'utf8')}</style>`);
+html=html.replace(/<script src="([^"?]+)(?:\?[^\"]*)?"><\/script>/g,(_,file)=>`<script>\n${fs.readFileSync(path.join(dist,file),'utf8').replace(/<\/script/gi,'<\\/script')}\n</script>`);
+if(/<script src=|<link rel="stylesheet"/.test(html))throw Error('Standalone contains unresolved dependencies');
+fs.writeFileSync(path.join(dist,'blind-spot-standalone.html'),html);
+console.log(`Built self-contained HTML: ${Buffer.byteLength(html).toLocaleString()} bytes; art and Matter.js embedded.`);

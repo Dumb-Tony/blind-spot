@@ -1,22 +1,20 @@
-# Blind Spot — Region 1
+# Blind Spot — Region 1 overhaul
 
-A standalone 2D physics-destruction puzzle prototype.
+Open `dist/blind-spot-standalone.html` in a desktop browser. All artwork, physics, styles and sound work offline. Fullscreen is optional.
 
-## Play
+Grab the glowing stone, pull left and slightly down, and release. Dots show flight; the ring marks the first predicted collision. Disable every red camera. Mara stays beside the launcher.
 
-Open `dist/blind-spot-standalone.html` in a modern desktop browser. No server or internet connection is required. Drag the loaded stone backward from the sling, aim with the dotted guide, and release. Disable every red-lensed camera before the shots run out.
+Fine aim offers angle/power sliders. Arrow keys adjust aim; Space throws. Escape cancels aiming or pauses; R restarts; M mutes. Hints, reduced motion and level selection are built in. All eight levels are open. Best stars save locally when browser storage is available.
 
-Keyboard shortcuts: `R` restart, `M` mute, `Esc` pause/menu.
+## Source
+- `dist/game-data.js`: levels, materials, tool, rebel, region and scoring.
+- `dist/physics.js`: Matter.js simulation, impacts, structural damage, settling and prediction.
+- `dist/renderer.js`: canvas world, character, feedback and thumbnails.
+- `dist/game.js`: input, menus, fixed-step clock, audio and persistence.
+- `dist/styles.css`, `dist/index.html`: responsive interface.
+- `dist/vendor/`: bundled Matter.js and license.
+- `docs/GDD.md`, `docs/TEST_REPORT.md`: design and validation.
 
-## Project layout
+Run `node tests/production.test.cjs` from this directory; no package installation needed. Run `node scripts/build-standalone.mjs` after source edits. Optional development server: `npm install`, then `npm run dev`.
 
-- `dist/blind-spot-standalone.html` — one-file offline build
-- `dist/index.html` — hosted build entry
-- `dist/styles.css`, `dist/game-data.js`, `dist/game.js` — readable hosted source
-- `dist/vendor/matter.min.js` — bundled Matter.js 0.20.0
-- `docs/GDD.md` — concise design document
-- `tests/logic.test.js` — automated progression/scoring/data checks
-
-## Testing
-
-Run `node tests/logic.test.js`. A modern browser is required for the full canvas/WebAudio experience.
+`tests/solutions.json` records real physical solutions. The old prototype tests that duplicated gameplay logic have been retired.

@@ -1,37 +1,24 @@
-# Blind Spot — Region 1 Test Report
+# Blind Spot overhaul — validation report
+
+`node tests/production.test.cjs`: **127 assertions passed** against the shipped physics, renderer and controller. Input tests use a minimal DOM/canvas adapter, not another gameplay implementation.
 
 ## Passed
+- All eight levels clear every required camera through real launches and collisions. Recorded solutions use one stone on levels 1–7 and two on the finale, earning three stars.
+- Idle levels do not award destruction; projectile mass and positions remain finite; victory fires once.
+- All level scoring boundaries award 3, 2 and 1 stars correctly.
+- Exhausting shots with misses produces failure while the camera remains.
+- Tiny pulls and cancelled drags do not spend stones.
+- Guide and actual positions agree within 0.001 world units during sampled pre-impact flight.
+- Production pointer handlers launch and win at 1280×720, offset 640×360 and 1920×1080 canvas geometries.
+- Title Play works when storage is denied; restart clears shot count; mute safely handles denied storage.
+- Pause freezes airborne physics; resume restores motion. Fine aim activates the guide; Escape cancels.
+- 30 Hz and 200 Hz render clocks produce matching projectile positions within 0.1 world units.
+- Stars persist across simulated startups; malformed saved values are bounded.
+- Standalone HTML embeds script and stylesheet dependencies.
 
-- Startup regression with browser storage forcibly denied: initialization continues, PLAY attaches, and level select opens.
-- Sling-state regression: the parked stone restores finite mass/inertia, receives launch velocity, and moves after release.
-- JavaScript syntax checks for the level registry and game runtime.
-- Standalone build generation with all CSS, game code, level data, audio logic, and Matter.js embedded.
-- Offline-integrity check: the standalone file contains no external script or stylesheet references.
-- Data validation for eight levels, known materials, starter rebel/tool registration, ordered star thresholds, and finale placement.
-- Deterministic Matter.js simulation of all eight installations. Each level disabled every required camera within its configured shot allowance:
-  - Say Cheese: 1/3 shots
-  - Weak at the Knees: 1/3 shots
-  - Double Exposure: 1/4 shots
-  - Glass Policy: 1/4 shots
-  - Leaning Argument: 1/3 shots
-  - Paperwork Cascade: 2/4 shots
-  - Privacy Wall: 1/4 shots
-  - OmniPeek Relay: 2/5 shots
-- Logic checks for 1-, 2-, and 3-star results at every level’s thresholds.
-- Source and packaged build hashes generated after the final build.
+## Honest limits
+The illustrated asset was visually inspected. Supervised rendered-browser navigation repeatedly failed or lost its connection, so **a full interactive visual browser pass was not completed**. Automated scaled-input checks do not establish real-device hit areas, rendering, audio playback or fullscreen behavior. Mobile/touch and cross-browser usability remain unverified.
 
-## Browser test limitation
+The world deliberately pauses between shots and uses bounded settling waits. Prediction stops at first impact and does not forecast destruction. Damage and mounting loss are stylized approximations. Solutions establish solvability, not ideal difficulty; several introductory levels allow forgiving one-shot chain reactions. The overhaul uses a separate local save key from the old prototype.
 
-An automated real-browser smoke test was written to cover title → level select → drag/release → win overlay. The available Playwright runtime did not include a browser binary, and downloading that binary was blocked by the execution environment. The browser smoke script remains in `tests/browser-smoke.mjs` for a later run. Physics and game-data behavior were validated headlessly against the exact bundled Matter.js version instead.
-
-## Fixed after first publication
-
-- The initial build accessed `localStorage` before wiring the menu. Browsers that deny storage access threw during startup and left the title screen inert. All persistence access is now optional and failure-safe, and the denied-storage case has a dedicated regression test.
-- The initial build created the loaded stone as permanently static. Matter.js therefore had no finite dynamic mass to restore when released: the shot counter advanced while the body became invalid and appeared not to launch. Stones are now created dynamically, parked after their physical properties exist, and restored correctly on release.
-
-## Honest slice limitations
-
-- Physics puzzles can admit emergent solutions beyond the scripted validation shots; that is intentional.
-- Progress and mute state are local to one browser/device.
-- Synthesized effects begin only after user interaction because browsers block autoplay audio.
-- Touch input is supported, but the level compositions are tuned for a landscape desktop-sized playfield.
+Older tests that duplicated gameplay logic were retired. Reproduce current checks with the command above from the project root, with no npm installation.
