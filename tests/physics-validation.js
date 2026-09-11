@@ -29,3 +29,10 @@ for(let i=0;i<LEVELS.length;i++){
   assert.ok(s.cameras.every(q=>q.g.dead),`Level ${i+1} was not completed within its shot allowance`);
 }
 console.log("PASS: all eight levels completed within their shot allowances in deterministic physics simulation.");
+
+const transitionEngine=Engine.create({enableSleeping:true});
+const transitioning=Bodies.circle(190,535,18,{density:.008,frictionAir:.005});
+Body.setStatic(transitioning,true);World.add(transitionEngine.world,transitioning);
+Body.setStatic(transitioning,false);Body.setVelocity(transitioning,{x:20,y:-8});Engine.update(transitionEngine,1000/60);
+assert.ok(Number.isFinite(transitioning.position.x)&&transitioning.position.x>190,"Released sling body must move with finite physics state");
+console.log("PASS: loaded static stone restores finite mass and moves after release.");

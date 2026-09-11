@@ -1,6 +1,6 @@
 (function(){
 "use strict";
-const {Engine,World,Bodies,Body,Events,Composite}=Matter;
+const {Engine,World,Bodies,Body,Events,Composite,Sleeping}=Matter;
 const {LEVELS,MATERIALS,TOOLS,starsFor}=window.BlindSpotData;
 const canvas=document.getElementById("game"),ctx=canvas.getContext("2d");
 const W=canvas.width,H=canvas.height,GROUND=650,ANCHOR={x:190,y:535},tool=TOOLS["street-stone"];
@@ -8,10 +8,14 @@ const el=id=>document.getElementById(id);
 const screens=["menu","levels","how","result"];
 let engine=null,levelIndex=-1,level=null,projectile=null,shotsUsed=0,cameras=[],blocks=[],particles=[];
 let dragging=false,launched=false,shotFrames=0,quietFrames=0,resultPending=false,resultTimer=0,shake=0,flash=0;
-let mute=localStorage.getItem("blindspot-mute")==="1",progress=loadProgress(),audio=null,lastTime=performance.now();
+const storage={
+  get(key){try{return window.localStorage?window.localStorage.getItem(key):null}catch(_){return null}},
+  set(key,value){try{if(window.localStorage)window.localStorage.setItem(key,value)}catch(_){/* Progress is optional; gameplay must never depend on storage access. */}}
+};
+let mute=storage.get("blindspot-mute")==="1",progress=loadProgress(),audio=null,lastTime=performance.now();
 
-function loadProgress(){try{return JSON.parse(localStorage.getItem("blindspot-progress"))||{unlocked:1,stars:{}}}catch(_){return{unlocked:1,stars:{}}}}
-function saveProgress(){localStorage.setItem("blindspot-progress",JSON.stringify(progress))}
+function loadProgress(){try{return JSON.parse(storage.get("blindspot-progress"))||{unlocked:1,stars:{}}}catch(_){return{unlocked:1,stars:{}}}}
+function saveProgress(){storage.set("blindspot-progress",JSON.stringify(progress))}
 function showScreen(id){screens.forEach(s=>el(s).classList.toggle("active",s===id));el("hud").classList.toggle("hidden",id!==null)}
 function toast(message){const t=el("toast");t.textContent=message;t.classList.add("show");clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove("show"),1500)}
 
@@ -37,8 +41,10 @@ function makeCamera(def){
   body.game={kind:"camera",disabled:false,startX:def.x,startY:def.y,fallFrames:0};cameras.push(body);World.add(engine.world,body);return body;
 }
 function makeProjectile(){
-  projectile=Bodies.circle(ANCHOR.x,ANCHOR.y,tool.radius,{isStatic:true,density:tool.density,friction:.78,frictionAir:tool.airFriction,restitution:.32,label:"projectile"});
-  projectile.game={kind:"projectile"};World.add(engine.world,projectile);launched=false;dragging=false;shotFrames=0;quietFrames=0;
+  // Calculate dynamic mass and inertia before parking the stone in the sling.
+  // A Matter body created static has no finite values to restore on release.
+  projectile=Bodies.circle(ANCHOR.x,ANCHOR.y,tool.radius,{density:tool.density,friction:.78,frictionAir:tool.airFriction,restitution:.32,label:"projectile"});
+  projectile.game={kind:"projectile"};World.add(engine.world,projectile);Body.setStatic(projectile,true);launched=false;dragging=false;shotFrames=0;quietFrames=0;
 }
 function startLevel(index){
   levelIndex=index;level=LEVELS[index];engine=Engine.create({enableSleeping:true});engine.gravity.y=1;engine.gravity.scale=.001;
@@ -77,7 +83,15 @@ function updateHUD(){if(!level)return;el("levelLabel").textContent=`${String(lev
 function pointerPos(e){const r=canvas.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:(p.clientX-r.left)*W/r.width,y:(p.clientY-r.top)*H/r.height}}
 function onDown(e){if(!level||launched||resultPending||shotsUsed>=level.shots)return;audio.wake();const p=pointerPos(e);if(Math.hypot(p.x-projectile.position.x,p.y-projectile.position.y)<50){dragging=true;e.preventDefault()}}
 function onMove(e){if(!dragging)return;e.preventDefault();const p=pointerPos(e),dx=p.x-ANCHOR.x,dy=p.y-ANCHOR.y,d=Math.hypot(dx,dy)||1,limit=Math.min(tool.maxPull,d);let x=ANCHOR.x+dx/d*limit,y=ANCHOR.y+dy/d*limit;x=Math.min(x,ANCHOR.x+30);Body.setPosition(projectile,{x,y})}
-function onUp(e){if(!dragging)return;dragging=false;const dx=ANCHOR.x-projectile.position.x,dy=ANCHOR.y-projectile.position.y,pull=Math.hypot(dx,dy);if(pull<12){Body.setPosition(projectile,ANCHOR);return}Body.setStatic(projectile,false);Body.setVelocity(projectile,{x:dx*tool.power,y:dy*tool.power});launched=true;shotsUsed++;shotFrames=0;quietFrames=0;audio.launch();updateHUD();e.preventDefault()}
+function onUp(e){
+  if(!dragging)return;dragging=false;
+  const dx=ANCHOR.x-projectile.position.x,dy=ANCHOR.y-projectile.position.y,pull=Math.hypot(dx,dy);
+  if(pull<12){Body.setPosition(projectile,ANCHOR);return}
+  Body.setStatic(projectile,false);Sleeping.set(projectile,false);Body.setVelocity(projectile,{x:dx*tool.power,y:dy*tool.power});
+  const valid=[projectile.mass,projectile.position.x,projectile.position.y,projectile.velocity.x,projectile.velocity.y].every(Number.isFinite);
+  if(!valid){World.remove(engine.world,projectile);projectile=null;makeProjectile();toast("Stone reset — try that pull again.");return}
+  launched=true;shotsUsed++;shotFrames=0;quietFrames=0;audio.launch();updateHUD();e.preventDefault();
+}
 
 function step(){
   if(!engine)return;Engine.update(engine,1000/60);
@@ -127,7 +141,7 @@ function loop(now){const elapsed=Math.min(50,now-lastTime);lastTime=now;if(level
 
 function renderLevelGrid(){el("levelGrid").innerHTML=LEVELS.map((l,i)=>{const unlocked=i<progress.unlocked,best=progress.stars[i]||0;return `<button class="level-card" data-level="${i}" ${unlocked?"":"disabled"} aria-label="${unlocked?`Play level ${i+1}, ${l.name}`:`Level ${i+1} locked`}"><span class="num">${String(i+1).padStart(2,"0")}</span><b>${l.name.toUpperCase()}</b><span class="card-stars">${"★".repeat(best)}${"☆".repeat(3-best)}</span>${unlocked?"":'<span class="lock">LOCKED</span>'}</button>`}).join("");el("levelGrid").querySelectorAll("button:not(:disabled)").forEach(b=>b.onclick=()=>startLevel(+b.dataset.level))}
 function openLevels(){renderLevelGrid();showScreen("levels")}
-function toggleMute(){mute=!mute;localStorage.setItem("blindspot-mute",mute?"1":"0");updateHUD();toast(mute?"Sound muted":"Sound on");if(!mute)audio.wake()}
+function toggleMute(){mute=!mute;storage.set("blindspot-mute",mute?"1":"0");updateHUD();toast(mute?"Sound muted":"Sound on");if(!mute)audio.wake()}
 
 canvas.addEventListener("mousedown",onDown);canvas.addEventListener("mousemove",onMove);window.addEventListener("mouseup",onUp);
 canvas.addEventListener("touchstart",onDown,{passive:false});canvas.addEventListener("touchmove",onMove,{passive:false});window.addEventListener("touchend",onUp,{passive:false});
