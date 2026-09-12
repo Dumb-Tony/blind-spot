@@ -1,8 +1,8 @@
-# Test report — 0.8
+# Test report — 0.9
 
 Validation: September 12, 2026.
 
-**1,994 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
+**2,048 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
 
 ## Automated coverage
 
@@ -34,3 +34,7 @@ node scripts/serve.cjs
 GitHub Pages repeats the build and regression suite before deployment.
 
 The final standalone Central Works level was also completed through real browser controls: Stone then Paint, two throws, three stars and a five-camera chain.
+
+## Visual overhaul checks (0.9)
+
+All four rigs are rendered through the production canvas adapter at four extreme aiming positions. Hand coordinates match the actual pulled projectile, feet stay planted, and elbow coordinates remain finite. Release starts from the real contact point, follows through and recovers. Idle breathing is absent with reduced motion; reset clears the old release state. All 120 existing solution replays still pass. Browser inspection covers grounded character appearance, bracing and pull poses, launcher changes, the updated scene, menus and standalone build.

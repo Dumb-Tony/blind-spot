@@ -1,9 +1,15 @@
-# Blind Spot — Six Regions (0.8)
+# Blind Spot — Six Regions (0.9)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original Region 1 layouts, scoring, art and saved stars remain intact.
+
+## Visual update
+
+Gameplay rebels now use articulated, cel-shaded bodies with planted boots, bending limbs, pull-dependent weight shifts and hands that track the actual tool. Ready poses reach into place; release triggers follow-through and recovery. Mara braces the sling, while Inez, Dex and June operate their distinct launchers. Their illustrated menu portraits are preserved.
+
+District lighting, distant architecture, roof edges, material bevels and shadows, menu cards and HUD styling have also been refreshed. This is a visual update: all 120 layouts, shot budgets, EMP tuning and saved progress remain compatible.
 
 ## Campaign
 
@@ -35,6 +41,7 @@ Three stars reward the tested shot target shown before aiming; two and one stars
 
 - `dist/game-data.js`: original layouts, deterministic campaign compositions, supplies and calibrated star targets.
 - `dist/physics.js`: shared Matter.js simulation, inventory, abilities, constraints, fracture and aiming guide.
+- `dist/rebel-rig.js`: articulated gameplay characters, two-link arm poses and release motion.
 - `dist/renderer.js`, `dist/game.js`: visuals, input, sound, menus and save migration.
 - `docs/GDD.md`, `docs/CAMPAIGN.md`, `docs/TEST_REPORT.md`, `docs/CHANGELOG.md`: design, level reference and validation.
 - `tests/solutions.json`: reproducible winning launches for all 120 levels (spoilers).

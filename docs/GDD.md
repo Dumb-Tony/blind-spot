@@ -1,4 +1,4 @@
-# Blind Spot — Game Design Document, 0.8
+# Blind Spot — Game Design Document, 0.9
 
 ## Play loop
 Aim, launch, watch the structure react, then choose the next shot. The intended feel is the readable launch-and-collapse puzzle loop of Angry Birds: scarce shots, useful material differences, vulnerable supports, weight transfer, chain reactions, quick retries and optional three-star mastery. Blind Spot retains its own surveillance targets, characters, artwork and tool effects.
@@ -27,3 +27,11 @@ Paint radius remains 145 pixels. A pull lasts 1.1 seconds, aimed left and above 
 
 ## Progress compatibility
 Original installations have stable legacy IDs. Unversioned eight- or thirty-two-slot saves map through these IDs to the expanded campaign. Version 2 stores the expanded stars array and last level. Invalid values are bounded, blocked storage is tolerated, and retries do not reduce best stars. No save reset is required.
+
+## 0.9 character and scene direction
+
+In-play characters are articulated canvas illustrations rather than portrait cards. Each has a distinct palette and identifying accessories: Mara’s coral jacket/lime scarf, Inez’s purple jacket/painted trousers, Dex’s teal hoodie/goggles, and June’s gold jacket/overalls. Feet remain fixed on the roof while hips, shoulders, knees and arms respond to pull tension. A two-link arm solve keeps the grip aligned with the physical tool across all valid pull angles. The supporting hand braces the sling or launcher frame.
+
+The ready state reaches into position over 0.35 seconds. A launch event carries the actual release coordinates; the hand follows through over 0.22 seconds and recovers by 0.85 seconds. The elastic has a brief damped rebound. These motions are render-only and do not alter collision bodies, impulses or launch timing. Pausing freezes the animation clock. Reduced motion removes idle breathing, scarf flutter, elastic rebound and camera shake; essential aiming and release feedback remain.
+
+Original menu portraits remain intact. Six district palettes add atmospheric lighting and non-collidable distant architecture. Contrasting roof edges and character contact shadows establish a common ground plane. Beveled material highlights and offset shadows improve the legibility of structures without changing their hitboxes.

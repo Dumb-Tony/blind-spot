@@ -37,7 +37,7 @@ function harness({denied=false,saved=null,width=1280,height=720,offsetX=0,offset
   const window=new Node('window');window.requestAnimationFrame=fn=>{raf=fn};window.matchMedia=()=>({matches:false});Object.defineProperty(window,'localStorage',{get(){if(denied)throw Error('Denied');return{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}}});
   class Image{constructor(){this.complete=false;this.naturalWidth=0}}
   const ctx={window,document,Matter,console,Image,performance:{now:()=>now}};vm.createContext(ctx);
-  window.Matter=Matter;window.BlindSpotAssets={atlas:''};for(const f of ['game-data.js','physics.js','renderer.js','game.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
+  window.Matter=Matter;window.BlindSpotAssets={atlas:''};for(const f of ['game-data.js','physics.js','rebel-rig.js','renderer.js','game.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
   return{ctx,ids,store,state:()=>window.__blindSpot.getState(),tick(seconds=1,fps=60){const count=Math.round(seconds*fps);for(let n=0;n<count;n++){now+=1000/fps;raf(now)}},click:id=>ids[id].onclick(),key:key=>window.fire('keydown',{key}),drag(dx,dy){const p=(x,y)=>({clientX:offsetX+x/1280*width,clientY:offsetY+y/720*height,pointerId:1,button:0});ids.game.fire('pointerdown',p(220,490));ids.game.fire('pointermove',p(220-dx,490+dy));ids.game.fire('pointerup',p(220-dx,490+dy))}};
 }
 for(const dimensions of [{},{width:640,height:360,offsetX:50,offsetY:125},{width:1920,height:1080}]){
@@ -118,3 +118,19 @@ for(const l of LEVELS){const settled=new Simulation(l);ok(settled.cameras.every(
 const mounted=new Simulation(LEVELS[80]),fixedLens=mounted.cameras.find(cam=>cam.game.bolted);ok(fixedLens.isStatic&&fixedLens.game.shield,'armored mixed-tool pod is visibly bolted and fixed');mounted.projectile.game.tool='grapple';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(mounted.hooks.length===0&&!fixedLens.game.disabled,'hook cannot move bolted armored pod');mounted.projectile.game.tool='paint-can';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(fixedLens.game.disabled,'paint disables bolted armor');
 const emptyTool=new Simulation(LEVELS[80]);emptyTool.inventory['paint-can']=0;ok(!emptyTool.selectTool('paint-can'),'empty inventory cannot be selected');emptyTool.inventory['street-stone']=0;emptyTool.inventory['paint-can']=1;emptyTool.finishShot();ok(emptyTool.tool.id==='paint-can','next available tool loads when current supply is empty');emptyTool.inventory['paint-can']=0;emptyTool.finishShot();ok(emptyTool.state==='lost','total supply exhaustion ends attempt');
 console.log('PASS: '+checks+' final assertions, all 120 levels and inventory / EMP / stability checks.');
+
+// The pose contacts are checked against actual physics coordinates, including extreme pulls.
+const rig=visual.ctx.window.BlindSpotRebelRig;
+for(const tool of Object.keys(c.BlindSpotData.TOOLS))for(const pull of [[3,-35],[118,0],[3,118],[80,80]]){
+ const actor=new Simulation({...LEVELS[0],tool});actor.aim(220-pull[0],490+pull[1]);const pose=rig.pose(actor,99,{x:220,y:490},2,false);
+ ok(Math.hypot(pose.hand.x-actor.projectile.position.x,pose.hand.y-actor.projectile.position.y)<1e-9,'animated hand tracks the actual pulled tool');
+ ok(pose.feet.every(f=>f.y===614),'feet remain planted through every aiming angle');
+ const joint=rig.elbow(pose.shoulder,pose.palm);ok(Number.isFinite(joint.x)&&Number.isFinite(joint.y),'arm joints remain finite at extreme pulls');
+ renderer.rebel(actor);renderer.rebel(actor,true);
+}
+const actor=new Simulation(LEVELS[0]);actor.aim(135,545);const release={...actor.projectile.position};actor.launch();
+const beginning=rig.pose(actor,0,release,1,false),follow=rig.pose(actor,.22,release,1,false),recovered=rig.pose(actor,1,release,1,false);
+ok(beginning.hand.x===release.x&&beginning.hand.y===release.y,'release begins at the real grip point');ok(follow.hand.x>220&&recovered.hand.x===220,'follow-through reaches forward then returns');
+const still1=rig.pose(actor,99,release,1,true),still2=rig.pose(actor,99,release,3,true);ok(still1.shoulder.y===still2.shoulder.y,'reduced motion removes idle breathing');
+renderer.event({type:'launch',x:release.x,y:release.y});ok(renderer.shotAge===0&&renderer.releasePoint.x===release.x,'launch event starts animation at contact');renderer.animate(.2);ok(renderer.shotAge===.2,'animation advances on the rendering clock');renderer.reset();ok(renderer.shotAge===99&&renderer.readyAge===0,'restart clears follow-through and starts reach');
+console.log('PASS: '+checks+' final assertions including all four animated rebel rigs.');

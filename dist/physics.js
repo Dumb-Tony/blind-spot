@@ -42,7 +42,7 @@
       const v=this.launchVelocity();if(Math.hypot(v.x,v.y)<2.5){this.cancel();return false}
       Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
       if(this.inventory)this.inventory[this.tool.id]--;
-      this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch');return true;
+      this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch',this.projectile);return true;
     }
     launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*this.tool.power,y:(WORLD.anchor.y-this.projectile.position.y)*this.tool.power}}
     predict(stopAtHit=true){

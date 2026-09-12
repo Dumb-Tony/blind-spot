@@ -1,3 +1,11 @@
+# 0.9 — Rebels take the shot
+
+- Replaced floating gameplay portrait panels with four articulated, cel-shaded rebels.
+- Added planted feet, bending knees/elbows, pull-dependent stance, actual hand/tool contact, ready reach, release follow-through and recovery.
+- Preserved distinct launchers and original illustrated menu portraits.
+- Added district lighting/architecture, roof contact detail, material bevels/shadows, elastic rebound and refreshed menus/HUD.
+- Added pose/contact/recovery/reduced-motion regression coverage. All 120 level solutions remain valid.
+
 # 0.8 — Six regions, 120 installations
 
 - Expanded every existing region to twenty levels; preserved the original layouts and Region 1 balance.
