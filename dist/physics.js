@@ -1,21 +1,22 @@
 /* Shared production simulation. Tests instantiate this exact class. */
 (function(global){
   'use strict';
-  const {Engine,Composite,Bodies,Body,Events,Sleeping,Query}=global.Matter;
+  const {Engine,Composite,Bodies,Body,Events,Sleeping,Query,Constraint}=global.Matter;
   const {WORLD,TOOLS,MATERIALS,starsFor}=global.BlindSpotData;
   const TOOL=TOOLS['street-stone'],DT=WORLD.step/2;
   const angle=a=>Math.atan2(Math.sin(a),Math.cos(a));
-  function stone(x,y){return Bodies.circle(x,y,TOOL.radius,{density:TOOL.density,friction:.8,frictionAir:TOOL.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
+  function stone(x,y,tool=TOOL){return Bodies.circle(x,y,tool.radius,{density:tool.density,friction:.8,frictionAir:tool.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
   class Simulation{
     constructor(level,onEvent=()=>{}){
-      this.level=level;this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
+      this.level=level;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
       this.engine.gravity.scale=WORLD.gravity;this.blocks=[];this.cameras=[];this.stones=[];this.pendingBreak=new Set();this.shotsUsed=0;this.time=0;this.shotTime=0;this.quiet=0;this.state='setup';this.lastHit=-100;this.combo=0;this.bestCombo=0;this.breaks=0;this.trail=[];this.lastTrail=[];this.armed=false;
       this.add(Bodies.rectangle(640,660,4000,80,{isStatic:true,friction:.85,label:'ground'}));
       level.blocks.forEach(d=>{
         const m=MATERIALS[d.material],b=Bodies.rectangle(d.x,d.y,d.w,d.h,{isStatic:!!d.fixed,density:m.density,friction:m.friction,restitution:m.restitution,chamfer:{radius:2},sleepThreshold:45});
         b.game={kind:'block',material:d.material,w:d.w,h:d.h,hp:m.hp,maxHP:m.hp};this.blocks.push(b);this.add(b);
+        if(d.suspended){for(const side of [-1,1]){const cable=Constraint.create({pointA:{x:d.x+side*d.w*.35,y:d.y-d.suspended},bodyB:b,pointB:{x:side*d.w*.35,y:0},length:d.suspended,stiffness:.85,damping:.08});this.cables.push(cable);Composite.add(this.engine.world,cable)}}
       });
-      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0};this.cameras.push(b);this.add(b)});
+      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
       for(let n=0;n<180;n++)Engine.update(this.engine,DT);
       this.cameras.forEach(b=>{b.game.mount={...b.position};b.game.mountAngle=b.angle});
       Events.on(this.engine,'collisionStart',e=>this.collisions(e));this.state='ready';this.load();
@@ -24,11 +25,11 @@
     get remaining(){return this.cameras.filter(c=>!c.game.disabled).length}
     get shotsLeft(){return this.level.shots-this.shotsUsed}
     emit(type,body,extra={}){this.onEvent({type,x:body?.position.x,y:body?.position.y,...extra})}
-    load(){this.projectile=stone(WORLD.anchor.x,WORLD.anchor.y);this.projectile.game={kind:'stone'};Body.setStatic(this.projectile,true);this.add(this.projectile);this.state='ready';this.emit('ready')}
+    load(){this.projectile=stone(WORLD.anchor.x,WORLD.anchor.y,this.tool);this.projectile.game={kind:'stone',tool:this.tool.id||'street-stone',spent:false,color:this.tool.color};Body.setStatic(this.projectile,true);this.add(this.projectile);this.state='ready';this.emit('ready')}
     aim(x,y){
       if(this.state!=='ready'&&this.state!=='aiming')return false;
       let dx=Math.min(-3,x-WORLD.anchor.x),dy=Math.max(-35,Math.min(118,y-WORLD.anchor.y));
-      const length=Math.hypot(dx,dy),scale=Math.min(1,TOOL.maxPull/length);dx*=scale;dy*=scale;
+      const length=Math.hypot(dx,dy),scale=Math.min(1,this.tool.maxPull/length);dx*=scale;dy*=scale;
       this.state='aiming';Body.setPosition(this.projectile,{x:WORLD.anchor.x+dx,y:WORLD.anchor.y+dy});return true;
     }
     cancel(){if(this.state==='aiming'){Body.setPosition(this.projectile,WORLD.anchor);this.state='ready'}}
@@ -38,11 +39,11 @@
       Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
       this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch');return true;
     }
-    launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*TOOL.power,y:(WORLD.anchor.y-this.projectile.position.y)*TOOL.power}}
+    launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*this.tool.power,y:(WORLD.anchor.y-this.projectile.position.y)*this.tool.power}}
     predict(stopAtHit=true){
       if(!['aiming','ready'].includes(this.state))return{points:[],hit:null};
       const e=Engine.create();e.gravity.scale=WORLD.gravity;
-      const p=stone(this.projectile.position.x,this.projectile.position.y);Composite.add(e.world,p);Body.setVelocity(p,this.launchVelocity());
+      const p=stone(this.projectile.position.x,this.projectile.position.y,this.tool);Composite.add(e.world,p);Body.setVelocity(p,this.launchVelocity());
       const targets=Composite.allBodies(this.engine.world).filter(b=>b!==this.projectile&&!b.game?.disabled);
       const points=[{...p.position}],samples=[];let hit=null;
       for(let n=0;n<260;n++){
@@ -53,20 +54,21 @@
       Engine.clear(e);return{points,samples,hit};
     }
     openingGuide(){
-      // Only the opening 0.4 seconds / 180 pixels. Never query future targets.
+      // Only the opening 0.8 seconds / 340 pixels. Never query future targets.
       const e=Engine.create();e.gravity.scale=WORLD.gravity;
-      const p=stone(this.projectile.position.x,this.projectile.position.y);
+      const p=stone(this.projectile.position.x,this.projectile.position.y,this.tool);
       Composite.add(e.world,p);Body.setVelocity(p,this.launchVelocity());
       const points=[{...p.position}];let distance=0,previous={...p.position};
-      for(let i=0;i<48;i++){
+      for(let i=0;i<96;i++){
         Engine.update(e,DT);distance+=Math.hypot(p.position.x-previous.x,p.position.y-previous.y);previous={...p.position};
-        if(distance>180)break;if(i%4===3)points.push({...p.position});
+        if(distance>340)break;if(i%4===3)points.push({...p.position});
       }
       Engine.clear(e);return{points};
     }
     collisions(event){
       if(!this.armed)return;
       for(const pair of event.pairs){
+        for(const [projectile,target] of [[pair.bodyA,pair.bodyB],[pair.bodyB,pair.bodyA]])if(projectile.game?.kind==='stone'&&!projectile.game.spent)this.activateTool(projectile,target,pair.collision.supports[0]||projectile.position);
         const a=pair.bodyA,b=pair.bodyB,n=pair.collision.normal;
         const pos=pair.collision.supports[0]||a.position;
         // Contact velocity includes rotation: a falling beam's tip carries an impact.
@@ -78,9 +80,25 @@
         for(const [target,other] of [[a,b],[b,a]]){
           const g=target.game;if(!g||g.disabled||g.broken)continue;
           const massFactor=other.isStatic?1:Math.max(.15,Math.min(2.4,other.mass/(target.mass+other.mass)*2));
-          if(g.kind==='camera'&&relative*Math.sqrt(massFactor)>2.2){this.disable(target,other.game?.kind==='stone'?'DIRECT HIT':'CHAIN REACTION');continue}
+          if(g.kind==='camera'&&!g.shield&&relative*Math.sqrt(massFactor)>2.2){this.disable(target,other.game?.kind==='stone'?'DIRECT HIT':'CHAIN REACTION');continue}
           if(g.kind==='block'&&!target.isStatic){const m=MATERIALS[g.material];if(relative>m.threshold){g.hp-=(relative-m.threshold)*10*massFactor*(other.game?.kind==='stone'?1.2:1);this.emit('crack',target,{material:g.material});if(g.hp<=0)this.pendingBreak.add(target)}}
         }
+      }
+    }
+    activateTool(projectile,target,point){
+      const id=projectile.game.tool;if(id==='street-stone')return;projectile.game.spent=true;
+      if(id==='paint-can'||id==='emp-puck'){
+        const radius=id==='paint-can'?145:180;
+        const near=this.cameras.filter(c=>!c.game.disabled&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<radius);
+        const networks=new Set(near.map(c=>c.game.circuit).filter(Boolean));
+        for(const c of this.cameras)if(near.includes(c)||(id==='emp-puck'&&networks.has(c.game.circuit)))this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE');
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color});
+      }
+      if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
+        const local={x:point.x-target.position.x,y:point.y-target.position.y},cos=Math.cos(-target.angle),sin=Math.sin(-target.angle);
+        const hook=Constraint.create({pointA:{x:Math.max(260,target.position.x-230),y:target.position.y-55},bodyB:target,pointB:{x:local.x*cos-local.y*sin,y:local.x*sin+local.y*cos},length:40,stiffness:.018,damping:.06});
+        this.hooks.push({constraint:hook,until:this.time+1.1});Composite.add(this.engine.world,hook);Sleeping.set(target,false);
+        this.emit('ability',{position:point},{tool:id,radius:50,color:this.tool.color});
       }
     }
     breakBody(b){
@@ -106,7 +124,10 @@
     step(){
       if(['won','lost','ready','aiming'].includes(this.state))return;
       for(let i=0;i<2;i++){
-        Engine.update(this.engine,DT);for(const b of this.pendingBreak)this.breakBody(b);this.pendingBreak.clear();this.time+=DT/1000;this.shotTime+=DT/1000;
+        Engine.update(this.engine,DT);
+        for(const cable of [...this.cables]){const end=Constraint.pointBWorld(cable);const strain=Math.hypot(end.x-cable.pointA.x,end.y-cable.pointA.y)-cable.length;cable.overload=strain>.55?(cable.overload||0)+DT/1000:0;if(!this.blocks.includes(cable.bodyB)||cable.overload>.12){Composite.remove(this.engine.world,cable);this.cables=this.cables.filter(c=>c!==cable);Sleeping.set(cable.bodyB,false)}}
+        for(const hook of [...this.hooks])if(this.time>hook.until){Composite.remove(this.engine.world,hook.constraint);this.hooks=this.hooks.filter(h=>h!==hook)}
+        for(const b of this.pendingBreak)this.breakBody(b);this.pendingBreak.clear();this.time+=DT/1000;this.shotTime+=DT/1000;
         for(const c of this.cameras){if(c.game.disabled)continue;const tilted=Math.abs(angle(c.angle-c.game.mountAngle))>.85,fallen=c.position.y-c.game.mount.y>48;c.game.fallTime=tilted||fallen?c.game.fallTime+DT/1000:0;if(c.game.fallTime>.3||c.position.y>780||c.position.x>1420||c.position.x< -120)this.disable(c,'MOUNT BROKEN')}
         for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&(b.position.y>850||b.position.x>1480||b.position.x< -180))Composite.remove(this.engine.world,b);
       }

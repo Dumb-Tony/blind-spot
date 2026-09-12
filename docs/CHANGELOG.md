@@ -9,3 +9,11 @@ Contact damage now accounts for mass ratio and angular contact velocity. Fractur
 All eight existing levels retain their layouts, allowances, and star targets. Physical solution recordings were regenerated because chain reactions changed. Help and level tips were updated to avoid promising an impact prediction.
 
 The title identifies the build as 0.5. Standalone packaging remains fully local and offline.
+
+# 0.6 — Four-region campaign
+- Extended and brightened the fading opening guide to 0.8 seconds / 340 pixels. No impact marker.
+- Added Inez, Dex and June with a new portrait atlas, automatic paint/EMP/pull abilities, armor, circuits and hanging beams.
+- Added 24 puzzles, region selection, per-region progress and migration of existing saves.
+- Kept all original Region 1 layouts and recorded solutions.
+- Moved Fine aim above the playfield to keep low targets visible.
+- 408 production assertions pass, including all 32 three-star solutions.

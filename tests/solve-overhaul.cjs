@@ -5,7 +5,7 @@ const {Simulation}=ctx.BlindSpotPhysics,{LEVELS,WORLD}=ctx.BlindSpotData;
 function play(seq,level){const s=new Simulation(level);for(const [dx,dy] of seq){s.aim(WORLD.anchor.x-dx,WORLD.anchor.y+dy);s.launch();let n=0;while(s.state==='flying'&&n++<600)s.step();if(s.state==='won')break}return s}
 const candidates=[];for(let dx=55;dx<=117;dx+=5)for(let dy=-15;dy<=100;dy+=5)if(Math.hypot(dx,dy)<=118)candidates.push([dx,dy]);
 const output=[];
-for(let i=0;i<8;i++){
+for(let i=0;i<LEVELS.length;i++){
   const l=LEVELS[i];let seq=[],best=null;
   for(let shot=0;shot<l.shots;shot++){
     let round=null;

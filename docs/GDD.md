@@ -1,41 +1,27 @@
-# Blind Spot — concise GDD
+# Blind Spot — Game Design Document, 0.6
 
-## Promise
-A playful 2D physics puzzle: aim, launch an improvised tool, collapse structures, disable every fictional surveillance camera, earn 1–3 stars. No human targets. Region 1 introduces Mara, a courier and skater, and her taped heavy Street Stone. Mara remains beside the launcher. Eight levels end at the Ministry of Looking.
+## Core loop
+Aim, launch a tool, let physics and abilities resolve, disable every surveillance camera, earn one to three stars. Rebels stay at the launcher. The fictional Ministry's surveillance hardware is the target. Tone is playful, colorful and rebellious.
 
-## Controls and feel
-Drag the glowing stone backward and release. A forgiving grab radius, pointer capture and canvas coordinate conversion support scaled windows. Tiny pulls and cancelled drags cost nothing. A fading guide shows only the opening 0.4 seconds, capped at 180 pixels. No predicted contact marker or collision label is shown. Fine-aim sliders and arrows/Space provide alternatives. Escape cancels or pauses; R restarts; M mutes. Fullscreen is optional.
+## Campaign
+Four regions, eight levels each. Each introduces one rebel, one automatic impact tool and one structural or surveillance mechanic. All regions are available from the level-select dropdown; next-level navigation crosses region boundaries. Stars save per level; older Region 1 saves migrate in place.
 
-Combine punchy, forgiving launches with readable chain reactions. Wood splinters, glass shatters, concrete falls intact and anchored steel blocks shots. Cameras shut down through direct impact, debris impact or sustained loss of mounting. No secondary tool ability.
+1. **Starter City / Mara / Street Stone.** The original eight levels remain unchanged. Wood breaks, glass shatters, concrete transfers weight, anchored steel stays fixed.
+2. **Color Quarter / Inez / Paint Can.** Armored lenses resist direct collision damage. First impact bursts paint over a 145-pixel radius, disabling nearby lenses. Puzzles introduce pairs, barriers, separated pods, glass splash surfaces, elevated structures and a clustered finale. Falling mounts remain a valid alternative.
+3. **Signal Heights / Dex / EMP Puck.** First impact pulses within 180 pixels. Every nearby camera goes offline; matching circuit letters propagate shutdown to remote cameras. Cyan A and amber B wires show membership. Circuits do not cross between letters. Puzzles teach reachable nodes, separate networks, barriers and intersecting networks. The pulse can pass through structural materials.
+4. **Iron Docks / June / Pull Hook.** First contact with a movable body creates a physical pull for 1.1 seconds toward a point left and above it. Off-center contact creates torque. Hanging beams have two suspension constraints. Sustained extension beyond 0.55 pixels for 0.12 seconds tears a cable. Puzzles teach swinging, falling loads, independent cranes, support removal and a two-crane finale.
 
-## Simulation and outcomes
-Locally bundled Matter.js runs two substeps per fixed 60 Hz game step, independent of display refresh rate. Prediction uses matching physical properties and step size. Structures seat before play with damage disabled. The world pauses between shots for inspection. Broken blocks create physical fragments plus cosmetic particles.
+The 24 new levels each allow four tools. Two or fewer earns three stars, three earns two, four earns one. Clever chain reactions may beat these targets. Existing Region 1 thresholds remain unchanged. A failed attempt earns no stars.
 
-After launch, motion resolves before another stone loads. Bounded settling waits prevent indefinite stalls. Success requires all cameras disabled; failure requires tools exhausted with cameras remaining after resolution. Save each result once. Storage failure never blocks gameplay.
+## Aiming and readability
+Mouse/pointer drag, keyboard arrows/Space, and Fine aim sliders share the same launch model. The guide now spans up to 0.8 seconds or 340 pixels and fades only in its latter half. It shows direction and early curvature, never a predicted impact or target marker. Fine aim sits near the top, keeping low cameras visible.
 
-## Eight-level curriculum
-| Level | Lesson | Stones | Three / two stars: at most |
-|---|---|---:|---:|
-| First blind spot | Exposed camera and sling | 3 | 1 / 2 |
-| Knee-jerk reaction | Wooden supports | 3 | 1 / 2 |
-| Glass houses | Break a shield | 3 | 1 / 2 |
-| Double take | Momentum between towers | 4 | 2 / 3 |
-| Heavy paperwork | Drop a concrete weight | 3 | 1 / 2 |
-| Overprotective | Arc over anchored steel | 4 | 2 / 3 |
-| Domino department | Top-heavy chain reactions | 4 | 2 / 3 |
-| The Ministry of Looking | Four-camera material finale | 5 | 2 / 4 |
+Current tool and rebel appear in the HUD. Paint armor has a magenta outline; circuit letters and wires distinguish networks; cables and the temporary golden pull line show physical attachments. New portraits accompany the original city backdrop with region-specific color treatment. Region 1's art remains intact.
 
-Any other successful completion earns one star. Failure earns none. Thresholds are visible during play. Hints are optional. All eight levels are open for testing and replay; local progress records best stars.
+## Physics
+Matter.js runs at a fixed 60 Hz game clock with two substeps. Contact damage uses mass ratio and angular contact velocity. Fracture retains total mass and linear momentum; physical fragments inherit spin. Nearby sleeping bodies wake after a supporting body breaks. Debris participates in settling. No level-specific scripted camera kills are used.
 
-## Presentation
-Graphic-novel city at golden hour; navy, cream, lime, coral and cyan. Illustrated Mara has a distinctive silhouette and subtle motion beside the sling. Oversized red lenses, scan cones, sparks and cracked lenses distinguish cameras and shutdowns. Wood grain, cyan panes, concrete panels and steel hazard stripes distinguish materials. Particles, brief shake, trails and chain labels emphasize results. Synthesized launch, impact, break, shutdown and completion sounds have mute. Reduced motion suppresses shake and reduces animation.
+The world pauses between tools for inspection. Resolution uses a quiet window and a 14-second upper bound. Disabling all cameras wins; exhausting tools after resolution loses. Paint/EMP effects occur only at first impact. Hooks cannot grip anchored steel. Cosmetic particles are distinct from physical fragments.
 
-Menus prioritize immediate Play, clear controls, thumbnail levels, stars, restart and outcomes. Satire targets the fictional Ministry's bureaucracy, not civilians.
-
-## Expansion and delivery
-Separate data, physics, renderer and controller modules. Future regions each add one rebel, one tool and one new mechanic: painter/paint splash/shielded cameras; tinkerer/EMP/electronic clusters; mechanic/pull tool/suspended weights. These are future design directions only. Avoid inventory management, hacking minigames and complex upgrades.
-
-The standalone HTML embeds all dependencies and artwork; readable source and engine license accompany it. Desktop play is primary. No music, cloud saves, moving enemies or later regions. Keyboard aiming, DOM controls, mute and reduced motion help accessibility, but the spatial canvas puzzle is not fully screen-reader playable. Physical outcomes may vary slightly between browser engines.
-
-## Physics revision 0.5
-Mass-sensitive contact damage and angular contact velocity distinguish heavy falling weights from small debris. Physical fragments retain total mass and linear momentum and inherit spin. Nearby sleeping bodies wake on fracture. Debris is included in settling; quiet time is 0.85 seconds with a 14-second per-shot upper bound. This is a game-oriented rigid-body simulation, not a finite-element structural solver. No scripted camera kills or puzzle-specific collapse triggers are used.
+## Delivery and limits
+One self-contained offline HTML plus readable source, tests, bundled engine license and generated artwork. GitHub Pages is the public release. Desktop is the primary platform. Camera puzzles require vision; this is not a fully screen-reader-playable game. Cross-browser/device testing and further difficulty tuning remain future work. This is the first playable pass of Regions 2–4, reusing the existing city setting rather than adding new background paintings.

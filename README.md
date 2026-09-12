@@ -1,37 +1,33 @@
-# Blind Spot — Region 1, version 0.5
+# Blind Spot — Four Regions (0.6)
 
-Continue the recovered cloud game locally. The eight layouts, illustrated city and Mara, controls, menus, progress, and Matter.js engine are preserved.
+Play: https://dumb-tony.github.io/blind-spot/
+Source: https://github.com/Dumb-Tony/blind-spot
 
-## Play
-Open `dist/blind-spot-standalone.html` directly in your browser. It embeds the artwork, physics, styles, and synthesized sound and works offline. Fullscreen is optional.
+Open `dist/blind-spot-standalone.html` to play offline. All artwork, physics, styles, and sound are embedded. The current game continues the recovered Region 1 source and preserves its eight layouts, scoring targets, artwork, and saves.
 
-Grab the glowing stone, pull left and down, and release. Fading dots reveal only the start of your shot. Judge the landing yourself; disable every red camera.
+## Campaign
+| Region | Rebel | Tool | New mechanic | Levels |
+|---|---|---|---|---:|
+| Starter City | Mara | Street Stone | Breakable structures | 8 |
+| Color Quarter | Inez | Paint Can | Splash coats armored lenses | 8 |
+| Signal Heights | Dex | EMP Puck | Pulses disable matching circuits | 8 |
+| Iron Docks | June | Pull Hook | Pulling and suspended beams | 8 |
 
-Fine aim provides angle/power sliders. Arrows adjust aim; Space throws; Escape cancels or pauses; R restarts; M mutes. All eight levels are open. Best stars save locally when storage is available.
+Choose a region from the level-select dropdown. All 32 levels are open. Existing eight-level saves automatically expand to 32 without losing stars.
 
-## This update
-- Opening guide: at most 0.4 seconds / 180 pixels, fading completely away. No predicted impact marker or contact label.
-- Impacts account for the other body's mass and the velocity at a rotating body's contact point.
-- Fragments retain the parent's mass, linear momentum, and spin, so broken beams still carry weight and interact with structures.
-- Breaking a support wakes nearby resting bodies so loads can fall naturally.
-- Debris participates in settling. A 0.85-second quiet window and 14-second upper limit let chain reactions resolve without hanging.
+## Controls
+Drag the glowing tool left and down, then release. The brighter fading guide shows up to 0.8 seconds / 340 pixels of flight; landing and contact remain hidden. Fine aim uses sliders. Arrows aim; Space throws; Escape cancels or pauses; R restarts; M mutes. Tools activate automatically on their first impact: no secondary button.
 
-## Files and commands
-- `dist/`: readable game source and playable standalone HTML.
-- `dist/game-data.js`: eight levels, materials, tool, scoring.
-- `dist/physics.js`: production simulation and opening guide.
-- `dist/renderer.js`, `dist/game.js`: drawing, inputs, audio, menus, progress.
+Paint affects nearby lenses in a 145-pixel radius. EMP affects nearby cameras in a 180-pixel radius and all cameras sharing their circuit letter/color. Hooks grip a movable body and pull left for 1.1 seconds; strained suspension cables can tear. Fixed steel cannot be pulled. Ordinary impacts and falling mounts still count.
+
+## Source and checks
+- `dist/game-data.js`: 32 level layouts, region/rebel/tool definitions and scoring.
+- `dist/physics.js`: Matter.js simulation, abilities, cables, fracture and guide.
+- `dist/renderer.js`, `dist/game.js`: visuals, input, menus, sound, saves.
+- `dist/assets/`: original artwork plus three new rebel portraits.
 - `docs/GDD.md`, `docs/TEST_REPORT.md`, `docs/CHANGELOG.md`: design and validation.
-- `tests/solutions.json`: reproducible physics solutions (spoilers).
-- `node scripts/build-standalone.mjs`: rebuild the offline HTML.
-- `node tests/production.test.cjs`: run production regression checks; no installation required.
-- `node scripts/serve.cjs`: local preview at http://127.0.0.1:4175.
+- `tests/solutions.json`: reproducible solutions (spoilers).
 
-GitHub repository: https://github.com/Dumb-Tony/blind-spot
+Run `node scripts/build-standalone.mjs` to rebuild offline HTML; `node tests/production.test.cjs` runs 408 production assertions with no installation. `node scripts/serve.cjs` starts the local preview. GitHub Pages tests and publishes `dist/` on pushes to `main`.
 
-The recovered version is retained in Git history and the `region1-cloud-baseline` tag. The original source ZIP is retained locally. Updated source bundles should be generated from the current commit, not the original ZIP.
-
-## Online play and publishing
-Play the current build: https://dumb-tony.github.io/blind-spot/
-
-The public GitHub repository includes the original cloud history. GitHub Pages publishes `dist/` only after the production checks pass. Future pushes to `main` rebuild, test, and publish automatically. The original cloud-hosted site is a separate older publication; GitHub Pages is the current release link.
+The `region1-cloud-baseline` tag preserves the recovered original. Old local ZIPs remain historical snapshots; use the latest versioned bundle. The original Sites publication retains its existing access; GitHub Pages is the public sharing link.
