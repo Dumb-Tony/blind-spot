@@ -5,3 +5,7 @@ tests/screenshots/
 
 *.zip
 *.tar.gz
+
+tests/solutions-*.json
+tests/solver-*.log
+tests/production-run.log

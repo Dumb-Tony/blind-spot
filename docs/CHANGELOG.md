@@ -1,3 +1,17 @@
+# 0.8 — Six regions, 120 installations
+
+- Expanded every existing region to twenty levels; preserved the original layouts and Region 1 balance.
+- Added Junction Yard (Stone + Paint) and Central Works (all four tools), twenty levels each.
+- Added limited selectable tool supplies, active rebel/launcher switching and bolted armored pods.
+- EMP radius reduced from 180 to 95 pixels. Circuit propagation is limited to one nearest neighbor within 190 pixels. Revised EMP hints and short wire visuals.
+- Added taller frames, heavy caps, fragile upper storeys, separated towers, counterweights and suspended loads.
+- Calibrated star targets against recorded solutions, with spare completion throws.
+- Migrated old eight- and thirty-two-level progress without moving earned stars to different puzzles.
+- Expanded production tests, browser checks, campaign reference and standalone build.
+
+---
+Historical releases below describe their own versions.
+
 # Changes in 0.5 — September 12, 2026
 
 Recovered the existing cloud repository into the user's Blind Spot folder, preserving its history and artwork. No replacement game or new region was introduced.

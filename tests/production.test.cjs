@@ -8,7 +8,7 @@ let checks=0;const ok=(v,label)=>{assert.ok(v,label);checks++};
 for(let i=0;i<LEVELS.length;i++){
   let wins=0;const s=new Simulation(LEVELS[i],e=>{if(e.type==='win')wins++});
   for(let n=0;n<300;n++)s.step();ok(s.shotsUsed===0&&s.remaining===LEVELS[i].cameras.length,`L${i+1}: no free pre-shot destruction`);
-  for(const [dx,dy] of solutions[i].shots){s.aim(220-dx,490+dy);ok(s.launch(),`L${i+1}: launch accepted`);ok(Number.isFinite(s.projectile.mass)&&s.projectile.mass>0,'finite dynamic mass');for(let n=0;n<600&&s.state==='flying';n++)s.step();ok(Number.isFinite(s.projectile.position.x),'no invalid physics');}
+  for(const [dx,dy,tool] of solutions[i].shots){if(tool)ok(s.selectTool(tool),"available tool selected");s.aim(220-dx,490+dy);ok(s.launch(),`L${i+1}: launch accepted`);ok(Number.isFinite(s.projectile.mass)&&s.projectile.mass>0,'finite dynamic mass');for(let n=0;n<900&&s.state==='flying';n++)s.step();ok(Number.isFinite(s.projectile.position.x),'no invalid physics');}
   ok(s.state==='won'&&s.remaining===0,`L${i+1}: production solver clears all cameras`);ok(s.shotsUsed<=LEVELS[i].stars[0],`L${i+1}: three stars attainable`);for(let n=0;n<300;n++)s.step();ok(wins===1,'win event exactly once');
   console.log(`PASS level ${i+1}: ${LEVELS[i].name}, ${s.shotsUsed} shot(s), ${s.breaks} broken blocks`);
   for(const [used,expected] of [[LEVELS[i].stars[0],3],[LEVELS[i].stars[1],2],[LEVELS[i].shots,1]])ok(starsFor(LEVELS[i],used)===expected,'scoring boundary');
@@ -29,7 +29,7 @@ function harness({denied=false,saved=null,width=1280,height=720,offsetX=0,offset
     setAttribute(name,value){this[name]=value}
     getContext(){return draw} getBoundingClientRect(){return{left:offsetX,top:offsetY,width,height}}
     setPointerCapture(){} releasePointerCapture(){} focus(){}
-    set innerHTML(value){this._html=value;if(this.id==='levelGrid'){this.children=Array.from({length:8},(_,i)=>{const n=new Node('card'+i);n.dataset.level=i;n.querySelector=()=>new Node('thumb');return n})}}
+    set innerHTML(value){this._html=value;if(this.id==='levelGrid'){this.children=Array.from({length:(value.match(/data-level=/g)||[]).length},(_,i)=>{const n=new Node('card'+i);n.dataset.level=i;n.querySelector=()=>new Node('thumb');return n})}}
     get innerHTML(){return this._html} querySelectorAll(){return this.children}
   }
   const ids={};for(const match of fs.readFileSync('dist/index.html','utf8').matchAll(/id="([^"]+)"/g))ids[match[1]]=new Node(match[1]);ids.angleInput.value='18';ids.powerInput.value='90';ids.angleInput.tagName=ids.powerInput.tagName='INPUT';
@@ -46,7 +46,7 @@ for(const dimensions of [{},{width:640,height:360,offsetX:50,offsetY:125},{width
 const h=harness();h.click('playBtn');h.drag(95,30);h.tick(.5);h.click('pauseBtn');const paused=h.state().projectile.x;h.tick(4);ok(h.state().projectile.x===paused,'pause freezes moving projectile');h.click('resumeBtn');h.tick(.5);ok(h.state().projectile.x!==paused,'resume restores motion');h.click('restartBtn');h.click('aimBtn');ok(h.state().state==='aiming','fine aim activates guide');h.key('Escape');ok(h.state().shotsUsed===0&&h.state().state==='ready','Esc cancels aim');
 const fpsStates=[30,60,200].map(fps=>{const h=harness();h.click('playBtn');h.tick(1/fps,fps);h.drag(95,30);h.tick(1,fps);return h.state().projectile});ok(Math.abs(fpsStates[0].x-fpsStates[2].x)<.1,'30 and 200Hz render clocks give same physics position');
 const saved=harness();saved.click('playBtn');saved.drag(55,25);saved.tick(9);const resumed=harness({saved:Object.fromEntries(saved.store)});ok(resumed.state().progress.stars[0]===3,'best stars persist across page startup');
-const bad=harness({saved:{'blindspot-overhaul-progress':'{"stars":"bad","last":999}'}});ok(bad.state().progress.last===31,'corrupt save values are bounded');
+const bad=harness({saved:{'blindspot-overhaul-progress':'{"stars":"bad","last":999}'}});ok(bad.state().progress.last===67,'corrupt save values are bounded');
 const single=fs.readFileSync('dist/blind-spot-standalone.html','utf8');ok(!/<script src=|<link rel="stylesheet"/.test(single),'offline dependency embedding');
 console.log(`PASS: ${checks} assertions across exact production physics, real pointer handlers, scaled canvases, trajectories, pause, restart, failure, stars, storage, and refresh rates.`);
 // Physical regressions for the revised contact and fragment model.
@@ -76,23 +76,23 @@ ok(!cameraImpact(.05)&&cameraImpact(20),'impact strength respects debris mass');
 console.log(`PASS: ${checks} total assertions including fracture, support collapse, weighted impacts, and limited aiming.`);
 // Expansion mechanics and campaign continuity.
 const oldSave=harness({saved:{'blindspot-overhaul-progress':JSON.stringify({stars:[3,2,1,0,0,0,0,0],last:2})}});
-ok(oldSave.state().progress.stars.length===32&&oldSave.state().progress.stars[0]===3&&oldSave.state().progress.stars[8]===0,'old eight-level saves expand without losing stars');
+ok(oldSave.state().progress.stars.length===120&&oldSave.state().progress.stars[0]===3&&oldSave.state().progress.stars[8]===0,'old eight-level saves expand without losing stars');
 for(let region=1;region<4;region++){
  const ui=harness();ui.click('selectBtn');ui.ids.regionSelect.value=String(region);ui.ids.regionSelect.onchange();ui.ids.levelGrid.children[0].onclick();
- ok(ui.state().index===region*8,'region picker starts the correct level');
- const [dx,dy]=solutions[region*8].shots[0];ui.drag(dx,dy);ui.tick(18);
+ ok(ui.state().index===region*20,'region picker starts the correct level');
+ const [dx,dy]=solutions[region*20].shots[0];ui.drag(dx,dy);ui.tick(18);
  ok(ui.state().state==='won','new tool wins via production pointer controller');
- ui.click('nextBtn');ok(ui.state().index===region*8+1,'new region next-level progression');
+ ui.click('nextBtn');ok(ui.state().index===region*20+1,'new region next-level progression');
 }
-const paint=new Simulation(LEVELS[8]);paint.armed=true;const lens=paint.cameras[0];const rock=Matter.Bodies.circle(lens.position.x-30,lens.position.y,19);rock.game={kind:'stone',tool:'street-stone'};Matter.Body.setVelocity(rock,{x:15,y:0});
+const paint=new Simulation(LEVELS[20]);paint.armed=true;const lens=paint.cameras[0];const rock=Matter.Bodies.circle(lens.position.x-30,lens.position.y,19);rock.game={kind:'stone',tool:'street-stone'};Matter.Body.setVelocity(rock,{x:15,y:0});
 paint.collisions({pairs:[{bodyA:lens,bodyB:rock,collision:{normal:{x:1,y:0},supports:[lens.position]}}]});ok(!lens.game.disabled,'armored lens resists direct impact');
 paint.projectile.game.tool='paint-can';paint.activateTool(paint.projectile,lens,lens.position);ok(lens.game.disabled,'paint bypasses armored lens');
-const network=new Simulation(LEVELS[17]);network.activateTool(network.projectile,network.cameras[0],network.cameras[0].position);ok(network.remaining===0,'EMP reaches remote matching circuit');
-const separate=new Simulation(LEVELS[18]);separate.activateTool(separate.projectile,separate.cameras[0],separate.cameras[0].position);ok(separate.remaining===1,'EMP does not jump to an unrelated remote circuit');
-const crane=new Simulation(LEVELS[24]);const craneBeam=crane.blocks[0];crane.state='flying';crane.armed=true;crane.activateTool(crane.projectile,craneBeam,craneBeam.position);ok(crane.hooks.length===1,'hook creates physical pulling constraint');for(let n=0;n<200&&crane.state==='flying';n++)crane.step();ok(crane.hooks.length===0,'pull constraint releases after its time window');
+const network=new Simulation(LEVELS[41]);network.activateTool(network.projectile,network.cameras[0],network.cameras[0].position);ok(network.remaining===1,'EMP no longer reaches a remote matching circuit');
+const separate=new Simulation(LEVELS[42]);separate.activateTool(separate.projectile,separate.cameras[0],separate.cameras[0].position);ok(separate.remaining===1,'EMP does not jump to an unrelated remote circuit');
+const crane=new Simulation(LEVELS[60]);const craneBeam=crane.blocks[0];crane.state='flying';crane.armed=true;crane.activateTool(crane.projectile,craneBeam,craneBeam.position);ok(crane.hooks.length===1,'hook creates physical pulling constraint');for(let n=0;n<200&&crane.state==='flying';n++)crane.step();ok(crane.hooks.length===0,'pull constraint releases after its time window');
 const near=new Simulation(LEVELS[0]);near.aim(120,520);const visible=near.openingGuide();ok(visible.points.at(-1).x-visible.points[0].x>280,'extended guide visibly reaches beyond sling');
-console.log(`PASS: ${checks} campaign assertions across 32 levels and four tools.`);
-const wet=new Simulation(LEVELS[8]);wet.splatter(wet.cameras[0].position,145);
+console.log(`PASS: ${checks} campaign assertions across 120 levels and four tools.`);
+const wet=new Simulation(LEVELS[20]);wet.splatter(wet.cameras[0].position,145);
 ok(wet.cameras[0].game.paint.length>0,'paint coats camera lenses');ok(wet.blocks[0].game.paint.length>0,'paint coats fixed surfaces');ok(wet.paintGround.length>0,'near-ground paint leaves a puddle');
 const marked=new Simulation(LEVELS[1]);const markedBeam=marked.blocks.find(b=>!b.isStatic);marked.splatter(markedBeam.position,145);marked.breakBody(markedBeam);ok(marked.blocks.filter(b=>b.game.kind==='debris').every(b=>b.game.paint?.length>0),'paint is retained by broken fragments');
 for(let n=0;n<20;n++)wet.splatter(wet.cameras[0].position,145);ok(wet.cameras[0].game.paint.length<=30&&wet.paintGround.length<=16,'paint marks have bounded storage');
@@ -100,3 +100,21 @@ const visual=harness();const renderer=new visual.ctx.window.BlindSpotRenderer.Re
 renderer.event({type:'paint',x:800,y:500,destinations:[{x:820,y:560}],radius:145});ok(renderer.paintDrops.length>50,'paint creates a visible spray');renderer.animate(1);ok(renderer.paintDrops.length===0,'airborne spray expires');renderer.reset();ok(renderer.paintDrops.length===0&&renderer.electric.length===0,'restart clears transient tool effects');
 const inspect=harness();inspect.click('playBtn');inspect.drag(55,25);inspect.tick(9);inspect.click('inspectBtn');ok(inspect.state().screen===null&&inspect.state().state==='won','inspect aftermath preserves won state');inspect.tick(2);ok(inspect.state().shotsUsed===1,'inspection does not launch or rescore');
 console.log(`PASS: ${checks} assertions including persistent surface paint and aftermath inspection.`);
+
+// Expanded inventory and bounded EMP regression tests.
+ok(LEVELS.length===120&&c.BlindSpotData.REGIONS.every(r=>r.levels===20),'six regions of twenty');
+ok(new Set(LEVELS.map(l=>l.id)).size===120,'stable unique level identities');
+const migrated=harness({saved:{'blindspot-overhaul-progress':JSON.stringify({stars:Array.from({length:32},(_,i)=>i%4),last:25})}});
+ok(migrated.state().progress.last===61&&migrated.state().progress.stars[41]===1,'32-level save maps by original identity');
+const mixed=new Simulation(LEVELS[80]);ok(mixed.selectTool('paint-can'),'mixed tool can be selected');mixed.aim(150,520);mixed.cancel();ok(mixed.inventory['paint-can']===3,'cancel preserves supplies');mixed.aim(150,520);mixed.launch();ok(mixed.inventory['paint-can']===2&&!mixed.selectTool('street-stone'),'launch consumes selected tool and disallows switching in flight');
+const pulseLevel={...LEVELS[40],blocks:[],cameras:[{x:750,y:599,circuit:'A'},{x:900,y:599,circuit:'A'},{x:1050,y:599,circuit:'A'}]};
+const pulse=new Simulation(pulseLevel);pulse.activateTool(pulse.projectile,pulse.cameras[0],pulse.cameras[0].position);ok(pulse.remaining===1&&!pulse.cameras[2].game.disabled,'EMP jumps once without recursive chain');
+const outside=new Simulation(pulseLevel);outside.activateTool(outside.projectile,outside.cameras[0],{x:outside.cameras[0].position.x-100,y:outside.cameras[0].position.y});ok(outside.remaining===3,'100-pixel miss is outside EMP reach');
+const inside=new Simulation(pulseLevel);inside.activateTool(inside.projectile,inside.cameras[0],{x:inside.cameras[0].position.x-90,y:inside.cameras[0].position.y});ok(inside.remaining===1,'90-pixel hit pulses and jumps once');
+const selector=harness();selector.click('selectBtn');selector.ids.regionSelect.value='5';selector.ids.regionSelect.onchange();ok(selector.ids.levelGrid.children.length===20,'twenty actual menu cards');selector.ids.levelGrid.children[0].onclick();selector.ids.toolSelect.value='paint-can';selector.ids.toolSelect.onchange();ok(selector.state().tool==='paint-can','production selector changes active tool');selector.drag(55,25);ok(selector.state().inventory['paint-can']===2,'pointer shot spends selected inventory');
+console.log('PASS: '+checks+' total production assertions for v0.8.');
+
+for(const l of LEVELS){const settled=new Simulation(l);ok(settled.cameras.every((cam,i)=>Math.hypot(cam.position.x-l.cameras[i].x,cam.position.y-l.cameras[i].y)<25),l.name+': initial layout is stable');}
+const mounted=new Simulation(LEVELS[80]),fixedLens=mounted.cameras.find(cam=>cam.game.bolted);ok(fixedLens.isStatic&&fixedLens.game.shield,'armored mixed-tool pod is visibly bolted and fixed');mounted.projectile.game.tool='grapple';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(mounted.hooks.length===0&&!fixedLens.game.disabled,'hook cannot move bolted armored pod');mounted.projectile.game.tool='paint-can';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(fixedLens.game.disabled,'paint disables bolted armor');
+const emptyTool=new Simulation(LEVELS[80]);emptyTool.inventory['paint-can']=0;ok(!emptyTool.selectTool('paint-can'),'empty inventory cannot be selected');emptyTool.inventory['street-stone']=0;emptyTool.inventory['paint-can']=1;emptyTool.finishShot();ok(emptyTool.tool.id==='paint-can','next available tool loads when current supply is empty');emptyTool.inventory['paint-can']=0;emptyTool.finishShot();ok(emptyTool.state==='lost','total supply exhaustion ends attempt');
+console.log('PASS: '+checks+' final assertions, all 120 levels and inventory / EMP / stability checks.');

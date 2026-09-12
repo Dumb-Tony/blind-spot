@@ -8,7 +8,7 @@
   function stone(x,y,tool=TOOL){return Bodies.circle(x,y,tool.radius,{density:tool.density,friction:.8,frictionAir:tool.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
   class Simulation{
     constructor(level,onEvent=()=>{}){
-      this.level=level;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
+      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
       this.engine.gravity.scale=WORLD.gravity;this.blocks=[];this.cameras=[];this.stones=[];this.pendingBreak=new Set();this.shotsUsed=0;this.time=0;this.shotTime=0;this.quiet=0;this.state='setup';this.lastHit=-100;this.combo=0;this.bestCombo=0;this.breaks=0;this.trail=[];this.lastTrail=[];this.armed=false;
       this.add(Bodies.rectangle(640,660,4000,80,{isStatic:true,friction:.85,label:'ground'}));
       level.blocks.forEach(d=>{
@@ -16,7 +16,7 @@
         b.game={kind:'block',material:d.material,w:d.w,h:d.h,hp:m.hp,maxHP:m.hp};this.blocks.push(b);this.add(b);
         if(d.suspended){for(const side of [-1,1]){const cable=Constraint.create({pointA:{x:d.x+side*d.w*.35,y:d.y-d.suspended},bodyB:b,pointB:{x:side*d.w*.35,y:0},length:d.suspended,stiffness:.85,damping:.08});this.cables.push(cable);Composite.add(this.engine.world,cable)}}
       });
-      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
+      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{isStatic:!!d.bolted,density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,bolted:!!d.bolted,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
       for(let n=0;n<180;n++)Engine.update(this.engine,DT);
       this.cameras.forEach(b=>{b.game.mount={...b.position};b.game.mountAngle=b.angle});
       Events.on(this.engine,'collisionStart',e=>this.collisions(e));this.state='ready';this.load();
@@ -26,6 +26,10 @@
     get shotsLeft(){return this.level.shots-this.shotsUsed}
     emit(type,body,extra={}){this.onEvent({type,x:body?.position.x,y:body?.position.y,...extra})}
     load(){this.projectile=stone(WORLD.anchor.x,WORLD.anchor.y,this.tool);this.projectile.game={kind:'stone',tool:this.tool.id||'street-stone',spent:false,color:this.tool.color};Body.setStatic(this.projectile,true);this.add(this.projectile);this.state='ready';this.emit('ready')}
+    selectTool(id){
+      if(!['ready','aiming'].includes(this.state)||!this.inventory||!(this.inventory[id]>0)||!TOOLS[id])return false;
+      Composite.remove(this.engine.world,this.projectile);this.tool=TOOLS[id];this.load();return true;
+    }
     aim(x,y){
       if(this.state!=='ready'&&this.state!=='aiming')return false;
       let dx=Math.min(-3,x-WORLD.anchor.x),dy=Math.max(-35,Math.min(118,y-WORLD.anchor.y));
@@ -37,6 +41,7 @@
       if(this.state!=='aiming')return false;
       const v=this.launchVelocity();if(Math.hypot(v.x,v.y)<2.5){this.cancel();return false}
       Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
+      if(this.inventory)this.inventory[this.tool.id]--;
       this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch');return true;
     }
     launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*this.tool.power,y:(WORLD.anchor.y-this.projectile.position.y)*this.tool.power}}
@@ -88,12 +93,15 @@
     activateTool(projectile,target,point){
       const id=projectile.game.tool;if(id==='street-stone')return;projectile.game.spent=true;
       if(id==='paint-can'||id==='emp-puck'){
-        const radius=id==='paint-can'?145:180;
+        const radius=id==='paint-can'?145:TOOLS['emp-puck'].pulseRadius;
         if(id==='paint-can')this.splatter(point,radius);
         const near=this.cameras.filter(c=>!c.game.disabled&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<radius);
-        const networks=new Set(near.map(c=>c.game.circuit).filter(Boolean));
+        const linked=new Set();
+        // One hop only: no map-wide shutdown, and no recursive daisy chain.
+        if(id==='emp-puck')for(const source of near){const neighbor=this.cameras.filter(c=>!c.game.disabled&&!near.includes(c)&&c.game.circuit&&c.game.circuit===source.game.circuit&&Math.hypot(c.position.x-source.position.x,c.position.y-source.position.y)<=TOOLS[id].linkRange).sort((a,b)=>Math.hypot(a.position.x-source.position.x,a.position.y-source.position.y)-Math.hypot(b.position.x-source.position.x,b.position.y-source.position.y))[0];if(neighbor)linked.add(neighbor)}
+
         const affected=[];
-        for(const c of this.cameras)if(near.includes(c)||(id==='emp-puck'&&networks.has(c.game.circuit))){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
+        for(const c of this.cameras)if(near.includes(c)||linked.has(c)){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
       if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
@@ -163,9 +171,9 @@
     }
     finishShot(){
       if(this.remaining===0){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}
-      if(!this.shotsLeft){this.state='lost';this.emit('lose');return}this.load();
+      if(!this.shotsLeft||(this.inventory&&!Object.values(this.inventory).some(n=>n>0))){this.state='lost';this.emit('lose');return}if(this.inventory&&!this.inventory[this.tool.id])this.tool=TOOLS[Object.keys(this.inventory).find(id=>this.inventory[id]>0)];this.load();
     }
-    snapshot(){return{state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
+    snapshot(){return{tool:this.tool.id,inventory:this.inventory?{...this.inventory}:null,state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
   }
   global.BlindSpotPhysics={Simulation,stone,DT};
 })(typeof window!=='undefined'?window:globalThis);

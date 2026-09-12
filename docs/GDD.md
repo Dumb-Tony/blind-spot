@@ -1,32 +1,29 @@
-# Blind Spot — Game Design Document, 0.6
+# Blind Spot — Game Design Document, 0.8
 
-## Core loop
-Aim, launch a tool, let physics and abilities resolve, disable every surveillance camera, earn one to three stars. Rebels stay at the launcher. The fictional Ministry's surveillance hardware is the target. Tone is playful, colorful and rebellious.
+## Play loop
+Aim, launch, watch the structure react, then choose the next shot. The intended feel is the readable launch-and-collapse puzzle loop of Angry Birds: scarce shots, useful material differences, vulnerable supports, weight transfer, chain reactions, quick retries and optional three-star mastery. Blind Spot retains its own surveillance targets, characters, artwork and tool effects.
 
-## Campaign
-Four regions, eight levels each. Each introduces one rebel, one automatic impact tool and one structural or surveillance mechanic. All regions are available from the level-select dropdown; next-level navigation crosses region boundaries. Stars save per level; older Region 1 saves migrate in place.
+The simulation and the original Region 1 were extended in place. Physics remains at two 120 Hz substeps per 60 Hz controller tick. The playfield remains 1280 × 720 so aiming and touch coordinates retain their established feel. Larger regions mean twenty puzzles each; later installations also occupy more of the existing field, from roughly x=658 to 1140, with upper storeys reaching about y=220. No camera scrolling or off-screen targeting is introduced.
 
-1. **Starter City / Mara / Street Stone.** The original eight levels remain unchanged. Wood breaks, glass shatters, concrete transfers weight, anchored steel stays fixed.
-2. **Color Quarter / Inez / Paint Can.** Armored lenses resist direct collision damage. First impact bursts paint over a 145-pixel radius, disabling nearby lenses. Puzzles introduce pairs, barriers, separated pods, glass splash surfaces, elevated structures and a clustered finale. Falling mounts remain a valid alternative.
-3. **Signal Heights / Dex / EMP Puck.** First impact pulses within 180 pixels. Every nearby camera goes offline; matching circuit letters propagate shutdown to remote cameras. Cyan A and amber B wires show membership. Circuits do not cross between letters. Puzzles teach reachable nodes, separate networks, barriers and intersecting networks. The pulse can pass through structural materials.
-4. **Iron Docks / June / Pull Hook.** First contact with a movable body creates a physical pull for 1.1 seconds toward a point left and above it. Off-center contact creates torque. Hanging beams have two suspension constraints. Sustained extension beyond 0.55 pixels for 0.12 seconds tears a cable. Puzzles teach swinging, falling loads, independent cranes, support removal and a two-crane finale.
+## Six twenty-level regions
+Starter City, Color Quarter, Signal Heights and Iron Docks each retain their original eight installations and gain twelve larger puzzles. Junction Yard adds twenty stone-and-paint puzzles. Central Works adds twenty full-crew puzzles. Deterministic structural compositions use independent towers, suspended beams, fixed pods, glass barriers, steel awnings, counterweights, heavy caps and upper storeys. There is no runtime random puzzle generation.
 
-The 24 new levels each allow four tools. Two or fewer earns three stars, three earns two, four earns one. Clever chain reactions may beat these targets. Existing Region 1 thresholds remain unchanged. A failed attempt earns no stars.
+Difficulty builds through stages: exposed supports, separated targets, stacked loads, multiple approaches, then district finales. More targets and compound structures raise planning demands. Neighboring puzzles vary in angle and material; subjective difficulty is not guaranteed to rise identically for every player. All layouts have recorded three-star solutions and spare shots for ordinary completion. See CAMPAIGN.md for per-level targets.
 
-## Aiming and readability
-Mouse/pointer drag, keyboard arrows/Space, and Fine aim sliders share the same launch model. The guide now spans up to 0.8 seconds or 340 pixels and fades only in its latter half. It shows direction and early curvature, never a predicted impact or target marker. Fine aim sits near the top, keeping low cameras visible.
+## Mixed supplies
+Players choose an available tool while ready or aiming. Switching cancels the old aim without spending a shot. Launching consumes one selected item and one shared throw. Supplies cannot change in flight. If a tool runs out, the next available type loads automatically; exhausting supplies or the throw allowance loses the attempt. Restart restores everything. The HUD shows remaining supply and changes the portrait, launcher and projectile with the selected tool.
 
-Current tool and rebel appear in the HUD. Paint armor has a magenta outline; circuit letters and wires distinguish networks; cables and the temporary golden pull line show physical attachments. New portraits accompany the original city backdrop with region-specific color treatment. Region 1's art remains intact.
+Junction Yard pairs structural stone shots with paint cleanup. Central Works offers all four abilities. Bolted armored pods visibly attach to fixed platforms and require paint or EMP; they cannot simply be knocked to the ground. Other cameras retain impact and broken-mount vulnerability. Clever alternatives remain valid.
 
-## Physics
-Matter.js runs at a fixed 60 Hz game clock with two substeps. Contact damage uses mass ratio and angular contact velocity. Fracture retains total mass and linear momentum; physical fragments inherit spin. Nearby sleeping bodies wake after a supporting body breaks. Debris participates in settling. No level-specific scripted camera kills are used.
+## Materials and destruction
+Wood fractures; glass fractures more readily. Concrete retains its mass and falls. Anchored steel stays fixed. Fragments preserve total mass, linear momentum and angular velocity, then collide with cameras and other debris. Removing supports wakes nearby bodies. Contact strength includes rotation and the other body's mass, so a heavy falling beam matters more than a tiny fast splinter.
 
-The world pauses between tools for inspection. Resolution uses a quiet window and a 14-second upper bound. Disabling all cameras wins; exhausting tools after resolution loses. Paint/EMP effects occur only at first impact. Hooks cannot grip anchored steel. Cosmetic particles are distinct from physical fragments.
+## Tools and feedback
+Stone remains the familiar sling. Paint uses a pressure lobber, a spinning can, airborne splashes, clipped surface marks and ground puddles. Marks move with surfaces and survive fracture. EMP uses a coil launcher and disc, followed by the smaller pulse ring, affected-node arcs and persistent shorted-camera marks. Hooks use a winch, visible cable and barbed head; a temporary constraint applies the physical pull.
 
-## Delivery and limits
-One self-contained offline HTML plus readable source, tests, bundled engine license and generated artwork. GitHub Pages is the public release. Desktop is the primary platform. Camera puzzles require vision; this is not a fully screen-reader-playable game. Cross-browser/device testing and further difficulty tuning remain future work. This is the first playable pass of Regions 2–4, reusing the existing city setting rather than adding new background paintings.
+EMP direct radius is 95 pixels, formerly 180. A directly hit circuit node may reach its nearest matching live neighbor within 190 pixels, once. It never recursively propagates and never switches off a distant circuit for free. Dashed wires only join nodes within the same short-link distance. Structural materials do not occlude the pulse. Multiple nodes directly within the pulse each receive their own single-neighbor opportunity.
 
-## Tool presentation update (0.7)
-Each tool now has its own projectile silhouette, launcher, trail and impact feedback. Paint uses persistent, body-local decals with drips and a floor puddle, bounded to 30 marks per body and 16 ground marks. Fragment decals retain their original alignment. EMP arcs connect the pulse origin to affected cameras and leave a cyan shorted-lens mark. The grappling cable is drawn back to the winch. Cosmetic drawing does not replace the existing physics collision shapes or expand ability radii.
+Paint radius remains 145 pixels. A pull lasts 1.1 seconds, aimed left and above the contact, and only attaches to movable bodies. Sustained suspension strain tears cables. The opening guide remains capped at 0.8 seconds / 340 pixels and exposes no predicted contact.
 
-The result screen provides LOOK AT THE DAMAGE for examining persistent aftermath. A minimum final-effect dwell precedes success. Restart removes all transient and persistent marks with the old level state.
+## Progress compatibility
+Original installations have stable legacy IDs. Unversioned eight- or thirty-two-slot saves map through these IDs to the expanded campaign. Version 2 stores the expanded stars array and last level. Invalid values are bounded, blocked storage is tolerated, and retries do not reduce best stars. No save reset is required.

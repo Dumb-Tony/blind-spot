@@ -1,22 +1,36 @@
-# Test report — 0.6
+# Test report — 0.8
 
 Validation: September 12, 2026.
 
-**408 assertions pass** using the shipped production simulation, renderer and controller scripts. The controller suite uses a minimal DOM/canvas adapter; it is not a full browser.
+**1,994 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
 
-- All 32 levels clear within three-star targets using recorded real launches; `tests/solutions.json` contains each sequence.
-- The original eight Region 1 solutions still pass after the expansion.
-- All scoring boundaries, finite body properties, no pre-shot free destruction, exactly-once win events, failure, cancel, pause/resume, restart and refresh-rate invariance pass.
-- Old eight-level progress expands to 32 while preserving earned stars. Region picker and next-level navigation select the right level and tool.
-- Pointer-controller solutions pass for the first level of each new region.
-- Armor resists direct impact, paint coats armor, EMP crosses matching circuits but not unrelated remote circuits, and hooks create and release real constraints.
-- Fracture mass/momentum, heavy support collapse, mass-sensitive debris impacts and guide limits remain covered.
-- The guide is at most 0.8 seconds / 340 pixels, reaches visibly past the sling, and returns no impact information.
-- The standalone build embeds both artwork atlases, engine, styles and game scripts without external script or stylesheet references.
+## Automated coverage
 
-Targeted browser inspection confirmed region selection, the Inez portrait, HUD tool labels and the longer fading guide. Fine aim was then moved upward to avoid obscuring low targets. The earlier 0.5 browser playthrough completed all original eight levels; a full 32-level manual browser playthrough has not been performed. Do not confuse deterministic solvability checks with subjective difficulty or cross-device validation.
+- Every level: valid launches, finite projectile physics, camera clearance, achievable three-star target, scoring boundaries, exactly-once win and no free pre-shot destruction.
+- All 120 initial layouts: camera displacement after seating stays below 25 pixels. Overlapping counterweights found during development were moved before final validation.
+- EMP: a 100-pixel miss does nothing; a 90-pixel hit activates; a remote matching circuit stays online; a nearby circuit jump stops after one hop; unrelated remote circuits remain unaffected.
+- Tool selection: shared allowance plus individual supplies, no mid-flight switching, no charge for cancellation, unavailable-tool rejection, automatic fallback and failure when all supplies are empty.
+- Bolted armor: remains fixed, cannot be pulled, and can be painted.
+- Save migration: both original eight-level and later thirty-two-level saves retain stars and their last installation at the new positions. Corrupt and blocked storage are tolerated.
+- Production controller: twenty cards per selected region, correct navigation, real pointer paths at three canvas sizes, selectable mixed tools, pause/resume, restart, cancellation and 30/60/200 Hz timing consistency.
+- Physical regressions: fragment mass and linear momentum, inherited spin, heavy-load collapse, debris mass sensitivity and capped opening guide without predicted contact.
+- Visual regressions: paint coats blocks and lenses, persists on fragments, has bounded storage and clears transient effects on restart; aftermath inspection preserves the result.
+- Standalone: assets, engine, styles and code are embedded with no external script or stylesheet dependencies.
 
-Limitations: sound output not audited; physics outcomes can vary slightly across engines; new-region difficulty is an initial pass; new regions share a tinted version of the original city background.
+## Browser checks
 
-## 0.7 verification
-419 assertions pass, including all 32 original solution sequences, paint on lenses and fixed surfaces, ground puddles, painted fracture fragments, bounded storage, renderer invocation for surfaces/cameras, spray expiry, effect reset and post-win inspection without rescoring. Browser inspection verified the paint-coated lens/platform/puddle after a real throw and the distinct EMP coil launcher and disc. Visual effects retain the existing game physics; paint is not a fluid simulation.
+The local multi-file build and final standalone HTML were opened in the browser. Checked the six-region menu, twenty-level lists, large final layout, tool dropdown, changing rebel/launcher, supply consumption, disabled switching during flight, persistent paint on collapsed structures and return to ready state. The final standalone displays version 0.8 and its calibrated star target.
+
+The 120 complete solution replays run in the shared production engine under Node. Browser checks cover representative paths, not 120 separate manual browser playthroughs. Solver success proves a feasible route; perceived difficulty still benefits from player feedback. No cross-device human playtest study is claimed.
+
+## Reproduce
+
+```
+node scripts/build-standalone.mjs
+node tests/production.test.cjs
+node scripts/serve.cjs
+```
+
+GitHub Pages repeats the build and regression suite before deployment.
+
+The final standalone Central Works level was also completed through real browser controls: Stone then Paint, two throws, three stars and a five-camera chain.

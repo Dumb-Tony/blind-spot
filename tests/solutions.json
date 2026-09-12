@@ -1,5 +1,6 @@
 [
   {
+    "id": "legacy-0",
     "level": 1,
     "name": "First blind spot",
     "won": true,
@@ -16,6 +17,7 @@
     ]
   },
   {
+    "id": "legacy-1",
     "level": 2,
     "name": "Knee-jerk reaction",
     "won": true,
@@ -32,6 +34,7 @@
     ]
   },
   {
+    "id": "legacy-2",
     "level": 3,
     "name": "Glass houses",
     "won": true,
@@ -48,6 +51,7 @@
     ]
   },
   {
+    "id": "legacy-3",
     "level": 4,
     "name": "Double take",
     "won": true,
@@ -65,6 +69,7 @@
     ]
   },
   {
+    "id": "legacy-4",
     "level": 5,
     "name": "Heavy paperwork",
     "won": true,
@@ -82,6 +87,7 @@
     ]
   },
   {
+    "id": "legacy-5",
     "level": 6,
     "name": "Overprotective",
     "won": true,
@@ -104,6 +110,7 @@
     ]
   },
   {
+    "id": "legacy-6",
     "level": 7,
     "name": "Domino department",
     "won": true,
@@ -122,6 +129,7 @@
     ]
   },
   {
+    "id": "legacy-7",
     "level": 8,
     "name": "The Ministry of Looking",
     "won": true,
@@ -141,7 +149,331 @@
     ]
   },
   {
+    "id": "starter-city-9",
     "level": 9,
+    "name": "Side street",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        65,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      7.9,
+      0.8,
+      0.6
+    ]
+  },
+  {
+    "id": "starter-city-10",
+    "level": 10,
+    "name": "Freight steps",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      7.8,
+      1,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-11",
+    "level": 11,
+    "name": "Balancing act",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        95,
+        45
+      ],
+      [
+        85,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-12",
+    "level": 12,
+    "name": "Split courtyard",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        65,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      12.8,
+      1,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "starter-city-13",
+    "level": 13,
+    "name": "Glass arcade",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        55,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10.4,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-14",
+    "level": 14,
+    "name": "Dead weight",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      10.5,
+      1,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "starter-city-15",
+    "level": 15,
+    "name": "Upper offices",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        75,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-16",
+    "level": 16,
+    "name": "Long division",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      17.7,
+      1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-17",
+    "level": 17,
+    "name": "Civic scaffolds",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        55
+      ],
+      [
+        75,
+        15
+      ],
+      [
+        95,
+        -15
+      ],
+      [
+        105,
+        45
+      ],
+      [
+        85,
+        45
+      ],
+      [
+        55,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.7,
+      0.8,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "starter-city-18",
+    "level": 18,
+    "name": "The leaning archive",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        65
+      ],
+      [
+        95,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1.1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "starter-city-19",
+    "level": 19,
+    "name": "Last supports",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45
+      ],
+      [
+        75,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.8,
+      0.8,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "starter-city-20",
+    "level": 20,
+    "name": "City hall",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        55
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "legacy-8",
+    "level": 21,
     "name": "Fresh coat",
     "won": true,
     "remaining": 0,
@@ -157,7 +489,8 @@
     ]
   },
   {
-    "level": 10,
+    "id": "legacy-9",
+    "level": 22,
     "name": "Two for a splash",
     "won": true,
     "remaining": 0,
@@ -174,7 +507,8 @@
     ]
   },
   {
-    "level": 11,
+    "id": "legacy-10",
+    "level": 23,
     "name": "Above the awning",
     "won": true,
     "remaining": 0,
@@ -191,7 +525,8 @@
     ]
   },
   {
-    "level": 12,
+    "id": "legacy-11",
+    "level": 24,
     "name": "Wet floor",
     "won": true,
     "remaining": 0,
@@ -208,7 +543,8 @@
     ]
   },
   {
-    "level": 13,
+    "id": "legacy-12",
+    "level": 25,
     "name": "Gallery wall",
     "won": true,
     "remaining": 0,
@@ -225,7 +561,8 @@
     ]
   },
   {
-    "level": 14,
+    "id": "legacy-13",
+    "level": 26,
     "name": "Color falls",
     "won": true,
     "remaining": 0,
@@ -247,7 +584,8 @@
     ]
   },
   {
-    "level": 15,
+    "id": "legacy-14",
+    "level": 27,
     "name": "Undercoat",
     "won": true,
     "remaining": 0,
@@ -265,7 +603,8 @@
     ]
   },
   {
-    "level": 16,
+    "id": "legacy-15",
+    "level": 28,
     "name": "A different picture",
     "won": true,
     "remaining": 0,
@@ -288,11 +627,335 @@
     ]
   },
   {
-    "level": 17,
-    "name": "Pull the plug",
+    "id": "color-quarter-9",
+    "level": 29,
+    "name": "Back alley mural",
     "won": true,
     "remaining": 0,
     "shots": [
+      [
+        105,
+        25
+      ],
+      [
+        75,
+        45
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      7.9,
+      0.8,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-10",
+    "level": 30,
+    "name": "Raised canvas",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        65,
+        45
+      ],
+      [
+        55,
+        5
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      7.8,
+      1,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-11",
+    "level": 31,
+    "name": "Paint balcony",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        65,
+        25
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-12",
+    "level": 32,
+    "name": "Separated studios",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45
+      ],
+      [
+        115,
+        5
+      ],
+      [
+        105,
+        35
+      ],
+      [
+        75,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      12.8,
+      1,
+      0.5,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-13",
+    "level": 33,
+    "name": "The conservatory",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45
+      ],
+      [
+        55,
+        25
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10.4,
+      0.8,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-14",
+    "level": 34,
+    "name": "Concrete canvas",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        75,
+        15
+      ],
+      [
+        65,
+        55
+      ],
+      [
+        105,
+        15
+      ],
+      [
+        105,
+        45
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      10.5,
+      1,
+      0.5,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-15",
+    "level": 35,
+    "name": "Over the gallery",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        55
+      ],
+      [
+        105,
+        25
+      ],
+      [
+        95,
+        55
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10,
+      0.8,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-16",
+    "level": 36,
+    "name": "Private collection",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45
+      ],
+      [
+        55,
+        25
+      ],
+      [
+        75,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      17.7,
+      1,
+      0.5,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-17",
+    "level": 37,
+    "name": "Exhibition halls",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        115,
+        15
+      ],
+      [
+        65,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.7,
+      0.8,
+      0.6,
+      0.5,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-18",
+    "level": 38,
+    "name": "Paint the district",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        65
+      ],
+      [
+        65,
+        55
+      ],
+      [
+        55,
+        5
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1.1,
+      0.5,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "color-quarter-19",
+    "level": 39,
+    "name": "Final exhibition",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        65,
+        55
+      ],
+      [
+        65,
+        55
+      ],
       [
         55,
         15
@@ -300,18 +963,75 @@
     ],
     "stars": 3,
     "initialCameraShift": [
+      0.6,
+      16.8,
+      0.8,
+      0.6,
+      0.5,
       0.4
     ]
   },
   {
-    "level": 18,
+    "id": "color-quarter-20",
+    "level": 40,
+    "name": "The grand mural",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        55
+      ],
+      [
+        105,
+        25
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1,
+      0.5,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "legacy-16",
+    "level": 41,
+    "name": "Pull the plug",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4
+    ]
+  },
+  {
+    "id": "legacy-17",
+    "level": 42,
     "name": "Shared password",
     "won": true,
     "remaining": 0,
     "shots": [
       [
         55,
-        10
+        25
+      ],
+      [
+        55,
+        45
       ]
     ],
     "stars": 3,
@@ -321,14 +1041,19 @@
     ]
   },
   {
-    "level": 19,
+    "id": "legacy-18",
+    "level": 43,
     "name": "Separate channels",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        60,
-        30
+        105,
+        5
+      ],
+      [
+        55,
+        45
       ]
     ],
     "stars": 3,
@@ -338,14 +1063,15 @@
     ]
   },
   {
-    "level": 20,
+    "id": "legacy-19",
+    "level": 44,
     "name": "Signal booster",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        55,
-        10
+        85,
+        15
       ]
     ],
     "stars": 3,
@@ -356,14 +1082,19 @@
     ]
   },
   {
-    "level": 21,
+    "id": "legacy-20",
+    "level": 45,
     "name": "Firewall",
     "won": true,
     "remaining": 0,
     "shots": [
       [
         55,
-        15
+        35
+      ],
+      [
+        55,
+        55
       ]
     ],
     "stars": 3,
@@ -373,14 +1104,19 @@
     ]
   },
   {
-    "level": 22,
+    "id": "legacy-21",
+    "level": 46,
     "name": "Cross talk",
     "won": true,
     "remaining": 0,
     "shots": [
       [
+        95,
+        15
+      ],
+      [
         55,
-        20
+        45
       ]
     ],
     "stars": 3,
@@ -392,7 +1128,8 @@
     ]
   },
   {
-    "level": 23,
+    "id": "legacy-22",
+    "level": 47,
     "name": "Dead zone",
     "won": true,
     "remaining": 0,
@@ -410,14 +1147,19 @@
     ]
   },
   {
-    "level": 24,
+    "id": "legacy-23",
+    "level": 48,
     "name": "Radio silence",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        55,
-        40
+        85,
+        15
+      ],
+      [
+        115,
+        25
       ]
     ],
     "stars": 3,
@@ -429,7 +1171,323 @@
     ]
   },
   {
-    "level": 25,
+    "id": "signal-heights-9",
+    "level": 49,
+    "name": "Local access",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ],
+      [
+        95,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      7.9,
+      0.8,
+      0.6
+    ]
+  },
+  {
+    "id": "signal-heights-10",
+    "level": 50,
+    "name": "Short connection",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        35
+      ],
+      [
+        85,
+        35
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      7.8,
+      1,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-11",
+    "level": 51,
+    "name": "Air gap",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-12",
+    "level": 52,
+    "name": "Rooftop routers",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        65,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      12.8,
+      1,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "signal-heights-13",
+    "level": 53,
+    "name": "Broken signal",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45
+      ],
+      [
+        55,
+        5
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10.4,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-14",
+    "level": 54,
+    "name": "Relay weight",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45
+      ],
+      [
+        65,
+        -15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      10.5,
+      1,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "signal-heights-15",
+    "level": 55,
+    "name": "Switchboard",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        115,
+        25
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-16",
+    "level": 56,
+    "name": "Cold storage",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      17.7,
+      1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-17",
+    "level": 57,
+    "name": "Network islands",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        55
+      ],
+      [
+        75,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.7,
+      0.8,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "signal-heights-18",
+    "level": 58,
+    "name": "Uplink terraces",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        65
+      ],
+      [
+        65,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1.1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "signal-heights-19",
+    "level": 59,
+    "name": "Final broadcast",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        55
+      ],
+      [
+        105,
+        35
+      ],
+      [
+        95,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.8,
+      0.8,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "signal-heights-20",
+    "level": 60,
+    "name": "The exchange",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45
+      ],
+      [
+        65,
+        65
+      ],
+      [
+        65,
+        -15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "legacy-24",
+    "level": 61,
     "name": "Loose ends",
     "won": true,
     "remaining": 0,
@@ -445,7 +1503,8 @@
     ]
   },
   {
-    "level": 26,
+    "id": "legacy-25",
+    "level": 62,
     "name": "Swing shift",
     "won": true,
     "remaining": 0,
@@ -462,7 +1521,8 @@
     ]
   },
   {
-    "level": 27,
+    "id": "legacy-26",
+    "level": 63,
     "name": "Falling inventory",
     "won": true,
     "remaining": 0,
@@ -479,7 +1539,8 @@
     ]
   },
   {
-    "level": 28,
+    "id": "legacy-27",
+    "level": 64,
     "name": "Two cranes",
     "won": true,
     "remaining": 0,
@@ -496,7 +1557,8 @@
     ]
   },
   {
-    "level": 29,
+    "id": "legacy-28",
+    "level": 65,
     "name": "Dock dominoes",
     "won": true,
     "remaining": 0,
@@ -513,7 +1575,8 @@
     ]
   },
   {
-    "level": 30,
+    "id": "legacy-29",
+    "level": 66,
     "name": "Load bearing",
     "won": true,
     "remaining": 0,
@@ -530,7 +1593,8 @@
     ]
   },
   {
-    "level": 31,
+    "id": "legacy-30",
+    "level": 67,
     "name": "Longshore",
     "won": true,
     "remaining": 0,
@@ -548,7 +1612,8 @@
     ]
   },
   {
-    "level": 32,
+    "id": "legacy-31",
+    "level": 68,
     "name": "The last crane",
     "won": true,
     "remaining": 0,
@@ -568,6 +1633,1520 @@
       0.4,
       0.4,
       1.3
+    ]
+  },
+  {
+    "id": "iron-docks-9",
+    "level": 69,
+    "name": "Cargo lane",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        25
+      ],
+      [
+        55,
+        -15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4
+    ]
+  },
+  {
+    "id": "iron-docks-10",
+    "level": 70,
+    "name": "Loading stairs",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35
+      ],
+      [
+        55,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4
+    ]
+  },
+  {
+    "id": "iron-docks-11",
+    "level": 71,
+    "name": "Tipping point",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        55
+      ],
+      [
+        65,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "iron-docks-12",
+    "level": 72,
+    "name": "Twin gantries",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        25
+      ],
+      [
+        115,
+        5
+      ],
+      [
+        55,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6
+    ]
+  },
+  {
+    "id": "iron-docks-13",
+    "level": 73,
+    "name": "Fragile freight",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45
+      ],
+      [
+        115,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4,
+      0.5
+    ]
+  },
+  {
+    "id": "iron-docks-14",
+    "level": 74,
+    "name": "Counterweights",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        45
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6
+    ]
+  },
+  {
+    "id": "iron-docks-15",
+    "level": 75,
+    "name": "Dock offices",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        55
+      ],
+      [
+        55,
+        55
+      ],
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10,
+      0.8,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "iron-docks-16",
+    "level": 76,
+    "name": "Cargo islands",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        55
+      ],
+      [
+        65,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "iron-docks-17",
+    "level": 77,
+    "name": "Dry dock",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45
+      ],
+      [
+        115,
+        5
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4,
+      0.5,
+      0.4
+    ]
+  },
+  {
+    "id": "iron-docks-18",
+    "level": 78,
+    "name": "Crane avenue",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        65
+      ],
+      [
+        85,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1.1,
+      0.4,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "iron-docks-19",
+    "level": 79,
+    "name": "Terminal weight",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55
+      ],
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.8,
+      0.8,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "iron-docks-20",
+    "level": 80,
+    "name": "Port authority",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        35
+      ],
+      [
+        105,
+        45
+      ],
+      [
+        55,
+        65
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6,
+      0.4
+    ]
+  },
+  {
+    "id": "junction-yard-1",
+    "level": 81,
+    "name": "Fresh partnership",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        15,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-2",
+    "level": 82,
+    "name": "Two approaches",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        15,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-3",
+    "level": 83,
+    "name": "Open the shutters",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        15,
+        "paint-can"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-4",
+    "level": 84,
+    "name": "Shared canvas",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        15,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-5",
+    "level": 85,
+    "name": "Divide the work",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        15,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-6",
+    "level": 86,
+    "name": "Art delivery",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-7",
+    "level": 87,
+    "name": "The glass market",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-8",
+    "level": 88,
+    "name": "Upper gallery",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-9",
+    "level": 89,
+    "name": "Paint and rubble",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "paint-can"
+      ],
+      [
+        115,
+        15,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.8,
+      0.8,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-10",
+    "level": 90,
+    "name": "Courtyard crew",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        45,
+        "paint-can"
+      ],
+      [
+        75,
+        5,
+        "street-stone"
+      ],
+      [
+        95,
+        15,
+        "street-stone"
+      ],
+      [
+        75,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      12.7,
+      1,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-11",
+    "level": 91,
+    "name": "Crossover",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45,
+        "street-stone"
+      ],
+      [
+        115,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-12",
+    "level": 92,
+    "name": "Private balconies",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35,
+        "street-stone"
+      ],
+      [
+        105,
+        5,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      12.8,
+      1,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-13",
+    "level": 93,
+    "name": "Narrow passage",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45,
+        "paint-can"
+      ],
+      [
+        85,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      10.4,
+      0.8,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-14",
+    "level": 94,
+    "name": "Freight murals",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55,
+        "paint-can"
+      ],
+      [
+        75,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      18,
+      1,
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-15",
+    "level": 95,
+    "name": "The tall order",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55,
+        "street-stone"
+      ],
+      [
+        75,
+        25,
+        "street-stone"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      18.3,
+      0.8,
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-16",
+    "level": 96,
+    "name": "Museum annex",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      17.7,
+      1,
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-17",
+    "level": 97,
+    "name": "Separate wings",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        45,
+        "paint-can"
+      ],
+      [
+        65,
+        -15,
+        "street-stone"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      16.7,
+      0.8,
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-18",
+    "level": 98,
+    "name": "Office avalanche",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        55,
+        "paint-can"
+      ],
+      [
+        95,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.7,
+      1.1,
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-19",
+    "level": 99,
+    "name": "The last commission",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ],
+      [
+        105,
+        35,
+        "street-stone"
+      ],
+      [
+        65,
+        45,
+        "street-stone"
+      ],
+      [
+        85,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        35,
+        "street-stone"
+      ],
+      [
+        105,
+        45,
+        "street-stone"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 2,
+    "initialCameraShift": [
+      0.7,
+      13.5,
+      0.8,
+      0.7,
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "junction-yard-20",
+    "level": 100,
+    "name": "Junction takeover",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        35,
+        "street-stone"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ],
+      [
+        55,
+        45,
+        "street-stone"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      16.6,
+      1,
+      0.5,
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-1",
+    "level": 101,
+    "name": "Crew call",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        25,
+        "paint-can"
+      ],
+      [
+        55,
+        25,
+        "grapple"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-2",
+    "level": 102,
+    "name": "Signal and steel",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25,
+        "grapple"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-3",
+    "level": 103,
+    "name": "Hooked on color",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        25,
+        "grapple"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-4",
+    "level": 104,
+    "name": "Different angles",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "emp-puck"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-5",
+    "level": 105,
+    "name": "First operation",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "street-stone"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-6",
+    "level": 106,
+    "name": "Heavy relay",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        15,
+        "emp-puck"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-7",
+    "level": 107,
+    "name": "The outer works",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35,
+        "grapple"
+      ],
+      [
+        55,
+        45,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-8",
+    "level": 108,
+    "name": "Lifting privacy",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        5,
+        "grapple"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-9",
+    "level": 109,
+    "name": "Switching tactics",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        25,
+        "emp-puck"
+      ],
+      [
+        75,
+        35,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-10",
+    "level": 110,
+    "name": "Crew quarters",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        35,
+        "grapple"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-11",
+    "level": 111,
+    "name": "Factory windows",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "grapple"
+      ],
+      [
+        95,
+        25,
+        "grapple"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      12.5,
+      0.8,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-12",
+    "level": 112,
+    "name": "Load and signal",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        15,
+        "street-stone"
+      ],
+      [
+        85,
+        35,
+        "grapple"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-13",
+    "level": 113,
+    "name": "The high route",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        45,
+        "paint-can"
+      ],
+      [
+        95,
+        5,
+        "grapple"
+      ],
+      [
+        105,
+        35,
+        "grapple"
+      ],
+      [
+        85,
+        35,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4,
+      0
+    ]
+  },
+  {
+    "id": "central-works-14",
+    "level": 114,
+    "name": "Four departments",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45,
+        "paint-can"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-15",
+    "level": 115,
+    "name": "Freight exchange",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55,
+        "street-stone"
+      ],
+      [
+        115,
+        25,
+        "grapple"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      18.3,
+      0.8,
+      0.6,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-16",
+    "level": 116,
+    "name": "The inner works",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        45,
+        "paint-can"
+      ],
+      [
+        55,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-17",
+    "level": 117,
+    "name": "Communications court",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "paint-can"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      0.8,
+      0.4,
+      0.5,
+      0
+    ]
+  },
+  {
+    "id": "central-works-18",
+    "level": 118,
+    "name": "Tower committee",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        55,
+        "paint-can"
+      ],
+      [
+        75,
+        15,
+        "grapple"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1.1,
+      0.4,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-19",
+    "level": 119,
+    "name": "Final preparations",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        45,
+        "street-stone"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ],
+      [
+        95,
+        35,
+        "grapple"
+      ],
+      [
+        85,
+        45,
+        "grapple"
+      ],
+      [
+        65,
+        55,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.7,
+      13.5,
+      0.8,
+      0.7,
+      0.5,
+      0.6,
+      0
+    ]
+  },
+  {
+    "id": "central-works-20",
+    "level": 120,
+    "name": "The central blackout",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "street-stone"
+      ],
+      [
+        55,
+        65,
+        "paint-can"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      2.3,
+      1,
+      0.4,
+      0.6,
+      0.4,
+      0
     ]
   }
 ]

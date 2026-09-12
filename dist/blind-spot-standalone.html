@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10172b"><meta name="description" content="Blind Spot — playful, punchy physics puzzles. Turn surveillance towers into a glorious mess."><title>Blind Spot · Four Regions</title><style>:root{--ink:#10172b;--panel:#152139;--cream:#fff4dd;--lime:#d9ff63;--coral:#ff795c;--teal:#63dbde;--muted:#b4c2cc;--line:#ffffff23;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--cream);background:var(--ink);font-synthesis:none}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10172b"><meta name="description" content="Blind Spot — playful, punchy physics puzzles. Turn surveillance towers into a glorious mess."><title>Blind Spot · Six Regions</title><style>:root{--ink:#10172b;--panel:#152139;--cream:#fff4dd;--lime:#d9ff63;--coral:#ff795c;--teal:#63dbde;--muted:#b4c2cc;--line:#ffffff23;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--cream);background:var(--ink);font-synthesis:none}
 *{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button:focus-visible,canvas:focus-visible,input:focus-visible{outline:3px solid var(--lime);outline-offset:4px}[hidden]{display:none!important}#app{position:relative;height:100dvh;min-height:320px;overflow:hidden;isolation:isolate;background:#10172b}#stage{position:absolute;inset:0;display:grid;place-items:center}#game{width:min(100vw,calc(100dvh * 1.77778));height:min(100dvh,calc(100vw / 1.77778));touch-action:none;display:block;outline:none!important}
 .screen{position:absolute;inset:0;z-index:30;display:none;padding:clamp(16px,3vw,42px);background:#10172bec;overflow:auto}.screen.active{display:grid;place-items:center}.screen#menu{background:linear-gradient(100deg,#10172b 40%,#15243cef);padding:0;overflow:auto}.title-layout{position:relative;display:grid;grid-template-columns:1.1fr 1fr;width:min(1150px,94vw);min-height:min(690px,100dvh);align-items:center;gap:4vw;margin:auto}.title-copy{z-index:2;padding:28px 0}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--lime);margin:0 0 15px}h1,h2{font-weight:1000;font-family:Impact,'Arial Black',system-ui,sans-serif;letter-spacing:-.045em;line-height:.9;margin:0}h1{font-size:clamp(76px,min(11.5vw,16vh),152px);transform:rotate(-3deg);transform-origin:left bottom;text-shadow:6px 6px 0 #0005}h1 em{color:var(--coral);font-style:normal}h2{font-size:clamp(32px,5vw,58px);line-height:1}.intro{font-size:clamp(20px,2.7vw,32px);font-weight:850;line-height:1.15;margin:24px 0 14px}.description{color:var(--muted);font-size:16px;line-height:1.6;margin:0 0 25px}.menu-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.primary,.secondary{border:2px solid transparent;padding:14px 22px;border-radius:8px;font-weight:950;font-size:14px;letter-spacing:.035em;min-height:49px;transition:transform .12s,background .12s;box-shadow:0 5px 0 #060c1a}.primary{background:var(--lime);color:var(--ink)}.primary span{margin-left:16px}.primary:hover{background:#eaff9e;transform:translateY(-2px)}.secondary{border-color:#ffffff3a;color:var(--cream);background:#24344d}.secondary:hover{background:#314667}.quiet{border:0;background:transparent;color:var(--muted);padding:12px;font-size:14px}.quiet:hover{color:var(--cream);text-decoration:underline}.build-label{color:#768a9c;font-size:11px;letter-spacing:.18em}.character-card{position:relative;align-self:stretch;min-height:380px;overflow:hidden}.character-card canvas{width:100%;height:100%;object-fit:contain;max-height:96dvh}.character-caption{position:absolute;bottom:9%;left:7%;right:0;transform:rotate(-4deg);padding:18px;background:var(--coral);color:var(--ink);box-shadow:7px 7px 0 #0005}.character-caption span{display:block;font-size:12px;font-weight:950;letter-spacing:.13em;margin-bottom:6px}.character-caption strong{font-size:clamp(18px,2vw,27px);line-height:1.05}.panel{background:#17243b;border:1px solid #ffffff30;border-radius:17px;box-shadow:0 18px 70px #0006;padding:clamp(22px,3vw,40px);width:100%;max-height:92dvh;overflow:auto}.wide{max-width:1100px}.compact{max-width:560px}.center{text-align:center}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}.panel-head p:not(.eyebrow){color:var(--muted);margin-bottom:0}.square{flex-shrink:0;border:1px solid #ffffff35;color:var(--cream);background:#152039;border-radius:10px;width:44px;height:44px;font-weight:900;font-size:24px;display:grid;place-items:center}.square:hover{background:#344560}.level-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.level-card{position:relative;border:1px solid #ffffff26;background:#213149;color:var(--cream);border-radius:10px;text-align:left;padding:13px;transition:.15s}.level-card:hover{border-color:var(--lime);transform:translateY(-3px)}.level-card canvas{width:100%;height:90px;background:#101b30;border-radius:5px}.level-card .num{position:absolute;top:19px;left:22px;font-weight:900;font-size:20px;color:var(--lime)}.level-card b{display:block;font-size:15px;margin:10px 0 5px}.level-card small{display:block;color:var(--muted);font-size:12px}.card-stars{display:block;color:#ffdb6d;letter-spacing:4px;font-size:21px;margin-top:8px}.note{font-size:13px;color:var(--muted);margin-bottom:0}.stack{display:grid;gap:12px;margin-top:24px}.panel ol{padding-left:22px;line-height:1.55}.panel li{padding:6px 0}.panel p{line-height:1.5}.materials{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:20px 0}.materials span{padding:13px 4px;border-radius:6px;text-align:center;font-size:11px;font-weight:950;color:#142037}.materials small{display:block;font-size:12px;font-weight:650;margin-top:6px}.wood{background:#e3a258}.glass{background:#67e5ec}.heavy{background:#7486a6}.steel{background:#344860;color:#fff!important}.keys{font-size:13px;color:var(--muted)}#hud{position:absolute;z-index:10;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,96vw);display:flex;gap:16px;align-items:center;padding:10px 14px;background:#101a30ef;border:1px solid #ffffff29;border-radius:14px;box-shadow:0 5px 25px #0003}.level-title{flex:1;min-width:0}.level-title small{display:block;color:var(--teal);font-size:11px;font-weight:900;letter-spacing:.14em;margin-bottom:3px}.level-title strong{font-size:20px;white-space:nowrap}.counter{display:flex;align-items:center;gap:12px;border-left:1px solid #ffffff25;padding-left:18px}.counter small{font-size:10px;font-weight:850;letter-spacing:.1em;max-width:65px}.counter b{font-size:30px;color:var(--lime)}#playFooter{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:min(1160px,94vw);z-index:10;display:flex;align-items:center;gap:14px;padding:10px 16px;background:#101a30e8;border:1px solid #ffffff20;border-radius:12px}#playFooter>div{flex:1;min-width:0}#stateLabel{display:block;color:var(--lime);font-size:12px;letter-spacing:.1em}#hintLabel{display:block;color:#d2dde5;font-size:14px;margin-top:5px}#aimPanel{position:absolute;bottom:103px;left:50%;transform:translateX(-50%);z-index:12;display:flex;align-items:center;gap:20px;padding:16px;background:#15213cf5;border:1px solid var(--teal);border-radius:12px}#aimPanel label{display:grid;grid-template-columns:1fr auto;gap:5px;color:var(--teal);font-size:13px}#aimPanel input{grid-column:1/3;grid-row:2;width:160px;accent-color:var(--lime)}#globalButtons{position:absolute;right:14px;bottom:103px;display:flex;gap:6px;z-index:35}.utility{border:1px solid #ffffff25;background:#10172bd9;color:var(--muted);border-radius:6px;font-size:10px;font-weight:850;padding:9px}.big-stars{font-size:58px;letter-spacing:6px;color:#ffdc70;margin:20px 0 10px;text-shadow:0 4px #90602b}.big-stars .empty{color:#47536b;text-shadow:none}.result-stats{display:flex;justify-content:center;gap:22px;color:var(--teal);font-weight:800;font-size:13px}.result-stats b{display:block;font-size:24px;color:var(--cream)}#toast{pointer-events:none;position:absolute;z-index:50;bottom:120px;left:50%;transform:translate(-50%,20px);max-width:85vw;text-align:center;padding:13px 20px;background:#0d1629f5;border:1px solid var(--teal);border-radius:9px;color:#fff;font-size:15px;opacity:0;transition:.2s}#toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:780px){.title-layout{grid-template-columns:1fr .8fr;gap:0}.character-caption{left:0;font-size:14px}.description{font-size:14px}.level-grid{grid-template-columns:repeat(2,1fr)}#hud{gap:8px;padding:8px}.counter{padding-left:9px;gap:6px}.counter small{display:none}.level-title strong{font-size:16px}.level-title small{font-size:9px}#playFooter{gap:3px;padding:10px}#hintLabel{font-size:12px}#aimPanel{width:90vw;gap:12px}#aimPanel input{width:100%}#aimPanel label{flex:1}.materials{grid-template-columns:repeat(2,1fr)}}
@@ -10,6 +10,8 @@
 .region-picker{display:flex;align-items:center;gap:1rem;margin:1rem 0;font-weight:800}.region-picker select{font:inherit;color:#fff2d8;background:#26354c;border:1px solid #63758e;border-radius:8px;padding:.7rem;max-width:100%}
 
 #aimPanel{top:92px;bottom:auto}@media(max-height:600px){#aimPanel{top:65px;bottom:auto;padding:10px}}
+
+.tool-picker{display:grid;gap:3px;font-size:9px;font-weight:900;color:var(--teal)}.tool-picker select{max-width:170px;border:1px solid #ffffff40;border-radius:6px;padding:8px;background:#22334b;color:var(--cream);font:inherit;font-size:12px}.tool-picker select:focus-visible{outline:3px solid var(--lime)}@media(max-width:780px){.tool-picker select{max-width:112px;padding:5px;font-size:10px}.level-title strong{white-space:normal}.level-title small{letter-spacing:0}}
 </style></head>
 <body><main id="app">
   <div id="stage"><canvas id="game" width="1280" height="720" tabindex="0" aria-label="Blind Spot playfield. Drag the stone left and down to aim. Release to throw. Arrow keys also aim; Space throws."></canvas></div>
@@ -18,15 +20,16 @@
     <div class="level-title"><small id="district"></small><strong id="levelLabel"></strong></div>
     <div class="counter"><small>CAMERAS LEFT</small><b id="cameraCount">1</b></div>
     <div class="counter stones-counter"><small>TOOLS LEFT</small><b id="shotCount">3</b></div>
+    <label class="tool-picker">LOAD TOOL <select id="toolSelect" aria-label="Choose tool"></select></label>
     <button id="restartBtn" class="square" title="Restart (R)" aria-label="Restart level">↻</button>
   </header>
   <aside id="playFooter" hidden><div><strong id="stateLabel">READY WHEN YOU ARE</strong><span id="hintLabel"></span></div><button id="hintBtn" class="quiet">Need a hint?</button><button id="aimBtn" class="quiet" aria-expanded="false">Fine aim</button></aside>
   <div id="aimPanel" hidden><label>Angle <input id="angleInput" type="range" min="-8" max="78" value="18"><output id="angleValue">18°</output></label><label>Power <input id="powerInput" type="range" min="25" max="100" value="90"><output id="powerValue">90%</output></label><button id="fireBtn" class="primary">THROW <span>→</span></button></div>
   <section id="menu" class="screen active" aria-labelledby="title">
-    <div class="title-layout"><div class="title-copy"><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h1 id="title">BLIND<br><em>SPOT.</em></h1><p class="intro">Big brother.<br>Meet little rock.</p><p class="description">Four rebels. Thirty-two installations.<br>Make a spectacular mess of being watched.</p><div class="menu-actions"><button id="playBtn" class="primary">LET’S BREAK THINGS <span>→</span></button><button id="selectBtn" class="secondary">CHOOSE REGION</button></div><button id="howBtn" class="quiet">How to play</button><p class="build-label">FOUR REGIONS · 0.7</p></div><div class="character-card"><canvas id="heroArt" width="768" height="1024" aria-label="Mara, the student courier, wearing a coral jacket and lime scarf"></canvas><div class="character-caption"><span>MEET MARA</span><strong>“Your privacy settings?<br>I brought them.”</strong></div></div></div>
+    <div class="title-layout"><div class="title-copy"><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h1 id="title">BLIND<br><em>SPOT.</em></h1><p class="intro">Big brother.<br>Meet little rock.</p><p class="description">Four rebels. Six regions. 120 installations.<br>Make a spectacular mess of being watched.</p><div class="menu-actions"><button id="playBtn" class="primary">LET’S BREAK THINGS <span>→</span></button><button id="selectBtn" class="secondary">CHOOSE REGION</button></div><button id="howBtn" class="quiet">How to play</button><p class="build-label">SIX REGIONS · 0.8</p></div><div class="character-card"><canvas id="heroArt" width="768" height="1024" aria-label="Mara, the student courier, wearing a coral jacket and lime scarf"></canvas><div class="character-caption"><span>MEET MARA</span><strong>“Your privacy settings?<br>I brought them.”</strong></div></div></div>
   </section>
-  <section id="levels" class="screen" aria-labelledby="levelsTitle"><div class="panel wide"><div class="panel-head"><div><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h2 id="levelsTitle">Starter City</h2><p id="regionProgress"></p></div><button id="levelsBack" class="square" aria-label="Back to title">×</button></div><label class="region-picker" for="regionSelect">Region <select id="regionSelect"><option value="0">01 · Starter City — Stone</option><option value="1">02 · Color Quarter — Paint</option><option value="2">03 · Signal Heights — EMP</option><option value="3">04 · Iron Docks — Pull Hook</option></select></label><div id="levelGrid" class="level-grid"></div><p class="note">Every level is open for playtesting. Stars and your best runs are saved on this device.</p></div></section>
-  <section id="how" class="screen" aria-labelledby="howTitle"><div class="panel compact"><p class="eyebrow">MARA’S FIELD GUIDE</p><h2 id="howTitle">Pull. Release.<br>Watch it fall.</h2><ol><li><b>Grab the glowing stone.</b> Pull left to add power, down to arc higher.</li><li><b>Judge the arc.</b> Fading dots show the beginning. You figure out where the stone lands.</li><li><b>Release.</b> Smash every red camera. Broken mounts and falling debris count too.</li></ol><div class="materials"><span class="wood">WOOD<small>Breaks</small></span><span class="glass">GLASS<small>Shatters</small></span><span class="heavy">CONCRETE<small>Falls</small></span><span class="steel">STEEL<small>Stays put</small></span></div><p><b>Region tools activate on impact.</b> Inez paints nearby armored lenses. Dex pulses nearby cameras and their matching circuits. June’s hook pulls a moving object left, then releases.</p><p>Three stars reward fewer tools. Exact goals are shown before every throw.</p><p class="keys">Arrows: aim · Space: throw · R: retry · Esc: pause · M: sound<br>Cancel a drag with Esc or right-click. “Fine aim” gives you sliders.</p><button id="howClose" class="primary">GOT IT <span>→</span></button></div></section>
+  <section id="levels" class="screen" aria-labelledby="levelsTitle"><div class="panel wide"><div class="panel-head"><div><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h2 id="levelsTitle">Starter City</h2><p id="regionProgress"></p></div><button id="levelsBack" class="square" aria-label="Back to title">×</button></div><label class="region-picker" for="regionSelect">Region <select id="regionSelect"><option value="0">01 · Starter City — Stone</option><option value="1">02 · Color Quarter — Paint</option><option value="2">03 · Signal Heights — EMP</option><option value="3">04 · Iron Docks — Pull Hook</option><option value="4">05 · Junction Yard — Stone + Paint</option><option value="5">06 · Central Works — Full Crew</option></select></label><div id="levelGrid" class="level-grid"></div><p class="note">Every level is open for playtesting. Stars and your best runs are saved on this device.</p></div></section>
+  <section id="how" class="screen" aria-labelledby="howTitle"><div class="panel compact"><p class="eyebrow">MARA’S FIELD GUIDE</p><h2 id="howTitle">Pull. Release.<br>Watch it fall.</h2><ol><li><b>Grab the glowing stone.</b> Pull left to add power, down to arc higher.</li><li><b>Judge the arc.</b> Fading dots show the beginning. You figure out where the stone lands.</li><li><b>Release.</b> Smash every red camera. Broken mounts and falling debris count too.</li></ol><div class="materials"><span class="wood">WOOD<small>Breaks</small></span><span class="glass">GLASS<small>Shatters</small></span><span class="heavy">CONCRETE<small>Falls</small></span><span class="steel">STEEL<small>Stays put</small></span></div><p><b>Region tools activate on impact.</b> Inez paints nearby armored lenses. Dex pulses cameras within 95 pixels and one matching neighbor within 190 pixels. June’s hook pulls a moving object left, then releases.</p><p>In mixed regions, use LOAD TOOL to choose before each throw. Supplies are limited. Three stars reward fewer tools. Exact goals are shown before every throw.</p><p class="keys">Arrows: aim · Space: throw · R: retry · Esc: pause · M: sound<br>Cancel a drag with Esc or right-click. “Fine aim” gives you sliders.</p><button id="howClose" class="primary">GOT IT <span>→</span></button></div></section>
   <section id="pause" class="screen" aria-labelledby="pauseTitle"><div class="panel compact center"><p class="eyebrow">TAKE A BREATHER</p><h2 id="pauseTitle">Nobody’s moving.</h2><p>Physics are paused. Your shot can wait.</p><div class="stack"><button id="resumeBtn" class="primary">BACK TO IT →</button><button id="pauseRestart" class="secondary">RETRY LEVEL</button><button id="pauseLevels" class="secondary">LEVEL SELECT</button><button id="pauseHelp" class="quiet">How to play</button></div></div></section>
   <section id="result" class="screen" aria-labelledby="resultTitle" aria-live="polite"><div class="panel compact center"><p id="resultEyebrow" class="eyebrow"></p><h2 id="resultTitle"></h2><div id="resultStars" class="big-stars"></div><p id="resultDetail"></p><div id="resultStats" class="result-stats"></div><div class="stack"><button id="nextBtn" class="primary"></button><button id="retryBtn" class="secondary">ONE MORE TRY ↻</button><button id="inspectBtn" class="secondary">LOOK AT THE DAMAGE</button><button id="resultLevels" class="quiet">Level select</button></div></div></section>
   <div id="globalButtons"><button id="muteBtn" class="utility" aria-label="Mute sound" title="Sound (M)">SOUND ON</button><button id="motionBtn" class="utility" aria-pressed="false">SHAKE ON</button><button id="fullscreenBtn" class="utility" aria-label="Toggle fullscreen">⛶</button></div>
@@ -115,6 +118,64 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   add(3,'Load bearing','Pull out a leg',[...tower(865,165,180),B(865,423,130,24,'heavy'),suspended(1100,510,145)],[C(865,390),C(1100,480)],'A hook also grips wood. Drag a support out from beneath the heavy cap.');
   add(3,'Longshore','Three on a beam',[suspended(950,490,320)],[C(840,460),C(950,460),C(1060,460)],'Aim away from the center to twist the long beam.');
   add(3,'The last crane','Iron Docks finale',[suspended(820,415,210),suspended(1090,505,210),shelf(960,610,160)],[C(775,385),C(875,385),C(1090,475),C(960,580)],'Drop the cranes, then finish anything still watching.');
+  // Stable identities keep the original 32 installations and their saved stars intact.
+  const legacy=LEVELS.splice(0);legacy.forEach((l,i)=>{l.id=`legacy-${i}`;l.finale=false});
+  TOOLS['street-stone'].id='street-stone';
+  TOOLS['emp-puck'].pulseRadius=95;TOOLS['emp-puck'].linkRange=190;
+  REGIONS[2].description='Land close: the 95-pixel pulse reaches only one nearby circuit neighbor.';
+  REGIONS.push(
+    {id:'junction-yard',name:'Junction Yard',rebel:'mara',tool:'street-stone',color:'#ffab88',description:'Mara and Inez team up. Break supports, then coat the armored survivors.'},
+    {id:'central-works',name:'Central Works',rebel:'june',tool:'grapple',color:'#baa4ff',description:'The whole crew. Choose your tools, open a route, and bring the city down.'}
+  );
+  const titles=[
+    ['Side street','Freight steps','Balancing act','Split courtyard','Glass arcade','Dead weight','Upper offices','Long division','Civic scaffolds','The leaning archive','Last supports','City hall'],
+    ['Back alley mural','Raised canvas','Paint balcony','Separated studios','The conservatory','Concrete canvas','Over the gallery','Private collection','Exhibition halls','Paint the district','Final exhibition','The grand mural'],
+    ['Local access','Short connection','Air gap','Rooftop routers','Broken signal','Relay weight','Switchboard','Cold storage','Network islands','Uplink terraces','Final broadcast','The exchange'],
+    ['Cargo lane','Loading stairs','Tipping point','Twin gantries','Fragile freight','Counterweights','Dock offices','Cargo islands','Dry dock','Crane avenue','Terminal weight','Port authority'],
+    ['Fresh partnership','Two approaches','Open the shutters','Shared canvas','Divide the work','Art delivery','The glass market','Upper gallery','Paint and rubble','Courtyard crew','Crossover','Private balconies','Narrow passage','Freight murals','The tall order','Museum annex','Separate wings','Office avalanche','The last commission','Junction takeover'],
+    ['Crew call','Signal and steel','Hooked on color','Different angles','First operation','Heavy relay','The outer works','Lifting privacy','Switching tactics','Crew quarters','Factory windows','Load and signal','The high route','Four departments','Freight exchange','The inner works','Communications court','Tower committee','Final preparations','The central blackout']
+  ];
+  // Authored structural vocabulary, composed deterministically into escalating districts.
+  // Each stage adds span, height, targets or a second structural task; no random puzzles.
+  function installation(region,stage){
+    const titleIndex=stage;stage+=region<4?8:0;
+    const mixed=region>=4, tier=Math.floor(stage/4), motif=stage%4;
+    const count=2+Math.floor((stage+(mixed?2:0))/5), blocks=[],cameras=[];
+    const left=690-tier*8,right=1040+tier*25,spacing=(right-left)/(count-1);
+    const primary=REGIONS[region].tool;
+    for(let j=0;j<count;j++){
+      const x=left+j*spacing, height=90+tier*24+((j+motif)%3)*35;
+      const width=Math.min(144,spacing-18), mat=(j+stage)%3===0?'glass':'wood';
+      // Alternate independent towers, hanging loads, two-storey frames and fixed paint pods.
+      const hanging=(region===3||region===5)&&j%2===0&&motif!==2;
+      const armored=(region===1)||(mixed&&j===count-1);
+      if(armored&&j===count-1){blocks.push(shelf(x,620-height,width));cameras.push({...shield(x,591-height),bolted:mixed});}
+      else if(hanging){blocks.push(suspended(x,620-height,width,110+tier*10));cameras.push(C(x,590-height));}
+      else {
+        blocks.push(...tower(x,height,width,mat));
+        let top=620-height-20;
+        if(tier>=1&&(j+motif)%2===0){blocks.push(B(x,top-13,width*.64,26,'heavy'));top-=26;}
+        if(tier>=2&&j===1){const upper=65+tier*8;blocks.push(B(x-width*.3,top-upper/2,18,upper,'glass'),B(x+width*.3,top-upper/2,18,upper),B(x,top-upper-8,width,16));top-=upper+16;}
+        cameras.push({...C(x,top-19),shield:armored,circuit:region===2||region===5?(Math.floor(j/2)%2?'B':'A'):undefined});
+      }
+      if(tier>=2&&j===0)cameras.push({...C(x+width*.22,599),circuit:region===2?'B':undefined});
+    }
+    if(motif===1)blocks.push(B(590,570,22,100,'glass'));
+    if(motif===2)blocks.push(B(600,572-tier*6,24,96+tier*12,'steel',true));
+    if(motif===3&&tier>=1){const x=left-85;blocks.push(B(x,600,20,40,'glass'),B(x,565,88,30,'heavy'));}
+    const tip=mixed?'Choose a tool before throwing. Break the exposed legs; save paint for the armored lens on the far platform.':region===1?'Paint the upper lenses or break their supports. Separate towers need separate splashes.':region===2?'Get the puck within 95 pixels. Circuit jumps stop after one neighbor within 190 pixels. Falling mounts still count.':region===3?'Hook the end of a beam or pull out a wooden leg. Let the weight finish the collapse.':'Aim at glass and narrow legs. Heavy caps and falling beams carry the destruction onward.';
+    const shots=cameras.length+3, arsenal=mixed?(region===4?{'street-stone':cameras.length+1,'paint-can':3}:{grapple:3,'street-stone':3,'paint-can':3,'emp-puck':3}):undefined;
+    return{id:`${REGIONS[region].id}-${stage+1}`,name:titles[region][titleIndex],district:REGIONS[region].name.toUpperCase(),region,tool:primary,arsenal,lesson:`${['Supports & timing','Separated targets','Stacked loads','Multiple approaches','District finale'][tier]} · ${cameras.length} cameras`,hint:tip,tip,shots,stars:[cameras.length+1,cameras.length+2],blocks,cameras,difficulty:stage+1};
+  }
+  REGIONS.forEach((r,region)=>{
+    r.start=LEVELS.length;r.levels=20;
+    if(region<4){const original=legacy.slice(region*8,region*8+8);if(region===2)original.forEach(l=>{l.hint=l.tip='Land within 95 pixels of a camera. Only one matching neighbor within 190 pixels can follow. Use another shot for distant nodes.';l.shots=6;l.stars=[4,5]});LEVELS.push(...original);}
+    for(let stage=0;stage<(region<4?12:20);stage++)LEVELS.push(installation(region,stage));
+    LEVELS.at(-1).finale=true;
+  });
+  // Reference pars calibrated against reproducible launches; two spare throws remain.
+  const PAR={"starter-city-9":2,"starter-city-10":2,"starter-city-11":3,"starter-city-12":2,"starter-city-13":2,"starter-city-14":2,"starter-city-15":2,"starter-city-16":2,"starter-city-17":6,"starter-city-18":2,"starter-city-19":2,"starter-city-20":2,"color-quarter-9":3,"color-quarter-10":3,"color-quarter-11":3,"color-quarter-12":4,"color-quarter-13":3,"color-quarter-14":6,"color-quarter-15":4,"color-quarter-16":3,"color-quarter-17":3,"color-quarter-18":3,"color-quarter-19":4,"color-quarter-20":3,"legacy-16":2,"legacy-17":2,"legacy-18":2,"legacy-19":2,"legacy-20":2,"legacy-21":2,"legacy-22":2,"legacy-23":2,"signal-heights-9":2,"signal-heights-10":3,"signal-heights-11":2,"signal-heights-12":2,"signal-heights-13":2,"signal-heights-14":2,"signal-heights-15":3,"signal-heights-16":2,"signal-heights-17":2,"signal-heights-18":2,"signal-heights-19":3,"signal-heights-20":3,"iron-docks-9":2,"iron-docks-10":2,"iron-docks-11":2,"iron-docks-12":3,"iron-docks-13":2,"iron-docks-14":2,"iron-docks-15":3,"iron-docks-16":2,"iron-docks-17":3,"iron-docks-18":2,"iron-docks-19":2,"iron-docks-20":3,"junction-yard-1":2,"junction-yard-2":2,"junction-yard-3":2,"junction-yard-4":2,"junction-yard-5":2,"junction-yard-6":2,"junction-yard-7":2,"junction-yard-8":2,"junction-yard-9":3,"junction-yard-10":4,"junction-yard-11":3,"junction-yard-12":3,"junction-yard-13":3,"junction-yard-14":3,"junction-yard-15":3,"junction-yard-16":2,"junction-yard-17":3,"junction-yard-18":3,"junction-yard-19":9,"junction-yard-20":3,"central-works-1":2,"central-works-2":2,"central-works-3":2,"central-works-4":2,"central-works-5":2,"central-works-6":2,"central-works-7":2,"central-works-8":2,"central-works-9":2,"central-works-10":2,"central-works-11":3,"central-works-12":3,"central-works-13":4,"central-works-14":2,"central-works-15":3,"central-works-16":2,"central-works-17":2,"central-works-18":3,"central-works-19":5,"central-works-20":2};
+  LEVELS.forEach(l=>{if(PAR[l.id]){l.stars=[PAR[l.id],PAR[l.id]+1];l.shots=Math.max(PAR[l.id]+2,l.cameras.length)}});
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);
 
@@ -129,7 +190,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   function stone(x,y,tool=TOOL){return Bodies.circle(x,y,tool.radius,{density:tool.density,friction:.8,frictionAir:tool.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
   class Simulation{
     constructor(level,onEvent=()=>{}){
-      this.level=level;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
+      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
       this.engine.gravity.scale=WORLD.gravity;this.blocks=[];this.cameras=[];this.stones=[];this.pendingBreak=new Set();this.shotsUsed=0;this.time=0;this.shotTime=0;this.quiet=0;this.state='setup';this.lastHit=-100;this.combo=0;this.bestCombo=0;this.breaks=0;this.trail=[];this.lastTrail=[];this.armed=false;
       this.add(Bodies.rectangle(640,660,4000,80,{isStatic:true,friction:.85,label:'ground'}));
       level.blocks.forEach(d=>{
@@ -137,7 +198,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
         b.game={kind:'block',material:d.material,w:d.w,h:d.h,hp:m.hp,maxHP:m.hp};this.blocks.push(b);this.add(b);
         if(d.suspended){for(const side of [-1,1]){const cable=Constraint.create({pointA:{x:d.x+side*d.w*.35,y:d.y-d.suspended},bodyB:b,pointB:{x:side*d.w*.35,y:0},length:d.suspended,stiffness:.85,damping:.08});this.cables.push(cable);Composite.add(this.engine.world,cable)}}
       });
-      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
+      level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{isStatic:!!d.bolted,density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,bolted:!!d.bolted,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
       for(let n=0;n<180;n++)Engine.update(this.engine,DT);
       this.cameras.forEach(b=>{b.game.mount={...b.position};b.game.mountAngle=b.angle});
       Events.on(this.engine,'collisionStart',e=>this.collisions(e));this.state='ready';this.load();
@@ -147,6 +208,10 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     get shotsLeft(){return this.level.shots-this.shotsUsed}
     emit(type,body,extra={}){this.onEvent({type,x:body?.position.x,y:body?.position.y,...extra})}
     load(){this.projectile=stone(WORLD.anchor.x,WORLD.anchor.y,this.tool);this.projectile.game={kind:'stone',tool:this.tool.id||'street-stone',spent:false,color:this.tool.color};Body.setStatic(this.projectile,true);this.add(this.projectile);this.state='ready';this.emit('ready')}
+    selectTool(id){
+      if(!['ready','aiming'].includes(this.state)||!this.inventory||!(this.inventory[id]>0)||!TOOLS[id])return false;
+      Composite.remove(this.engine.world,this.projectile);this.tool=TOOLS[id];this.load();return true;
+    }
     aim(x,y){
       if(this.state!=='ready'&&this.state!=='aiming')return false;
       let dx=Math.min(-3,x-WORLD.anchor.x),dy=Math.max(-35,Math.min(118,y-WORLD.anchor.y));
@@ -158,6 +223,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
       if(this.state!=='aiming')return false;
       const v=this.launchVelocity();if(Math.hypot(v.x,v.y)<2.5){this.cancel();return false}
       Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
+      if(this.inventory)this.inventory[this.tool.id]--;
       this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch');return true;
     }
     launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*this.tool.power,y:(WORLD.anchor.y-this.projectile.position.y)*this.tool.power}}
@@ -209,12 +275,15 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     activateTool(projectile,target,point){
       const id=projectile.game.tool;if(id==='street-stone')return;projectile.game.spent=true;
       if(id==='paint-can'||id==='emp-puck'){
-        const radius=id==='paint-can'?145:180;
+        const radius=id==='paint-can'?145:TOOLS['emp-puck'].pulseRadius;
         if(id==='paint-can')this.splatter(point,radius);
         const near=this.cameras.filter(c=>!c.game.disabled&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<radius);
-        const networks=new Set(near.map(c=>c.game.circuit).filter(Boolean));
+        const linked=new Set();
+        // One hop only: no map-wide shutdown, and no recursive daisy chain.
+        if(id==='emp-puck')for(const source of near){const neighbor=this.cameras.filter(c=>!c.game.disabled&&!near.includes(c)&&c.game.circuit&&c.game.circuit===source.game.circuit&&Math.hypot(c.position.x-source.position.x,c.position.y-source.position.y)<=TOOLS[id].linkRange).sort((a,b)=>Math.hypot(a.position.x-source.position.x,a.position.y-source.position.y)-Math.hypot(b.position.x-source.position.x,b.position.y-source.position.y))[0];if(neighbor)linked.add(neighbor)}
+
         const affected=[];
-        for(const c of this.cameras)if(near.includes(c)||(id==='emp-puck'&&networks.has(c.game.circuit))){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
+        for(const c of this.cameras)if(near.includes(c)||linked.has(c)){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
       if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
@@ -284,9 +353,9 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     }
     finishShot(){
       if(this.remaining===0){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}
-      if(!this.shotsLeft){this.state='lost';this.emit('lose');return}this.load();
+      if(!this.shotsLeft||(this.inventory&&!Object.values(this.inventory).some(n=>n>0))){this.state='lost';this.emit('lose');return}if(this.inventory&&!this.inventory[this.tool.id])this.tool=TOOLS[Object.keys(this.inventory).find(id=>this.inventory[id]>0)];this.load();
     }
-    snapshot(){return{state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
+    snapshot(){return{tool:this.tool.id,inventory:this.inventory?{...this.inventory}:null,state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
   }
   global.BlindSpotPhysics={Simulation,stone,DT};
 })(typeof window!=='undefined'?window:globalThis);
@@ -338,14 +407,14 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     background(sim){
       const c=this.ctx,g=c.createLinearGradient(0,0,0,620);g.addColorStop(0,'#f5aa79');g.addColorStop(.6,'#f0c298');g.addColorStop(1,'#476e86');c.fillStyle=g;c.fillRect(0,0,1280,720);
       if(this.art.complete&&this.art.naturalWidth)c.drawImage(this.art,768,120,768,650,0,0,1280,620);
-      c.fillStyle=['#12233c6b','#431f526b','#083d526b','#6648205b'][sim?.level.region||0];c.fillRect(0,0,1280,620);
+      c.fillStyle=['#12233c6b','#431f526b','#083d526b','#6648205b','#5534236b','#30204f6b'][sim?.level.region||0];c.fillRect(0,0,1280,620);
       // Flat, contrasting foreground keeps the physical silhouettes readable.
       c.fillStyle='#152238';c.fillRect(0,620,1280,100);c.fillStyle='#7d929a';c.fillRect(0,620,1280,6);c.fillStyle='#31445a';c.fillRect(0,628,1280,12);
       c.strokeStyle='#ffffff10';c.lineWidth=2;for(let x=0;x<1280;x+=94){c.beginPath();c.moveTo(x,643);c.lineTo(x+30,720);c.stroke()}
       c.save();c.translate(558,167);c.rotate(-.025);c.fillStyle='#102039dd';rr(c,-125,-30,250,62,4);c.fill();c.strokeStyle='#d9ff63';c.lineWidth=2;c.stroke();c.textAlign='center';c.fillStyle='#fff3dd';c.font='900 15px system-ui';c.fillText(sim?.level.finale?'MINISTRY OF LOOKING':'YOUR PRIVACY MATTERS*',0,-3);c.font='11px system-ui';c.fillStyle='#e6ae94';c.fillText(sim?.level.finale?'DEPARTMENT OF ABSOLUTELY EVERYTHING':'*to our data collection department',0,17);c.restore();
     }
     rebel(sim){
-      const c=this.ctx;const rebel=REBELS[REGIONS[sim?.level.region||0].rebel];const bob=this.reduceMotion?0:Math.sin(this.time*2.5)*1.7;const recoil=this.reduceMotion?0:this.recoil;
+      const c=this.ctx;const rebel=Object.values(REBELS).find(r=>r.tool===(sim?.tool.id||'street-stone'));const bob=this.reduceMotion?0:Math.sin(this.time*2.5)*1.7;const recoil=this.reduceMotion?0:this.recoil;
       c.save();c.translate(74-recoil*5,619);c.rotate(-recoil*.03);c.fillStyle='#10172b';rr(c,-66,-209+bob,128,209,16);c.fill();
       if(rebel.portrait!==undefined&&this.rebels.complete&&this.rebels.naturalWidth)c.drawImage(this.rebels,rebel.portrait*512,0,512,1024,-54,-220+bob,108,210);else if(this.art.complete&&this.art.naturalWidth)c.drawImage(this.art,0,0,768,1024,-72,-210+bob,144,192);
       c.fillStyle='#d9ff63';rr(c,-41,-22,84,22,4);c.fill();c.textAlign='center';c.fillStyle='#152238';c.font='900 12px system-ui';c.fillText(rebel.name.toUpperCase(),1,-6);c.restore();
@@ -354,14 +423,14 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
       }
     }
     sling(sim,front=false){
-      if(sim&&sim.level.tool!=='street-stone'){if(!front)this.launcher(sim);return}
+      if(sim&&sim.tool.id!=='street-stone'){if(!front)this.launcher(sim);return}
       const c=this.ctx,a=WORLD.anchor;let pos=a;if(sim&&['ready','aiming'].includes(sim.state))pos=sim.projectile.position;
       c.lineCap='round';
       if(!front){c.strokeStyle='#182035';c.lineWidth=23;c.beginPath();c.moveTo(a.x,617);c.lineTo(a.x,534);c.moveTo(a.x,548);c.lineTo(a.x-24,481);c.moveTo(a.x,548);c.lineTo(a.x+24,481);c.stroke();c.strokeStyle='#b68452';c.lineWidth=12;c.stroke();c.strokeStyle='#e6ba75';c.lineWidth=3;c.beginPath();c.moveTo(a.x+3,595);c.lineTo(a.x+3,543);c.stroke();c.strokeStyle='#78e7e1';c.lineWidth=9;c.beginPath();c.moveTo(a.x-9,574);c.lineTo(a.x+9,574);c.stroke()}
       c.strokeStyle=front?'#ffe4a4':'#784d3d';c.lineWidth=front?6:8;c.beginPath();c.moveTo(a.x+(front?-24:24),481);c.lineTo(pos.x,pos.y);c.stroke();
     }
     launcher(sim){
-      const c=this.ctx,tool=sim.level.tool,accent=TOOLS[tool].color,a=WORLD.anchor,v=sim.launchVelocity(),tilt=['ready','aiming'].includes(sim.state)?Math.atan2(v.y,v.x):-.3;
+      const c=this.ctx,tool=sim.tool.id,accent=TOOLS[tool].color,a=WORLD.anchor,v=sim.launchVelocity(),tilt=['ready','aiming'].includes(sim.state)?Math.atan2(v.y,v.x):-.3;
       c.save();c.strokeStyle='#182339';c.lineWidth=12;c.beginPath();c.moveTo(196,616);c.lineTo(220,545);c.lineTo(248,616);c.stroke();c.fillStyle='#31445c';rr(c,200,530,40,28,6);c.fill();
       if(tool==='grapple'){circle(c,219,561,26,'#172339');for(let r=8;r<25;r+=5){c.strokeStyle='#d4ac62';c.lineWidth=3;c.beginPath();c.arc(219,561,r,0,TAU);c.stroke()}c.strokeStyle='#ffd275';c.beginPath();c.moveTo(220,550);c.lineTo(a.x,a.y);c.stroke()}
       if(tool==='paint-can'){c.fillStyle='#ef42b7';rr(c,182,557,20,45,5);c.fill();c.strokeStyle='#b8c7d3';c.lineWidth=4;c.beginPath();c.moveTo(192,557);c.lineTo(201,518);c.stroke()}
@@ -381,7 +450,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     }
     camera(b,ctx=this.ctx){const c=ctx,g=b.game,dead=g.disabled;c.save();c.translate(b.position.x,b.position.y);c.rotate(b.angle);if(!dead){c.fillStyle='#ff604616';c.beginPath();c.moveTo(-23,0);c.lineTo(-110,-34);c.lineTo(-110,34);c.closePath();c.fill()}
       c.fillStyle='#121d31';rr(c,-27,-21,54,42,8);c.fill();c.fillStyle=dead?'#5b6573':'#fff2d8';rr(c,-25,-19,50,37,7);c.fill();c.strokeStyle='#142238';c.lineWidth=3;c.stroke();c.fillStyle=dead?'#26344a':'#ff6c51';rr(c,-22,-13,30,26,6);c.fill();circle(c,-6,0,10,'#142238');circle(c,-6,0,6,dead?'#46556b':'#ff674d');if(!dead){circle(c,-8,-2,2.5,'#ffecc6');circle(c,17,-10,2,Math.sin(this.time*4+b.id)>.1?'#ff7757':'#6a3d35')}else{c.strokeStyle='#92e8cd';c.lineWidth=2;c.beginPath();c.moveTo(-12,-5);c.lineTo(-1,6);c.moveTo(-1,-5);c.lineTo(-12,6);c.stroke()}
-      if(g.shield&&!dead){c.strokeStyle='#f577d0';c.lineWidth=4;c.strokeRect(-29,-24,58,48)}if(g.circuit&&!dead){c.fillStyle=g.circuit==='A'?'#65eaf2':'#f7c46f';c.font='bold 14px system-ui';c.textAlign='center';c.fillText(g.circuit,0,-29)}
+      if(g.bolted){c.fillStyle='#a7b6c6';c.fillRect(-23,19,46,5);circle(c,-19,21,3,'#fff');circle(c,19,21,3,'#fff')}if(g.shield&&!dead){c.strokeStyle='#f577d0';c.lineWidth=4;c.strokeRect(-29,-24,58,48)}if(g.circuit&&!dead){c.fillStyle=g.circuit==='A'?'#65eaf2':'#f7c46f';c.font='bold 14px system-ui';c.textAlign='center';c.fillText(g.circuit,0,-29)}
       c.fillStyle='#172339';c.fillRect(13,2,7,3);c.fillRect(13,8,7,3);if(g.disabledBy==='emp-puck'){c.strokeStyle='#65eaf2';c.lineWidth=3;c.beginPath();c.moveTo(-14,-9);c.lineTo(-4,-2);c.lineTo(-11,2);c.lineTo(1,11);c.stroke();circle(c,17,-10,2,'#436879')}this.paintSurface(c,g.paint,52,38);c.restore();
     }
     stone(b,loaded=false){const c=this.ctx;c.save();c.translate(b.position.x,b.position.y);c.rotate(b.angle);if(loaded){c.strokeStyle='#d9ff6377';c.lineWidth=2;c.beginPath();c.arc(0,0,27+(this.reduceMotion?0:Math.sin(this.time*4)*3),0,TAU);c.stroke()}
@@ -398,18 +467,18 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
         // A faint previous arc makes adjusting a missed shot intuitive.
         c.lineWidth=2;c.strokeStyle='#f6e3bd35';c.setLineDash([3,8]);c.beginPath();sim.lastTrail.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.stroke();c.setLineDash([]);
         c.lineWidth=3;for(const cable of [...sim.cables,...sim.hooks.map(h=>h.constraint)]){const end=global.Matter.Constraint.pointBWorld(cable);c.strokeStyle=sim.cables.includes(cable)?'#c6d0dc':'#ffd275';c.beginPath();c.moveTo(sim.cables.includes(cable)?cable.pointA.x:WORLD.anchor.x,sim.cables.includes(cable)?cable.pointA.y:WORLD.anchor.y);c.lineTo(end.x,end.y);c.stroke()}
-        for(const circuit of ['A','B']){const nodes=sim.cameras.filter(b=>b.game.circuit===circuit&&!b.game.disabled);c.strokeStyle=circuit==='A'?'#65eaf280':'#f7c46f80';c.setLineDash([5,7]);c.beginPath();nodes.forEach((b,i)=>i?c.lineTo(b.position.x,b.position.y):c.moveTo(b.position.x,b.position.y));c.stroke();c.setLineDash([])}
+        for(const circuit of ['A','B']){const nodes=sim.cameras.filter(b=>b.game.circuit===circuit&&!b.game.disabled);c.strokeStyle=circuit==='A'?'#65eaf280':'#f7c46f80';c.setLineDash([5,7]);c.beginPath();nodes.forEach((b,i)=>{for(const a of nodes.slice(i+1))if(Math.hypot(a.position.x-b.position.x,a.position.y-b.position.y)<=TOOLS['emp-puck'].linkRange){c.moveTo(b.position.x,b.position.y);c.lineTo(a.position.x,a.position.y)}});c.stroke();c.setLineDash([])}
         sim.blocks.forEach(b=>this.block(b));sim.cameras.forEach(b=>this.camera(b));sim.stones.forEach(b=>this.stone(b));
         if(['ready','aiming'].includes(sim.state))this.stone(sim.projectile,true);
         if(sim.state==='aiming'&&this.guide){const {points}=this.guide;points.forEach((p,i)=>{if(i===0)return;const fade=Math.min(1,(1-i/(points.length-1))*2);circle(c,p.x,p.y,3+fade,`rgba(231,255,158,${fade*.95})`)});
           const v=sim.launchVelocity(),power=Math.min(100,Math.round(Math.hypot(v.x,v.y)/(118*.23)*100));c.fillStyle='#10172bf0';rr(c,145,349,150,42,9);c.fill();c.fillStyle='#d9ff63';c.font='900 16px system-ui';c.textAlign='center';c.fillText(`${power}% POWER`,220,375);
         }
-        if(sim.state==='flying'){const last=sim.trail.slice(-26),tool=sim.level.tool;
+        if(sim.state==='flying'){const last=sim.trail.slice(-26),tool=sim.tool.id;
           if(tool==='grapple'&&!sim.projectile.game.spent){c.strokeStyle='#dfba72';c.lineWidth=2;c.beginPath();c.moveTo(WORLD.anchor.x,WORLD.anchor.y);c.lineTo(sim.projectile.position.x,sim.projectile.position.y);c.stroke()}
           else last.forEach((p,i)=>{c.globalAlpha=i/30;circle(c,p.x,p.y,tool==='paint-can'?3:2.5*(i/26),TOOLS[tool].color||'#ffde90');if(tool==='emp-puck'&&i%3===0){c.strokeStyle='#65eaf2';c.lineWidth=1.5;c.beginPath();c.moveTo(p.x-5,p.y-6);c.lineTo(p.x+2,p.y);c.lineTo(p.x-3,p.y+5);c.stroke()}});c.globalAlpha=1;
         }
         this.sling(sim,true);
-        c.fillStyle='#102039e8';rr(c,360,636,600,25,5);c.fill();c.textAlign='center';c.font='900 12px system-ui';c.fillStyle='#ffe596';c.fillText(`★★★  ${sim.level.stars[0]} STONE${sim.level.stars[0]>1?'S':''} OR FEWER     ·     ★★  ${sim.level.stars[1]} OR FEWER     ·     ★  CLEAR THE LEVEL`,660,653);
+        c.fillStyle='#102039e8';rr(c,360,636,600,25,5);c.fill();c.textAlign='center';c.font='900 12px system-ui';c.fillStyle='#ffe596';c.fillText(`★★★  ${sim.level.stars[0]} TOOL${sim.level.stars[0]>1?'S':''} OR FEWER     ·     ★★  ${sim.level.stars[1]} OR FEWER     ·     ★  CLEAR THE LEVEL`,660,653);
       }
       for(const e of this.electric){c.save();c.globalAlpha=Math.max(0,1-e.age/1.3);c.strokeStyle='#a2ffff';c.lineWidth=3;for(const target of e.targets){const end=target.position;c.beginPath();c.moveTo(e.x,e.y);for(let i=1;i<12;i++){const t=i/12,jitter=Math.sin(i*13+Math.floor(this.time*16))*11;c.lineTo(e.x+(end.x-e.x)*t,e.y+(end.y-e.y)*t+jitter)}c.lineTo(end.x,end.y);c.stroke()}c.restore()}
       for(const p of this.paintDrops){const t=Math.min(1,p.age/p.duration),x=p.x+(p.tx-p.x)*t,y=p.y+(p.ty-p.y)*t-40*Math.sin(t*Math.PI);c.save();c.translate(x,y);c.rotate(Math.atan2(p.ty-p.y,p.tx-p.x));c.scale(1.6,1);circle(c,0,0,p.size*(1-t*.25),'#ed39b5');circle(c,-1,-1,p.size*.35,'#ffb0ea');c.restore()}
@@ -430,7 +499,14 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   const {LEVELS,REGIONS,REBELS,WORLD,TOOLS,starsFor}=window.BlindSpotData,{Simulation}=window.BlindSpotPhysics;
   const $=id=>document.getElementById(id),canvas=$('game'),view=new window.BlindSpotRenderer.Renderer(canvas);let tool=TOOLS['street-stone'],selectedRegion=0;
   const storage={get(key){try{return window.localStorage.getItem(key)}catch(_){return null}},set(key,value){try{window.localStorage.setItem(key,value);return true}catch(_){return false}}};
-  function loadProgress(){try{const data=JSON.parse(storage.get('blindspot-overhaul-progress'));if(!data||typeof data!=='object')throw 0;return{stars:Array.from({length:LEVELS.length},(_,i)=>Math.max(0,Math.min(3,Number(data.stars?.[i])||0))),last:Math.max(0,Math.min(LEVELS.length-1,Number(data.last)||0))}}catch(_){return{stars:Array(LEVELS.length).fill(0),last:0}}}
+  function loadProgress(){
+    const empty={version:2,stars:Array(LEVELS.length).fill(0),last:0};
+    try{const data=JSON.parse(storage.get('blindspot-overhaul-progress'));if(!data||typeof data!=='object')return empty;
+      const oldIndex=i=>data.version===2?i:LEVELS.findIndex(l=>l.id==='legacy-'+i);
+      if(Array.isArray(data.stars))data.stars.forEach((v,i)=>{const n=oldIndex(i);if(n>=0&&n<LEVELS.length)empty.stars[n]=Math.max(0,Math.min(3,Number(v)||0))});
+      const last=Number.isInteger(data.last)?data.last:0;empty.last=data.version===2?Math.max(0,Math.min(LEVELS.length-1,last)):Math.max(0,oldIndex(Math.max(0,Math.min(31,last))));return empty;
+    }catch(_){return empty}
+  }
   let progress=loadProgress(),muted=storage.get('blindspot-mute')==='1',motion=storage.get('blindspot-motion')!=='0',sim=null,index=0,screen='menu',helpReturn='menu',dragId=null,fineAim=false,elapsed=0,lastNow=null,clock=0,lastSound=-9,resultShown=false,angle=18,power=90;
   if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)motion=false;
   const sounds={ctx:null,wake(){try{if(muted)return false;const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return false;this.ctx=this.ctx||new Audio();if(this.ctx.state==='suspended')this.ctx.resume().catch(()=>{});return true}catch(_){return false}},tone(f,d=.12,type='triangle',amp=.06,delay=0){if(!this.wake())return;try{const t=this.ctx.currentTime+delay,o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(Math.max(35,f*.45),t+d);g.gain.setValueAtTime(amp,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(this.ctx.destination);o.start(t);o.stop(t+d)}catch(_){}},noise(d=.12,amp=.06){if(!this.wake())return;try{const len=Math.ceil(this.ctx.sampleRate*d),buffer=this.ctx.createBuffer(1,len,this.ctx.sampleRate),data=buffer.getChannelData(0);for(let i=0;i<len;i++)data[i]=(Math.random()*2-1)*(1-i/len);const s=this.ctx.createBufferSource(),g=this.ctx.createGain();s.buffer=buffer;g.gain.value=amp;s.connect(g);g.connect(this.ctx.destination);s.start()}catch(_){}}};
@@ -449,8 +525,8 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     if(e.type==='win'||e.type==='lose')finish(e);
   }
   function startLevel(i){cancelDrag();index=i;selectedRegion=LEVELS[i].region;tool=TOOLS[LEVELS[i].tool];resultShown=false;fineAim=false;view.reset();sim=new Simulation(LEVELS[i],event);progress.last=i;storage.set('blindspot-overhaul-progress',JSON.stringify(progress));changeScreen(null);sounds.wake();updateHUD()}
-  function updateHUD(){if(!sim)return;const l=sim.level;$('district').textContent=`${String(index-REGIONS[l.region].start+1).padStart(2,'0')} / ${l.district} · ${REBELS[REGIONS[l.region].rebel].name} / ${tool.name}`;$('levelLabel').textContent=l.name;$('cameraCount').textContent=sim.remaining;$('shotCount').textContent=sim.shotsLeft;
-    $('stateLabel').textContent=sim.state==='won'?'INSTALLATION OFFLINE · R TO REPLAY':sim.state==='aiming'?'RELEASE TO THROW · ESC TO CANCEL':sim.state==='flying'?(sim.remaining===0?'ALL CAMERAS OFFLINE · LET IT FALL':'LET THE CHAOS SETTLE…'):'READY WHEN YOU ARE';$('hintLabel').textContent=sim.state==='flying'?'The next tool loads automatically when the action settles.':l.hint;
+  function updateHUD(){if(!sim)return;const l=sim.level;tool=sim.tool;const options=sim.inventory?Object.keys(sim.inventory):[tool.id];const signature=JSON.stringify([sim.inventory,tool.id,sim.state]);if(updateHUD.tools!==signature){updateHUD.tools=signature;$('toolSelect').innerHTML=options.map(id=>`<option value="${id}">${TOOLS[id].name}${sim.inventory?' · '+sim.inventory[id]+' left':''}</option>`).join('');$('toolSelect').value=tool.id;$('toolSelect').disabled=!sim.inventory||!['ready','aiming'].includes(sim.state)}$('district').textContent=`${String(index-REGIONS[l.region].start+1).padStart(2,'0')} / ${l.district} · ${Object.values(REBELS).find(r=>r.tool===tool.id).name} / ${tool.name}`;$('levelLabel').textContent=l.name;$('cameraCount').textContent=sim.remaining;$('shotCount').textContent=sim.shotsLeft;
+    $('stateLabel').textContent=sim.state==='won'?'INSTALLATION OFFLINE · R TO REPLAY':sim.state==='aiming'?'RELEASE TO THROW · ESC TO CANCEL':sim.state==='flying'?(sim.remaining===0?'ALL CAMERAS OFFLINE · LET IT FALL':'LET THE CHAOS SETTLE…'):`READY · ★★★ ${l.stars[0]} THROWS OR FEWER`;$('hintLabel').textContent=sim.state==='flying'?'The next tool loads automatically when the action settles.':l.hint;
     $('aimBtn').disabled=!['ready','aiming'].includes(sim.state);$('fireBtn').disabled=!['ready','aiming'].includes(sim.state);
   }
   function finish(e){if(resultShown)return;resultShown=true;const win=e.type==='win',l=sim.level,stars=win?starsFor(l,sim.shotsUsed):0;$('inspectBtn').hidden=!win;
@@ -461,10 +537,11 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     $('resultStats').innerHTML=`<span><b>${sim.shotsUsed}</b>TOOLS</span><span><b>${sim.breaks}</b>BLOCKS BROKEN</span><span><b>${sim.bestCombo}×</b>BEST CHAIN</span>`;
     $('nextBtn').textContent=win?(index===LEVELS.length-1?'BACK TO REGIONS →':'NEXT INSTALLATION →'):'TRY AGAIN →';changeScreen('result');
   }
-  function renderLevels(){const region=REGIONS[selectedRegion],subset=LEVELS.slice(region.start,region.start+region.levels),scores=progress.stars.slice(region.start,region.start+region.levels);$('levelsTitle').textContent=region.name;$('regionSelect').value=String(selectedRegion);$('regionProgress').textContent=`${scores.reduce((a,b)=>a+b,0)} / 24 stars · ${scores.filter(s=>s>0).length} / 8 installations offline · ${REBELS[region.rebel].name} / ${TOOLS[region.tool].name}`;
+  function renderLevels(){const region=REGIONS[selectedRegion],subset=LEVELS.slice(region.start,region.start+region.levels),scores=progress.stars.slice(region.start,region.start+region.levels);$('levelsTitle').textContent=region.name;$('regionSelect').value=String(selectedRegion);$('regionProgress').textContent=`${scores.reduce((a,b)=>a+b,0)} / ${region.levels*3} stars · ${scores.filter(s=>s>0).length} / ${region.levels} installations offline · ${REBELS[region.rebel].name} / ${TOOLS[region.tool].name}`;
     $('levelGrid').innerHTML=subset.map((l,n)=>{const i=region.start+n;return `<button class="level-card" data-level="${i}" aria-label="Play level ${i+1}: ${l.name}. ${progress.stars[i]} stars."><canvas width="360" height="145"></canvas><span class="num">${String(n+1).padStart(2,'0')}</span><b>${l.name}</b><small>${l.lesson}</small><span class="card-stars">${'★'.repeat(progress.stars[i])}${'☆'.repeat(3-progress.stars[i])}</span></button>`}).join('');
     $('levelGrid').querySelectorAll('.level-card').forEach((b,n)=>{const i=region.start+n;view.thumbnail(b.querySelector('canvas'),LEVELS[i]);b.onclick=()=>startLevel(i)});
   }
+  $('toolSelect').onchange=()=>{cancelDrag();if(sim.selectTool($('toolSelect').value)){tool=sim.tool;view.guide=null;updateHUD()}else {toast('That tool is empty. Choose one with ammunition left.');updateHUD.tools=null;updateHUD()}};
   $('regionSelect').onchange=()=>{selectedRegion=Number($('regionSelect').value)||0;renderLevels()};
   function worldPoint(e){const rect=canvas.getBoundingClientRect();return{x:(e.clientX-rect.left)*WORLD.width/rect.width,y:(e.clientY-rect.top)*WORLD.height/rect.height}}
   function updateGuide(){view.guide=sim?.openingGuide();updateHUD()}
@@ -490,7 +567,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   $('fullscreenBtn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if($('app').requestFullscreen)await $('app').requestFullscreen();else toast('Fullscreen is unavailable here; try opening the game in its own tab.')}catch(_){toast('Open the game in its own browser tab for fullscreen.')}};
   window.addEventListener('keydown',e=>{
     const k=e.key.toLowerCase();if(k==='m'){toggleMute();return}if(k==='escape'){e.preventDefault();if(sim?.state==='aiming'){cancelDrag();fineAim=false;$('aimPanel').hidden=true}else if(screen==='how')changeScreen(helpReturn);else if(screen==='levels')changeScreen('menu');else pause();return}
-    if(screen!==null)return;if(k==='r'){startLevel(index);return}if(e.target?.tagName==='INPUT')return;
+    if(screen!==null)return;if(k==='r'){startLevel(index);return}if(['INPUT','SELECT'].includes(e.target?.tagName))return;
     if(['arrowleft','arrowright','arrowup','arrowdown',' '].includes(k)){e.preventDefault();if(!['ready','aiming'].includes(sim.state))return;if(k===' ') {if(sim.state==='ready')sliderAim();sim.launch();view.guide=null;return}if(k==='arrowup')angle=Math.min(78,angle+2);if(k==='arrowdown')angle=Math.max(-8,angle-2);if(k==='arrowright')power=Math.min(100,power+3);if(k==='arrowleft')power=Math.max(25,power-3);$('angleInput').value=angle;$('powerInput').value=power;sliderAim()}
   });
   window.addEventListener('blur',()=>{if(screen===null)pause()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&screen===null)pause()});

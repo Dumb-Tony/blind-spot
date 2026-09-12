@@ -9,3 +9,5 @@
 .region-picker{display:flex;align-items:center;gap:1rem;margin:1rem 0;font-weight:800}.region-picker select{font:inherit;color:#fff2d8;background:#26354c;border:1px solid #63758e;border-radius:8px;padding:.7rem;max-width:100%}
 
 #aimPanel{top:92px;bottom:auto}@media(max-height:600px){#aimPanel{top:65px;bottom:auto;padding:10px}}
+
+.tool-picker{display:grid;gap:3px;font-size:9px;font-weight:900;color:var(--teal)}.tool-picker select{max-width:170px;border:1px solid #ffffff40;border-radius:6px;padding:8px;background:#22334b;color:var(--cream);font:inherit;font-size:12px}.tool-picker select:focus-visible{outline:3px solid var(--lime)}@media(max-width:780px){.tool-picker select{max-width:112px;padding:5px;font-size:10px}.level-title strong{white-space:normal}.level-title small{letter-spacing:0}}

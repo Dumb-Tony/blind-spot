@@ -1,0 +1,573 @@
+[
+  {
+    "level": 1,
+    "name": "First blind spot",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.3
+    ]
+  },
+  {
+    "level": 2,
+    "name": "Knee-jerk reaction",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.5
+    ]
+  },
+  {
+    "level": 3,
+    "name": "Glass houses",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        10
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.3
+    ]
+  },
+  {
+    "level": 4,
+    "name": "Double take",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        60,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.4,
+      1.5
+    ]
+  },
+  {
+    "level": 5,
+    "name": "Heavy paperwork",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        70,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.3,
+      1.6
+    ]
+  },
+  {
+    "level": 6,
+    "name": "Overprotective",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        90,
+        35
+      ],
+      [
+        55,
+        40
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      8.8,
+      10.1,
+      1.5
+    ]
+  },
+  {
+    "level": 7,
+    "name": "Domino department",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        40
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.6,
+      1.6,
+      1.5
+    ]
+  },
+  {
+    "level": 8,
+    "name": "The Ministry of Looking",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        80,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      10.1,
+      12,
+      8.1,
+      1.4
+    ]
+  },
+  {
+    "level": 9,
+    "name": "Fresh coat",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        20
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4
+    ]
+  },
+  {
+    "level": 10,
+    "name": "Two for a splash",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        30
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 11,
+    "name": "Above the awning",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        40
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 12,
+    "name": "Wet floor",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 13,
+    "name": "Gallery wall",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        70,
+        30
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 14,
+    "name": "Color falls",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        20
+      ],
+      [
+        55,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      9.5,
+      9.5,
+      0.4
+    ]
+  },
+  {
+    "level": 15,
+    "name": "Undercoat",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        60,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 16,
+    "name": "A different picture",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        110,
+        35
+      ],
+      [
+        55,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      9.5,
+      9.5,
+      11.1,
+      0.4
+    ]
+  },
+  {
+    "level": 17,
+    "name": "Pull the plug",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4
+    ]
+  },
+  {
+    "level": 18,
+    "name": "Shared password",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        10
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 19,
+    "name": "Separate channels",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        60,
+        30
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 20,
+    "name": "Signal booster",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        10
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      9.5,
+      9.5
+    ]
+  },
+  {
+    "level": 21,
+    "name": "Firewall",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        15
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 22,
+    "name": "Cross talk",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        20
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4,
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 23,
+    "name": "Dead zone",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        30
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      9.5,
+      9.5,
+      0.4
+    ]
+  },
+  {
+    "level": 24,
+    "name": "Radio silence",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        40
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      9.5,
+      9.5,
+      0.4
+    ]
+  },
+  {
+    "level": 25,
+    "name": "Loose ends",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        30
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4
+    ]
+  },
+  {
+    "level": 26,
+    "name": "Swing shift",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 27,
+    "name": "Falling inventory",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        40
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      1.3,
+      0.4
+    ]
+  },
+  {
+    "level": 28,
+    "name": "Two cranes",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        60,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 29,
+    "name": "Dock dominoes",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        50
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      8.6
+    ]
+  },
+  {
+    "level": 30,
+    "name": "Load bearing",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        50
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      2.6,
+      0.4
+    ]
+  },
+  {
+    "level": 31,
+    "name": "Longshore",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        50
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4,
+      0.4
+    ]
+  },
+  {
+    "level": 32,
+    "name": "The last crane",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        115,
+        20
+      ],
+      [
+        55,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.4,
+      0.4,
+      1.3
+    ]
+  }
+]
