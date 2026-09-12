@@ -17,3 +17,6 @@ Validation: September 12, 2026.
 Targeted browser inspection confirmed region selection, the Inez portrait, HUD tool labels and the longer fading guide. Fine aim was then moved upward to avoid obscuring low targets. The earlier 0.5 browser playthrough completed all original eight levels; a full 32-level manual browser playthrough has not been performed. Do not confuse deterministic solvability checks with subjective difficulty or cross-device validation.
 
 Limitations: sound output not audited; physics outcomes can vary slightly across engines; new-region difficulty is an initial pass; new regions share a tinted version of the original city background.
+
+## 0.7 verification
+419 assertions pass, including all 32 original solution sequences, paint on lenses and fixed surfaces, ground puddles, painted fracture fragments, bounded storage, renderer invocation for surfaces/cameras, spray expiry, effect reset and post-win inspection without rescoring. Browser inspection verified the paint-coated lens/platform/puddle after a real throw and the distinct EMP coil launcher and disc. Visual effects retain the existing game physics; paint is not a fluid simulation.

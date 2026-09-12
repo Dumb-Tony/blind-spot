@@ -18,15 +18,16 @@
     if(e.type==='launch'){sounds.tone(260,.15,'triangle',.09);sounds.noise(.08,.03);fineAim=false;$('aimPanel').hidden=true;$('aimBtn').setAttribute('aria-expanded','false')}
     if(e.type==='break'&&clock-lastSound>.04){lastSound=clock;if(e.material==='glass'){sounds.tone(1600,.1,'sine',.03);sounds.tone(2250,.16,'sine',.02,.03)}else{sounds.noise(.1,.065);sounds.tone(100,.09,'triangle',.08)}}
     if(e.type==='impact'&&e.strength>3&&clock-lastSound>.12){lastSound=clock;sounds.tone(85,.1,'triangle',.04)}
-    if(e.type==='camera'){sounds.tone(560,.15,'sawtooth',.025);sounds.tone(180,.18,'square',.018,.08)}
+    if(e.type==='ability'){if(e.tool==='paint-can')sounds.noise(.28,.12);if(e.tool==='emp-puck'){sounds.tone(1800,.4,'sawtooth',.025);sounds.tone(90,.4,'sine',.05)}if(e.tool==='grapple'){sounds.noise(.09,.08);sounds.tone(240,.5,'triangle',.06)}}
+    if(e.type==='camera'&&e.reason!=='LENS PAINTED'){sounds.tone(560,.15,'sawtooth',.025);sounds.tone(180,.18,'square',.018,.08)}
     if(e.type==='win'||e.type==='lose')finish(e);
   }
   function startLevel(i){cancelDrag();index=i;selectedRegion=LEVELS[i].region;tool=TOOLS[LEVELS[i].tool];resultShown=false;fineAim=false;view.reset();sim=new Simulation(LEVELS[i],event);progress.last=i;storage.set('blindspot-overhaul-progress',JSON.stringify(progress));changeScreen(null);sounds.wake();updateHUD()}
   function updateHUD(){if(!sim)return;const l=sim.level;$('district').textContent=`${String(index-REGIONS[l.region].start+1).padStart(2,'0')} / ${l.district} · ${REBELS[REGIONS[l.region].rebel].name} / ${tool.name}`;$('levelLabel').textContent=l.name;$('cameraCount').textContent=sim.remaining;$('shotCount').textContent=sim.shotsLeft;
-    $('stateLabel').textContent=sim.state==='aiming'?'RELEASE TO THROW · ESC TO CANCEL':sim.state==='flying'?(sim.remaining===0?'ALL CAMERAS OFFLINE · LET IT FALL':'LET THE CHAOS SETTLE…'):'READY WHEN YOU ARE';$('hintLabel').textContent=sim.state==='flying'?'The next tool loads automatically when the action settles.':l.hint;
+    $('stateLabel').textContent=sim.state==='won'?'INSTALLATION OFFLINE · R TO REPLAY':sim.state==='aiming'?'RELEASE TO THROW · ESC TO CANCEL':sim.state==='flying'?(sim.remaining===0?'ALL CAMERAS OFFLINE · LET IT FALL':'LET THE CHAOS SETTLE…'):'READY WHEN YOU ARE';$('hintLabel').textContent=sim.state==='flying'?'The next tool loads automatically when the action settles.':l.hint;
     $('aimBtn').disabled=!['ready','aiming'].includes(sim.state);$('fireBtn').disabled=!['ready','aiming'].includes(sim.state);
   }
-  function finish(e){if(resultShown)return;resultShown=true;const win=e.type==='win',l=sim.level,stars=win?starsFor(l,sim.shotsUsed):0;
+  function finish(e){if(resultShown)return;resultShown=true;const win=e.type==='win',l=sim.level,stars=win?starsFor(l,sim.shotsUsed):0;$('inspectBtn').hidden=!win;
     if(win){progress.stars[index]=Math.max(progress.stars[index],stars);const saved=storage.set('blindspot-overhaul-progress',JSON.stringify(progress));if(!saved)toast('This browser cannot save progress. Your session still works.');[330,440,660,880].forEach((f,i)=>sounds.tone(f,.3,'triangle',.055,i*.1))}else sounds.tone(140,.4,'triangle',.055);
     $('resultEyebrow').textContent=win?(l.finale?REGIONS[l.region].name.toUpperCase()+' · OFFLINE':'INSTALLATION · OFFLINE'):'NOT QUITE A BLIND SPOT';$('resultTitle').textContent=win?(l.finale?'The city can breathe.':stars===3?'Beautifully unobserved.':'Privacy restored.'):'Still watching.';
     $('resultStars').innerHTML='★'.repeat(stars)+`<span class="empty">${'★'.repeat(3-stars)}</span>`;$('resultStars').setAttribute('aria-label',`${stars} of 3 stars`);
@@ -56,6 +57,7 @@
   canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',cancelDrag);canvas.addEventListener('lostpointercapture',()=>{if(dragId!==null)cancelDrag()});canvas.addEventListener('contextmenu',e=>{e.preventDefault();cancelDrag()});
   $('playBtn').onclick=()=>startLevel(progress.last);$('selectBtn').onclick=()=>changeScreen('levels');$('levelsBack').onclick=()=>changeScreen('menu');$('howBtn').onclick=()=>{helpReturn='menu';changeScreen('how')};$('howClose').onclick=()=>changeScreen(helpReturn);
   $('pauseBtn').onclick=pause;$('resumeBtn').onclick=()=>changeScreen(null);$('restartBtn').onclick=$('pauseRestart').onclick=$('retryBtn').onclick=()=>startLevel(index);$('pauseLevels').onclick=$('resultLevels').onclick=()=>changeScreen('levels');$('pauseHelp').onclick=()=>{helpReturn='pause';changeScreen('how')};
+  $('inspectBtn').onclick=()=>changeScreen(null);
   $('nextBtn').onclick=()=>{if(sim.state==='lost')startLevel(index);else if(index===LEVELS.length-1)changeScreen('levels');else startLevel(index+1)};
   $('hintBtn').onclick=()=>toast(sim.level.tip);$('aimBtn').onclick=()=>{fineAim=!fineAim;$('aimPanel').hidden=!fineAim;$('aimBtn').setAttribute('aria-expanded',String(fineAim));if(fineAim)sliderAim();else cancelDrag()};$('angleInput').oninput=$('powerInput').oninput=sliderAim;$('fireBtn').onclick=()=>{sliderAim();sim.launch();view.guide=null};
   $('muteBtn').onclick=toggleMute;$('muteBtn').textContent=muted?'SOUND OFF':'SOUND ON';$('motionBtn').onclick=()=>{motion=!motion;storage.set('blindspot-motion',motion?'1':'0');$('motionBtn').textContent=motion?'SHAKE ON':'SHAKE OFF';$('motionBtn').setAttribute('aria-pressed',String(!motion))};$('motionBtn').textContent=motion?'SHAKE ON':'SHAKE OFF';

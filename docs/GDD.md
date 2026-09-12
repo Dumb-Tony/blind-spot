@@ -25,3 +25,8 @@ The world pauses between tools for inspection. Resolution uses a quiet window an
 
 ## Delivery and limits
 One self-contained offline HTML plus readable source, tests, bundled engine license and generated artwork. GitHub Pages is the public release. Desktop is the primary platform. Camera puzzles require vision; this is not a fully screen-reader-playable game. Cross-browser/device testing and further difficulty tuning remain future work. This is the first playable pass of Regions 2–4, reusing the existing city setting rather than adding new background paintings.
+
+## Tool presentation update (0.7)
+Each tool now has its own projectile silhouette, launcher, trail and impact feedback. Paint uses persistent, body-local decals with drips and a floor puddle, bounded to 30 marks per body and 16 ground marks. Fragment decals retain their original alignment. EMP arcs connect the pulse origin to affected cameras and leave a cyan shorted-lens mark. The grappling cable is drawn back to the winch. Cosmetic drawing does not replace the existing physics collision shapes or expand ability radii.
+
+The result screen provides LOOK AT THE DAMAGE for examining persistent aftermath. A minimum final-effect dwell precedes success. Restart removes all transient and persistent marks with the old level state.

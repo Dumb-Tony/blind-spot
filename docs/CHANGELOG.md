@@ -17,3 +17,10 @@ The title identifies the build as 0.5. Standalone packaging remains fully local 
 - Kept all original Region 1 layouts and recorded solutions.
 - Moved Fine aim above the playfield to keep low targets visible.
 - 408 production assertions pass, including all 32 three-star solutions.
+
+## 0.7 — Visible tool identities and aftermath
+Mara retains the stone and wooden sling. Inez now launches a recognizable paint can from a pressure lobber; the impact throws magenta droplets and deposits persistent splashes, drips and ground puddles. Marks are clipped to surfaces, move with bodies and carry onto fractured debris. Paint no longer relies on a text label to communicate lens coverage.
+
+Dex uses a glowing disc and coil launcher, with an electrical flight trail, expanding pulse, arcs to affected cameras and visible shorted-lens marks. June uses a steel hooked head and winch launcher; a cable follows the hook in flight and visibly pulls its attachment. Ability sounds distinguish splashes, electronic discharge and mechanical pull.
+
+Victories leave at least 1.5 seconds to see the final effect. Choose LOOK AT THE DAMAGE to inspect the scene indefinitely, then use pause for level selection or R to retry. Paint is visual surface coverage using the existing splash radius, not a fluid simulation; gameplay trajectories and all 32 recorded solutions are preserved.

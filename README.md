@@ -1,4 +1,4 @@
-# Blind Spot — Four Regions (0.6)
+# Blind Spot — Four Regions (0.7)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
@@ -31,3 +31,6 @@ Paint affects nearby lenses in a 145-pixel radius. EMP affects nearby cameras in
 Run `node scripts/build-standalone.mjs` to rebuild offline HTML; `node tests/production.test.cjs` runs 408 production assertions with no installation. `node scripts/serve.cjs` starts the local preview. GitHub Pages tests and publishes `dist/` on pushes to `main`.
 
 The `region1-cloud-baseline` tag preserves the recovered original. Old local ZIPs remain historical snapshots; use the latest versioned bundle. The original Sites publication retains its existing access; GitHub Pages is the public sharing link.
+
+## What's new in 0.7
+All tools now have distinct projectiles and launchers. Paint leaves visible splashes and drips on cameras, platforms, fragments and the ground. EMP adds electrical arcs and shorted-lens marks. The hook has a visible winch cable. Select LOOK AT THE DAMAGE after a win to inspect the aftermath. The 419-check suite still clears all 32 levels.

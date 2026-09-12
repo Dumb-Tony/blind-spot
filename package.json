@@ -1,7 +1,7 @@
 {
   "name": "blind-spot-region-one",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "scripts": {
     "dev": "vite dist --config vite.config.mjs",
     "build": "node scripts/build-standalone.mjs",

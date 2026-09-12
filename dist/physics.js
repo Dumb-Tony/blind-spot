@@ -89,10 +89,12 @@
       const id=projectile.game.tool;if(id==='street-stone')return;projectile.game.spent=true;
       if(id==='paint-can'||id==='emp-puck'){
         const radius=id==='paint-can'?145:180;
+        if(id==='paint-can')this.splatter(point,radius);
         const near=this.cameras.filter(c=>!c.game.disabled&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<radius);
         const networks=new Set(near.map(c=>c.game.circuit).filter(Boolean));
-        for(const c of this.cameras)if(near.includes(c)||(id==='emp-puck'&&networks.has(c.game.circuit)))this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE');
-        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color});
+        const affected=[];
+        for(const c of this.cameras)if(near.includes(c)||(id==='emp-puck'&&networks.has(c.game.circuit))){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
       if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
         const local={x:point.x-target.position.x,y:point.y-target.position.y},cos=Math.cos(-target.angle),sin=Math.sin(-target.angle);
@@ -100,6 +102,27 @@
         this.hooks.push({constraint:hook,until:this.time+1.1});Composite.add(this.engine.world,hook);Sleeping.set(target,false);
         this.emit('ability',{position:point},{tool:id,radius:50,color:this.tool.color});
       }
+    }
+    splatter(point,radius){
+      // Surface-local marks stay attached when a painted object moves or rotates.
+      const destinations=[];
+      for(const b of [...this.blocks,...this.cameras]){
+        const g=b.game,w=g.w||52,h=g.h||38,cos=Math.cos(b.angle),sin=Math.sin(b.angle);
+        const dx=point.x-b.position.x,dy=point.y-b.position.y;
+        const x=Math.max(-w/2,Math.min(w/2,dx*cos+dy*sin)),y=Math.max(-h/2,Math.min(h/2,-dx*sin+dy*cos));
+        const wx=b.position.x+x*cos-y*sin,wy=b.position.y+x*sin+y*cos;
+        if(Math.hypot(wx-point.x,wy-point.y)>radius)continue;
+        g.paint=g.paint||[];
+        const lens=g.kind==='camera'&&Math.hypot(dx,dy)<radius;
+        for(let i=0;i<5;i++){
+          const a=i*2.399+this.shotsUsed,r=i===0?0:8+i*4;
+          g.paint.push({x:lens?-6+Math.cos(a)*r*.4:x+Math.cos(a)*r,y:lens?Math.sin(a)*r*.35:y+Math.sin(a)*r,r:lens?19:12+i*2,seed:i+this.shotsUsed*7});
+        }
+        g.paint=g.paint.slice(-30);destinations.push({x:wx,y:wy});
+      }
+      this.paintGround=this.paintGround||[];
+      if(point.y+radius>=WORLD.ground){this.paintGround.push({x:point.x,y:WORLD.ground,r:55,seed:this.shotsUsed});this.paintGround=this.paintGround.slice(-16);destinations.push({x:point.x,y:WORLD.ground})}
+      this.emit('paint',{position:point},{destinations,radius});
     }
     breakBody(b){
       if(b.game.broken)return;b.game.broken=true;this.breaks++;
@@ -116,6 +139,7 @@
         const chip=Bodies.rectangle(x,y,w,h,{angle:b.angle,friction:MATERIALS[b.game.material].friction,restitution:.08,sleepThreshold:45});
         Body.setMass(chip,b.mass/2);
         chip.game={kind:'debris',material:b.game.material,w,h};
+        if(b.game.paint)chip.game.paint=b.game.paint.map(p=>({...p,x:p.x-(horizontal?offset:0),y:p.y-(horizontal?0:offset)}));
         Body.setVelocity(chip,{x:b.velocity.x-b.angularVelocity*(y-b.position.y),y:b.velocity.y+b.angularVelocity*(x-b.position.x)});
         Body.setAngularVelocity(chip,b.angularVelocity);this.blocks.push(chip);this.add(chip);
       }
@@ -134,7 +158,7 @@
       if(this.projectile&&this.shotTime<5)this.trail.push({...this.projectile.position});if(this.trail.length>160)this.trail.shift();
       const bodies=Composite.allBodies(this.engine.world).filter(b=>!b.isStatic);
       const moving=bodies.some(b=>!b.isSleeping&&(b.speed>.38||Math.abs(b.angularVelocity)>.018));this.quiet=moving?0:this.quiet+1/60;
-      if(this.remaining===0&&this.shotTime>.65&&(this.quiet>.45||this.time-this.lastHit>3.5)){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}
+      if(this.remaining===0){if(this.shotTime>.65&&this.time-this.lastHit>1.5&&(this.quiet>.45||this.time-this.lastHit>3.5)){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)})}return}
       if(this.shotTime>1.1&&(this.quiet>.85||this.shotTime>14))this.finishShot();
     }
     finishShot(){
