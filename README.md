@@ -30,3 +30,8 @@ Fine aim provides angle/power sliders. Arrows adjust aim; Space throws; Escape c
 GitHub repository: https://github.com/Dumb-Tony/blind-spot
 
 The recovered version is retained in Git history and the `region1-cloud-baseline` tag. The original source ZIP is retained locally. Updated source bundles should be generated from the current commit, not the original ZIP.
+
+## Online play and publishing
+Play the current build: https://dumb-tony.github.io/blind-spot/
+
+The public GitHub repository includes the original cloud history. GitHub Pages publishes `dist/` only after the production checks pass. Future pushes to `main` rebuild, test, and publish automatically. The original cloud-hosted site is a separate older publication; GitHub Pages is the current release link.
