@@ -1,8 +1,8 @@
-# Test report — 0.9
+# Test report — 0.10
 
 Validation: September 12, 2026.
 
-**2,048 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
+**2,100 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
 
 ## Automated coverage
 
@@ -38,3 +38,7 @@ The final standalone Central Works level was also completed through real browser
 ## Visual overhaul checks (0.9)
 
 All four rigs are rendered through the production canvas adapter at four extreme aiming positions. Hand coordinates match the actual pulled projectile, feet stay planted, and elbow coordinates remain finite. Release starts from the real contact point, follows through and recovers. Idle breathing is absent with reduced motion; reset clears the old release state. All 120 existing solution replays still pass. Browser inspection covers grounded character appearance, bracing and pull poses, launcher changes, the updated scene, menus and standalone build.
+
+## Painted character checks (0.10)
+
+All 120 existing solutions and the 0.9 pose/contact checks still pass. New tests cover finite painted source/destination rectangles for all four character columns, exclusion of exterior neutral texture background while retaining enclosed white highlights, preservation of dark linework, and offline embedding. The generated source and an assembled asset contact sheet (ready and pulling poses for all four rebels) were inspected. This turn did not repeat browser interaction testing; the browser checks above describe earlier versions. The 0.9 motion source is unchanged.

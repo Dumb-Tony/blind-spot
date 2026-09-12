@@ -1,4 +1,4 @@
-# Blind Spot — Six Regions (0.9)
+# Blind Spot — Six Regions (0.10)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
@@ -7,7 +7,10 @@ Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles
 
 ## Visual update
 
-Gameplay rebels now use articulated, cel-shaded bodies with planted boots, bending limbs, pull-dependent weight shifts and hands that track the actual tool. Ready poses reach into place; release triggers follow-through and recovery. Mara braces the sling, while Inez, Dex and June operate their distinct launchers. Their illustrated menu portraits are preserved.
+Version 0.10 restores the original illustrated character style while preserving the 0.9 movement rig. Faces, hair, clothes, gloves and shoes use painted textures rather than polygon artwork. See `docs/ARTWORK.md` for source references and the generation prompt.
+
+
+Gameplay rebels now use detailed painted artwork matched to the original portraits, attached to articulated bodies with planted boots, bending limbs, pull-dependent weight shifts and hands that track the actual tool. Ready poses reach into place; release triggers follow-through and recovery. Mara braces the sling, while Inez, Dex and June operate their distinct launchers. Their illustrated menu portraits are preserved.
 
 District lighting, distant architecture, roof edges, material bevels and shadows, menu cards and HUD styling have also been refreshed. This is a visual update: all 120 layouts, shot budgets, EMP tuning and saved progress remain compatible.
 
@@ -41,6 +44,7 @@ Three stars reward the tested shot target shown before aiming; two and one stars
 
 - `dist/game-data.js`: original layouts, deterministic campaign compositions, supplies and calibrated star targets.
 - `dist/physics.js`: shared Matter.js simulation, inventory, abilities, constraints, fracture and aiming guide.
+- `dist/rebel-skin.js`: painted character layers and one-time texture preparation.
 - `dist/rebel-rig.js`: articulated gameplay characters, two-link arm poses and release motion.
 - `dist/renderer.js`, `dist/game.js`: visuals, input, sound, menus and save migration.
 - `docs/GDD.md`, `docs/CAMPAIGN.md`, `docs/TEST_REPORT.md`, `docs/CHANGELOG.md`: design, level reference and validation.

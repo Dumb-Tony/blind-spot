@@ -5,7 +5,7 @@
   function rr(ctx,x,y,w,h,r=5){ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);else ctx.rect(x,y,w,h)}
   function circle(ctx,x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
   class Renderer{
-    constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.art=new Image();this.art.src=global.BlindSpotAssets.atlas;this.rebels=new Image();this.rebels.src=global.BlindSpotAssets.rebels||'';this.particles=[];this.paintDrops=[];this.electric=[];this.labels=[];this.rings=[];this.shake=0;this.recoil=0;this.time=0;this.reduceMotion=false;this.guide=null;this.hitFlash=0;this.toastTime=0;this.onArt=null;this.shotAge=99;this.readyAge=1;this.releasePoint={...WORLD.anchor};this.art.onload=()=>this.drawHero()}
+    constructor(canvas){this.canvas=canvas;this.ctx=canvas.getContext('2d');this.art=new Image();this.art.src=global.BlindSpotAssets.atlas;this.rebels=new Image();this.rebels.src=global.BlindSpotAssets.rebels||'';this.painted=new Image();this.paintedTexture=null;this.painted.onload=()=>{this.paintedTexture=global.BlindSpotPaintedSkin.prepare(this.painted)};this.painted.src=global.BlindSpotAssets.painted||'';this.particles=[];this.paintDrops=[];this.electric=[];this.labels=[];this.rings=[];this.shake=0;this.recoil=0;this.time=0;this.reduceMotion=false;this.guide=null;this.hitFlash=0;this.toastTime=0;this.onArt=null;this.shotAge=99;this.readyAge=1;this.releasePoint={...WORLD.anchor};this.art.onload=()=>this.drawHero()}
     drawHero(){const canvas=document.getElementById('heroArt');if(!canvas||!this.art.complete)return;const c=canvas.getContext('2d');c.drawImage(this.art,0,0,768,1024,0,0,768,1024)}
     reset(){this.particles=[];this.paintDrops=[];this.electric=[];this.labels=[];this.rings=[];this.shake=0;this.recoil=0;this.guide=null;this.hitFlash=0;this.shotAge=99;this.readyAge=0;this.releasePoint={...WORLD.anchor}}
     event(e){
@@ -61,7 +61,7 @@
       c.save();c.translate(462,142);c.rotate(-.025);c.fillStyle='#101e32db';rr(c,-98,-27,235,65,7);c.fill();c.fillStyle=theme[2];c.fillRect(-98,-18,3,37);c.textAlign='left';c.font='900 10px system-ui';c.fillText('MINISTRY / SURVEILLANCE DIVISION',-83,-8);c.fillStyle='#f5eddb';c.font='900 17px system-ui';c.fillText(REGIONS[region].name.toUpperCase(),-83,16);c.restore();
     }
     rebel(sim,front=false){
-      const rig=global.BlindSpotRebelRig,p=rig.pose(sim,this.shotAge,this.releasePoint,this.time,this.reduceMotion,this.readyAge);this.rebelPose=p;rig.draw(this.ctx,p,this.time,this.reduceMotion,front);
+      const rig=global.BlindSpotRebelRig,p=rig.pose(sim,this.shotAge,this.releasePoint,this.time,this.reduceMotion,this.readyAge);this.rebelPose=p;if(this.paintedTexture)global.BlindSpotPaintedSkin.draw(this.ctx,p,this.paintedTexture,front);else rig.draw(this.ctx,p,this.time,this.reduceMotion,front);
       if(!front&&sim?.state==='ready'){const c=this.ctx;c.textAlign='center';c.font='900 11px system-ui';c.fillStyle='#fff1d8';c.fillText('PULL TO AIM',265,423)}
     }
     sling(sim,front=false){

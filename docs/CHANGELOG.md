@@ -1,3 +1,11 @@
+# 0.10 — Painted rebels, preserved motion
+
+- Added detailed painted character parts matched to the original portraits.
+- Kept the 0.9 pose solver, grip tracking, planted feet and release timing unchanged.
+- Added layered sleeves, forearms/gloves, trousers, level boots and detailed head/torso textures.
+- Included painted artwork in the standalone file and documented its references and prompt.
+- All 120 three-star solutions still pass; regression suite now includes painted-layer and texture-isolation coverage.
+
 # 0.9 — Rebels take the shot
 
 - Replaced floating gameplay portrait panels with four articulated, cel-shaded rebels.

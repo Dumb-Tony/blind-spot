@@ -37,7 +37,7 @@ function harness({denied=false,saved=null,width=1280,height=720,offsetX=0,offset
   const window=new Node('window');window.requestAnimationFrame=fn=>{raf=fn};window.matchMedia=()=>({matches:false});Object.defineProperty(window,'localStorage',{get(){if(denied)throw Error('Denied');return{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)}}});
   class Image{constructor(){this.complete=false;this.naturalWidth=0}}
   const ctx={window,document,Matter,console,Image,performance:{now:()=>now}};vm.createContext(ctx);
-  window.Matter=Matter;window.BlindSpotAssets={atlas:''};for(const f of ['game-data.js','physics.js','rebel-rig.js','renderer.js','game.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
+  window.Matter=Matter;window.BlindSpotAssets={atlas:''};for(const f of ['game-data.js','physics.js','rebel-rig.js','rebel-skin.js','renderer.js','game.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
   return{ctx,ids,store,state:()=>window.__blindSpot.getState(),tick(seconds=1,fps=60){const count=Math.round(seconds*fps);for(let n=0;n<count;n++){now+=1000/fps;raf(now)}},click:id=>ids[id].onclick(),key:key=>window.fire('keydown',{key}),drag(dx,dy){const p=(x,y)=>({clientX:offsetX+x/1280*width,clientY:offsetY+y/720*height,pointerId:1,button:0});ids.game.fire('pointerdown',p(220,490));ids.game.fire('pointermove',p(220-dx,490+dy));ids.game.fire('pointerup',p(220-dx,490+dy))}};
 }
 for(const dimensions of [{},{width:640,height:360,offsetX:50,offsetY:125},{width:1920,height:1080}]){
@@ -134,3 +134,12 @@ ok(beginning.hand.x===release.x&&beginning.hand.y===release.y,'release begins at
 const still1=rig.pose(actor,99,release,1,true),still2=rig.pose(actor,99,release,3,true);ok(still1.shoulder.y===still2.shoulder.y,'reduced motion removes idle breathing');
 renderer.event({type:'launch',x:release.x,y:release.y});ok(renderer.shotAge===0&&renderer.releasePoint.x===release.x,'launch event starts animation at contact');renderer.animate(.2);ok(renderer.shotAge===.2,'animation advances on the rendering clock');renderer.reset();ok(renderer.shotAge===99&&renderer.readyAge===0,'restart clears follow-through and starts reach');
 console.log('PASS: '+checks+' final assertions including all four animated rebel rigs.');
+
+// Painted artwork uses the same pose objects and replaces the fallback only after decoding.
+const skin=visual.ctx.window.BlindSpotPaintedSkin;let paintedCalls=0;const paintedColumns=new Set();const paintedContext=new Proxy({drawImage(...args){paintedCalls++;paintedColumns.add(Math.floor(args[1]/256));ok(args.slice(1).every(Number.isFinite),'painted source and destination rectangles remain finite')}},{get:(o,k)=>o[k]||(()=>{})});
+for(const tool of Object.keys(c.BlindSpotData.TOOLS)){const actor=new Simulation({...LEVELS[0],tool});actor.aim(102,608);const p=rig.pose(actor,99,{x:220,y:490},1,false);skin.draw(paintedContext,p,{width:1024,height:1536});skin.draw(paintedContext,p,{width:1024,height:1536},true)}
+ok(paintedColumns.size===4,'painted rendering uses all four character columns');
+const pixels=new Uint8ClampedArray(7*7*4);for(let i=0;i<49;i++){pixels.set([220,220,220,255],i*4)}for(let y=1;y<=5;y++)for(let x=1;x<=5;x++)pixels.set([35,23,20,255],(y*7+x)*4);pixels.set([255,255,255,255],(3*7+3)*4);skin.matte(pixels,7,7);
+ok(pixels[3]===0&&pixels[(3*7+3)*4+3]===255,'neutral exterior is isolated while enclosed white highlights survive');ok(pixels[(2*7+2)*4+3]===255,'dark painted hair and linework survive isolation');
+ok(fs.existsSync('dist/assets/rebel-parts-painted.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('painted:"data:image/png;base64,'),'painted source is included in the offline game');
+console.log('PASS: '+checks+' final assertions including painted sprite assembly.');

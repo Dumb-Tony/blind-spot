@@ -1,4 +1,4 @@
-# Blind Spot — Game Design Document, 0.9
+# Blind Spot — Game Design Document, 0.10
 
 ## Play loop
 Aim, launch, watch the structure react, then choose the next shot. The intended feel is the readable launch-and-collapse puzzle loop of Angry Birds: scarce shots, useful material differences, vulnerable supports, weight transfer, chain reactions, quick retries and optional three-star mastery. Blind Spot retains its own surveillance targets, characters, artwork and tool effects.
@@ -35,3 +35,7 @@ In-play characters are articulated canvas illustrations rather than portrait car
 The ready state reaches into position over 0.35 seconds. A launch event carries the actual release coordinates; the hand follows through over 0.22 seconds and recovers by 0.85 seconds. The elastic has a brief damped rebound. These motions are render-only and do not alter collision bodies, impulses or launch timing. Pausing freezes the animation clock. Reduced motion removes idle breathing, scarf flutter, elastic rebound and camera shake; essential aiming and release feedback remain.
 
 Original menu portraits remain intact. Six district palettes add atmospheric lighting and non-collidable distant architecture. Contrasting roof edges and character contact shadows establish a common ground plane. Beveled material highlights and offset shadows improve the legibility of structures without changing their hitboxes.
+
+## 0.10 painted character skin
+
+The approved 0.9 pose solver and motion timing remain unchanged. A painted layer now replaces the visible polygon bodies once its image decodes. It uses six types of illustrated components for each rebel, sampled from one atlas matched to the original portrait style. Upper sleeves overlap forearms, trouser layers overlap at knees, and independently drawn boots keep their soles planted. Texture preparation runs once per decoded image, not each frame. Level geometry, game physics, supplies, EMP balance and save formats are untouched. Detailed artwork and existing body movement take precedence over minor decorative effects: expressions and scarf folds are painted into the texture.
