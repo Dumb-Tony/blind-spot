@@ -49,3 +49,28 @@ const saved=harness();saved.click('playBtn');saved.drag(55,25);saved.tick(9);con
 const bad=harness({saved:{'blindspot-overhaul-progress':'{"stars":"bad","last":999}'}});ok(bad.state().progress.last===7,'corrupt save values are bounded');
 const single=fs.readFileSync('dist/blind-spot-standalone.html','utf8');ok(!/<script src=|<link rel="stylesheet"/.test(single),'offline dependency embedding');
 console.log(`PASS: ${checks} assertions across exact production physics, real pointer handlers, scaled canvases, trajectories, pause, restart, failure, stars, storage, and refresh rates.`);
+// Physical regressions for the revised contact and fragment model.
+const fracture=new Simulation(LEVELS[1]);const beam=fracture.blocks.find(b=>!b.isStatic&&b.game.w>b.game.h);
+Matter.Body.setVelocity(beam,{x:4,y:2});Matter.Body.setAngularVelocity(beam,.04);
+const mass=beam.mass,px=mass*beam.velocity.x,py=mass*beam.velocity.y;
+fracture.breakBody(beam);const chips=fracture.blocks.filter(b=>b.game.kind==='debris');
+ok(chips.length===2,'fracture produces two physical pieces');
+ok(Math.abs(chips.reduce((v,b)=>v+b.mass,0)-mass)<1e-8,'fracture preserves load-bearing mass');
+ok(Math.abs(chips.reduce((v,b)=>v+b.mass*b.velocity.x,0)-px)<1e-8&&Math.abs(chips.reduce((v,b)=>v+b.mass*b.velocity.y,0)-py)<1e-8,'fracture conserves linear momentum');
+ok(chips.every(b=>b.angularVelocity===beam.angularVelocity),'fragments inherit parent spin');
+const load=new Simulation(LEVELS[4]);load.armed=true;load.state='flying';
+const weight=load.blocks.find(b=>b.game.material==='heavy'),height=weight.position.y;
+for(const b of [...load.blocks])if(b.game.material==='glass'||b.game.material==='wood'){load.breakBody(b)}
+for(const b of load.blocks.filter(b=>b.game.kind==='debris'))Matter.Body.setPosition(b,{x:400,y:650});
+for(let n=0;n<180;n++)load.step();
+ok(weight.position.y>height+40,'removing support transfers heavy load into collapse');
+for(const aim of [[55,25],[115,15],[60,95]]){
+ const s=new Simulation(LEVELS[0]);s.aim(220-aim[0],490+aim[1]);const g=s.openingGuide();
+ ok(!('hit' in g),'opening guide exposes no impact prediction');
+ ok(g.points.length<=13&&g.points.length>2,'opening guide is time-bounded');
+ ok(g.points.every(p=>Math.hypot(p.x-g.points[0].x,p.y-g.points[0].y)<=180),'opening guide is distance-bounded');
+}
+// Tiny fast fragments cannot have the same destructive authority as concrete.
+function cameraImpact(mass){const s=new Simulation(LEVELS[0]);s.armed=true;const cam=s.cameras[0],chip=Matter.Bodies.rectangle(cam.position.x-30,cam.position.y,8,8);chip.game={kind:'debris'};Matter.Body.setMass(chip,mass);Matter.Body.setVelocity(chip,{x:3,y:0});s.collisions({pairs:[{bodyA:cam,bodyB:chip,collision:{normal:{x:1,y:0},supports:[cam.position]}}]});return cam.game.disabled}
+ok(!cameraImpact(.05)&&cameraImpact(20),'impact strength respects debris mass');
+console.log(`PASS: ${checks} total assertions including fracture, support collapse, weighted impacts, and limited aiming.`);

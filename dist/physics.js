@@ -52,30 +52,54 @@
       }
       Engine.clear(e);return{points,samples,hit};
     }
+    openingGuide(){
+      // Only the opening 0.4 seconds / 180 pixels. Never query future targets.
+      const e=Engine.create();e.gravity.scale=WORLD.gravity;
+      const p=stone(this.projectile.position.x,this.projectile.position.y);
+      Composite.add(e.world,p);Body.setVelocity(p,this.launchVelocity());
+      const points=[{...p.position}];let distance=0,previous={...p.position};
+      for(let i=0;i<48;i++){
+        Engine.update(e,DT);distance+=Math.hypot(p.position.x-previous.x,p.position.y-previous.y);previous={...p.position};
+        if(distance>180)break;if(i%4===3)points.push({...p.position});
+      }
+      Engine.clear(e);return{points};
+    }
     collisions(event){
       if(!this.armed)return;
       for(const pair of event.pairs){
         const a=pair.bodyA,b=pair.bodyB,n=pair.collision.normal;
-        const relative=Math.abs((a.velocity.x-b.velocity.x)*n.x+(a.velocity.y-b.velocity.y)*n.y);
+        const pos=pair.collision.supports[0]||a.position;
+        // Contact velocity includes rotation: a falling beam's tip carries an impact.
+        const velocityAt=body=>({x:body.velocity.x-body.angularVelocity*(pos.y-body.position.y),y:body.velocity.y+body.angularVelocity*(pos.x-body.position.x)});
+        const av=velocityAt(a),bv=velocityAt(b);
+        const relative=Math.abs((av.x-bv.x)*n.x+(av.y-bv.y)*n.y);
         if(relative<1.3)continue;
-        const pos=pair.collision.supports[0]||a.position;this.emit('impact',{position:pos},{strength:relative});
+        this.emit('impact',{position:pos},{strength:relative});
         for(const [target,other] of [[a,b],[b,a]]){
           const g=target.game;if(!g||g.disabled||g.broken)continue;
-          if(g.kind==='camera'&&relative>2.2){this.disable(target,other.game?.kind==='stone'?'DIRECT HIT':'CHAIN REACTION');continue}
-          if(g.kind==='block'&&!target.isStatic){const m=MATERIALS[g.material];if(relative>m.threshold){g.hp-=(relative-m.threshold)*10*(other.game?.kind==='stone'?1.2:1);this.emit('crack',target,{material:g.material});if(g.hp<=0)this.pendingBreak.add(target)}}
+          const massFactor=other.isStatic?1:Math.max(.15,Math.min(2.4,other.mass/(target.mass+other.mass)*2));
+          if(g.kind==='camera'&&relative*Math.sqrt(massFactor)>2.2){this.disable(target,other.game?.kind==='stone'?'DIRECT HIT':'CHAIN REACTION');continue}
+          if(g.kind==='block'&&!target.isStatic){const m=MATERIALS[g.material];if(relative>m.threshold){g.hp-=(relative-m.threshold)*10*massFactor*(other.game?.kind==='stone'?1.2:1);this.emit('crack',target,{material:g.material});if(g.hp<=0)this.pendingBreak.add(target)}}
         }
       }
     }
     breakBody(b){
       if(b.game.broken)return;b.game.broken=true;this.breaks++;
       Composite.remove(this.engine.world,b);this.blocks=this.blocks.filter(v=>v!==b);this.emit('break',b,{material:b.game.material,w:b.game.w,h:b.game.h,angle:b.angle});
+      // A sleeping stack must respond immediately when its supporting body changes.
+      for(const nearby of Composite.allBodies(this.engine.world)){
+        if(!nearby.isStatic&&nearby.bounds.max.x>b.bounds.min.x-8&&nearby.bounds.min.x<b.bounds.max.x+8&&nearby.bounds.max.y>b.bounds.min.y-8&&nearby.bounds.min.y<b.bounds.max.y+8)Sleeping.set(nearby,false);
+      }
       const horizontal=b.game.w>b.game.h;
       for(let i=0;i<2;i++){
-        const w=horizontal?b.game.w*.4:b.game.w*.75,h=horizontal?b.game.h*.7:b.game.h*.4;
-        const offset=(i?1:-1)*(horizontal?b.game.w:b.game.h)*.26;
+        const w=horizontal?b.game.w*.49:b.game.w,h=horizontal?b.game.h:b.game.h*.49;
+        const offset=(i?1:-1)*(horizontal?b.game.w:b.game.h)*.25;
         const x=b.position.x+Math.cos(b.angle+(horizontal?0:Math.PI/2))*offset,y=b.position.y+Math.sin(b.angle+(horizontal?0:Math.PI/2))*offset;
-        const chip=Bodies.rectangle(x,y,w,h,{angle:b.angle,density:MATERIALS[b.game.material].density*.75,friction:.8,restitution:.1});
-        chip.game={kind:'debris',material:b.game.material,w,h};Body.setVelocity(chip,{x:b.velocity.x+(i?.7:-.7),y:b.velocity.y-.4});Body.setAngularVelocity(chip,(i?1:-1)*.035);this.blocks.push(chip);this.add(chip);
+        const chip=Bodies.rectangle(x,y,w,h,{angle:b.angle,friction:MATERIALS[b.game.material].friction,restitution:.08,sleepThreshold:45});
+        Body.setMass(chip,b.mass/2);
+        chip.game={kind:'debris',material:b.game.material,w,h};
+        Body.setVelocity(chip,{x:b.velocity.x-b.angularVelocity*(y-b.position.y),y:b.velocity.y+b.angularVelocity*(x-b.position.x)});
+        Body.setAngularVelocity(chip,b.angularVelocity);this.blocks.push(chip);this.add(chip);
       }
     }
     disable(b,reason){if(b.game.disabled)return;b.game.disabled=true;this.combo=this.time-this.lastHit<1.8?this.combo+1:1;this.lastHit=this.time;this.bestCombo=Math.max(this.bestCombo,this.combo);this.emit('camera',b,{reason,combo:this.combo})}
@@ -87,10 +111,10 @@
         for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&(b.position.y>850||b.position.x>1480||b.position.x< -180))Composite.remove(this.engine.world,b);
       }
       if(this.projectile&&this.shotTime<5)this.trail.push({...this.projectile.position});if(this.trail.length>160)this.trail.shift();
-      const bodies=Composite.allBodies(this.engine.world).filter(b=>!b.isStatic&&b.game?.kind!=='debris');
+      const bodies=Composite.allBodies(this.engine.world).filter(b=>!b.isStatic);
       const moving=bodies.some(b=>!b.isSleeping&&(b.speed>.38||Math.abs(b.angularVelocity)>.018));this.quiet=moving?0:this.quiet+1/60;
       if(this.remaining===0&&this.shotTime>.65&&(this.quiet>.45||this.time-this.lastHit>3.5)){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}
-      if(this.shotTime>1.1&&(this.quiet>.6||this.shotTime>9))this.finishShot();
+      if(this.shotTime>1.1&&(this.quiet>.85||this.shotTime>14))this.finishShot();
     }
     finishShot(){
       if(this.remaining===0){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}

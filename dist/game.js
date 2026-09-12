@@ -39,7 +39,7 @@
     $('levelGrid').querySelectorAll('.level-card').forEach((b,i)=>{view.thumbnail(b.querySelector('canvas'),LEVELS[i]);b.onclick=()=>startLevel(i)});
   }
   function worldPoint(e){const rect=canvas.getBoundingClientRect();return{x:(e.clientX-rect.left)*WORLD.width/rect.width,y:(e.clientY-rect.top)*WORLD.height/rect.height}}
-  function updateGuide(){view.guide=sim?.predict();updateHUD()}
+  function updateGuide(){view.guide=sim?.openingGuide();updateHUD()}
   function cancelDrag(){if(dragId!==null){try{canvas.releasePointerCapture(dragId)}catch(_){}dragId=null}sim?.cancel();view.guide=null}
   function down(e){if(screen!==null||!sim||sim.state!=='ready'||(e.button!==undefined&&e.button!==0))return;const p=worldPoint(e);if(Math.hypot(p.x-WORLD.anchor.x,p.y-WORLD.anchor.y)>85){toast('Grab the glowing stone beside Mara to aim.');return}sounds.wake();dragId=e.pointerId;canvas.setPointerCapture(e.pointerId);sim.aim(p.x,p.y);updateGuide();e.preventDefault()}
   function move(e){if(dragId!==e.pointerId)return;const p=worldPoint(e);sim.aim(p.x,p.y);updateGuide();e.preventDefault()}

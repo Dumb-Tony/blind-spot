@@ -2,3 +2,6 @@
 tests/smoke.png
 node_modules/
 tests/screenshots/
+
+*.zip
+*.tar.gz

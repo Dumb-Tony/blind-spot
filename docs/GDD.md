@@ -4,7 +4,7 @@
 A playful 2D physics puzzle: aim, launch an improvised tool, collapse structures, disable every fictional surveillance camera, earn 1–3 stars. No human targets. Region 1 introduces Mara, a courier and skater, and her taped heavy Street Stone. Mara remains beside the launcher. Eight levels end at the Ministry of Looking.
 
 ## Controls and feel
-Drag the glowing stone backward and release. A forgiving grab radius, pointer capture and canvas coordinate conversion support scaled windows. Tiny pulls and cancelled drags cost nothing. A physics-based guide shows the flight and first collision. Fine-aim sliders and arrows/Space provide alternatives. Escape cancels or pauses; R restarts; M mutes. Fullscreen is optional.
+Drag the glowing stone backward and release. A forgiving grab radius, pointer capture and canvas coordinate conversion support scaled windows. Tiny pulls and cancelled drags cost nothing. A fading guide shows only the opening 0.4 seconds, capped at 180 pixels. No predicted contact marker or collision label is shown. Fine-aim sliders and arrows/Space provide alternatives. Escape cancels or pauses; R restarts; M mutes. Fullscreen is optional.
 
 Combine punchy, forgiving launches with readable chain reactions. Wood splinters, glass shatters, concrete falls intact and anchored steel blocks shots. Cameras shut down through direct impact, debris impact or sustained loss of mounting. No secondary tool ability.
 
@@ -36,3 +36,6 @@ Menus prioritize immediate Play, clear controls, thumbnail levels, stars, restar
 Separate data, physics, renderer and controller modules. Future regions each add one rebel, one tool and one new mechanic: painter/paint splash/shielded cameras; tinkerer/EMP/electronic clusters; mechanic/pull tool/suspended weights. These are future design directions only. Avoid inventory management, hacking minigames and complex upgrades.
 
 The standalone HTML embeds all dependencies and artwork; readable source and engine license accompany it. Desktop play is primary. No music, cloud saves, moving enemies or later regions. Keyboard aiming, DOM controls, mute and reduced motion help accessibility, but the spatial canvas puzzle is not fully screen-reader playable. Physical outcomes may vary slightly between browser engines.
+
+## Physics revision 0.5
+Mass-sensitive contact damage and angular contact velocity distinguish heavy falling weights from small debris. Physical fragments retain total mass and linear momentum and inherit spin. Nearby sleeping bodies wake on fracture. Debris is included in settling; quiet time is 0.85 seconds with a 14-second per-shot upper bound. This is a game-oriented rigid-body simulation, not a finite-element structural solver. No scripted camera kills or puzzle-specific collapse triggers are used.

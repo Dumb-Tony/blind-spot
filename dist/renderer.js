@@ -62,7 +62,7 @@
         c.lineWidth=2;c.strokeStyle='#f6e3bd35';c.setLineDash([3,8]);c.beginPath();sim.lastTrail.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.stroke();c.setLineDash([]);
         sim.blocks.forEach(b=>this.block(b));sim.cameras.forEach(b=>this.camera(b));sim.stones.forEach(b=>this.stone(b));
         if(['ready','aiming'].includes(sim.state))this.stone(sim.projectile,true);
-        if(sim.state==='aiming'&&this.guide){const {points,hit}=this.guide;points.forEach((p,i)=>{if(i===0)return;circle(c,p.x,p.y,3.4,`rgba(231,255,158,${Math.max(.3,1-i/85)})`)});if(hit){c.strokeStyle=hit.kind==='camera'?'#ff9170':'#e4ff8b';c.lineWidth=3;c.beginPath();c.arc(hit.x,hit.y,23,0,TAU);c.stroke();c.textAlign='center';c.font='900 12px system-ui';c.fillStyle=c.strokeStyle;c.fillText('FIRST IMPACT',hit.x,hit.y-32)}
+        if(sim.state==='aiming'&&this.guide){const {points}=this.guide;points.forEach((p,i)=>{if(i===0)return;const fade=1-i/(points.length-1);circle(c,p.x,p.y,2+1.4*fade,`rgba(231,255,158,${fade*fade*.9})`)});
           const v=sim.launchVelocity(),power=Math.min(100,Math.round(Math.hypot(v.x,v.y)/(118*.23)*100));c.fillStyle='#10172bf0';rr(c,145,349,150,42,9);c.fill();c.fillStyle='#d9ff63';c.font='900 16px system-ui';c.textAlign='center';c.fillText(`${power}% POWER`,220,375);
         }
         if(sim.state==='flying'){const last=sim.trail.slice(-26);last.forEach((p,i)=>circle(c,p.x,p.y,2.5*(i/26),`rgba(255,222,144,${i/45})`))}
