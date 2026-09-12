@@ -40,9 +40,15 @@
     launch(){
       if(this.state!=='aiming')return false;
       const v=this.launchVelocity();if(Math.hypot(v.x,v.y)<2.5){this.cancel();return false}
-      Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
+      this.wakeWorld();Body.setStatic(this.projectile,false);Sleeping.set(this.projectile,false);Body.setVelocity(this.projectile,v);
       if(this.inventory)this.inventory[this.tool.id]--;
       this.state='flying';this.armed=true;this.shotsUsed++;this.stones.push(this.projectile);this.shotTime=0;this.quiet=0;this.lastTrail=this.trail;this.trail=[];this.emit('launch',this.projectile);return true;
+    }
+    wakeWorld(){
+      // Sleeping is useful only during initial seating. Once play starts, all dynamic
+      // bodies integrate gravity, including an entire stack whose support moves away.
+      this.engine.enableSleeping=false;
+      for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&b.isSleeping)Sleeping.set(b,false);
     }
     launchVelocity(){return{x:(WORLD.anchor.x-this.projectile.position.x)*this.tool.power,y:(WORLD.anchor.y-this.projectile.position.y)*this.tool.power}}
     predict(stopAtHit=true){
@@ -73,7 +79,7 @@
     collisions(event){
       if(!this.armed)return;
       for(const pair of event.pairs){
-        for(const [projectile,target] of [[pair.bodyA,pair.bodyB],[pair.bodyB,pair.bodyA]])if(projectile.game?.kind==='stone'&&!projectile.game.spent)this.activateTool(projectile,target,pair.collision.supports[0]||projectile.position);
+        for(const [projectile,target] of [[pair.bodyA,pair.bodyB],[pair.bodyB,pair.bodyA]])if(projectile.game?.kind==='stone'&&!projectile.isStatic&&!projectile.game.spent)this.activateTool(projectile,target,pair.collision.supports[0]||projectile.position);
         const a=pair.bodyA,b=pair.bodyB,n=pair.collision.normal;
         const pos=pair.collision.supports[0]||a.position;
         // Contact velocity includes rotation: a falling beam's tip carries an impact.
@@ -154,26 +160,33 @@
     }
     disable(b,reason){if(b.game.disabled)return;b.game.disabled=true;this.combo=this.time-this.lastHit<1.8?this.combo+1:1;this.lastHit=this.time;this.bestCombo=Math.max(this.bestCombo,this.combo);this.emit('camera',b,{reason,combo:this.combo})}
     step(){
-      if(['won','lost','ready','aiming'].includes(this.state))return;
+      if(!this.armed)return;
+      if(this.engine.enableSleeping)this.wakeWorld();
+      const inFlight=this.state==='flying',terminal=this.state==='won'||this.state==='lost';
       for(let i=0;i<2;i++){
         Engine.update(this.engine,DT);
         for(const cable of [...this.cables]){const end=Constraint.pointBWorld(cable);const strain=Math.hypot(end.x-cable.pointA.x,end.y-cable.pointA.y)-cable.length;cable.overload=strain>.55?(cable.overload||0)+DT/1000:0;if(!this.blocks.includes(cable.bodyB)||cable.overload>.12){Composite.remove(this.engine.world,cable);this.cables=this.cables.filter(c=>c!==cable);Sleeping.set(cable.bodyB,false)}}
         for(const hook of [...this.hooks])if(this.time>hook.until){Composite.remove(this.engine.world,hook.constraint);this.hooks=this.hooks.filter(h=>h!==hook)}
-        for(const b of this.pendingBreak)this.breakBody(b);this.pendingBreak.clear();this.time+=DT/1000;this.shotTime+=DT/1000;
+        for(const b of this.pendingBreak)this.breakBody(b);this.pendingBreak.clear();this.time+=DT/1000;if(inFlight)this.shotTime+=DT/1000;
         for(const c of this.cameras){if(c.game.disabled)continue;const tilted=Math.abs(angle(c.angle-c.game.mountAngle))>.85,fallen=c.position.y-c.game.mount.y>48;c.game.fallTime=tilted||fallen?c.game.fallTime+DT/1000:0;if(c.game.fallTime>.3||c.position.y>780||c.position.x>1420||c.position.x< -120)this.disable(c,'MOUNT BROKEN')}
-        for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&(b.position.y>850||b.position.x>1480||b.position.x< -180))Composite.remove(this.engine.world,b);
+        for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&(b.position.y>850||b.position.x>1480||b.position.x< -180)){
+          Composite.remove(this.engine.world,b);this.blocks=this.blocks.filter(v=>v!==b);this.stones=this.stones.filter(v=>v!==b);
+          // Keep disabled camera records for scoring, but never draw a removed body.
+          if(b.game?.kind==='camera')b.game.removed=true;
+        }
       }
-      if(this.projectile&&this.shotTime<5)this.trail.push({...this.projectile.position});if(this.trail.length>160)this.trail.shift();
+      if(inFlight&&this.projectile&&this.shotTime<5)this.trail.push({...this.projectile.position});if(this.trail.length>160)this.trail.shift();
       const bodies=Composite.allBodies(this.engine.world).filter(b=>!b.isStatic);
       const moving=bodies.some(b=>!b.isSleeping&&(b.speed>.38||Math.abs(b.angularVelocity)>.018));this.quiet=moving?0:this.quiet+1/60;
+      if(terminal)return;
       if(this.remaining===0){if(this.shotTime>.65&&this.time-this.lastHit>1.5&&(this.quiet>.45||this.time-this.lastHit>3.5)){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)})}return}
-      if(this.shotTime>1.1&&(this.quiet>.85||this.shotTime>14))this.finishShot();
+      if(inFlight&&this.shotTime>1.1&&(this.quiet>.85||(this.shotTime>14&&this.shotsLeft>0)))this.finishShot();
     }
     finishShot(){
       if(this.remaining===0){this.state='won';this.emit('win',null,{stars:starsFor(this.level,this.shotsUsed)});return}
       if(!this.shotsLeft||(this.inventory&&!Object.values(this.inventory).some(n=>n>0))){this.state='lost';this.emit('lose');return}if(this.inventory&&!this.inventory[this.tool.id])this.tool=TOOLS[Object.keys(this.inventory).find(id=>this.inventory[id]>0)];this.load();
     }
-    snapshot(){return{tool:this.tool.id,inventory:this.inventory?{...this.inventory}:null,state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
+    snapshot(){const dynamic=Composite.allBodies(this.engine.world).filter(b=>!b.isStatic);return{physics:{dynamicBodies:dynamic.length,sleepingBodies:dynamic.filter(b=>b.isSleeping).length,movingBodies:dynamic.filter(b=>b.speed>.38||Math.abs(b.angularVelocity)>.018).length},tool:this.tool.id,inventory:this.inventory?{...this.inventory}:null,state:this.state,shotsUsed:this.shotsUsed,shotsLeft:this.shotsLeft,remaining:this.remaining,time:this.time,projectile:this.projectile?{x:this.projectile.position.x,y:this.projectile.position.y,mass:this.projectile.mass}:null}}
   }
   global.BlindSpotPhysics={Simulation,stone,DT};
 })(typeof window!=='undefined'?window:globalThis);

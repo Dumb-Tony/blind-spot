@@ -1,0 +1,23 @@
+<!doctype html><meta charset="utf-8"><title>Blind Spot physics playtest</title>
+<style>body{background:#102528;color:#dff6dc;font:16px system-ui}button{padding:12px}iframe{width:960px;height:540px;border:0}pre{white-space:pre-wrap}</style>
+<h1>120-level browser physics replay</h1><p>Production controller and physics, isolated progress, accelerated clock. Each result is rendered. No user saves are changed.</p><button id="run">Run all 120 levels</button><pre id="report">Ready</pre><iframe id="gameFrame"></iframe>
+<script>
+run.onclick=async()=>{run.disabled=true;let results=[];try{
+ const [html,solutions]=await Promise.all([fetch('index.html').then(r=>r.text()),fetch('qa-solutions.json').then(r=>r.json())]);
+ const boot=`<script>const qaStore=new Map([['blindspot-mute','1']]);Object.defineProperty(window,'localStorage',{value:{getItem:k=>qaStore.get(k)||null,setItem:(k,v)=>qaStore.set(k,v)}});let qaRaf;window.requestAnimationFrame=fn=>qaRaf=fn;window.qaTick=t=>qaRaf(t);HTMLCanvasElement.prototype.setPointerCapture=function(){};HTMLCanvasElement.prototype.releasePointerCapture=function(){};<\/script>`;
+ const hook=`<script>let qaSim,qaView;const realDraw=BlindSpotRenderer.Renderer.prototype.draw;BlindSpotRenderer.Renderer.prototype.draw=function(s){qaSim=s;qaView=this};window.qaDraw=()=>realDraw.call(qaView,qaSim);window.qaCheck=()=>Matter.Composite.allBodies(qaSim.engine.world).every(b=>Number.isFinite(b.position.x)&&Number.isFinite(b.position.y)&&Number.isFinite(b.angle)&&(!qaSim.armed||b.isStatic||!b.isSleeping));<\/script>`;
+ gameFrame.srcdoc=html.replace('<head>','<head>'+boot).replace(/<script src="game.js[^>]*><\/script>/,hook+'$&');
+ await new Promise(r=>gameFrame.onload=r);let w=gameFrame.contentWindow,d=w.document,now=0;const tick=()=>w.qaTick(now+=1000/60),state=()=>w.__blindSpot.getState();
+ for(let i=0;i<solutions.length;i++){
+ d.getElementById('selectBtn').click();const region=d.getElementById('regionSelect');region.value=String(Math.floor(i/20));region.dispatchEvent(new w.Event('change'));d.querySelector(`[data-level="${i}"]`).click();tick();
+ let healthy=true;
+ for(const [dx,dy,tool] of solutions[i].shots){if(tool){let sel=d.getElementById('toolSelect');sel.value=tool;sel.dispatchEvent(new w.Event('change'));}
+ const canvas=d.getElementById('game'),r=canvas.getBoundingClientRect();const ptr=(type,x,y)=>canvas.dispatchEvent(new w.PointerEvent(type,{clientX:r.left+x*r.width/1280,clientY:r.top+y*r.height/720,pointerId:1,button:0,bubbles:true}));ptr('pointerdown',220,490);ptr('pointermove',220-dx,490+dy);ptr('pointerup',220-dx,490+dy);
+ for(let n=0;n<1800&&state().state==='flying';n++){tick();healthy=healthy&&w.qaCheck();}
+ if(state().state==='won')break;
+ }
+ for(let n=0;n<180;n++)tick();w.qaDraw();let s=state();results.push({level:i+1,pass:s.state==='won'&&s.progress.stars[i]===3&&healthy&&w.qaCheck(),shots:s.shotsUsed,state:s.state,sleepers:s.physics.sleepingBodies});report.textContent=JSON.stringify({completed:results.length,passed:results.filter(r=>r.pass).length,failures:results.filter(r=>!r.pass),latest:results.at(-1)},null,2);await new Promise(r=>setTimeout(r,0));
+ }
+ window.qaResults=results;report.textContent='COMPLETE\n'+report.textContent;
+ }catch(e){report.textContent+='\nERROR '+e.stack}run.disabled=false;};
+</script>

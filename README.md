@@ -1,9 +1,13 @@
-# Blind Spot — Six Regions (0.10)
+# Blind Spot — Six Regions (0.11)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original Region 1 layouts, scoring, art and saved stars remain intact.
+
+## Physics update
+
+Version 0.11 fixes unsupported sleeping stacks and simulation freezes between throws and on result screens. Blocks, cameras and debris keep responding to gravity after play starts. The final throw waits for the structure to settle before declaring failure. Layouts, shot limits, artwork and progress are preserved. All 120 levels have refreshed three-star solutions.
 
 ## Visual update
 
@@ -53,3 +57,5 @@ Three stars reward the tested shot target shown before aiming; two and one stars
 Run `node scripts/build-standalone.mjs`, then `node tests/production.test.cjs`. No dependency installation is needed. `node scripts/serve.cjs` starts the local preview. `node tests/solve-overhaul.cjs --save` searches and records solutions; it is intentionally slower than the normal regression suite. GitHub Pages runs the build and regression suite before deployment on pushes to `main`.
 
 The `region1-cloud-baseline` tag preserves the recovered cloud original. Earlier versioned ZIPs are historical snapshots. GitHub Pages is the public sharing link.
+
+For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 120 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.

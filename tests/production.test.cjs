@@ -8,7 +8,7 @@ let checks=0;const ok=(v,label)=>{assert.ok(v,label);checks++};
 for(let i=0;i<LEVELS.length;i++){
   let wins=0;const s=new Simulation(LEVELS[i],e=>{if(e.type==='win')wins++});
   for(let n=0;n<300;n++)s.step();ok(s.shotsUsed===0&&s.remaining===LEVELS[i].cameras.length,`L${i+1}: no free pre-shot destruction`);
-  for(const [dx,dy,tool] of solutions[i].shots){if(tool)ok(s.selectTool(tool),"available tool selected");s.aim(220-dx,490+dy);ok(s.launch(),`L${i+1}: launch accepted`);ok(Number.isFinite(s.projectile.mass)&&s.projectile.mass>0,'finite dynamic mass');for(let n=0;n<900&&s.state==='flying';n++)s.step();ok(Number.isFinite(s.projectile.position.x),'no invalid physics');}
+  for(const [dx,dy,tool] of solutions[i].shots){if(tool)ok(s.selectTool(tool),"available tool selected");s.aim(220-dx,490+dy);ok(s.launch(),`L${i+1}: launch accepted`);ok(Number.isFinite(s.projectile.mass)&&s.projectile.mass>0,'finite dynamic mass');for(let n=0;n<1800&&s.state==='flying';n++)s.step();ok(Number.isFinite(s.projectile.position.x),'no invalid physics');}
   ok(s.state==='won'&&s.remaining===0,`L${i+1}: production solver clears all cameras`);ok(s.shotsUsed<=LEVELS[i].stars[0],`L${i+1}: three stars attainable`);for(let n=0;n<300;n++)s.step();ok(wins===1,'win event exactly once');
   console.log(`PASS level ${i+1}: ${LEVELS[i].name}, ${s.shotsUsed} shot(s), ${s.breaks} broken blocks`);
   for(const [used,expected] of [[LEVELS[i].stars[0],3],[LEVELS[i].stars[1],2],[LEVELS[i].shots,1]])ok(starsFor(LEVELS[i],used)===expected,'scoring boundary');
@@ -143,3 +143,7 @@ const pixels=new Uint8ClampedArray(7*7*4);for(let i=0;i<49;i++){pixels.set([220,
 ok(pixels[3]===0&&pixels[(3*7+3)*4+3]===255,'neutral exterior is isolated while enclosed white highlights survive');ok(pixels[(2*7+2)*4+3]===255,'dark painted hair and linework survive isolation');
 ok(fs.existsSync('dist/assets/rebel-parts-painted.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('painted:"data:image/png;base64,'),'painted source is included in the offline game');
 console.log('PASS: '+checks+' final assertions including painted sprite assembly.');
+
+require('./floating.test.cjs');
+
+const aftermath=harness();aftermath.click('playBtn');aftermath.drag(55,25);aftermath.tick(9);const resultTime=aftermath.state().time;aftermath.tick(1);ok(aftermath.state().screen==='result'&&aftermath.state().time>resultTime+.9,'result screen continues the production physics clock');console.log('PASS all production and floating regression checks.');

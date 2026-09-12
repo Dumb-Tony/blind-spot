@@ -59,7 +59,7 @@
   function pause(){if(screen===null){cancelDrag();changeScreen('pause')}else if(screen==='pause')changeScreen(null)}
   function frame(now){
     const dt=lastNow===null?0:Math.min(.1,(now-lastNow)/1000);lastNow=now;clock+=dt;
-    if(screen===null&&sim){elapsed+=dt;while(elapsed>=1/60){sim.step();elapsed-=1/60;if(screen!==null){elapsed=0;break}}view.animate(dt);updateHUD()}else if(screen==='menu'||screen==='result')view.animate(dt);
+    if(screen===null&&sim){elapsed+=dt;while(elapsed>=1/60){sim.step();elapsed-=1/60;if(screen!==null){elapsed=0;break}}view.animate(dt);updateHUD()}else if(screen==='result'&&sim){elapsed+=dt;while(elapsed>=1/60){sim.step();elapsed-=1/60}view.animate(dt)}else if(screen==='menu')view.animate(dt);
     view.reduceMotion=!motion;view.draw(sim);if(toast.until<clock)$('toast').classList.remove('show');window.requestAnimationFrame(frame);
   }
   canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',cancelDrag);canvas.addEventListener('lostpointercapture',()=>{if(dragId!==null)cancelDrag()});canvas.addEventListener('contextmenu',e=>{e.preventDefault();cancelDrag()});

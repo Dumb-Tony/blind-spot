@@ -1,8 +1,8 @@
-# Test report — 0.10
+# Test report — 0.11
 
 Validation: September 12, 2026.
 
-**2,100 assertions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 solutions still pass.
+**Over 1,900 assertions plus floating regressions pass** against the shipped production simulation, renderer and controller. All **120 levels** have replayable three-star solutions in `tests/solutions.json`; the original Region 1 layouts and star targets are unchanged. See [Physics repair and playtest](PHYSICS-0.11.md) for the current validation.
 
 ## Automated coverage
 
@@ -17,11 +17,11 @@ Validation: September 12, 2026.
 - Visual regressions: paint coats blocks and lenses, persists on fragments, has bounded storage and clears transient effects on restart; aftermath inspection preserves the result.
 - Standalone: assets, engine, styles and code are embedded with no external script or stylesheet dependencies.
 
-## Browser checks
+## Browser checks from earlier releases
 
 The local multi-file build and final standalone HTML were opened in the browser. Checked the six-region menu, twenty-level lists, large final layout, tool dropdown, changing rebel/launcher, supply consumption, disabled switching during flight, persistent paint on collapsed structures and return to ready state. The final standalone displays version 0.8 and its calibrated star target.
 
-The 120 complete solution replays run in the shared production engine under Node. Browser checks cover representative paths, not 120 separate manual browser playthroughs. Solver success proves a feasible route; perceived difficulty still benefits from player feedback. No cross-device human playtest study is claimed.
+Earlier browser checks covered representative paths. Version 0.11 additionally passes all 120 automated browser controller replays as documented in PHYSICS-0.11.md. Solver success proves a feasible route; perceived difficulty still benefits from player feedback. No cross-device human playtest study is claimed.
 
 ## Reproduce
 

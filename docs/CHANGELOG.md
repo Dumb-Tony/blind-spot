@@ -1,3 +1,10 @@
+# 0.11 — Unsupported structures keep falling
+
+- Wake every dynamic body at the first launch; keep gravity active during subsequent aiming, loading and result inspection.
+- Wait for final-shot motion to settle before declaring failure. Remove off-world bodies from rendering as well as physics.
+- Preserve all 120 layouts and star targets, tool balance and the painted animation rig. Refresh reproducible solutions for the corrected collapses.
+- Add floating-stack, sliding-support, timeout and cleanup regressions, plus an isolated 120-level browser controller replay.
+
 # 0.10 — Painted rebels, preserved motion
 
 - Added detailed painted character parts matched to the original portraits.
