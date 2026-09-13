@@ -54,7 +54,7 @@ const fracture=new Simulation(LEVELS[1]);const beam=fracture.blocks.find(b=>!b.i
 Matter.Body.setVelocity(beam,{x:4,y:2});Matter.Body.setAngularVelocity(beam,.04);
 const mass=beam.mass,px=mass*beam.velocity.x,py=mass*beam.velocity.y;
 fracture.breakBody(beam);const chips=fracture.blocks.filter(b=>b.game.kind==='debris');
-ok(chips.length===2,'fracture produces two physical pieces');
+ok(chips.length>=4&&chips.every(b=>b.game.outline?.length>=3),'fracture produces material-shaped physical pieces');
 ok(Math.abs(chips.reduce((v,b)=>v+b.mass,0)-mass)<1e-8,'fracture preserves load-bearing mass');
 ok(Math.abs(chips.reduce((v,b)=>v+b.mass*b.velocity.x,0)-px)<1e-8&&Math.abs(chips.reduce((v,b)=>v+b.mass*b.velocity.y,0)-py)<1e-8,'fracture conserves linear momentum');
 ok(chips.every(b=>b.angularVelocity===beam.angularVelocity),'fragments inherit parent spin');
@@ -159,6 +159,7 @@ ok(Math.abs(settleAt(30).shoulder.x-settleAt(144).shoulder.x)<1e-8,'body smoothi
 console.log('PASS: '+checks+' assertions plus floating and contraption fixtures.');
 require('./stress-physics.cjs');
 require('./materials.test.cjs');
+require('./fracture.test.cjs');
 const fractional=harness({height:719.984375});fractional.click('playBtn');
 for(const [type,x,y] of [['pointerdown',220,490],['pointermove',185,535],['pointerup',185,535]])fractional.ids.game.fire(type,{clientX:x,clientY:y,pointerId:1,button:0});
 ok(fractional.state().projectile.x===185&&fractional.state().projectile.y===535,'fractional canvas height does not perturb an identical visible drag');

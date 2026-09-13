@@ -1,9 +1,15 @@
-# Blind Spot — Six Regions (0.13)
+# Blind Spot — Six Regions (0.14)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original eight Region 1 layouts and their scoring, artwork and saved stars remain intact.
+
+## Material-specific destruction
+
+Version 0.14 makes glass shatter into triangular physical shards, wood split into uneven splinters, and concrete crack and crumble into angular rubble. Larger wood and concrete pieces can fracture once more after a hard collision. Fragments retain mass, inherited motion and surface paint; destroyed beams release their constraints. Fixed steel remains solid. Existing layouts, characters, tool ranges and saved progress are preserved; winning routes have been retested for the new debris behavior.
+
+See [the fracture test report](docs/PLAYTEST-0.14.md).
 
 ## Tactile material surfaces
 

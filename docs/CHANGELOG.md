@@ -1,3 +1,11 @@
+# 0.14 — Material matters
+
+- Replaced the common two-rectangle break with triangular glass shards, long irregular wood splinters and chunky concrete rubble. Rendered fragment outlines match the physical convex bodies.
+- Concrete now accumulates impact damage (90 HP, 5.5 speed threshold); cracks deepen and branch before it crumbles. Fixed steel remains unbreakable.
+- Large wood/concrete debris can fracture a second time. Glass makes 4–20 shards according to pane dimensions; wood makes four primary pieces and concrete five. Secondary splitting is bounded by size, generation and body-count checks.
+- Preserve mass and inherited translation/spin; paint follows fragments. Remove destroyed hinge, cable and hook constraints. Add glass flecks, wood slivers and concrete dust.
+- Retest campaign solutions, stability, fragment geometry, momentum, aftermath and browser play.
+
 # 0.13 — Tactile city
 
 - Added a painted material atlas: honey wood grain, rough concrete aggregate, brushed/rusted steel and chipped orange enamel.

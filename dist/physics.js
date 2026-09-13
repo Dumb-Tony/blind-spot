@@ -94,7 +94,7 @@
           const g=target.game;if(!g||g.disabled||g.broken)continue;
           const massFactor=other.isStatic?1:Math.max(.15,Math.min(2.4,other.mass/(target.mass+other.mass)*2));
           if(g.kind==='camera'&&!g.shield&&relative*Math.sqrt(massFactor)>2.2){this.disable(target,other.game?.kind==='stone'?'DIRECT HIT':'CHAIN REACTION');continue}
-          if(g.kind==='block'&&!target.isStatic){const m=MATERIALS[g.material];if(relative>m.threshold){g.hp-=(relative-m.threshold)*10*massFactor*(other.game?.kind==='stone'?1.2:1);this.emit('crack',target,{material:g.material});if(g.hp<=0)this.pendingBreak.add(target)}}
+          if((g.kind==='block'||g.kind==='debris')&&!target.isStatic&&Number.isFinite(g.hp)){const m=MATERIALS[g.material];if(relative>m.threshold){g.hp-=(relative-m.threshold)*10*massFactor*(other.game?.kind==='stone'?1.2:1);this.emit('crack',target,{material:g.material});if(g.hp<=0)this.pendingBreak.add(target)}}
         }
       }
     }
@@ -155,6 +155,7 @@
       }
     }
     breakBody(b){
+      if(b.isStatic)return;
       if(b.game.material==='cell'&&b.game.kind==='block'){this.chargeCell(b);return}
       if(b.game.broken)return;b.game.broken=true;this.breaks++;
       Composite.remove(this.engine.world,b);this.blocks=this.blocks.filter(v=>v!==b);this.emit('break',b,{material:b.game.material,w:b.game.w,h:b.game.h,angle:b.angle});
@@ -162,19 +163,60 @@
       for(const nearby of Composite.allBodies(this.engine.world)){
         if(!nearby.isStatic&&nearby.bounds.max.x>b.bounds.min.x-8&&nearby.bounds.min.x<b.bounds.max.x+8&&nearby.bounds.max.y>b.bounds.min.y-8&&nearby.bounds.min.y<b.bounds.max.y+8)Sleeping.set(nearby,false);
       }
-      const horizontal=b.game.w>b.game.h;
-      for(let i=0;i<2;i++){
-        const w=horizontal?b.game.w*.49:b.game.w,h=horizontal?b.game.h:b.game.h*.49;
-        const offset=(i?1:-1)*(horizontal?b.game.w:b.game.h)*.25;
-        const x=b.position.x+Math.cos(b.angle+(horizontal?0:Math.PI/2))*offset,y=b.position.y+Math.sin(b.angle+(horizontal?0:Math.PI/2))*offset;
-        const chip=Bodies.rectangle(x,y,w,h,{angle:b.angle,friction:MATERIALS[b.game.material].friction,restitution:.08,sleepThreshold:45});
-        Body.setMass(chip,b.mass/2);
-        chip.game={kind:'debris',material:b.game.material,w,h};
-        if(b.game.paint)chip.game.paint=b.game.paint.map(p=>({...p,x:p.x-(horizontal?offset:0),y:p.y-(horizontal?0:offset)}));
+      // Convex pieces tile the original footprint. No radial explosion: fragments
+      // inherit the parent's linear and rotational velocity and conserve its mass.
+      const g=b.game,w=g.w,h=g.h,material=g.material,depth=(g.depth||0)+1;
+      const horizontal=w>=h,L=horizontal?w:h,T=horizontal?h:w;
+      const local=(x,y)=>horizontal?{x,y}:{x:y,y:x};
+      const pieces=[];
+      if(material==='glass'){
+        const columns=Math.max(2,Math.min(5,Math.ceil(L/45))),rows=T>55?2:1;
+        for(let row=0;row<rows;row++)for(let col=0;col<columns;col++){
+          const x=-L/2+L*col/columns,y=-T/2+T*row/rows,dx=L/columns,dy=T/rows;
+          const a=local(x,y),b=local(x+dx,y),c=local(x+dx,y+dy),d=local(x,y+dy);
+          if((col+row)%2)pieces.push([a,b,d],[b,c,d]);else pieces.push([a,b,c],[a,c,d]);
+        }
+      }else{
+        // Offset fracture junctions make wood tear into long splinters and stone
+        // crumble into chunky, irregular wedges rather than two clean halves.
+        const cx=L*(material==='wood'?.09:-.07),cy=T*.08;
+        const center=local(cx,cy),a=local(-L/2,-T/2),b=local(L/2,-T/2),c=local(L/2,T/2),d=local(-L/2,T/2);
+        if(material==='wood')pieces.push([a,local(L*.17,-T/2),center,d],[local(L*.17,-T/2),b,center],[b,c,center],[c,d,center]);
+        else pieces.push([a,local(0,-T/2),center,d],[local(0,-T/2),b,center],[b,local(L/2,T*.17),center],[local(L/2,T*.17),c,center],[c,d,center]);
+      }
+      const area=points=>Math.abs(points.reduce((sum,v,i)=>{const next=points[(i+1)%points.length];return sum+v.x*next.y-next.x*v.y},0))/2;
+      // Refracturing a polygon must not create matter outside its existing outline.
+      const clip=(subject,outline)=>{
+        let result=subject;const signed=outline.reduce((s,v,i)=>{const n=outline[(i+1)%outline.length];return s+v.x*n.y-n.x*v.y},0),sign=Math.sign(signed)||1;
+        for(let i=0;i<outline.length&&result.length;i++){
+          const a=outline[i],b=outline[(i+1)%outline.length],input=result;result=[];
+          const side=p=>sign*((b.x-a.x)*(p.y-a.y)-(b.y-a.y)*(p.x-a.x));
+          for(let j=0;j<input.length;j++){const p=input[j],q=input[(j+1)%input.length],sp=side(p),sq=side(q);
+            if(sp>=-1e-7)result.push(p);if((sp>0&&sq<0)||(sp<0&&sq>0)){const t=sp/(sp-sq);result.push({x:p.x+(q.x-p.x)*t,y:p.y+(q.y-p.y)*t});}
+          }
+        }return result;
+      };
+      const polygons=pieces.map(points=>global.Matter.Vertices.hull(g.outline?clip(points,g.outline):points)).filter(points=>points.length>=3&&area(points)>2);
+      const total=polygons.reduce((sum,points)=>sum+area(points),0);
+      for(const points of polygons){
+        const centroid=global.Matter.Vertices.centre(points),cos=Math.cos(b.angle),sin=Math.sin(b.angle);
+        const x=b.position.x+centroid.x*cos-centroid.y*sin,y=b.position.y+centroid.x*sin+centroid.y*cos;
+        const chip=Bodies.rectangle(x,y,10,10,{friction:MATERIALS[material].friction,restitution:material==='glass'?.12:.05,sleepThreshold:45});
+        Body.setVertices(chip,points);
+        Body.setAngle(chip,b.angle);Body.setMass(chip,b.mass*area(points)/total);
+        const outline=points.map(v=>({x:v.x-centroid.x,y:v.y-centroid.y}));
+        const cw=2*Math.max(...outline.map(v=>Math.abs(v.x))),ch=2*Math.max(...outline.map(v=>Math.abs(v.y)));
+        const canCrumble=material!=='glass'&&depth<2&&area(points)>450&&this.blocks.length<180;
+        chip.game={kind:'debris',material,w:cw,h:ch,outline,depth,hp:canCrumble?(material==='heavy'?90:28):Infinity,maxHP:canCrumble?(material==='heavy'?90:28):Infinity};
+        if(g.paint)chip.game.paint=g.paint.map(p=>({...p,x:p.x-centroid.x,y:p.y-centroid.y}));
         Body.setVelocity(chip,{x:b.velocity.x-b.angularVelocity*(y-b.position.y),y:b.velocity.y+b.angularVelocity*(x-b.position.x)});
         Body.setAngularVelocity(chip,b.angularVelocity);this.blocks.push(chip);this.add(chip);
       }
+      // Constraints attached to a destroyed beam must not retain ghost supports.
+      for(const list of [this.cables,this.hinges])for(let i=list.length-1;i>=0;i--)if(list[i].bodyA===b||list[i].bodyB===b){Composite.remove(this.engine.world,list[i]);list.splice(i,1);}
+      for(let i=this.hooks.length-1;i>=0;i--)if(this.hooks[i].constraint.bodyB===b){Composite.remove(this.engine.world,this.hooks[i].constraint);this.hooks.splice(i,1);}
     }
+
     disable(b,reason){if(b.game.disabled)return;b.game.disabled=true;this.combo=this.time-this.lastHit<1.8?this.combo+1:1;this.lastHit=this.time;this.bestCombo=Math.max(this.bestCombo,this.combo);this.emit('camera',b,{reason,combo:this.combo})}
     step(){
       if(!this.armed)return;
