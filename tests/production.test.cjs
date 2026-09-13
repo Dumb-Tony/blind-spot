@@ -147,3 +147,18 @@ console.log('PASS: '+checks+' final assertions including painted sprite assembly
 require('./floating.test.cjs');
 
 const aftermath=harness();aftermath.click('playBtn');aftermath.drag(55,25);aftermath.tick(9);const resultTime=aftermath.state().time;aftermath.tick(1);ok(aftermath.state().screen==='result'&&aftermath.state().time>resultTime+.9,'result screen continues the production physics clock');console.log('PASS all production and floating regression checks.');
+
+require('./contraptions.test.cjs');
+const startPose=rig.pose(null,99,{x:220,y:490},1,true);
+const aimActor=new Simulation(LEVELS[0]);aimActor.aim(102,570);const targetPose=rig.pose(aimActor,99,{x:220,y:490},1,true);
+const eased=rig.stabilize(targetPose,startPose,1/60);
+ok(eased.shoulder.x>targetPose.shoulder.x&&eased.shoulder.x<startPose.shoulder.x,'posture eases into a sudden pull');
+ok(eased.hand.x===targetPose.hand.x&&eased.hand.y===targetPose.hand.y,'smoothing preserves exact aiming contact');
+const settleAt=fps=>{let p=startPose;for(let i=0;i<fps;i++)p=rig.stabilize(targetPose,p,1/fps);return p};
+ok(Math.abs(settleAt(30).shoulder.x-settleAt(144).shoulder.x)<1e-8,'body smoothing is independent of rendering rate');
+console.log('PASS: '+checks+' assertions plus floating and contraption fixtures.');
+require('./stress-physics.cjs');
+const fractional=harness({height:719.984375});fractional.click('playBtn');
+for(const [type,x,y] of [['pointerdown',220,490],['pointermove',185,535],['pointerup',185,535]])fractional.ids.game.fire(type,{clientX:x,clientY:y,pointerId:1,button:0});
+ok(fractional.state().projectile.x===185&&fractional.state().projectile.y===535,'fractional canvas height does not perturb an identical visible drag');
+console.log('PASS final: '+checks+' assertions plus mechanics and 360 stress runs.');

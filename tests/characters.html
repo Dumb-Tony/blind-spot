@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><title>Blind Spot character motion review</title><style>body{background:#182b3c;color:#f1e8d5;font:16px system-ui}button,input{margin:10px}canvas{width:100%;max-width:1280px}</style>
+<h1>Character motion review</h1><p>Production painted bodies and pose smoothing. Adjust the pull, then watch reach, release and recovery.</p>
+<label>Pull <input id="pull" type="range" min="0" max="118" value="70"></label><label>Height <input id="height" type="range" min="-35" max="118" value="45"></label><button id="release">Release and recover</button><button id="aim">Aim</button><canvas id="poses" width="1280" height="420"></canvas>
+<script src="assets.js"></script><script src="rebel-rig.js"></script><script src="rebel-skin.js"></script><script>
+let image=new Image(),texture=null,age=99,mode='aiming',last=0,previous=[],releasePoint={x:150,y:535};image.onload=()=>texture=BlindSpotPaintedSkin.prepare(image);image.src=BlindSpotAssets.painted;
+function grip(){const x=Math.max(3,Number(pull.value)),y=Number(height.value),scale=Math.min(1,118/Math.hypot(x,y));return{x:220-x*scale,y:490+y*scale}}
+release.onclick=()=>{releasePoint=grip();age=0;mode='flying'};aim.onclick=()=>{mode='aiming';age=99};
+function draw(now){const dt=Math.min(.05,(now-last)/1000||0);last=now;age+=dt;const ctx=poses.getContext('2d');ctx.fillStyle='#182b3c';ctx.fillRect(0,0,1280,420);
+['street-stone','paint-can','emp-puck','grapple'].forEach((id,i)=>{const sim={state:mode,tool:{id},projectile:{position:grip()}};let p=BlindSpotRebelRig.pose(sim,age,releasePoint,now/1000,false);p=BlindSpotRebelRig.stabilize(p,previous[i],dt,mode==='aiming'||age<.04);previous[i]=p;
+ctx.save();ctx.translate(i*320-95,-445);ctx.scale(1.35,1.35);ctx.fillStyle='#e8d7ac';ctx.fillRect(75,619,205,2);if(texture){BlindSpotPaintedSkin.draw(ctx,p,texture);BlindSpotPaintedSkin.draw(ctx,p,texture,true)}ctx.restore();ctx.fillStyle='#e8d7ac';ctx.font='bold 18px system-ui';ctx.fillText(BlindSpotRebelRig.palettes[id].name,i*320+95,35);});requestAnimationFrame(draw)}requestAnimationFrame(draw);
+</script>

@@ -1,0 +1,8 @@
+const fs=require('fs'),vm=require('vm');const c={Matter:require('../dist/vendor/matter.min.js')};vm.createContext(c);for(const f of ['game-data','physics'])vm.runInContext(fs.readFileSync('dist/'+f+'.js','utf8'),c);const routes=JSON.parse(fs.readFileSync('tests/solutions.json'));const report=[];
+const jitter=[[0,0],[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,1],[-1,1],[1,-1]];
+function win(l,seq,ox=0,oy=0){const s=new c.BlindSpotPhysics.Simulation(l);for(const [x,y,t] of seq){if(t)s.selectTool(t);s.aim(220-x-ox,490+y+oy);if(!s.launch())return false;for(let n=0;n<1800&&s.state==='flying';n++)s.step();if(s.state==='won')return true;}return false;}
+function score(l,seq){if(!win(l,seq))return 0;return jitter.reduce((v,[x,y])=>v+Number(win(l,seq,x,y)),0)}
+for(const [i,l] of c.BlindSpotData.LEVELS.entries())if(l.contraption){let best=routes[i].shots,bestScore=score(l,best);const original=bestScore;
+ if(bestScore<7)for(let shot=0;shot<best.length&&bestScore<7;shot++){const prior=best;for(let radius=1;radius<=4&&bestScore<7;radius++)for(let x=-radius;x<=radius&&bestScore<7;x++)for(let y=-radius;y<=radius&&bestScore<7;y++){if(Math.max(Math.abs(x),Math.abs(y))!==radius)continue;let seq=prior.map((s,k)=>k===shot?[s[0]+x,s[1]+y,...s.slice(2)]:s);const value=score(l,seq);if(value>bestScore){best=seq;bestScore=value;}}}
+ routes[i].shots=best;report.push({level:i+1,original,wins:bestScore,trials:9});console.log(i+1,original,'->',bestScore);fs.writeFileSync('tests/solutions-robust.json',JSON.stringify(routes,null,2));fs.writeFileSync('tests/solutions-robust-report.json',JSON.stringify(report,null,2));
+}

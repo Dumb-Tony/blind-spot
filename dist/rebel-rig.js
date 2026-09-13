@@ -14,8 +14,10 @@
   const aiming=sim?.state==='aiming',tool=sim?.tool.id||'street-stone',a={x:220,y:490};
   const pulled=aiming?sim.projectile.position:age<.65?release:a;
   const tension=Math.min(1,Math.hypot(pulled.x-a.x,pulled.y-a.y)/118)*(aiming?1:Math.max(0,1-age/.45));
-  const squat=aiming?Math.max(0,pulled.y-525)*.25:0,recoil=age<.55?Math.sin(Math.min(1,age/.55)*Math.PI)*10:0;
-  const hip={x:152-tension*13,y:551+squat},shoulder={x:163-tension*24+recoil,y:489+squat+(reduced?0:Math.sin(time*2)*.7)};
+  const load=aiming?1:1-smooth(age/.5),horizontal=Math.max(0,a.x-pulled.x)/118*load,vertical=Math.max(0,pulled.y-a.y)/118*load;
+  const reach=vertical*(1-horizontal)*24;
+  const squat=(Math.max(0,pulled.y-525)*.20+Math.max(0,pulled.y-570)*.25*(1-horizontal))*load,recoil=age<.55?Math.sin(Math.min(1,age/.55)*Math.PI)*5:0;
+  const hip={x:152-horizontal*13+reach*.4,y:551+squat},shoulder={x:163-horizontal*24+reach+recoil,y:489+squat+(reduced?0:Math.sin(time*2)*.7)};
   let hand=aiming?{...sim.projectile.position}:{...a};
   if(!aiming&&age<.85){const t=smooth(age/.22);hand=mix(release,{x:244,y:473},t);if(age>.22)hand=mix(hand,a,smooth((age-.22)/.63))}
   if(!aiming&&age>=.85&&readyAge<.35)hand=mix({x:175,y:548},a,smooth(readyAge/.35));
@@ -34,7 +36,7 @@
   // Contact shadows stay on the same plane as the physics ground.
   c.save();c.translate(158,620);c.scale(1,.12);dot(0,0,61,'#08152570');c.restore();
   for(let i=0;i<2;i++){const foot=p.feet[i],hip={x:p.hip.x+(i?11:-10),y:p.hip.y},knee={x:hip.x+(i?22:-16),y:583+p.squat*.4};line([hip,knee,{x:foot.x,y:foot.y-7}],ink,24);line([hip,knee,{x:foot.x,y:foot.y-7}],s.pants,18);line([{x:knee.x-4,y:knee.y-4},{x:knee.x+5,y:knee.y-1}],'#9ab2bc55',2);poly([[foot.x-12,601],[foot.x+7,603],[foot.x+9,608],[foot.x+21,610],[foot.x+22,618],[foot.x-13,618]],i?'#354353':'#293440');line([{x:foot.x-11,y:616},{x:foot.x+21,y:616}],'#c1bba9',3);for(let n=0;n<3;n++)line([{x:foot.x-3,y:606+n*2},{x:foot.x+6,y:607+n*2}],'#c2bba5',1);}
-  arm({x:p.shoulder.x+6,y:p.shoulder.y+5},p.support,-1,false);
+  arm({x:p.shoulder.x+6,y:p.shoulder.y+5},p.support,1,false);
   const x=p.shoulder.x,y=p.shoulder.y,h=p.hip;
   // Satchel/backpack, fitted jacket, seams and tool-specific workwear.
   poly([[x-30,y+8],[x-17,y+3],[h.x-13,h.y-1],[h.x-32,h.y-6]],'#273c4c');
@@ -63,5 +65,15 @@
   if(s.kind==='scarf'||s.kind==='bun'){const flutter=reduced?0:Math.sin(time*5)*4+p.recoil;poly([[x-5,y-5],[x-27,y-4],[x-48-flutter,y+14],[x-25,y+12],[x-12,y+9]],s.accent);line([{x:x-13,y:y-4},{x:x+10,y:y+2}],s.accent,10);}
   c.restore();
  }
- global.BlindSpotRebelRig={pose,draw,elbow,palettes};
+ // Smooth the torso as one connected mass while keeping the aiming hand exact.
+ function stabilize(p,previous,dt,trackHand=true){
+  if(!previous||previous.tool!==p.tool)return p;
+  const t=1-Math.exp(-Math.max(0,dt)*16),out={...p};
+  for(const k of ['hip','shoulder'])out[k]=mix(previous[k],p[k],t);
+  out.head={x:out.shoulder.x-10,y:out.shoulder.y-39};
+  for(const k of ['squat','tension','recoil'])out[k]=previous[k]+(p[k]-previous[k])*t;
+  if(!trackHand){out.hand=mix(previous.hand,p.hand,t);out.palm={x:out.hand.x-15,y:out.hand.y+6};}
+  return out;
+ }
+ global.BlindSpotRebelRig={pose,draw,elbow,palettes,stabilize};
 })(window);

@@ -1,9 +1,17 @@
-# Blind Spot — Six Regions (0.11)
+# Blind Spot — Six Regions (0.12)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
-Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original Region 1 layouts, scoring, art and saved stars remain intact.
+Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original eight Region 1 layouts and their scoring, artwork and saved stars remain intact.
+
+## Contraptions and connected character motion
+
+Version 0.12 adds hinged platforms, local power-cell bursts and **24 substantially redesigned puzzles**: installations **9, 12, 16 and 20 in every region**, marked CONTRAPTION in level select. The original 32 introductory layouts remain intact. The rebels retain their painted artwork, with continuous torsos, covered joints, natural bracing elbows and smooth posture/recovery. Ground impacts kick up dust; new objects have visible hubs, charge flashes, burst rings and distinct sound.
+
+Power cells react to hard impacts or an EMP within its unchanged 95-pixel range. Their 175-pixel burst pushes nearby bodies and can chain to another cell. Fixed armor and distant targets remain separate problems. Hinged decks stay attached to their gold hub; uneven loads tip them after braces give way. Broken fragments can still prop them up, so a partial collapse can need another shot.
+
+All 120 levels retain recorded three-star routes. Existing best stars stay saved, including on redesigned levels. Pause opens sound, shake and fullscreen controls; keeping them off the active playfield prevents them from covering low cameras.
 
 ## Physics update
 
@@ -16,7 +24,7 @@ Version 0.10 restores the original illustrated character style while preserving 
 
 Gameplay rebels now use detailed painted artwork matched to the original portraits, attached to articulated bodies with planted boots, bending limbs, pull-dependent weight shifts and hands that track the actual tool. Ready poses reach into place; release triggers follow-through and recovery. Mara braces the sling, while Inez, Dex and June operate their distinct launchers. Their illustrated menu portraits are preserved.
 
-District lighting, distant architecture, roof edges, material bevels and shadows, menu cards and HUD styling have also been refreshed. This is a visual update: all 120 layouts, shot budgets, EMP tuning and saved progress remain compatible.
+District lighting, distant architecture, roof edges, material bevels and shadows, menu cards and HUD styling have also been refreshed. That earlier visual pass preserved gameplay. This release’s redesigned layouts and targets are listed in docs/CAMPAIGN.md.
 
 ## Campaign
 
@@ -59,3 +67,5 @@ Run `node scripts/build-standalone.mjs`, then `node tests/production.test.cjs`. 
 The `region1-cloud-baseline` tag preserves the recovered cloud original. Earlier versioned ZIPs are historical snapshots. GitHub Pages is the public sharing link.
 
 For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 120 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.
+
+The aiming-tolerance review gives 13 sensitive contraption puzzles a cleanup throw within the three-star target. See docs/PLAYTEST-0.12.md for validation and local browser review tools.

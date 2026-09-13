@@ -19,6 +19,7 @@
     heavy:{density:.006,friction:.65,restitution:.08,hp:Infinity,threshold:Infinity,color:'#7486a6',stroke:'#2a3550',name:'Concrete · falls'},
     steel:{density:.008,friction:.9,restitution:.04,hp:Infinity,threshold:Infinity,color:'#29364b',stroke:'#91a4b6',name:'Steel · fixed'}
   };
+  MATERIALS.cell={density:.003,friction:.7,restitution:.08,hp:18,threshold:2.2,color:'#d9773f',stroke:'#ffdc87',name:'Power cell · chain burst'};
   const TOOLS={'street-stone':{name:'Street Stone',radius:19,density:.008,airFriction:.0015,maxPull:118,power:.23}};
   const WORLD={width:1280,height:720,ground:620,anchor:{x:220,y:490},step:1000/60,gravity:.001};
   const REBELS={mara:{name:'Mara',role:'Courier. Skater. Camera critic.',tool:'street-stone'}};
@@ -129,5 +130,48 @@
   // Reference pars calibrated against reproducible launches; two spare throws remain.
   const PAR={"starter-city-9":2,"starter-city-10":2,"starter-city-11":3,"starter-city-12":2,"starter-city-13":2,"starter-city-14":2,"starter-city-15":2,"starter-city-16":2,"starter-city-17":6,"starter-city-18":2,"starter-city-19":2,"starter-city-20":2,"color-quarter-9":3,"color-quarter-10":3,"color-quarter-11":3,"color-quarter-12":4,"color-quarter-13":3,"color-quarter-14":6,"color-quarter-15":4,"color-quarter-16":3,"color-quarter-17":3,"color-quarter-18":3,"color-quarter-19":4,"color-quarter-20":3,"legacy-16":2,"legacy-17":2,"legacy-18":2,"legacy-19":2,"legacy-20":2,"legacy-21":2,"legacy-22":2,"legacy-23":2,"signal-heights-9":2,"signal-heights-10":3,"signal-heights-11":2,"signal-heights-12":2,"signal-heights-13":2,"signal-heights-14":2,"signal-heights-15":3,"signal-heights-16":2,"signal-heights-17":2,"signal-heights-18":2,"signal-heights-19":3,"signal-heights-20":3,"iron-docks-9":2,"iron-docks-10":2,"iron-docks-11":2,"iron-docks-12":3,"iron-docks-13":2,"iron-docks-14":2,"iron-docks-15":3,"iron-docks-16":2,"iron-docks-17":3,"iron-docks-18":2,"iron-docks-19":2,"iron-docks-20":3,"junction-yard-1":2,"junction-yard-2":2,"junction-yard-3":2,"junction-yard-4":2,"junction-yard-5":2,"junction-yard-6":2,"junction-yard-7":2,"junction-yard-8":2,"junction-yard-9":3,"junction-yard-10":4,"junction-yard-11":3,"junction-yard-12":3,"junction-yard-13":3,"junction-yard-14":3,"junction-yard-15":3,"junction-yard-16":2,"junction-yard-17":3,"junction-yard-18":3,"junction-yard-19":9,"junction-yard-20":3,"central-works-1":2,"central-works-2":2,"central-works-3":2,"central-works-4":2,"central-works-5":2,"central-works-6":2,"central-works-7":2,"central-works-8":2,"central-works-9":2,"central-works-10":2,"central-works-11":3,"central-works-12":3,"central-works-13":4,"central-works-14":2,"central-works-15":3,"central-works-16":2,"central-works-17":2,"central-works-18":3,"central-works-19":5,"central-works-20":2};
   LEVELS.forEach(l=>{if(PAR[l.id]){l.stars=[PAR[l.id],PAR[l.id]+1];l.shots=Math.max(PAR[l.id]+2,l.cameras.length)}});
+
+  // Four authored contraption puzzles per district. Stable IDs retain saved progress.
+  const cell=(x,y)=>B(x,y,36,40,'cell');
+  function rocker(x,y,w,group){return [
+    {...B(x,(y+620)/2,24,620-y,'steel',true),pivotGroup:group},
+    {...B(x,y,w,20,'heavy'),hinge:true,pivotGroup:group},
+    B(x-w*.38,(y+630)/2,18,610-y,'glass'),B(x+w*.38,(y+630)/2,18,610-y,'wood')
+  ];}
+  const contraptionNames=[
+    ['Balance of power','Battery basement','Counterweight court','The tipping point'],
+    ['Tilted canvas','Neon spill','Gallery pendulum','Color in motion'],
+    ['Live balance','Short circuit','Stored energy','Cascade protocol'],
+    ['Pivot shift','Boiler room','Crane exchange','Dockside demolition'],
+    ['Shared leverage','Paint the fuse','Transfer station','Coordinated chaos'],
+    ['Fulcrum protocol','Power reservoir','The exchange','Citywide blind spot']
+  ];
+  for(let region=0;region<6;region++)for(let pattern=0;pattern<4;pattern++){
+    const slot=[8,11,15,19][pattern],l=LEVELS[region*20+slot],group=region*4+pattern+1;
+    const lift=region*5;let blocks=[],cameras=[];
+    if(pattern===0){
+      blocks=[...rocker(835,505-lift,290,group),B(755,482-lift,60,26,'heavy'),...tower(1120,150+lift,110,'glass')];
+      cameras=[C(755,450-lift),C(915,476-lift),C(1120,430-lift)];
+    }else if(pattern===1){
+      blocks=[cell(755,600),...tower(845,145+lift,150,'glass'),B(845,435-lift,90,30,'heavy'),...tower(1090,215+lift,160),cell(1040,600)];
+      cameras=[C(845,401-lift),C(1090,365-lift),C(950,600)];
+      if(region===2||region===5)blocks.push(cell(890,600));
+    }else if(pattern===2){
+      blocks=[...rocker(810,510-lift,290,group),B(715,479-lift,60,42,'heavy'),...tower(1090,200+lift,180,'glass'),suspended(1090,305-lift,160,95),cell(1005,600)];
+      cameras=[C(890,481-lift),C(1040,380-lift),C(1140,380-lift),C(1090,275-lift)];
+    }else{
+      blocks=[cell(670,600),...tower(760,130,120,'glass'),...rocker(1020,470-lift,310,group),B(1095,434-lift,60,50,'heavy'),cell(865,600),B(1195,580,70,80,'steel',true)];
+      cameras=[C(760,450),C(910,441-lift),C(1095,389-lift),C(970,600),C(1195,521)];
+      if(region===0||region===3){blocks.push(cell(720,450));cameras[0]=C(795,450);}
+    }
+    if(region===1)cameras=cameras.map(c=>({...c,shield:true}));
+    if(region===2)cameras=cameras.map((c,i)=>({...c,circuit:i%2?'B':'A'}));
+    if(region>=4){if(pattern!==3){blocks.push(B(1220,600,80,40,'steel',true));cameras.push(C(1220,561));}const last=cameras.at(-1);last.shield=true;last.bolted=true;}
+    const tip=pattern===0?'The round hub is a hinge. Break an end brace or hit off-center to tip the deck and spill its cameras.':pattern===1?'Orange power cells burst after a hard impact or a close EMP. Use their short-range shove to bring down the neighboring frame.':pattern===2?'Pull or break the outer brace to shift the counterweight. The crane and the distant tower offer a second route.':'Chain the power cells into the left frame, then tip the hinged deck. Save a precise tool for the far camera.';
+    Object.assign(l,{name:contraptionNames[region][pattern],blocks,cameras,lesson:['Hinged platforms','Power-cell chain reactions','Counterweight transfer','Contraption finale'][pattern],hint:tip,tip,contraption:true,shots:pattern===3?7:6,stars:pattern===3?[5,6]:[4,5]});
+    if(region>=4){l.arsenal=region===4?{'street-stone':5,'paint-can':4}:{'street-stone':3,'paint-can':3,'emp-puck':3,grapple:3};l.hint+=' The bolted pink lens needs paint'+(region===5?' or a close EMP':'')+'.';}
+    const par=[[1,2,2,3],[2,2,2,3],[2,2,2,3],[1,3,2,2],[3,3,3,4],[2,2,3,3]][region][pattern];
+    l.stars=[par,par+1];l.shots=Math.max(par+2,cameras.length);
+  }
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);

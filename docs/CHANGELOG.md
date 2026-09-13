@@ -1,3 +1,13 @@
+# 0.12 — Contraptions and connected motion
+
+- Reworked painted body assembly: continuous torso and waist, filled joint seams, thicker overlapping sleeves and legs, naturally bent bracing elbows.
+- Added time-based posture smoothing and eased recovery while keeping the aiming hand locked to the actual tool.
+- Added hinged decks with visible fixed hubs and uneven loads; added impact/EMP power cells with a short charge, bounded blast and local chains.
+- Redesigned installations 9, 12, 16 and 20 in each district (24 puzzles). Preserve the original 32 layouts, all saved identities and the established tool ranges.
+- Calibrated new three-star targets against complete production solutions; mark new puzzles in the level picker and explain mechanics in the field guide.
+- Added impact dust, charge and burst sounds, and local shockwave feedback. Moved utility controls off the active playfield; access them while paused.
+- Added mechanics, animation-smoothing and 360 varied final-shot stress checks; replay the full 120-level campaign in the browser.
+
 # 0.11 — Unsupported structures keep falling
 
 - Wake every dynamic body at the first launch; keep gravity active during subsequent aiming, loading and result inspection.

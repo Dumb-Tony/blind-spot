@@ -151,25 +151,20 @@
   {
     "id": "starter-city-9",
     "level": 9,
-    "name": "Side street",
+    "name": "Balance of power",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        35
-      ],
-      [
-        65,
-        15
+        109,
+        26
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
       0.6,
-      7.9,
-      0.8,
-      0.6
+      0.3,
+      1.4
     ]
   },
   {
@@ -216,22 +211,20 @@
   {
     "id": "starter-city-12",
     "level": 12,
-    "name": "Split courtyard",
+    "name": "Battery basement",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        65,
-        35
+        51,
+        50
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      12.8,
-      1,
-      0.5,
-      0.6
+      5.5,
+      1.4,
+      1.3
     ]
   },
   {
@@ -304,23 +297,25 @@
   {
     "id": "starter-city-16",
     "level": 16,
-    "name": "Long division",
+    "name": "Counterweight court",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        115,
-        25
+        78,
+        33
+      ],
+      [
+        35,
+        86
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.6,
-      17.7,
-      1,
-      0.5,
-      0.6,
-      0.5
+      0.4,
+      1.5,
+      1.5,
+      0.4
     ]
   },
   {
@@ -400,27 +395,26 @@
   {
     "id": "starter-city-20",
     "level": 20,
-    "name": "City hall",
+    "name": "The tipping point",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        55,
-        55
+        70,
+        10
       ],
       [
-        55,
-        25
+        41,
+        72
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      16.7,
-      1,
-      0.5,
-      0.6,
-      0.5
+      1.5,
+      0.3,
+      2.6,
+      1.3,
+      0.4
     ]
   },
   {
@@ -581,25 +575,20 @@
   {
     "id": "color-quarter-9",
     "level": 29,
-    "name": "Back alley mural",
+    "name": "Tilted canvas",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        115,
-        15
-      ],
-      [
         55,
-        55
+        45
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
       0.6,
-      7.9,
-      0.8,
-      0.4
+      0.4,
+      1.4
     ]
   },
   {
@@ -662,34 +651,24 @@
   {
     "id": "color-quarter-12",
     "level": 32,
-    "name": "Separated studios",
+    "name": "Neon spill",
     "won": true,
     "remaining": 0,
     "shots": [
       [
         95,
-        45
+        30
       ],
       [
-        115,
-        5
-      ],
-      [
-        105,
-        35
-      ],
-      [
-        75,
-        45
+        35,
+        65
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      12.8,
-      1,
-      0.5,
-      0.4
+      5.5,
+      1.4,
+      1.3
     ]
   },
   {
@@ -790,30 +769,24 @@
   {
     "id": "color-quarter-16",
     "level": 36,
-    "name": "Private collection",
+    "name": "Gallery pendulum",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        95,
-        45
+        80,
+        35
       ],
       [
-        55,
-        25
-      ],
-      [
-        75,
-        45
+        35,
+        80
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.6,
-      17.7,
-      1,
       0.5,
-      0.6,
+      1.5,
+      1.5,
       0.4
     ]
   },
@@ -902,30 +875,29 @@
   {
     "id": "color-quarter-20",
     "level": 40,
-    "name": "The grand mural",
+    "name": "Color in motion",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        75,
-        55
-      ],
-      [
         105,
-        25
+        36
       ],
       [
-        55,
-        55
+        41,
+        62
+      ],
+      [
+        35,
+        90
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      16.7,
-      1,
-      0.5,
-      0.6,
+      1.5,
+      0.3,
+      2.5,
+      1.3,
       0.4
     ]
   },
@@ -1089,25 +1061,20 @@
   {
     "id": "signal-heights-9",
     "level": 49,
-    "name": "Local access",
+    "name": "Live balance",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        75,
-        45
-      ],
-      [
-        95,
-        15
+        59,
+        40
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
       0.6,
-      7.9,
-      0.8,
-      0.6
+      0.3,
+      1.4
     ]
   },
   {
@@ -1162,22 +1129,20 @@
   {
     "id": "signal-heights-12",
     "level": 52,
-    "name": "Rooftop routers",
+    "name": "Short circuit",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        55,
-        30
+        35,
+        45
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      12.8,
-      1,
-      0.5,
-      0.6
+      5.5,
+      1.4,
+      2.2
     ]
   },
   {
@@ -1246,27 +1211,25 @@
   {
     "id": "signal-heights-16",
     "level": 56,
-    "name": "Cold storage",
+    "name": "Stored energy",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        25
+        100,
+        35
       ],
       [
-        55,
-        25
+        35,
+        55
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.6,
-      17.7,
-      1,
       0.5,
-      0.6,
-      0.5
+      1.5,
+      1.5,
+      0.4
     ]
   },
   {
@@ -1350,23 +1313,26 @@
   {
     "id": "signal-heights-20",
     "level": 60,
-    "name": "The exchange",
+    "name": "Cascade protocol",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        85,
+        115,
         25
+      ],
+      [
+        85,
+        0
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      16.7,
-      1,
-      0.5,
-      0.6,
-      0.5
+      1.5,
+      0.3,
+      2.5,
+      1.3,
+      0.4
     ]
   },
   {
@@ -1522,25 +1488,20 @@
   {
     "id": "iron-docks-9",
     "level": 69,
-    "name": "Cargo lane",
+    "name": "Pivot shift",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        115,
-        25
-      ],
-      [
-        55,
-        -15
+        35,
+        66
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      0.8,
-      0.4
+      0.6,
+      0.3,
+      1.4
     ]
   },
   {
@@ -1591,7 +1552,7 @@
   {
     "id": "iron-docks-12",
     "level": 72,
-    "name": "Twin gantries",
+    "name": "Boiler room",
     "won": true,
     "remaining": 0,
     "shots": [
@@ -1610,11 +1571,9 @@
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      1,
-      0.4,
-      0.6
+      5.5,
+      1.4,
+      1.3
     ]
   },
   {
@@ -1699,26 +1658,20 @@
   {
     "id": "iron-docks-16",
     "level": 76,
-    "name": "Cargo islands",
+    "name": "Crane exchange",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        95,
-        55
-      ],
-      [
-        65,
-        25
+        39,
+        87
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      1,
-      0.4,
-      0.6,
+      0.5,
+      1.5,
+      1.5,
       0.4
     ]
   },
@@ -1799,30 +1752,21 @@
   {
     "id": "iron-docks-20",
     "level": 80,
-    "name": "Port authority",
+    "name": "Dockside demolition",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        85,
-        35
-      ],
-      [
-        105,
-        45
-      ],
-      [
-        55,
-        65
+        40,
+        80
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      1,
-      0.4,
-      0.6,
+      1.5,
+      0.3,
+      2.5,
+      1.3,
       0.4
     ]
   },
@@ -2026,32 +1970,26 @@
   {
     "id": "junction-yard-9",
     "level": 89,
-    "name": "Paint and rubble",
+    "name": "Shared leverage",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        45,
+        74,
+        37,
         "paint-can"
       ],
       [
-        115,
-        15,
-        "street-stone"
-      ],
-      [
-        55,
-        55,
+        35,
+        75,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
       0.6,
-      12.8,
-      0.8,
-      0.6,
+      0.3,
+      1.4,
       0
     ]
   },
@@ -2127,32 +2065,26 @@
   {
     "id": "junction-yard-12",
     "level": 92,
-    "name": "Private balconies",
+    "name": "Paint the fuse",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
+        104,
+        29,
+        "street-stone"
+      ],
+      [
         35,
-        "street-stone"
-      ],
-      [
-        105,
-        5,
-        "street-stone"
-      ],
-      [
-        55,
-        55,
+        80,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      12.8,
-      1,
-      0.5,
+      5.5,
+      1.4,
+      1.3,
       0
     ]
   },
@@ -2247,28 +2179,32 @@
   {
     "id": "junction-yard-16",
     "level": 96,
-    "name": "Museum annex",
+    "name": "Transfer station",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        115,
-        25,
-        "street-stone"
+        80,
+        45,
+        "paint-can"
       ],
       [
-        55,
-        55,
+        35,
+        80,
+        "paint-can"
+      ],
+      [
+        35,
+        100,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.6,
-      17.7,
-      1,
       0.5,
-      0.6,
+      1.5,
+      1.5,
+      0.4,
       0
     ]
   },
@@ -2370,29 +2306,32 @@
   {
     "id": "junction-yard-20",
     "level": 100,
-    "name": "Junction takeover",
+    "name": "Coordinated chaos",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        115,
-        25,
+        80,
+        35,
+        "paint-can"
+      ],
+      [
+        92,
+        -3,
         "street-stone"
       ],
       [
-        55,
-        55,
+        34,
+        95,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.5,
-      16.6,
-      1,
-      0.5,
-      0.6,
-      0.5,
+      1.5,
+      0.4,
+      2.6,
+      1.3,
       0
     ]
   },
@@ -2596,14 +2535,14 @@
   {
     "id": "central-works-9",
     "level": 109,
-    "name": "Switching tactics",
+    "name": "Fulcrum protocol",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        30,
-        "paint-can"
+        42,
+        57,
+        "grapple"
       ],
       [
         35,
@@ -2613,10 +2552,9 @@
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      0.8,
-      0.4,
+      0.6,
+      0.3,
+      1.4,
       0
     ]
   },
@@ -2677,27 +2615,26 @@
   {
     "id": "central-works-12",
     "level": 112,
-    "name": "Load and signal",
+    "name": "Power reservoir",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        25,
-        "paint-can"
+        110,
+        15,
+        "grapple"
       ],
       [
-        75,
         35,
+        85,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
-      0.4,
-      2.3,
-      1,
-      0.4,
+      5.5,
+      1.4,
+      2.2,
       0
     ]
   },
@@ -2797,28 +2734,27 @@
   {
     "id": "central-works-16",
     "level": 116,
-    "name": "The inner works",
+    "name": "The exchange",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        65,
         45,
-        "paint-can"
+        70,
+        "grapple"
       ],
       [
-        65,
-        55,
+        35,
+        80,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
       0.4,
-      2.3,
-      1,
+      1.5,
+      1.5,
       0.4,
-      0.6,
       0
     ]
   },
@@ -2920,29 +2856,27 @@
   {
     "id": "central-works-20",
     "level": 120,
-    "name": "The central blackout",
+    "name": "Citywide blind spot",
     "won": true,
     "remaining": 0,
     "shots": [
       [
-        105,
-        45,
-        "street-stone"
+        84,
+        43,
+        "grapple"
       ],
       [
-        55,
-        65,
+        35,
+        85,
         "paint-can"
       ]
     ],
     "stars": 3,
     "initialCameraShift": [
+      1.5,
       0.4,
-      2.3,
-      1,
-      0.4,
-      0.6,
-      0.4,
+      2.6,
+      1.3,
       0
     ]
   }

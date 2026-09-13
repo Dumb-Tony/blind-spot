@@ -24,4 +24,4 @@ No layouts, shot budgets, three-star thresholds, tool ranges, artwork or save fo
 
 The browser harness uses an accelerated clock and isolated in-memory progress. It suppresses intermediate drawing for speed, so this is automated browser coverage, not 120 manual real-time playthroughs. Real-time standalone visual checks supplement it. This does not establish that every possible shot or device is bug-free.
 
-To reproduce: run the standalone builder and `node tests/production.test.cjs`. Run `node scripts/serve.cjs`, open `http://127.0.0.1:4175/qa-physics.html`, and choose **Run all 120 levels**. The QA routes are local-server fixtures and are not published in the game.
+To reproduce: run the standalone builder and `node tests/production.test.cjs`. Run `node scripts/serve.cjs`, open `http://127.0.0.1:4186/qa-physics.html`, and choose **Run all 120 levels**. The QA routes are local-server fixtures and are not published in the game.

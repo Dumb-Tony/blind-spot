@@ -1,4 +1,4 @@
-# Blind Spot — Game Design Document, 0.10
+# Blind Spot — Game Design Document, 0.12
 
 ## Play loop
 Aim, launch, watch the structure react, then choose the next shot. The intended feel is the readable launch-and-collapse puzzle loop of Angry Birds: scarce shots, useful material differences, vulnerable supports, weight transfer, chain reactions, quick retries and optional three-star mastery. Blind Spot retains its own surveillance targets, characters, artwork and tool effects.
@@ -39,3 +39,11 @@ Original menu portraits remain intact. Six district palettes add atmospheric lig
 ## 0.10 painted character skin
 
 The approved 0.9 pose solver and motion timing remain unchanged. A painted layer now replaces the visible polygon bodies once its image decodes. It uses six types of illustrated components for each rebel, sampled from one atlas matched to the original portrait style. Upper sleeves overlap forearms, trouser layers overlap at knees, and independently drawn boots keep their soles planted. Texture preparation runs once per decoded image, not each frame. Level geometry, game physics, supplies, EMP balance and save formats are untouched. Detailed artwork and existing body movement take precedence over minor decorative effects: expressions and scarf folds are painted into the texture.
+
+## Contraptions update (0.12)
+
+Four authored layouts per district replace stages 9, 12, 16 and 20. A hinged heavy deck rotates about a world-fixed hub, with a matching visible pedestal. Deck and pedestal share an exclusion group so they do not collide with one another; all other objects still collide. End braces initially hold the load. Debris can continue to support it after fracture.
+
+Orange power cells have a short 0.18-second charge. A damaging impact or an EMP inside 95 pixels starts the charge. Bursts apply a finite radial velocity impulse inside 175 pixels, weaken nearby breakable blocks, disable exposed cameras within 105 pixels, and charge nearby cells once. Shielded and bolted lenses retain their existing behavior. The power-cell casing is consumed; visual fragments are cosmetic. No blast extends EMP network range.
+
+Painted characters reuse the existing atlas. Torso, pelvis and joint overlaps create a connected silhouette; the bracing elbow bends below the shoulder. Exponential posture smoothing uses elapsed time, while aiming contact stays exact. Follow-through and recovery ease into the next pose.

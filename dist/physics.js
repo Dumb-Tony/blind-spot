@@ -8,12 +8,14 @@
   function stone(x,y,tool=TOOL){return Bodies.circle(x,y,tool.radius,{density:tool.density,friction:.8,frictionAir:tool.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
   class Simulation{
     constructor(level,onEvent=()=>{}){
-      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
+      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.hinges=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
       this.engine.gravity.scale=WORLD.gravity;this.blocks=[];this.cameras=[];this.stones=[];this.pendingBreak=new Set();this.shotsUsed=0;this.time=0;this.shotTime=0;this.quiet=0;this.state='setup';this.lastHit=-100;this.combo=0;this.bestCombo=0;this.breaks=0;this.trail=[];this.lastTrail=[];this.armed=false;
       this.add(Bodies.rectangle(640,660,4000,80,{isStatic:true,friction:.85,label:'ground'}));
       level.blocks.forEach(d=>{
         const m=MATERIALS[d.material],b=Bodies.rectangle(d.x,d.y,d.w,d.h,{isStatic:!!d.fixed,density:m.density,friction:m.friction,restitution:m.restitution,chamfer:{radius:2},sleepThreshold:45});
-        b.game={kind:'block',material:d.material,w:d.w,h:d.h,hp:m.hp,maxHP:m.hp};this.blocks.push(b);this.add(b);
+        b.game={kind:'block',material:d.material,w:d.w,h:d.h,hp:m.hp,maxHP:m.hp,hinge:!!d.hinge};this.blocks.push(b);this.add(b);
+        if(d.pivotGroup)b.collisionFilter.group=-d.pivotGroup;
+        if(d.hinge){const hinge=Constraint.create({pointA:{x:d.x,y:d.y},bodyB:b,pointB:{x:0,y:0},length:0,stiffness:1,damping:.18});this.hinges.push(hinge);Composite.add(this.engine.world,hinge)}
         if(d.suspended){for(const side of [-1,1]){const cable=Constraint.create({pointA:{x:d.x+side*d.w*.35,y:d.y-d.suspended},bodyB:b,pointB:{x:side*d.w*.35,y:0},length:d.suspended,stiffness:.85,damping:.08});this.cables.push(cable);Composite.add(this.engine.world,cable)}}
       });
       level.cameras.forEach(d=>{const b=Bodies.rectangle(d.x,d.y,52,38,{isStatic:!!d.bolted,density:.002,friction:.8,restitution:.1,chamfer:{radius:5},sleepThreshold:40});b.game={kind:'camera',disabled:false,fallTime:0,shield:!!d.shield,bolted:!!d.bolted,circuit:d.circuit||null};this.cameras.push(b);this.add(b)});
@@ -100,6 +102,7 @@
       const id=projectile.game.tool;if(id==='street-stone')return;projectile.game.spent=true;
       if(id==='paint-can'||id==='emp-puck'){
         const radius=id==='paint-can'?145:TOOLS['emp-puck'].pulseRadius;
+        if(id==='emp-puck')for(const b of this.blocks)if(b.game.material==='cell'&&Math.hypot(b.position.x-point.x,b.position.y-point.y)<radius)this.chargeCell(b);
         if(id==='paint-can')this.splatter(point,radius);
         const near=this.cameras.filter(c=>!c.game.disabled&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<radius);
         const linked=new Set();
@@ -138,7 +141,21 @@
       if(point.y+radius>=WORLD.ground){this.paintGround.push({x:point.x,y:WORLD.ground,r:55,seed:this.shotsUsed});this.paintGround=this.paintGround.slice(-16);destinations.push({x:point.x,y:WORLD.ground})}
       this.emit('paint',{position:point},{destinations,radius});
     }
+    chargeCell(b){if(!b.game.broken&&b.game.fuse===undefined){b.game.fuse=this.time+.18;this.emit('charge',b)}}
+    detonate(b){
+      if(b.game.broken)return;b.game.broken=true;this.breaks++;const center={...b.position};
+      Composite.remove(this.engine.world,b);this.blocks=this.blocks.filter(v=>v!==b);this.emit('blast',b,{radius:175});
+      // Finite local impulse: distant towers and fixed armor still need their own shot.
+      for(const target of Composite.allBodies(this.engine.world)){
+        if(target.isStatic)continue;const dx=target.position.x-center.x,dy=target.position.y-center.y,d=Math.hypot(dx,dy);if(d>=175)continue;
+        const falloff=1-d/175,impulse=8*falloff,normal=d>1?{x:dx/d,y:dy/d}:{x:0,y:-1};
+        Body.setVelocity(target,{x:target.velocity.x+normal.x*impulse,y:target.velocity.y+normal.y*impulse-2*falloff});Sleeping.set(target,false);
+        const g=target.game;if(g?.kind==='camera'&&!g.shield&&d<105)this.disable(target,'POWER SURGE');
+        if(g?.kind==='block'&&!g.broken){if(g.material==='cell')this.chargeCell(target);else if(Number.isFinite(g.hp)){g.hp-=65*falloff;if(g.hp<=0)this.pendingBreak.add(target)}}
+      }
+    }
     breakBody(b){
+      if(b.game.material==='cell'&&b.game.kind==='block'){this.chargeCell(b);return}
       if(b.game.broken)return;b.game.broken=true;this.breaks++;
       Composite.remove(this.engine.world,b);this.blocks=this.blocks.filter(v=>v!==b);this.emit('break',b,{material:b.game.material,w:b.game.w,h:b.game.h,angle:b.angle});
       // A sleeping stack must respond immediately when its supporting body changes.
@@ -167,6 +184,7 @@
         Engine.update(this.engine,DT);
         for(const cable of [...this.cables]){const end=Constraint.pointBWorld(cable);const strain=Math.hypot(end.x-cable.pointA.x,end.y-cable.pointA.y)-cable.length;cable.overload=strain>.55?(cable.overload||0)+DT/1000:0;if(!this.blocks.includes(cable.bodyB)||cable.overload>.12){Composite.remove(this.engine.world,cable);this.cables=this.cables.filter(c=>c!==cable);Sleeping.set(cable.bodyB,false)}}
         for(const hook of [...this.hooks])if(this.time>hook.until){Composite.remove(this.engine.world,hook.constraint);this.hooks=this.hooks.filter(h=>h!==hook)}
+        for(const b of [...this.blocks])if(b.game.fuse!==undefined&&this.time>=b.game.fuse)this.detonate(b);
         for(const b of this.pendingBreak)this.breakBody(b);this.pendingBreak.clear();this.time+=DT/1000;if(inFlight)this.shotTime+=DT/1000;
         for(const c of this.cameras){if(c.game.disabled)continue;const tilted=Math.abs(angle(c.angle-c.game.mountAngle))>.85,fallen=c.position.y-c.game.mount.y>48;c.game.fallTime=tilted||fallen?c.game.fallTime+DT/1000:0;if(c.game.fallTime>.3||c.position.y>780||c.position.x>1420||c.position.x< -120)this.disable(c,'MOUNT BROKEN')}
         for(const b of Composite.allBodies(this.engine.world))if(!b.isStatic&&(b.position.y>850||b.position.x>1480||b.position.x< -180)){

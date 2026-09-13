@@ -22,24 +22,32 @@
   const col=columns[p.tool],cells=frames[col],scale=(image.naturalWidth||image.width)/1024;
   function tile(frame,x,y,w,h){const [sx,sy,sw,sh]=frame;c.drawImage(image,sx*scale,sy*scale,sw*scale,sh*scale,x,y,w,h)}
   function bone(frame,a,b,width,overlap=5){const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);c.save();c.translate(a.x,a.y);c.rotate(Math.atan2(dy,dx)-Math.PI/2);tile(frame,-width/2,-overlap,width,d+overlap*2);c.restore()}
-  function arm(start,end,bend){const joint=global.BlindSpotRebelRig.elbow(start,end,bend);bone(cells[3],joint,end,18,5);bone(cells[2],start,joint,29,8)}
+  const palette=global.BlindSpotRebelRig.palettes[p.tool];
+  function seam(a,b,width,color){c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.beginPath();c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);c.stroke()}
+  function arm(start,end,bend){const joint=global.BlindSpotRebelRig.elbow(start,end,bend);seam(start,joint,24,palette.shade);seam(joint,end,12,palette.skin);bone(cells[3],joint,end,18,5);bone(cells[2],start,joint,34,10)}
   c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
   if(front){arm({x:p.shoulder.x-3,y:p.shoulder.y+7},p.palm,1);c.restore();return}
   c.save();c.translate(158,620);c.scale(1,.12);c.fillStyle='#08152570';c.beginPath();c.arc(0,0,61,0,Math.PI*2);c.fill();c.restore();
   for(let i=0;i<2;i++){
    const foot=p.feet[i],hip={x:p.hip.x+(i?11:-10),y:p.hip.y},knee={x:hip.x+(i?22:-16),y:583+p.squat*.4};
    const lower=cells[5],bootTop=1382,shin=[lower[0],lower[1],lower[2],bootTop-lower[1]+7],boot=[lower[0],bootTop,lower[2],lower[1]+lower[3]-bootTop];
-   bone(shin,knee,{x:foot.x,y:604},26,5);const thigh=cells[4];bone([thigh[0],thigh[1]+35,thigh[2],thigh[3]-35],hip,knee,31,7);
+   seam(hip,knee,26,palette.pants);seam(knee,{x:foot.x,y:605},22,palette.pants);
+   bone(shin,knee,{x:foot.x,y:606},29,8);const thigh=cells[4];bone([thigh[0],thigh[1]+35,thigh[2],thigh[3]-35],hip,knee,36,10);
    // Boots are drawn separately so rotating a shin cannot lift the sole off the roof.
    tile(boot,foot.x-14,598,39,22);
   }
-  arm({x:p.shoulder.x+6,y:p.shoulder.y+5},p.support,-1);
-  // Exclude the reference torso's hanging sleeves; animated arms replace them.
+  // The bracing elbow hangs below the shoulder, rather than bending above the head.
+  arm({x:p.shoulder.x+6,y:p.shoulder.y+5},p.support,1);
+  const waist=cells[4];tile([waist[0],waist[1],waist[2],58],p.hip.x-26,p.hip.y-6,54,17);
+  // One continuous garment from shoulders to pelvis, with tucked-in limb roots.
   c.save();c.translate(p.shoulder.x,p.shoulder.y);c.rotate(Math.atan2(p.hip.y-p.shoulder.y,p.hip.x-p.shoulder.x)-Math.PI/2);
-  const tx=-52,ty=-19,tw=91,th=94;
-  c.beginPath();c.moveTo(tx+tw*.35,ty);c.lineTo(tx+tw,ty);c.lineTo(tx+tw,ty+th);c.lineTo(tx+tw*.44,ty+th);c.lineTo(tx+tw*.44,ty+th*.43);c.lineTo(tx+tw*.32,ty+th*.30);c.lineTo(tx+tw*.35,ty+th*.30);c.closePath();c.clip();tile(cells[1],tx,ty,tw,th);c.restore();
+  const torso=cells[1],height=Math.hypot(p.hip.x-p.shoulder.x,p.hip.y-p.shoulder.y)+24;
+  c.fillStyle=palette.shade;c.beginPath();c.moveTo(-18,-8);c.quadraticCurveTo(-31,7,-25,34);c.lineTo(-24,height-29);c.quadraticCurveTo(0,height-24,25,height-29);c.lineTo(25,14);c.quadraticCurveTo(22,-9,8,-10);c.closePath();c.fill();
+  tile([torso[0]+torso[2]*.35,torso[1],torso[2]*.63,torso[3]],-27,-17,59,height);
+  c.restore();
   // Pivot the detailed portrait at the neck, retaining the rig's original head motion.
-  const head=cells[0];c.save();c.translate(p.shoulder.x,p.shoulder.y-2);c.rotate(-p.tension*.12+p.recoil*.008);tile(head,-37,-64,67,68);c.restore();
+  seam({x:p.shoulder.x-3,y:p.shoulder.y-20},{x:p.shoulder.x,y:p.shoulder.y+2},13,palette.skin);
+  const head=cells[0];c.save();c.translate(p.shoulder.x,p.shoulder.y-2);c.rotate(-p.tension*.07+p.recoil*.006);tile(head,-34,-62,63,65);c.restore();
   c.restore();
  }
  global.BlindSpotPaintedSkin={draw,frames,columns,prepare,matte};

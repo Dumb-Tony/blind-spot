@@ -22,6 +22,8 @@
   }
   function event(e){
     view.event(e);
+    if(e.type==='charge')sounds.tone(850,.18,'sine',.04);
+    if(e.type==='blast'){sounds.noise(.35,.12);sounds.tone(65,.35,'triangle',.12);}
     if(e.type==='launch'){sounds.tone(260,.15,'triangle',.09);sounds.noise(.08,.03);fineAim=false;$('aimPanel').hidden=true;$('aimBtn').setAttribute('aria-expanded','false')}
     if(e.type==='break'&&clock-lastSound>.04){lastSound=clock;if(e.material==='glass'){sounds.tone(1600,.1,'sine',.03);sounds.tone(2250,.16,'sine',.02,.03)}else{sounds.noise(.1,.065);sounds.tone(100,.09,'triangle',.08)}}
     if(e.type==='impact'&&e.strength>3&&clock-lastSound>.12){lastSound=clock;sounds.tone(85,.1,'triangle',.04)}
@@ -43,12 +45,12 @@
     $('nextBtn').textContent=win?(index===LEVELS.length-1?'BACK TO REGIONS →':'NEXT INSTALLATION →'):'TRY AGAIN →';changeScreen('result');
   }
   function renderLevels(){const region=REGIONS[selectedRegion],subset=LEVELS.slice(region.start,region.start+region.levels),scores=progress.stars.slice(region.start,region.start+region.levels);$('levelsTitle').textContent=region.name;$('regionSelect').value=String(selectedRegion);$('regionProgress').textContent=`${scores.reduce((a,b)=>a+b,0)} / ${region.levels*3} stars · ${scores.filter(s=>s>0).length} / ${region.levels} installations offline · ${REBELS[region.rebel].name} / ${TOOLS[region.tool].name}`;
-    $('levelGrid').innerHTML=subset.map((l,n)=>{const i=region.start+n;return `<button class="level-card" data-level="${i}" aria-label="Play level ${i+1}: ${l.name}. ${progress.stars[i]} stars."><canvas width="360" height="145"></canvas><span class="num">${String(n+1).padStart(2,'0')}</span><b>${l.name}</b><small>${l.lesson}</small><span class="card-stars">${'★'.repeat(progress.stars[i])}${'☆'.repeat(3-progress.stars[i])}</span></button>`}).join('');
+    $('levelGrid').innerHTML=subset.map((l,n)=>{const i=region.start+n;return `<button class="level-card" data-level="${i}" aria-label="Play level ${i+1}: ${l.name}. ${progress.stars[i]} stars."><canvas width="360" height="145"></canvas><span class="num">${String(n+1).padStart(2,'0')}</span><b>${l.name}</b>${l.contraption?'<span class="contraption-badge">CONTRAPTION</span>':''}<small>${l.lesson}</small><span class="card-stars">${'★'.repeat(progress.stars[i])}${'☆'.repeat(3-progress.stars[i])}</span></button>`}).join('');
     $('levelGrid').querySelectorAll('.level-card').forEach((b,n)=>{const i=region.start+n;view.thumbnail(b.querySelector('canvas'),LEVELS[i]);b.onclick=()=>startLevel(i)});
   }
   $('toolSelect').onchange=()=>{cancelDrag();if(sim.selectTool($('toolSelect').value)){tool=sim.tool;view.guide=null;updateHUD()}else {toast('That tool is empty. Choose one with ammunition left.');updateHUD.tools=null;updateHUD()}};
   $('regionSelect').onchange=()=>{selectedRegion=Number($('regionSelect').value)||0;renderLevels()};
-  function worldPoint(e){const rect=canvas.getBoundingClientRect();return{x:(e.clientX-rect.left)*WORLD.width/rect.width,y:(e.clientY-rect.top)*WORLD.height/rect.height}}
+  function worldPoint(e){const rect=canvas.getBoundingClientRect(),snap=v=>Math.round(v*10)/10;return{x:snap((e.clientX-rect.left)*WORLD.width/rect.width),y:snap((e.clientY-rect.top)*WORLD.height/rect.height)}}
   function updateGuide(){view.guide=sim?.openingGuide();updateHUD()}
   function cancelDrag(){if(dragId!==null){try{canvas.releasePointerCapture(dragId)}catch(_){}dragId=null}sim?.cancel();view.guide=null}
   function down(e){if(screen!==null||!sim||sim.state!=='ready'||(e.button!==undefined&&e.button!==0))return;const p=worldPoint(e);if(Math.hypot(p.x-WORLD.anchor.x,p.y-WORLD.anchor.y)>85){toast('Grab the glowing tool beside the launcher to aim.');return}sounds.wake();dragId=e.pointerId;canvas.setPointerCapture(e.pointerId);sim.aim(p.x,p.y);updateGuide();e.preventDefault()}

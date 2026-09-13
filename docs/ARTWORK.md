@@ -26,3 +26,7 @@ ROW 5: only ONE trouser upper leg, hip joint at TOP, knee at BOTTOM. Points stra
 ROW 6: only ONE lower trouser leg, knee joint at TOP and complete shoe/boot at BOTTOM, toe points RIGHT. Points straight down.
 
 All 24 components are anatomically coherent painted paper-doll rig parts, consistent orientation and lighting. Softly rounded overlapping joint ends suitable for rotating skeletal animation. These are illustrative costume components, no injury or gore. Detailed expressive original graphic-novel illustration matching references; intricate hair, seams, wrinkles, fabric wear, natural faces and finger anatomy. No geometric vector simplification, no flat symbols, no full assembled characters, no extra limbs. 4 columns x 6 rows is critical.
+
+## 0.12 assembly revision
+
+No new images generated. Reuse the same painted atlas with a continuous torso crop, painted waist, connected limb roots and thicker overlaps. Correct the bracing elbow direction and smooth the pose; preserve all original faces, outfits and menu portraits.
