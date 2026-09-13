@@ -30,3 +30,11 @@ All 24 components are anatomically coherent painted paper-doll rig parts, consis
 ## 0.12 assembly revision
 
 No new images generated. Reuse the same painted atlas with a continuous torso crop, painted waist, connected limb roots and thicker overlaps. Correct the bracing elbow direction and smooth the pose; preserve all original faces, outfits and menu portraits.
+
+## 0.13 material atlas
+
+`dist/assets/material-atlas.png` is a generated 1254 × 1254 opaque bitmap with four equal quadrants: honey wood, cast concrete, brushed blue-gray steel, and chipped orange enamel. Generated with the built-in image-generation tool for this project. Existing character and background artwork is unchanged.
+
+Brief: a flat, evenly lit, hand-painted 2 × 2 texture atlas, no gutters, text, objects or perspective. Warm horizontal irregular wood grain and occasional knots; cool gray concrete aggregate, pits and chips; dark blue-gray brushed steel with horizontal scuffs and localized rust; orange industrial enamel with worn paint and fine chips. Distinct midscale patterns readable on 20-pixel beams.
+
+The renderer samples each quadrant at a fixed 192-world-pixel tile scale, inset by two source pixels to exclude neighboring materials. Stable per-body offsets vary the surface; upright wood rotates the grain along its length. Local transforms keep textures attached as bodies tumble. Glass deliberately uses a translucent fill, reflection streaks, beveled edges and branching damage rather than an opaque tile. Paint is drawn last. No collision geometry or physical properties depend on the artwork.

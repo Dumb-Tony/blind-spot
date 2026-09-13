@@ -158,6 +158,7 @@ const settleAt=fps=>{let p=startPose;for(let i=0;i<fps;i++)p=rig.stabilize(targe
 ok(Math.abs(settleAt(30).shoulder.x-settleAt(144).shoulder.x)<1e-8,'body smoothing is independent of rendering rate');
 console.log('PASS: '+checks+' assertions plus floating and contraption fixtures.');
 require('./stress-physics.cjs');
+require('./materials.test.cjs');
 const fractional=harness({height:719.984375});fractional.click('playBtn');
 for(const [type,x,y] of [['pointerdown',220,490],['pointermove',185,535],['pointerup',185,535]])fractional.ids.game.fire(type,{clientX:x,clientY:y,pointerId:1,button:0});
 ok(fractional.state().projectile.x===185&&fractional.state().projectile.y===535,'fractional canvas height does not perturb an identical visible drag');

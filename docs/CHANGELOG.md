@@ -1,3 +1,11 @@
+# 0.13 — Tactile city
+
+- Added a painted material atlas: honey wood grain, rough concrete aggregate, brushed/rusted steel and chipped orange enamel.
+- Made glass translucent with beveled reflections and branching damage; wood grain follows the beam's long axis.
+- Added material-specific end cuts, nails, edge spalls, plate ribs, bolts and vents. Textures remain attached through motion; rubble and thumbnails use the same renderer, with surface paint drawn above them.
+- Preserved the painted rebels, campaign geometry, physics, tools, scores and progress.
+- Verified all 120 browser routes and 360 stress throws; added loaded-atlas renderer regressions and a local material review page. Embedded the atlas in the standalone HTML.
+
 # 0.12 — Contraptions and connected motion
 
 - Reworked painted body assembly: continuous torso and waist, filled joint seams, thicker overlapping sleeves and legs, naturally bent bracing elbows.

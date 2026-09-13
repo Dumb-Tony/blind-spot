@@ -1,9 +1,15 @@
-# Blind Spot — Six Regions (0.12)
+# Blind Spot — Six Regions (0.13)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original eight Region 1 layouts and their scoring, artwork and saved stars remain intact.
+
+## Tactile material surfaces
+
+Version 0.13 replaces flat structural fills with distinct painted surfaces: lengthwise wood grain and end cuts, translucent beveled glass, pitted concrete aggregate, brushed and rusted steel plates, and chipped orange enamel power cells. Textures remain fixed to moving bodies and appear on debris and level thumbnails. Paint splatters stay above the surfaces. The existing characters, physics, campaign layouts, tools and saved progress are preserved.
+
+See [the material test report](docs/PLAYTEST-0.13.md) and [artwork notes](docs/ARTWORK.md). The standalone HTML embeds the new atlas and works offline.
 
 ## Contraptions and connected character motion
 

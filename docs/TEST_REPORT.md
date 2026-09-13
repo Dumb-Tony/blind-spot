@@ -1,6 +1,6 @@
-# Test report — 0.12
+# Test report — 0.13
 
-Current validation is documented in [Contraptions and connected motion](PLAYTEST-0.12.md).
+Current validation is documented in [Material surface pass](PLAYTEST-0.13.md). Previous mechanics validation is in [Contraptions and connected motion](PLAYTEST-0.12.md).
 
 - All 120 complete production routes pass with attainable three-star targets.
 - All 120 accelerated browser input replays pass, using isolated progress.

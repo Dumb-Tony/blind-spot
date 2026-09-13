@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>Blind Spot material review</title>
+<style>body{margin:0;background:#17283b;color:#f3e9d2;font:16px system-ui}header{padding:14px 24px}canvas{width:100%;max-width:1280px}button{padding:8px 20px;margin-left:20px}</style>
+<header>Production material review — intact, upright, damaged, rubble and paint <button id="rotate">Rotate pieces</button><span id="status">Loading textures</span></header><canvas id="materials" width="1280" height="620"></canvas>
+<script src="assets.js"></script><script src="game-data.js"></script><script src="renderer.js"></script><script>
+const canvas=document.getElementById('materials'),renderer=new BlindSpotRenderer.Renderer(canvas),c=canvas.getContext('2d');let rotating=false,angle=0;
+document.getElementById('rotate').onclick=()=>rotating=!rotating;
+const bodies=[];['wood','glass','heavy','steel','cell'].forEach((material,i)=>{
+  const x=140+i*250;[[170,32,130],[28,115,250],[115,45,370],[65,23,440],[140,48,530]].forEach(([w,h,y],j)=>bodies.push({position:{x,y},angle:0,game:{material,w,h,kind:j===3?'debris':'block',hp:j===2?8:42,maxHP:42,paint:j===4?[{x:0,y:-5,r:17,seed:3}]:[]}}));
+});
+function draw(){c.fillStyle='#213a50';c.fillRect(0,0,1280,620);for(let y=80;y<620;y+=20){c.fillStyle=y%40?'#365064':'#2a4459';c.fillRect(0,y,1280,10);}c.font='bold 20px system-ui';c.textAlign='center';c.fillStyle='#f3e9d2';['WOOD','GLASS','CONCRETE','STEEL','POWER CELL'].forEach((label,i)=>c.fillText(label,140+i*250,45));
+  if(rotating)angle+=.009;renderer.time+=1/60;for(const b of bodies){b.angle=angle;renderer.block(b);}document.getElementById('status').textContent=renderer.materialArt?.naturalWidth?' · Textures loaded':' · Loading';requestAnimationFrame(draw);
+}draw();
+</script>
