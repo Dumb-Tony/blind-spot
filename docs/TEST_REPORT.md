@@ -1,6 +1,6 @@
-# Test report — 0.15
+# Test report — 0.16
 
-Current validation is documented in [Early-game balance](PLAYTEST-0.15.md). Previous physics validation is in [Material fracture](PLAYTEST-0.14.md).
+Current visual validation is documented in [Connected character animation](PLAYTEST-0.16.md). Current balance validation is in [Early-game balance](PLAYTEST-0.15.md).
 
 - All 120 complete production routes pass with attainable three-star targets.
 - All 120 accelerated browser input replays pass, using isolated progress.

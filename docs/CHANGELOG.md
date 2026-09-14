@@ -1,3 +1,10 @@
+# 0.16 — Connected crew
+
+- Reworked all four painted gameplay rigs with tapered, rounded limb volumes instead of rectangular cutout strips.
+- Hid shoulder, elbow, hip and knee joins beneath overlapping clothing and textured limbs.
+- Added near/far depth ordering, directional body highlights, form shadows and grounded character silhouettes.
+- Preserved exact hand contact, planted feet, aiming reach, release follow-through and reduced-motion behavior.
+
 # 0.15 — Room to experiment
 
 - Reshaped Starter City's eight opening installations with broader supports, shared platforms, lower obstructions and several visually distinct attack paths.
