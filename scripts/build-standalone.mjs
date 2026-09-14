@@ -5,8 +5,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),dist=
 const atlas=fs.readFileSync(path.join(dist,'assets/region-one-atlas.png'));
 const rebels=fs.readFileSync(path.join(dist,'assets/rebels-atlas.png'));
 const painted=fs.readFileSync(path.join(dist,'assets/rebel-parts-painted.png'));
+const cohesive=fs.readFileSync(path.join(dist,'assets/rebel-poses-cohesive.png'));
 const materials=fs.readFileSync(path.join(dist,'assets/material-atlas.png'));
-const assets=`window.BlindSpotAssets={atlas:"data:image/png;base64,${atlas.toString('base64')}",rebels:"data:image/png;base64,${rebels.toString('base64')}",painted:"data:image/png;base64,${painted.toString('base64')}",materials:"data:image/png;base64,${materials.toString('base64')}"};\n`;
+const assets=`window.BlindSpotAssets={atlas:"data:image/png;base64,${atlas.toString('base64')}",rebels:"data:image/png;base64,${rebels.toString('base64')}",painted:"data:image/png;base64,${painted.toString('base64')}",cohesive:"data:image/png;base64,${cohesive.toString('base64')}",materials:"data:image/png;base64,${materials.toString('base64')}"};\n`;
 fs.writeFileSync(path.join(dist,'assets.js'),assets);
 let html=fs.readFileSync(path.join(dist,'index.html'),'utf8');
 html=html.replace(/<link rel="stylesheet" href="styles\.css[^\"]*">/,()=>`<style>${fs.readFileSync(path.join(dist,'styles.css'),'utf8')}</style>`);

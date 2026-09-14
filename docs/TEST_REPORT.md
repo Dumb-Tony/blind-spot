@@ -1,6 +1,6 @@
-# Test report — 0.16
+# Test report — 0.17
 
-Current visual validation is documented in [Connected character animation](PLAYTEST-0.16.md). Current balance validation is in [Early-game balance](PLAYTEST-0.15.md).
+Current visual validation is documented in [Cohesive character sprites](PLAYTEST-0.17.md). Current balance validation is in [Early-game balance](PLAYTEST-0.15.md).
 
 - All 120 complete production routes pass with attainable three-star targets.
 - All 120 accelerated browser input replays pass, using isolated progress.

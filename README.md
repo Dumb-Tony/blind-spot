@@ -1,9 +1,13 @@
-# Blind Spot — Six Regions (0.16)
+# Blind Spot — Six Regions (0.17)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; saved stars and level identities remain intact.
+
+## In the scene
+
+Version 0.17 replaces assembled body-part animation with twelve cohesive full-body gameplay sprites: ready, braced aim and release poses for all four rebels. Their outlines, lighting, scale, ground shadows and foot baseline are matched to the rooftops, while the live rig continues to choose poses from the real aiming and release state.
 
 ## Connected character animation
 

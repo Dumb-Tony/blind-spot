@@ -142,6 +142,10 @@ ok(paintedColumns.size===4,'painted rendering uses all four character columns');
 const pixels=new Uint8ClampedArray(7*7*4);for(let i=0;i<49;i++){pixels.set([220,220,220,255],i*4)}for(let y=1;y<=5;y++)for(let x=1;x<=5;x++)pixels.set([35,23,20,255],(y*7+x)*4);pixels.set([255,255,255,255],(3*7+3)*4);skin.matte(pixels,7,7);
 ok(pixels[3]===0&&pixels[(3*7+3)*4+3]===255,'neutral exterior is isolated while enclosed white highlights survive');ok(pixels[(2*7+2)*4+3]===255,'dark painted hair and linework survive isolation');
 ok(fs.existsSync('dist/assets/rebel-parts-painted.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('painted:"data:image/png;base64,'),'painted source is included in the offline game');
+let cohesiveCalls=0,cohesiveColumns=new Set(),cohesiveRows=new Set();const cohesiveContext=new Proxy({drawImage(...args){cohesiveCalls++;cohesiveColumns.add(Math.round(args[1]));cohesiveRows.add(Math.round(args[2]));ok(args.slice(1).every(Number.isFinite),'cohesive frame coordinates remain finite')}},{get:(o,k)=>o[k]||(()=>{})});
+for(const tool of Object.keys(c.BlindSpotData.TOOLS))for(const phase of ['ready','aim','release'])skin.drawCohesive(cohesiveContext,{tool,phase,tension:.7,squat:3},{width:1536,height:1536});
+ok(cohesiveCalls===12&&cohesiveColumns.size===4&&cohesiveRows.size===3,'cohesive atlas supplies every character and gameplay pose');
+ok(fs.existsSync('dist/assets/rebel-poses-cohesive.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('cohesive:"data:image/png;base64,'),'cohesive production sprites are included in the offline game');
 console.log('PASS: '+checks+' final assertions including painted sprite assembly.');
 
 require('./floating.test.cjs');

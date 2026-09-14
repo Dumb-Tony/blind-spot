@@ -23,7 +23,7 @@
   if(!aiming&&age>=.85&&readyAge<.35)hand=mix({x:175,y:548},a,smooth(readyAge/.35));
   if(sim?.state==='won'&&age>=.85)hand={x:184,y:529};
   const support=tool==='street-stone'?{x:196,y:507}:{x:203,y:515};
-  return{tool,hip,shoulder,head:{x:shoulder.x-10,y:shoulder.y-39},hand,support,palm:{x:hand.x-15,y:hand.y+6},feet:[{x:117,y:614},{x:183,y:614}],tension,recoil,squat};
+  return{tool,phase:aiming?'aim':age<.65?'release':'ready',hip,shoulder,head:{x:shoulder.x-10,y:shoulder.y-39},hand,support,palm:{x:hand.x-15,y:hand.y+6},feet:[{x:117,y:614},{x:183,y:614}],tension,recoil,squat};
  }
  function draw(c,p,time,reduced,front=false){
   const s=palettes[p.tool],ink='#172437';

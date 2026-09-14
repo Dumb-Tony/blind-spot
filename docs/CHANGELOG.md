@@ -1,3 +1,10 @@
+# 0.17 — In the scene
+
+- Replaced assembled body-part rendering with cohesive full-body sprites for every rebel.
+- Added consistent ready, braced aiming and release follow-through poses with continuous anatomy and clothing.
+- Matched character outline, top-left lighting, cool form shadow, scale and foot contact to the gameplay environment.
+- Kept the responsive pose state, slingshot layering and procedural fallback.
+
 # 0.16 — Connected crew
 
 - Reworked all four painted gameplay rigs with tapered, rounded limb volumes instead of rectangular cutout strips.

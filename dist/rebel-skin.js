@@ -11,6 +11,17 @@
  }
  function prepare(image,makeCanvas=()=>document.createElement('canvas')){const canvas=makeCanvas();canvas.width=image.naturalWidth||image.width;canvas.height=image.naturalHeight||image.height;const c=canvas.getContext('2d',{willReadFrequently:true});c.drawImage(image,0,0);const pixels=c.getImageData(0,0,canvas.width,canvas.height);matte(pixels.data,canvas.width,canvas.height);c.putImageData(pixels,0,0);return canvas}
  const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
+ function drawCohesive(c,p,image,front=false){
+  if(front)return;
+  const col=columns[p.tool]||0,row=p.phase==='aim'?1:p.phase==='release'?2:0;
+  const iw=image.width||image.naturalWidth,ih=image.height||image.naturalHeight,sw=iw/4,sh=ih/3,sx=col*sw,sy=row*sh;
+  // Whole-body frames share one roof baseline. Small pose motion keeps the sprite
+  // tied to the live rig without separating its anatomy into moving cutouts.
+  const tension=p.phase==='aim'?p.tension:0,x=18-tension*8,y=270+p.squat*.16,w=278,h=370;
+  c.save();c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+  c.globalAlpha=.22;c.fillStyle='#081525';c.beginPath();c.ellipse(155,617,86,8,0,0,Math.PI*2);c.fill();
+  c.globalAlpha=1;c.drawImage(image,sx,sy,sw,sh,x,y,w,h);c.restore();
+ }
  // Measured source cells, not equal-row assumptions. Values use the 1024x1536 source grid.
  const frames=[
   [[12,8,232,204],[1,214,254,278],[74,496,116,230],[101,738,82,213],[59,967,181,285],[72,1252,183,260]],
@@ -59,5 +70,5 @@
   const head=cells[0];c.save();c.translate(p.shoulder.x,p.shoulder.y-2);c.rotate(-p.tension*.07+p.recoil*.006);c.fillStyle='#09132145';c.beginPath();c.ellipse(2,-28,35,36,0,0,Math.PI*2);c.fill();tile(head,-34,-62,63,65);c.globalAlpha=.1;c.fillStyle='#fff';c.beginPath();c.ellipse(-16,-36,8,20,-.2,0,Math.PI*2);c.fill();c.globalAlpha=1;c.restore();
   c.restore();
  }
- global.BlindSpotPaintedSkin={draw,frames,columns,prepare,matte};
+ global.BlindSpotPaintedSkin={draw,drawCohesive,frames,columns,prepare,matte};
 })(window);

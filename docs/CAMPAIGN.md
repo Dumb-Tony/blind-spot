@@ -1,4 +1,4 @@
-# Campaign reference — 0.16
+# Campaign reference — 0.17
 
 120 levels; 24 contraption puzzles are marked below. Starter City's opening eight installations have broad targets and alternate attack paths. Three-star targets allow cleanup throws, and existing best stars remain saved.
 
