@@ -1,0 +1,370 @@
+[
+  {
+    "level": 1,
+    "name": "First blind spot",
+    "referenceTolerance": 9,
+    "trials": 68,
+    "oneShotWins": 27,
+    "winningStarts": 28,
+    "families": [
+      {
+        "shots": [
+          [
+            45,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            65,
+            5
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            65,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "name": "Knee-jerk reaction",
+    "referenceTolerance": 8,
+    "trials": 68,
+    "oneShotWins": 31,
+    "winningStarts": 33,
+    "families": [
+      {
+        "shots": [
+          [
+            35,
+            55
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            45,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 8,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            65,
+            5
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "name": "Glass houses",
+    "referenceTolerance": 7,
+    "trials": 68,
+    "oneShotWins": 26,
+    "winningStarts": 27,
+    "families": [
+      {
+        "shots": [
+          [
+            35,
+            45
+          ]
+        ],
+        "used": 1,
+        "nearby": 8,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            45,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            75,
+            15
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 4,
+    "name": "Double take",
+    "referenceTolerance": 4,
+    "trials": 68,
+    "oneShotWins": 16,
+    "winningStarts": 20,
+    "families": [
+      {
+        "shots": [
+          [
+            35,
+            45
+          ]
+        ],
+        "used": 1,
+        "nearby": 8,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            55,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            75,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 5,
+    "name": "Heavy paperwork",
+    "referenceTolerance": 3,
+    "trials": 68,
+    "oneShotWins": 17,
+    "winningStarts": 18,
+    "families": [
+      {
+        "shots": [
+          [
+            65,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            75,
+            5
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            85,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 6,
+    "name": "Overprotective",
+    "referenceTolerance": 6,
+    "trials": 68,
+    "oneShotWins": 24,
+    "winningStarts": 27,
+    "families": [
+      {
+        "shots": [
+          [
+            35,
+            55
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            55,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            75,
+            25
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 7,
+    "name": "Domino department",
+    "referenceTolerance": 9,
+    "trials": 68,
+    "oneShotWins": 21,
+    "winningStarts": 30,
+    "families": [
+      {
+        "shots": [
+          [
+            45,
+            45
+          ]
+        ],
+        "used": 1,
+        "nearby": 8,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            65,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            85,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "name": "The Ministry of Looking",
+    "referenceTolerance": 4,
+    "trials": 68,
+    "oneShotWins": 20,
+    "winningStarts": 32,
+    "families": [
+      {
+        "shots": [
+          [
+            75,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 7,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            95,
+            35
+          ]
+        ],
+        "used": 1,
+        "nearby": 9,
+        "trials": 9,
+        "missRecovery": true
+      },
+      {
+        "shots": [
+          [
+            115,
+            15
+          ]
+        ],
+        "used": 1,
+        "nearby": 8,
+        "trials": 9,
+        "missRecovery": true
+      }
+    ]
+  }
+]

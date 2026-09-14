@@ -14,7 +14,7 @@ for(let i=0;i<LEVELS.length;i++){
   for(const [used,expected] of [[LEVELS[i].stars[0],3],[LEVELS[i].stars[1],2],[LEVELS[i].shots,1]])ok(starsFor(LEVELS[i],used)===expected,'scoring boundary');
 }
 const missed=new Simulation(LEVELS[0]);while(missed.state!=='lost'){missed.aim(203,485);missed.launch();for(let n=0;n<600&&missed.state==='flying';n++)missed.step()}
-ok(missed.shotsUsed===3&&missed.remaining===1,'misses consume allowance and produce failure');
+ok(missed.shotsUsed===LEVELS[0].shots&&missed.remaining===1,'misses consume the full level allowance and produce failure');
 const cancelled=new Simulation(LEVELS[0]);cancelled.aim(140,525);cancelled.cancel();ok(cancelled.shotsUsed===0&&cancelled.state==='ready','cancel does not cost a shot');cancelled.aim(219,490);ok(!cancelled.launch()&&cancelled.shotsUsed===0,'tiny drag cancels');
 const guide=new Simulation(LEVELS[0]);guide.aim(130,520);const predicted=guide.predict(false);guide.launch();for(let n=0;n<18;n++){guide.step();const p=predicted.samples[n*2+1];ok(Math.hypot(p.x-guide.projectile.position.x,p.y-guide.projectile.position.y)<.001,'trajectory matches actual released body')}
 
@@ -106,12 +106,12 @@ ok(LEVELS.length===120&&c.BlindSpotData.REGIONS.every(r=>r.levels===20),'six reg
 ok(new Set(LEVELS.map(l=>l.id)).size===120,'stable unique level identities');
 const migrated=harness({saved:{'blindspot-overhaul-progress':JSON.stringify({stars:Array.from({length:32},(_,i)=>i%4),last:25})}});
 ok(migrated.state().progress.last===61&&migrated.state().progress.stars[41]===1,'32-level save maps by original identity');
-const mixed=new Simulation(LEVELS[80]);ok(mixed.selectTool('paint-can'),'mixed tool can be selected');mixed.aim(150,520);mixed.cancel();ok(mixed.inventory['paint-can']===3,'cancel preserves supplies');mixed.aim(150,520);mixed.launch();ok(mixed.inventory['paint-can']===2&&!mixed.selectTool('street-stone'),'launch consumes selected tool and disallows switching in flight');
+const mixed=new Simulation(LEVELS[80]);ok(mixed.selectTool('paint-can'),'mixed tool can be selected');mixed.aim(150,520);mixed.cancel();ok(mixed.inventory['paint-can']===LEVELS[80].arsenal['paint-can'],'cancel preserves supplies');mixed.aim(150,520);mixed.launch();ok(mixed.inventory['paint-can']===LEVELS[80].arsenal['paint-can']-1&&!mixed.selectTool('street-stone'),'launch consumes selected tool and disallows switching in flight');
 const pulseLevel={...LEVELS[40],blocks:[],cameras:[{x:750,y:599,circuit:'A'},{x:900,y:599,circuit:'A'},{x:1050,y:599,circuit:'A'}]};
 const pulse=new Simulation(pulseLevel);pulse.activateTool(pulse.projectile,pulse.cameras[0],pulse.cameras[0].position);ok(pulse.remaining===1&&!pulse.cameras[2].game.disabled,'EMP jumps once without recursive chain');
 const outside=new Simulation(pulseLevel);outside.activateTool(outside.projectile,outside.cameras[0],{x:outside.cameras[0].position.x-100,y:outside.cameras[0].position.y});ok(outside.remaining===3,'100-pixel miss is outside EMP reach');
 const inside=new Simulation(pulseLevel);inside.activateTool(inside.projectile,inside.cameras[0],{x:inside.cameras[0].position.x-90,y:inside.cameras[0].position.y});ok(inside.remaining===1,'90-pixel hit pulses and jumps once');
-const selector=harness();selector.click('selectBtn');selector.ids.regionSelect.value='5';selector.ids.regionSelect.onchange();ok(selector.ids.levelGrid.children.length===20,'twenty actual menu cards');selector.ids.levelGrid.children[0].onclick();selector.ids.toolSelect.value='paint-can';selector.ids.toolSelect.onchange();ok(selector.state().tool==='paint-can','production selector changes active tool');selector.drag(55,25);ok(selector.state().inventory['paint-can']===2,'pointer shot spends selected inventory');
+const selector=harness();selector.click('selectBtn');selector.ids.regionSelect.value='5';selector.ids.regionSelect.onchange();ok(selector.ids.levelGrid.children.length===20,'twenty actual menu cards');selector.ids.levelGrid.children[0].onclick();selector.ids.toolSelect.value='paint-can';selector.ids.toolSelect.onchange();ok(selector.state().tool==='paint-can','production selector changes active tool');selector.drag(55,25);ok(selector.state().inventory['paint-can']===LEVELS[100].arsenal['paint-can']-1,'pointer shot spends selected inventory');
 console.log('PASS: '+checks+' total production assertions for v0.8.');
 
 for(const l of LEVELS){const settled=new Simulation(l);ok(settled.cameras.every((cam,i)=>Math.hypot(cam.position.x-l.cameras[i].x,cam.position.y-l.cameras[i].y)<25),l.name+': initial layout is stable');}
@@ -160,6 +160,7 @@ console.log('PASS: '+checks+' assertions plus floating and contraption fixtures.
 require('./stress-physics.cjs');
 require('./materials.test.cjs');
 require('./fracture.test.cjs');
+require('./balance.test.cjs');
 const fractional=harness({height:719.984375});fractional.click('playBtn');
 for(const [type,x,y] of [['pointerdown',220,490],['pointermove',185,535],['pointerup',185,535]])fractional.ids.game.fire(type,{clientX:x,clientY:y,pointerId:1,button:0});
 ok(fractional.state().projectile.x===185&&fractional.state().projectile.y===535,'fractional canvas height does not perturb an identical visible drag');

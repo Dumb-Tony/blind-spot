@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>Blind Spot forgiving opening playtest</title><style>body{background:#142739;color:#eef3dc;font:16px system-ui}button{padding:12px}iframe{width:960px;height:540px;border:0}pre{white-space:pre-wrap}</style>
+<h1>Opening-level aiming and recovery check</h1><p>Actual pointer input, three separate shot paths per level, four-pixel aim errors, and a deliberate missed throw. Isolated progress.</p><button id="run">Test varied opening shots</button><pre id="report">Ready</pre><iframe id="gameFrame"></iframe>
+<script>
+run.onclick=async()=>{run.disabled=true;const results=[];try{
+ const [html,levels]=await Promise.all([fetch('index.html').then(r=>r.text()),fetch('qa-balance-routes.json').then(r=>r.json())]);
+ const boot=`<script>const qaStore=new Map([['blindspot-mute','1']]);Object.defineProperty(window,'localStorage',{value:{getItem:k=>qaStore.get(k)||null,setItem:(k,v)=>qaStore.set(k,v)}});let qaRaf;window.requestAnimationFrame=fn=>qaRaf=fn;window.qaTick=t=>qaRaf(t);HTMLCanvasElement.prototype.setPointerCapture=function(){};HTMLCanvasElement.prototype.releasePointerCapture=function(){};<\/script>`;
+ const hook=`<script>let qaSim,qaView;const draw=BlindSpotRenderer.Renderer.prototype.draw;BlindSpotRenderer.Renderer.prototype.draw=function(s){qaSim=s;qaView=this};window.qaDraw=()=>draw.call(qaView,qaSim);<\/script>`;
+ gameFrame.srcdoc=html.replace('<head>','<head>'+boot).replace(/<script src="game.js[^>]*><\/script>/,hook+'$&');await new Promise(r=>gameFrame.onload=r);
+ const w=gameFrame.contentWindow,d=w.document;let now=0;const tick=()=>w.qaTick(now+=1000/60),state=()=>w.__blindSpot.getState();
+ const trial=(index,shots,ox=0,oy=0,miss=false)=>{
+  d.getElementById('selectBtn').click();const region=d.getElementById('regionSelect');region.value=String(Math.floor(index/20));region.dispatchEvent(new w.Event('change'));d.querySelector(`[data-level="${index}"]`).click();tick();
+  for(const [dx,dy,t] of miss?[[17,-5],...shots]:shots){if(t){const s=d.getElementById('toolSelect');s.value=t;s.dispatchEvent(new w.Event('change'));}const canvas=d.getElementById('game'),r=canvas.getBoundingClientRect();const ptr=(type,x,y)=>canvas.dispatchEvent(new w.PointerEvent(type,{clientX:r.left+x*r.width/1280,clientY:r.top+y*r.height/720,pointerId:1,button:0,bubbles:true}));ptr('pointerdown',220,490);ptr('pointermove',220-dx-ox,490+dy+oy);ptr('pointerup',220-dx-ox,490+dy+oy);for(let n=0;n<1800&&state().state==='flying';n++)tick();if(state().state==='won')break;}
+  for(let n=0;n<3;n++)tick();return state().state==='won';
+ };
+ for(const row of levels){const families=[];for(const family of row.families){let wins=0;for(const [x,y] of [[0,0],[-4,0],[4,0],[0,-4],[0,4],[-4,-4],[4,4],[-4,4],[4,-4]]){wins+=Number(trial(row.level-1,family.shots,x,y));await new Promise(r=>setTimeout(r,0));}families.push({shots:family.shots,wins,trials:9,missRecovery:trial(row.level-1,family.shots,0,0,true)});}
+  results.push({level:row.level,families,pass:families.filter(f=>f.wins>=7&&f.missRecovery).length>=2});w.qaDraw();report.textContent=JSON.stringify(results,null,2);await new Promise(r=>setTimeout(r,0));
+ }report.textContent='COMPLETE '+results.filter(r=>r.pass).length+'/'+results.length+' levels\n'+JSON.stringify(results,null,2);
+ }catch(e){report.textContent='FAILED '+e.stack;}run.disabled=false;};
+</script>

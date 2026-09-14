@@ -1,3 +1,12 @@
+# 0.15 — Room to experiment
+
+- Reshaped Starter City's eight opening installations with broader supports, shared platforms, lower obstructions and several visually distinct attack paths.
+- Raised opening three-star targets to allow cleanup play: 2 throws on levels 1–3, 3 on levels 4–7, and 4 on level 8. Added three recovery throws beyond par.
+- Added forgiving nearby impact surfaces to the first two paint and EMP installations while preserving the 95-pixel EMP range.
+- Added one recovery throw to the first four installations in every district and one extra mixed-tool supply per available tool.
+- Added a varied-shot balance audit and real-pointer browser replay. Each opening level has three separate routes; every route passes at least 7/9 four-pixel aim variations and still clears after a deliberate miss.
+- Recalibrated full-campaign routes without changing level identities or saved stars.
+
 # 0.14 — Material matters
 
 - Replaced the common two-rectangle break with triangular glass shards, long irregular wood splinters and chunky concrete rubble. Rendered fragment outlines match the physical convex bodies.

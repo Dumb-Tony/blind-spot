@@ -1,9 +1,17 @@
-# Blind Spot — Six Regions (0.14)
+# Blind Spot — Six Regions (0.15)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
-Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; the original eight Region 1 layouts and their scoring, artwork and saved stars remain intact.
+Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; saved stars and level identities remain intact.
+
+## Room to experiment
+
+Version 0.15 reshapes Starter City's eight opening installations around broad structural targets and multiple attack paths. Players can hit legs, decks, glass, weights, or cameras directly, with three-star targets that allow cleanup throws. The opening paint and EMP installations add nearby impact surfaces without increasing either tool's range. The first four installations in every district carry an extra recovery throw and mixed-tool supplies where applicable.
+
+Every Starter City installation has three separated winning shot paths in the automated balance audit. Each path wins at least seven of nine trials when both axes vary by four pixels, and each survives a deliberate missed throw. All 120 campaign routes continue to pass in the browser.
+
+See [the early-game balance report](docs/PLAYTEST-0.15.md).
 
 ## Material-specific destruction
 

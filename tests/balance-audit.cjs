@@ -1,0 +1,4 @@
+const fs=require('node:fs'),vm=require('node:vm');const c={Matter:require('../dist/vendor/matter.min.js'),console};vm.createContext(c);for(const f of ['dist/game-data.js','dist/physics.js','tests/balance-tools.js'])vm.runInContext(fs.readFileSync(f,'utf8'),c);
+const routes=JSON.parse(fs.readFileSync('tests/solutions.json')),rows=[],indices=process.argv.includes('--intros')?[20,21,40,41]:[0,1,2,3,4,5,6,7];
+for(const i of indices){const l=c.BlindSpotData.LEVELS[i],row={level:i+1,name:l.name,referenceTolerance:c.BlindSpotBalance.tolerance(l,routes[i].shots),...(process.argv.includes('--scan')?c.BlindSpotBalance.scan(l):{})};rows.push(row);console.log(JSON.stringify(row));}
+fs.writeFileSync(process.argv.includes('--scan')?'tests/solutions-balance-scan.json':'tests/solutions-balance-baseline.json',JSON.stringify(rows,null,2));

@@ -173,5 +173,22 @@
     const par=[[1,2,2,3],[2,2,2,3],[2,2,2,3],[1,3,2,2],[3,3,3,4],[2,2,3,3]][region][pattern];
     l.stars=[par,par+1];l.shots=Math.max(par+2,cameras.length);
   }
+  // The opening district teaches broad structural targets before demanding precision.
+  // Keep stable level identities and saved stars while opening alternate attack paths.
+  const opening=[
+    {blocks:tower(770,90,250),cameras:[C(770,491)],par:2,tip:'Hit the camera, the wide wooden platform, or either leg. A second throw still earns three stars.'},
+    {blocks:tower(820,160,230),cameras:[C(820,421)],par:2,tip:'Break either leg, strike the broad deck, or reach the camera directly. Use a cleanup throw if it stays upright.'},
+    {blocks:[B(710,535,18,170,'glass'),...tower(830,75,210,'glass')],cameras:[C(830,506)],par:2,tip:'Shatter the front pane and carry through, break a glass leg, or arc onto the wooden deck.'},
+    {blocks:[...tower(720,110,160),...tower(990,150,190)],cameras:[C(720,471),C(990,431)],par:3,tip:'A low shot can sweep the legs; a higher shot hits the decks. You can take the towers separately and still earn three stars.'},
+    {blocks:[B(785,530,22,180,'glass'),B(915,530,22,180),B(850,430,180,20),B(850,398,96,44,'heavy')],cameras:[C(850,600),C(850,356)],par:3,tip:'Drop the concrete by breaking either support, or hit the upper camera and finish underneath. Three throws can earn three stars.'},
+    {blocks:[B(660,580,36,80,'steel',true),B(800,550,24,140),B(1000,550,24,140),B(900,470,240,20,'glass')],cameras:[C(845,440),C(900,440),C(955,440)],par:3,tip:'Clear the low wall to hit either leg, shatter the broad glass roof, or hit the cameras directly. The whole row shares one fragile platform.'},
+    {par:3,tip:'Sweep through the legs, topple the weighted caps, or take the towers separately. Three throws still earn three stars.'},
+    {blocks:[...tower(810,190,190,'glass'),B(810,395,180,30,'heavy'),...tower(1060,150,190)],cameras:[C(770,361),C(850,361),C(1020,431),C(1100,431)],par:4,tip:'Two pairs share two broad platforms. Break the glass legs, topple the concrete cap, or take the decks separately; four throws can earn three stars.'}
+  ];
+  opening.forEach((d,i)=>{const l=LEVELS[i];if(d.blocks)l.blocks=d.blocks;if(d.cameras)l.cameras=d.cameras;l.stars=[d.par,d.par+1];l.shots=d.par+3;l.tip=l.hint=d.tip;});
+  for(let i=8;i<20;i++){const l=LEVELS[i];if(l.stars[0]<3)l.stars=[l.stars[0]+1,l.stars[0]+2];l.shots=Math.max(l.shots,l.stars[0]+3);}
+  // Larger close-range impact surfaces introduce splash tools without extending EMP range.
+  for(const i of [20,21,40,41]){const l=LEVELS[i],c=l.cameras[0],x=i===21?(c.x+l.cameras[1].x)/2:c.x-45;l.blocks.push(B(x,c.y-19,18,76,'glass'));l.hint=l.tip='Hit the glass beside the lens, the shelf, or the camera itself. Nearby impact points can activate your tool.';}
+  for(const r of REGIONS)for(let n=0;n<4;n++){const l=LEVELS[r.start+n];l.shots=Math.max(l.shots,l.stars[0]+3);if(l.arsenal)for(const tool of Object.keys(l.arsenal))l.arsenal[tool]++;}
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);

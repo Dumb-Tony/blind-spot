@@ -1,40 +1,40 @@
-# Campaign reference — 0.12
+# Campaign reference — 0.15
 
-120 levels; 24 redesigned contraption puzzles are marked below. Three-star targets allow a cleanup throw on particularly sensitive chain-reaction routes. Existing best stars remain saved after redesign. Original 32 layouts are preserved.
+120 levels; 24 contraption puzzles are marked below. Starter City's opening eight installations have broad targets and alternate attack paths. Three-star targets allow cleanup throws, and existing best stars remain saved.
 
 ## Starter City
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 1 | First blind spot | 1 | 1 | 3 |
-| 2 | Knee-jerk reaction | 1 | 1 | 3 |
-| 3 | Glass houses | 1 | 1 | 3 |
-| 4 | Double take | 2 | 2 | 4 |
-| 5 | Heavy paperwork | 2 | 1 | 3 |
-| 6 | Overprotective | 3 | 2 | 4 |
-| 7 | Domino department | 3 | 2 | 4 |
-| 8 | The Ministry of Looking | 4 | 2 | 5 |
-| 9 | Balance of power **· redesigned** | 3 | 1 | 3 |
-| 10 | Freight steps | 4 | 2 | 4 |
-| 11 | Balancing act | 5 | 3 | 5 |
-| 12 | Battery basement **· redesigned** | 3 | 2 | 4 |
-| 13 | Glass arcade | 5 | 2 | 5 |
-| 14 | Dead weight | 5 | 2 | 5 |
-| 15 | Upper offices | 5 | 2 | 5 |
-| 16 | Counterweight court **· redesigned** | 4 | 2 | 4 |
-| 17 | Civic scaffolds | 6 | 6 | 8 |
-| 18 | The leaning archive | 6 | 2 | 6 |
-| 19 | Last supports | 6 | 2 | 6 |
-| 20 | The tipping point **· redesigned** | 5 | 3 | 5 |
+| 1 | First blind spot | 1 | 2 | 5 |
+| 2 | Knee-jerk reaction | 1 | 2 | 5 |
+| 3 | Glass houses | 1 | 2 | 5 |
+| 4 | Double take | 2 | 3 | 6 |
+| 5 | Heavy paperwork | 2 | 3 | 6 |
+| 6 | Overprotective | 3 | 3 | 6 |
+| 7 | Domino department | 3 | 3 | 6 |
+| 8 | The Ministry of Looking | 4 | 4 | 7 |
+| 9 | Balance of power **· redesigned** | 3 | 2 | 5 |
+| 10 | Freight steps | 4 | 3 | 6 |
+| 11 | Balancing act | 5 | 3 | 6 |
+| 12 | Battery basement **· redesigned** | 3 | 3 | 6 |
+| 13 | Glass arcade | 5 | 3 | 6 |
+| 14 | Dead weight | 5 | 3 | 6 |
+| 15 | Upper offices | 5 | 3 | 6 |
+| 16 | Counterweight court **· redesigned** | 4 | 3 | 6 |
+| 17 | Civic scaffolds | 6 | 6 | 9 |
+| 18 | The leaning archive | 6 | 3 | 6 |
+| 19 | Last supports | 6 | 3 | 6 |
+| 20 | The tipping point **· redesigned** | 5 | 3 | 6 |
 
 ## Color Quarter
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 21 | Fresh coat | 1 | 2 | 4 |
-| 22 | Two for a splash | 2 | 2 | 4 |
-| 23 | Above the awning | 2 | 2 | 4 |
-| 24 | Wet floor | 2 | 2 | 4 |
+| 21 | Fresh coat | 1 | 2 | 5 |
+| 22 | Two for a splash | 2 | 2 | 5 |
+| 23 | Above the awning | 2 | 2 | 5 |
+| 24 | Wet floor | 2 | 2 | 5 |
 | 25 | Gallery wall | 2 | 2 | 4 |
 | 26 | Color falls | 3 | 2 | 4 |
 | 27 | Undercoat | 3 | 2 | 4 |
@@ -56,10 +56,10 @@
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 41 | Pull the plug | 1 | 2 | 4 |
-| 42 | Shared password | 2 | 2 | 4 |
-| 43 | Separate channels | 2 | 2 | 4 |
-| 44 | Signal booster | 3 | 2 | 4 |
+| 41 | Pull the plug | 1 | 2 | 5 |
+| 42 | Shared password | 2 | 2 | 5 |
+| 43 | Separate channels | 2 | 2 | 5 |
+| 44 | Signal booster | 3 | 2 | 5 |
 | 45 | Firewall | 2 | 2 | 4 |
 | 46 | Cross talk | 4 | 2 | 4 |
 | 47 | Dead zone | 3 | 2 | 4 |
@@ -81,10 +81,10 @@
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 61 | Loose ends | 1 | 2 | 4 |
-| 62 | Swing shift | 2 | 2 | 4 |
-| 63 | Falling inventory | 2 | 2 | 4 |
-| 64 | Two cranes | 2 | 2 | 4 |
+| 61 | Loose ends | 1 | 2 | 5 |
+| 62 | Swing shift | 2 | 2 | 5 |
+| 63 | Falling inventory | 2 | 2 | 5 |
+| 64 | Two cranes | 2 | 2 | 5 |
 | 65 | Dock dominoes | 2 | 2 | 4 |
 | 66 | Load bearing | 2 | 2 | 4 |
 | 67 | Longshore | 3 | 2 | 4 |
@@ -106,10 +106,10 @@
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 81 | Fresh partnership | 2 | 2 | 4 |
-| 82 | Two approaches | 2 | 2 | 4 |
-| 83 | Open the shutters | 2 | 2 | 4 |
-| 84 | Shared canvas | 3 | 2 | 4 |
+| 81 | Fresh partnership | 2 | 2 | 5 |
+| 82 | Two approaches | 2 | 2 | 5 |
+| 83 | Open the shutters | 2 | 2 | 5 |
+| 84 | Shared canvas | 3 | 2 | 5 |
 | 85 | Divide the work | 3 | 2 | 4 |
 | 86 | Art delivery | 3 | 2 | 4 |
 | 87 | The glass market | 3 | 2 | 4 |
@@ -131,10 +131,10 @@
 
 | Level | Installation | Cameras | Three stars | Throws allowed |
 |---:|---|---:|---:|---:|
-| 101 | Crew call | 2 | 2 | 4 |
-| 102 | Signal and steel | 2 | 2 | 4 |
-| 103 | Hooked on color | 2 | 2 | 4 |
-| 104 | Different angles | 3 | 2 | 4 |
+| 101 | Crew call | 2 | 2 | 5 |
+| 102 | Signal and steel | 2 | 2 | 5 |
+| 103 | Hooked on color | 2 | 2 | 5 |
+| 104 | Different angles | 3 | 2 | 5 |
 | 105 | First operation | 3 | 2 | 4 |
 | 106 | Heavy relay | 3 | 2 | 4 |
 | 107 | The outer works | 3 | 2 | 4 |
