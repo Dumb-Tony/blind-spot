@@ -3,7 +3,7 @@
 ## Play loop
 Aim, launch, watch the structure react, then choose the next shot. The intended feel is the readable launch-and-collapse puzzle loop of Angry Birds: scarce shots, useful material differences, vulnerable supports, weight transfer, chain reactions, quick retries and optional three-star mastery. Blind Spot retains its own surveillance targets, characters, artwork and tool effects.
 
-The simulation and the original Region 1 were extended in place. Physics remains at two 120 Hz substeps per 60 Hz controller tick. The playfield remains 1280 × 720 so aiming and touch coordinates retain their established feel. Larger regions mean twenty puzzles each; later installations also occupy more of the existing field, from roughly x=658 to 1140, with upper storeys reaching about y=220. No camera scrolling or off-screen targeting is introduced.
+The simulation and the original Region 1 were extended in place. Physics remains at two 120 Hz substeps per 60 Hz controller tick. The playfield remains 1280 × 720 so aiming and touch coordinates retain their established feel. Eight regions contain twenty puzzles each; later installations add focused blasts, persistent foam bodies, taller frames and layered targets without camera scrolling or off-screen targeting.
 
 ## Six twenty-level regions
 Starter City, Color Quarter, Signal Heights and Iron Docks each retain their original eight installations and gain twelve larger puzzles. Junction Yard adds twenty stone-and-paint puzzles. Central Works adds twenty full-crew puzzles. Deterministic structural compositions use independent towers, suspended beams, fixed pods, glass barriers, steel awnings, counterweights, heavy caps and upper storeys. There is no runtime random puzzle generation.

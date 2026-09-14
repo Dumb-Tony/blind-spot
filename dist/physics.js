@@ -1,14 +1,15 @@
 /* Shared production simulation. Tests instantiate this exact class. */
 (function(global){
   'use strict';
-  const {Engine,Composite,Bodies,Body,Events,Sleeping,Query,Constraint}=global.Matter;
+  const {Engine,Composite,Bodies,Body,Events,Sleeping,Query,Constraint,Common}=global.Matter;
   const {WORLD,TOOLS,MATERIALS,starsFor}=global.BlindSpotData;
   const TOOL=TOOLS['street-stone'],DT=WORLD.step/2;
   const angle=a=>Math.atan2(Math.sin(a),Math.cos(a));
   function stone(x,y,tool=TOOL){return Bodies.circle(x,y,tool.radius,{density:tool.density,friction:.8,frictionAir:tool.airFriction,restitution:.23,sleepThreshold:35,label:'stone'});}
   class Simulation{
     constructor(level,onEvent=()=>{}){
-      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.hinges=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
+      Common._seed=[...String(level.id||level.name)].reduce((n,ch)=>(n*31+ch.charCodeAt(0))%233280,17);
+      this.level=level;this.inventory=level.arsenal?{...level.arsenal}:null;this.tool=TOOLS[level.tool||'street-stone'];this.cables=[];this.hooks=[];this.hinges=[];this.foams=[];this.onEvent=onEvent;this.engine=Engine.create({enableSleeping:true,positionIterations:8,velocityIterations:8});
       this.engine.gravity.scale=WORLD.gravity;this.blocks=[];this.cameras=[];this.stones=[];this.pendingBreak=new Set();this.shotsUsed=0;this.time=0;this.shotTime=0;this.quiet=0;this.state='setup';this.lastHit=-100;this.combo=0;this.bestCombo=0;this.breaks=0;this.trail=[];this.lastTrail=[];this.armed=false;
       this.add(Bodies.rectangle(640,660,4000,80,{isStatic:true,friction:.85,label:'ground'}));
       level.blocks.forEach(d=>{
@@ -118,6 +119,20 @@
         const hook=Constraint.create({pointA:{x:Math.max(260,target.position.x-230),y:target.position.y-55},bodyB:target,pointB:{x:local.x*cos-local.y*sin,y:local.x*sin+local.y*cos},length:40,stiffness:.018,damping:.06});
         this.hooks.push({constraint:hook,until:this.time+1.1});Composite.add(this.engine.world,hook);Sleeping.set(target,false);
         this.emit('ability',{position:point},{tool:id,radius:50,color:this.tool.color});
+      }
+      if(id==='breach-charge'){
+        const radius=TOOLS[id].blastRadius,affected=[];
+        for(const b of [...this.blocks,...this.cameras]){const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(18,Math.hypot(dx,dy));if(d>radius)continue;
+          if(b.game.kind==='camera'){if(!b.game.disabled){affected.push(b);this.disable(b,'FOCUSED BLAST')}}
+          else if(!b.isStatic&&Number.isFinite(b.game.hp)){b.game.hp-=Math.max(28,(radius-d)*1.15);if(b.game.hp<=0)this.pendingBreak.add(b);Body.applyForce(b,b.position,{x:dx/d*.028,y:dy/d*.028-.012})}
+        }
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
+      }
+      if(id==='foam-pod'){
+        const radius=TOOLS[id].foamRadius,foam=Bodies.polygon(point.x,point.y+18,8,52,{density:.0012,friction:.95,restitution:.02,chamfer:{radius:12},sleepThreshold:55});
+        foam.game={kind:'foam',tool:id,w:104,h:104};this.foams.push(foam);this.add(foam);Body.setVelocity(foam,{x:0,y:-2.4});
+        for(const b of [...this.blocks,...this.cameras])if(!b.isStatic){const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(25,Math.hypot(dx,dy));if(d<radius)Body.applyForce(b,b.position,{x:dx/d*.008,y:-.026*(1-d/radius)})}
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected:[]});
       }
     }
     splatter(point,radius){

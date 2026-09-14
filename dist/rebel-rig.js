@@ -5,7 +5,9 @@
   'street-stone':{name:'MARA',jacket:'#ed775d',shade:'#a94043',pants:'#293a59',skin:'#dda076',hair:'#382c34',accent:'#d9ef74',kind:'scarf'},
   'paint-can':{name:'INEZ',jacket:'#8864aa',shade:'#4e375f',pants:'#429498',skin:'#bd8057',hair:'#292631',accent:'#f05ea9',kind:'bun'},
   'emp-puck':{name:'DEX',jacket:'#397e83',shade:'#24505c',pants:'#35404b',skin:'#e3ad7b',hair:'#684534',accent:'#6debf0',kind:'goggles'},
-  grapple:{name:'JUNE',jacket:'#dfa443',shade:'#96642e',pants:'#344765',skin:'#ca8c5f',hair:'#272833',accent:'#ffdb89',kind:'mechanic'}
+  grapple:{name:'JUNE',jacket:'#dfa443',shade:'#96642e',pants:'#344765',skin:'#ca8c5f',hair:'#272833',accent:'#ffdb89',kind:'mechanic'},
+  'breach-charge':{name:'SOL',jacket:'#e96536',shade:'#71343b',pants:'#542f3c',skin:'#d99769',hair:'#24222c',accent:'#ff7a52',kind:'mechanic'},
+  'foam-pod':{name:'NIKO',jacket:'#668457',shade:'#314b42',pants:'#556044',skin:'#e0a477',hair:'#202532',accent:'#adff77',kind:'goggles'}
  };
  const mix=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}),smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
  // Two-link inverse kinematics: contact points are derived from the actual pulled body.

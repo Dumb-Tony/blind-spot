@@ -1,6 +1,6 @@
-# Campaign reference — 0.17
+# Campaign reference — 0.18
 
-120 levels; 24 contraption puzzles are marked below. Starter City's opening eight installations have broad targets and alternate attack paths. Three-star targets allow cleanup throws, and existing best stars remain saved.
+160 levels across eight districts; the original 120 identities and saved stars remain intact. Starter City's opening eight installations have broad targets and alternate attack paths.
 
 ## Starter City
 
@@ -151,3 +151,53 @@
 | 118 | Tower committee | 6 | 3 | 6 |
 | 119 | Final preparations | 7 | 5 | 7 |
 | 120 | Citywide blind spot **· redesigned** | 5 | 3 | 5 |
+
+## Redline Ward
+
+| Level | Installation | Cameras | Three stars | Throws allowed |
+|---:|---|---:|---:|---:|
+| 121 | First breach | 2 | 2 | 5 |
+| 122 | Knock twice | 2 | 2 | 5 |
+| 123 | Load-bearing lie | 2 | 2 | 5 |
+| 124 | Glass fuse | 3 | 3 | 6 |
+| 125 | Split foundation | 2 | 2 | 5 |
+| 126 | Hard corner | 3 | 3 | 6 |
+| 127 | Pressure line | 3 | 3 | 6 |
+| 128 | The red stair | 4 | 3 | 6 |
+| 129 | Crossbeam | 3 | 3 | 6 |
+| 130 | Controlled fall | 3 | 3 | 6 |
+| 131 | Bunker windows | 4 | 3 | 6 |
+| 132 | Three weak points | 5 | 4 | 7 |
+| 133 | Concrete ladder | 4 | 3 | 6 |
+| 134 | Blast corridor | 4 | 3 | 6 |
+| 135 | Deep supports | 4 | 3 | 6 |
+| 136 | Demolition clock | 6 | 5 | 8 |
+| 137 | Outer wall | 5 | 4 | 7 |
+| 138 | Redline offices | 5 | 4 | 7 |
+| 139 | Fault cascade | 5 | 4 | 7 |
+| 140 | Ward blackout | 6 | 5 | 8 |
+
+## Overgrowth
+
+| Level | Installation | Cameras | Three stars | Throws allowed |
+|---:|---|---:|---:|---:|
+| 141 | First bloom | 2 | 2 | 5 |
+| 142 | Lift the edge | 2 | 2 | 5 |
+| 143 | Soft landing | 2 | 2 | 5 |
+| 144 | Growing concern | 3 | 3 | 6 |
+| 145 | Wedge issue | 2 | 2 | 5 |
+| 146 | Under pressure | 3 | 3 | 6 |
+| 147 | Green scaffold | 3 | 3 | 6 |
+| 148 | Foam and glass | 4 | 3 | 6 |
+| 149 | Raised argument | 3 | 3 | 6 |
+| 150 | Root access | 3 | 3 | 6 |
+| 151 | Over the barrier | 4 | 3 | 6 |
+| 152 | Expanding plans | 5 | 4 | 7 |
+| 153 | Garden offices | 4 | 3 | 6 |
+| 154 | Lift bridge | 4 | 3 | 6 |
+| 155 | Packed tight | 4 | 3 | 6 |
+| 156 | Living leverage | 6 | 5 | 8 |
+| 157 | Upper canopy | 5 | 4 | 7 |
+| 158 | New foundations | 5 | 4 | 7 |
+| 159 | City greenhouse | 5 | 4 | 7 |
+| 160 | Overgrowth finale | 6 | 5 | 8 |

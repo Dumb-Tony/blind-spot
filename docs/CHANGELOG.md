@@ -1,3 +1,12 @@
+# 0.18 — More to break
+
+- Added Redline Ward and Overgrowth, expanding the campaign from 120 to 160 installations across eight districts.
+- Added Sol and Niko with cohesive ready, aiming and follow-through character art.
+- Added the Breach Charge, which sticks on contact and produces a focused short-range structural blast.
+- Added the Foam Pod, which blooms into a persistent collidable wedge and lifts nearby structures.
+- Added forty stable, progressively layered layouts and mixed-tool arsenals in the final district.
+- Expanded exact route, browser, inventory, stability and stress coverage to all 160 levels and six tools.
+
 # 0.17 — In the scene
 
 - Replaced assembled body-part rendering with cohesive full-body sprites for every rebel.

@@ -1,6 +1,6 @@
 <!doctype html><meta charset="utf-8"><title>Blind Spot physics playtest</title>
 <style>body{background:#102528;color:#dff6dc;font:16px system-ui}button{padding:12px}iframe{width:960px;height:540px;border:0}pre{white-space:pre-wrap}</style>
-<h1>120-level browser physics replay</h1><p>Production controller and physics, isolated progress, accelerated clock. Each result is rendered. No user saves are changed.</p><button id="run">Run all 120 levels</button><pre id="report">Ready</pre><iframe id="gameFrame"></iframe>
+<h1>160-level browser physics replay</h1><p>Production controller and physics, isolated progress, accelerated clock. Each result is rendered. No user saves are changed.</p><button id="run">Run all 160 levels</button><pre id="report">Ready</pre><iframe id="gameFrame"></iframe>
 <script>
 run.onclick=async()=>{run.disabled=true;let results=[];try{
  const [html,solutions]=await Promise.all([fetch('index.html').then(r=>r.text()),fetch('qa-solutions.json').then(r=>r.json())]);

@@ -1,9 +1,13 @@
-# Blind Spot — Six Regions (0.17)
+# Blind Spot — Eight Regions (0.18)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
 
 Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles and sound are embedded. This expands the existing local game; saved stars and level identities remain intact.
+
+## Much more city
+
+Version 0.18 adds Redline Ward and Overgrowth: forty new installations, Sol and Niko, the Breach Charge and Foam Pod, new district palettes and a six-tool mixed campaign. The game now contains eight regions, 160 levels, six rebels and six mechanically distinct tools.
 
 ## In the scene
 
@@ -17,7 +21,7 @@ Version 0.16 preserves the four painted character designs while replacing rectan
 
 Version 0.15 reshapes Starter City's eight opening installations around broad structural targets and multiple attack paths. Players can hit legs, decks, glass, weights, or cameras directly, with three-star targets that allow cleanup throws. The opening paint and EMP installations add nearby impact surfaces without increasing either tool's range. The first four installations in every district carry an extra recovery throw and mixed-tool supplies where applicable.
 
-Every Starter City installation has three separated winning shot paths in the automated balance audit. Each path wins at least seven of nine trials when both axes vary by four pixels, and each survives a deliberate missed throw. All 120 campaign routes continue to pass in the browser.
+Every Starter City installation has three separated winning shot paths in the automated balance audit. Each path wins at least seven of nine trials when both axes vary by four pixels, and each survives a deliberate missed throw. All 160 campaign routes pass in the browser.
 
 See [the early-game balance report](docs/PLAYTEST-0.15.md).
 
@@ -39,7 +43,7 @@ Version 0.12 adds hinged platforms, local power-cell bursts and **24 substantial
 
 Power cells react to hard impacts or an EMP within its unchanged 95-pixel range. Their 175-pixel burst pushes nearby bodies and can chain to another cell. Fixed armor and distant targets remain separate problems. Hinged decks stay attached to their gold hub; uneven loads tip them after braces give way. Broken fragments can still prop them up, so a partial collapse can need another shot.
 
-All 120 levels retain recorded three-star routes. Existing best stars stay saved, including on redesigned levels. Pause opens sound, shake and fullscreen controls; keeping them off the active playfield prevents them from covering low cameras.
+All 160 levels retain recorded three-star routes. Existing best stars stay saved, including on redesigned levels. Pause opens sound, shake and fullscreen controls; keeping them off the active playfield prevents them from covering low cameras.
 
 ## Physics update
 
@@ -65,7 +69,7 @@ District lighting, distant architecture, roof edges, material bevels and shadows
 | Junction Yard | Stone + Paint | 20 |
 | Central Works | All four tools | 20 |
 
-120 installations, 360 possible stars. The original eight levels remain at the beginning of each existing region. New stages broaden the playfield occupation, add taller frames and suspended loads, then combine separated targets, heavy caps, fragile upper storeys and ground-level cleanup. The two new regions teach choosing tools before combining them in larger operations. Difficulty follows staged ramps; individual puzzles reward different strengths and alternate solutions.
+160 installations, 480 possible stars. New stages broaden the playfield occupation, add taller frames and suspended loads, then combine separated targets, heavy caps, fragile upper storeys and ground-level cleanup. The final districts add focused demolition and physical foam construction before combining tools in larger operations.
 
 Choose **LOAD TOOL** before throwing in mixed regions. Each tool has a limited supply, and every throw uses the shared level allowance. Paint or a close EMP pulse defeats bolted armored cameras; ordinary cameras can still fall with their supports. The active rebel and launcher change with your selection.
 
@@ -88,12 +92,12 @@ Three stars reward the tested shot target shown before aiming; two and one stars
 - `dist/rebel-rig.js`: articulated gameplay characters, two-link arm poses and release motion.
 - `dist/renderer.js`, `dist/game.js`: visuals, input, sound, menus and save migration.
 - `docs/GDD.md`, `docs/CAMPAIGN.md`, `docs/TEST_REPORT.md`, `docs/CHANGELOG.md`: design, level reference and validation.
-- `tests/solutions.json`: reproducible winning launches for all 120 levels (spoilers).
+- `tests/solutions.json`: reproducible winning launches for all 160 levels (spoilers).
 
 Run `node scripts/build-standalone.mjs`, then `node tests/production.test.cjs`. No dependency installation is needed. `node scripts/serve.cjs` starts the local preview. `node tests/solve-overhaul.cjs --save` searches and records solutions; it is intentionally slower than the normal regression suite. GitHub Pages runs the build and regression suite before deployment on pushes to `main`.
 
 The `region1-cloud-baseline` tag preserves the recovered cloud original. Earlier versioned ZIPs are historical snapshots. GitHub Pages is the public sharing link.
 
-For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 120 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.
+For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 160 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.
 
 The aiming-tolerance review gives 13 sensitive contraption puzzles a cleanup throw within the three-star target. See docs/PLAYTEST-0.12.md for validation and local browser review tools.

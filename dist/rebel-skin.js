@@ -10,11 +10,12 @@
   while(read<write){const i=queue[read++],x=i%width,y=Math.floor(i/width);if(x)add(i-1);if(x<width-1)add(i+1);if(y)add(i-width);if(y<height-1)add(i+width)}return data;
  }
  function prepare(image,makeCanvas=()=>document.createElement('canvas')){const canvas=makeCanvas();canvas.width=image.naturalWidth||image.width;canvas.height=image.naturalHeight||image.height;const c=canvas.getContext('2d',{willReadFrequently:true});c.drawImage(image,0,0);const pixels=c.getImageData(0,0,canvas.width,canvas.height);matte(pixels.data,canvas.width,canvas.height);c.putImageData(pixels,0,0);return canvas}
- const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
+const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
+ const expansionColumns={'breach-charge':0,'foam-pod':1};
  function drawCohesive(c,p,image,front=false){
   if(front)return;
-  const col=columns[p.tool]||0,row=p.phase==='aim'?1:p.phase==='release'?2:0;
-  const iw=image.width||image.naturalWidth,ih=image.height||image.naturalHeight,sw=iw/4,sh=ih/3,sx=col*sw,sy=row*sh;
+  const expanded=p.tool in expansionColumns,col=expanded?expansionColumns[p.tool]:(columns[p.tool]||0),row=p.phase==='aim'?1:p.phase==='release'?2:0;
+  const iw=image.width||image.naturalWidth,ih=image.height||image.naturalHeight,sw=iw/(expanded?2:4),sh=ih/3,sx=col*sw,sy=row*sh;
   // Whole-body frames share one roof baseline. Small pose motion keeps the sprite
   // tied to the live rig without separating its anatomy into moving cutouts.
   const tension=p.phase==='aim'?p.tension:0,x=18-tension*8,y=270+p.squat*.16,w=278,h=370;

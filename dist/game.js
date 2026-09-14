@@ -3,6 +3,7 @@
   'use strict';
   const {LEVELS,REGIONS,REBELS,WORLD,TOOLS,starsFor}=window.BlindSpotData,{Simulation}=window.BlindSpotPhysics;
   const $=id=>document.getElementById(id),canvas=$('game'),view=new window.BlindSpotRenderer.Renderer(canvas);let tool=TOOLS['street-stone'],selectedRegion=0;
+  $('regionSelect').innerHTML=REGIONS.map((r,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${r.name} — ${TOOLS[r.tool].name}</option>`).join('');
   const storage={get(key){try{return window.localStorage.getItem(key)}catch(_){return null}},set(key,value){try{window.localStorage.setItem(key,value);return true}catch(_){return false}}};
   function loadProgress(){
     const empty={version:2,stars:Array(LEVELS.length).fill(0),last:0};
@@ -27,7 +28,7 @@
     if(e.type==='launch'){sounds.tone(260,.15,'triangle',.09);sounds.noise(.08,.03);fineAim=false;$('aimPanel').hidden=true;$('aimBtn').setAttribute('aria-expanded','false')}
     if(e.type==='break'&&clock-lastSound>.04){lastSound=clock;if(e.material==='glass'){sounds.tone(1600,.1,'sine',.03);sounds.tone(2250,.16,'sine',.02,.03)}else{sounds.noise(.1,.065);sounds.tone(100,.09,'triangle',.08)}}
     if(e.type==='impact'&&e.strength>3&&clock-lastSound>.12){lastSound=clock;sounds.tone(85,.1,'triangle',.04)}
-    if(e.type==='ability'){if(e.tool==='paint-can')sounds.noise(.28,.12);if(e.tool==='emp-puck'){sounds.tone(1800,.4,'sawtooth',.025);sounds.tone(90,.4,'sine',.05)}if(e.tool==='grapple'){sounds.noise(.09,.08);sounds.tone(240,.5,'triangle',.06)}}
+    if(e.type==='ability'){if(e.tool==='paint-can')sounds.noise(.28,.12);if(e.tool==='emp-puck'){sounds.tone(1800,.4,'sawtooth',.025);sounds.tone(90,.4,'sine',.05)}if(e.tool==='grapple'){sounds.noise(.09,.08);sounds.tone(240,.5,'triangle',.06)}if(e.tool==='breach-charge'){sounds.noise(.32,.15);sounds.tone(72,.4,'square',.09)}if(e.tool==='foam-pod'){sounds.noise(.22,.07);sounds.tone(310,.35,'sine',.05)}}
     if(e.type==='camera'&&e.reason!=='LENS PAINTED'){sounds.tone(560,.15,'sawtooth',.025);sounds.tone(180,.18,'square',.018,.08)}
     if(e.type==='win'||e.type==='lose')finish(e);
   }

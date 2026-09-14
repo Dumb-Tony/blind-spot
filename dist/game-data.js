@@ -190,5 +190,39 @@
   // Larger close-range impact surfaces introduce splash tools without extending EMP range.
   for(const i of [20,21,40,41]){const l=LEVELS[i],c=l.cameras[0],x=i===21?(c.x+l.cameras[1].x)/2:c.x-45;l.blocks.push(B(x,c.y-19,18,76,'glass'));l.hint=l.tip='Hit the glass beside the lens, the shelf, or the camera itself. Nearby impact points can activate your tool.';}
   for(const r of REGIONS)for(let n=0;n<4;n++){const l=LEVELS[r.start+n];l.shots=Math.max(l.shots,l.stars[0]+3);if(l.arsenal)for(const tool of Object.keys(l.arsenal))l.arsenal[tool]++;}
+
+  // Expansion districts append stable identities after the original 120 installations.
+  Object.assign(TOOLS,{
+    'breach-charge':{...TOOLS['street-stone'],id:'breach-charge',name:'Breach Charge',color:'#ff704f',density:.009,blastRadius:125},
+    'foam-pod':{...TOOLS['street-stone'],id:'foam-pod',name:'Foam Pod',color:'#a7ff88',density:.0045,foamRadius:105}
+  });
+  Object.assign(REBELS,{
+    sol:{name:'Sol',role:'Demolition runner. Opens the hard way.',tool:'breach-charge'},
+    niko:{name:'Niko',role:'Street builder. Turns gaps into leverage.',tool:'foam-pod'}
+  });
+  const expansion=[
+    {id:'redline-ward',name:'Redline Ward',rebel:'sol',tool:'breach-charge',color:'#ff704f',description:'Sol’s charge sticks on impact, then drives a focused blast through clustered supports.'},
+    {id:'overgrowth',name:'Overgrowth',rebel:'niko',tool:'foam-pod',color:'#a7ff88',description:'Niko’s foam blooms into a physical wedge that lifts beams and changes the structure.'}
+  ];
+  const expansionNames=[
+    ['First breach','Knock twice','Load-bearing lie','Glass fuse','Split foundation','Hard corner','Pressure line','The red stair','Crossbeam','Controlled fall','Bunker windows','Three weak points','Concrete ladder','Blast corridor','Deep supports','Demolition clock','Outer wall','Redline offices','Fault cascade','Ward blackout'],
+    ['First bloom','Lift the edge','Soft landing','Growing concern','Wedge issue','Under pressure','Green scaffold','Foam and glass','Raised argument','Root access','Over the barrier','Expanding plans','Garden offices','Lift bridge','Packed tight','Living leverage','Upper canopy','New foundations','City greenhouse','Overgrowth finale']
+  ];
+  function expansionLevel(region,stage){
+    const r=REGIONS[region],tier=Math.floor(stage/4),motif=stage%4,count=2+Math.floor(stage/5),blocks=[],cameras=[];
+    const left=720-tier*12,right=1040+tier*20,spacing=count===1?0:(right-left)/(count-1);
+    for(let j=0;j<count;j++){
+      const x=left+j*spacing,height=95+tier*24+((j+motif)%3)*24,width=Math.min(150,spacing-16||150),mat=(j+stage)%3===0?'glass':'wood';
+      if(motif===1&&j===0){blocks.push(suspended(x,620-height,width,90+tier*12));cameras.push(C(x,590-height));}
+      else {blocks.push(...tower(x,height,width,mat));if(tier>1&&(j+motif)%2===0)blocks.push(B(x,620-height-38,width*.65,32,'heavy'));cameras.push(C(x,581-height-(tier>1&&(j+motif)%2===0?32:0)));}
+    }
+    if(motif===2)blocks.push(B(625,555,28,130,'steel',true));
+    if(motif===3){blocks.push(B(545,590,20,60,'glass'),B(615,590,20,60,'wood'),B(580,545,104,30,'heavy'));cameras.push(C(580,510));}
+    if(region===6&&tier>=2)cameras[Math.min(1,cameras.length-1)].shield=true;
+    const par=Math.max(2,Math.ceil(cameras.length*.7)),arsenal=region===7?{'foam-pod':par+1,'breach-charge':2,'street-stone':2}:undefined;
+    const tip=region===6?'Stick the charge to a support or clustered camera mount. The blast is powerful but local; use the structure to carry it.':'Bloom foam beneath a beam or weight to lift it. Use the new angle, or switch tools when a direct break is cleaner.';
+    return{id:`${r.id}-${stage+1}`,name:expansionNames[region-6][stage],district:r.name.toUpperCase(),region,tool:r.tool,arsenal,lesson:`${['New tool','Separated structures','Layered loads','Compound routes','District finale'][tier]} · ${cameras.length} cameras`,hint:stage===0?r.description:tip,tip,shots:par+3,stars:[par,par+1],blocks,cameras,difficulty:21+stage,finale:stage===19};
+  }
+  for(const r of expansion){r.start=LEVELS.length;r.levels=20;REGIONS.push(r);const region=REGIONS.length-1;for(let stage=0;stage<20;stage++)LEVELS.push(expansionLevel(region,stage));}
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);
