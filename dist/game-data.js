@@ -29,18 +29,18 @@
   Object.assign(TOOLS,{
     'paint-can':{...TOOLS['street-stone'],id:'paint-can',name:'Paint Can',color:'#f577d0',density:.006},
     'emp-puck':{...TOOLS['street-stone'],id:'emp-puck',name:'EMP Puck',color:'#65eaf2',density:.007},
-    grapple:{...TOOLS['street-stone'],id:'grapple',name:'Pull Hook',color:'#ffd275',density:.01}
+    grapple:{...TOOLS['street-stone'],id:'grapple',name:'Cable Cutter',color:'#ffd275',density:.0065}
   });
   Object.assign(REBELS,{
     inez:{name:'Inez',role:'Muralist. Makes privacy visible.',tool:'paint-can',portrait:0},
     dex:{name:'Dex',role:'Tinkerer. Unplugs the city.',tool:'emp-puck',portrait:1},
-    june:{name:'June',role:'Mechanic. Pulls the system apart.',tool:'grapple',portrait:2}
+    june:{name:'June',role:'Mechanic. Cuts the system loose.',tool:'grapple',portrait:2}
   });
   REGIONS[0].color='#d9ff63';REGIONS[0].start=0;
   REGIONS.push(
     {id:'color-quarter',name:'Color Quarter',rebel:'inez',tool:'paint-can',start:8,levels:8,color:'#f577d0',description:'Paint bursts coat armored lenses. Get close; splash finishes the job.'},
     {id:'signal-heights',name:'Signal Heights',rebel:'dex',tool:'emp-puck',start:16,levels:8,color:'#65eaf2',description:'EMP pulses jump through matching circuits. Find the reachable node.'},
-    {id:'iron-docks',name:'Iron Docks',rebel:'june',tool:'grapple',start:24,levels:8,color:'#ffd275',description:'Hooks latch on impact and pull left. Swing beams and tear suspension cables.'}
+    {id:'iron-docks',name:'Iron Docks',rebel:'june',tool:'grapple',start:24,levels:8,color:'#ffd275',description:'June’s spinning cutter severs cables, hinges, glass, and wooden joints. Steel sends it ricocheting.'}
   );
   LEVELS.forEach(l=>{l.region=0;l.tool='street-stone'});
   const shelf=(x,y,w=140,material='steel')=>B(x,y,w,20,material,material==='steel');
@@ -64,7 +64,7 @@
   add(2,'Cross talk','Two neighboring networks',[shelf(820,600,200),shelf(1120,550,140)],[node(775,571,'A'),node(875,571,'B'),node(1080,521,'A'),node(1160,521,'B')],'Catch both near nodes in the same pulse to shut down both networks.');
   add(2,'Dead zone','Break into the cluster',[B(775,535,20,170,'glass'),...tower(885,120,170),shelf(1140,590)],[node(850,471,'A'),node(930,471,'B'),node(1140,561,'B')],'Pulse between the elevated nodes, or take separate shots.');
   add(2,'Radio silence','Signal Heights finale',[shelf(760,605),...tower(1000,200,180),shelf(1170,595,90)],[node(760,576,'A'),node(950,391,'A'),node(1040,391,'B'),node(1170,566,'B')],'Reach one node of each circuit. Every linked camera follows.');
-  add(3,'Loose ends','Meet June and the pull hook',[suspended(850,520)],[C(850,490)],'Hit the hanging beam. The hook pulls left for a moment and tears strained cables.');
+  add(3,'Loose ends','Meet June and the cable cutter',[suspended(850,520)],[C(850,490)],'Clip either suspension cable by striking the hanging beam. The loose side drops immediately.');
   add(3,'Swing shift','Tip a hanging platform',[suspended(880,480,230)],[C(825,450),C(935,450)],'An off-center hook twists the platform and dumps both cameras.');
   add(3,'Falling inventory','Drop a weight',[suspended(870,430,180),shelf(870,610,180)],[C(870,580),C(870,400)],'Pull the hanging weight down onto the ground camera.');
   add(3,'Two cranes','Choose each anchor',[suspended(775,510,135),suspended(1080,450,160)],[C(775,480),C(1080,420)],'Each crane is independent. Pull one beam, then the other.');
@@ -117,7 +117,7 @@
     if(motif===1)blocks.push(B(590,570,22,100,'glass'));
     if(motif===2)blocks.push(B(600,572-tier*6,24,96+tier*12,'steel',true));
     if(motif===3&&tier>=1){const x=left-85;blocks.push(B(x,600,20,40,'glass'),B(x,565,88,30,'heavy'));}
-    const tip=mixed?'Choose a tool before throwing. Break the exposed legs; save paint for the armored lens on the far platform.':region===1?'Paint the upper lenses or break their supports. Separate towers need separate splashes.':region===2?'Get the puck within 95 pixels. Circuit jumps stop after one neighbor within 190 pixels. Falling mounts still count.':region===3?'Hook the end of a beam or pull out a wooden leg. Let the weight finish the collapse.':'Aim at glass and narrow legs. Heavy caps and falling beams carry the destruction onward.';
+    const tip=mixed?'Choose a tool before throwing. Break the exposed legs; save paint for the armored lens on the far platform.':region===1?'Paint the upper lenses or break their supports. Separate towers need separate splashes.':region===2?'Get the puck within 95 pixels. Circuit jumps stop after one neighbor within 190 pixels. Falling mounts still count.':region===3?'Cut a suspended beam near one end, slice a hinge, or carve through a wooden leg. Let the released weight finish the collapse.':'Aim at glass and narrow legs. Heavy caps and falling beams carry the destruction onward.';
     const shots=cameras.length+3, arsenal=mixed?(region===4?{'street-stone':cameras.length+1,'paint-can':3}:{grapple:3,'street-stone':3,'paint-can':3,'emp-puck':3}):undefined;
     return{id:`${REGIONS[region].id}-${stage+1}`,name:titles[region][titleIndex],district:REGIONS[region].name.toUpperCase(),region,tool:primary,arsenal,lesson:`${['Supports & timing','Separated targets','Stacked loads','Multiple approaches','District finale'][tier]} · ${cameras.length} cameras`,hint:tip,tip,shots,stars:[cameras.length+1,cameras.length+2],blocks,cameras,difficulty:stage+1};
   }
@@ -224,5 +224,42 @@
     return{id:`${r.id}-${stage+1}`,name:expansionNames[region-6][stage],district:r.name.toUpperCase(),region,tool:r.tool,arsenal,lesson:`${['New tool','Separated structures','Layered loads','Compound routes','District finale'][tier]} · ${cameras.length} cameras`,hint:stage===0?r.description:tip,tip,shots:par+3,stars:[par,par+1],blocks,cameras,difficulty:21+stage,finale:stage===19};
   }
   for(const r of expansion){r.start=LEVELS.length;r.levels=20;REGIONS.push(r);const region=REGIONS.length-1;for(let stage=0;stage<20;stage++)LEVELS.push(expansionLevel(region,stage));}
+
+  // New crews append after the established 160 installations. The legacy
+  // grapple id is retained internally so existing solutions and saves migrate.
+  Object.assign(TOOLS,{
+    'magnet-puck':{...TOOLS['street-stone'],id:'magnet-puck',name:'Magnet Puck',color:'#8bb8ff',density:.008,magnetRadius:175},
+    'airburst':{...TOOLS['street-stone'],id:'airburst',name:'Airburst Capsule',color:'#ff9de1',density:.0048,burstRadius:165}
+  });
+  Object.assign(REBELS,{
+    vale:{name:'Vale',role:'Salvage pilot. Makes metal move.',tool:'magnet-puck'},
+    tess:{name:'Tess',role:'Rooftop runner. Weaponizes open air.',tool:'airburst'}
+  });
+  const nextRegions=[
+    {id:'magnet-mile',name:'Magnet Mile',rebel:'vale',tool:'magnet-puck',color:'#8bb8ff',description:'Vale’s puck drags loose beams, concrete, and cameras toward its landing point. Fixed steel anchors the reaction.'},
+    {id:'updraft',name:'Updraft',rebel:'tess',tool:'airburst',color:'#ff9de1',description:'Tess’s capsule releases a broad pressure wave. It moves structures without simply breaking everything it touches.'}
+  ];
+  const nextNames=[
+    ['First attraction','Loose change','Metal meeting','Salvage rights','Heavy draw','Crossed lines','Blue shift','Freight magnet','Anchor point','Moving parts','Scrap balcony','Polar offices','Concrete compass','Cargo cluster','The long pull','Foundry floor','Split attraction','Magnetic field','Salvage skyline','Mile blackout'],
+    ['First gust','Open window','Push comes down','Loose roof','Crosswind','Pressure drop','Pink horizon','Air pocket','Lift and separate','Draft offices','Wide blast','Falling weather','Vent stack','Storm door','Pressure court','High front','Split current','Rooftop warning','Last forecast','Updraft finale']
+  ];
+  function nextLevel(region,stage){
+    const r=REGIONS[region],tier=Math.floor(stage/4),motif=stage%4,count=2+Math.floor(stage/5),blocks=[],cameras=[];
+    const left=700-tier*10,right=1050+tier*18,spacing=(right-left)/Math.max(1,count-1);
+    for(let j=0;j<count;j++){
+      const x=left+j*spacing,height=100+tier*22+((j+motif)%3)*28,width=Math.min(145,spacing-18),mat=(j+stage)%3===0?'glass':j%2?'heavy':'wood';
+      if((motif===1||motif===3)&&j===0){blocks.push(suspended(x,620-height,width,95+tier*10));cameras.push(C(x,590-height));}
+      else {blocks.push(...tower(x,height,width,mat));if(tier>1&&j%2===0)blocks.push(B(x,620-height-37,width*.7,30,'heavy'));cameras.push(C(x,581-height-(tier>1&&j%2===0?30:0)));}
+    }
+    if(motif===2)blocks.push(B(610,555,26,130,'steel',true));
+    const par=Math.max(2,Math.ceil(cameras.length*.75));
+    const arsenal=region===9?{'airburst':par+2,'magnet-puck':2,'grapple':2,'street-stone':2}:undefined;
+    const tip=region===8?'Land beside loose structure. The magnetic snap gathers moving beams, weights, and unbolted cameras; fixed steel remains an anchor.':'Burst beside a platform or weight. The pressure wave shoves every loose object away, so placement decides the direction of collapse.';
+    return{id:`${r.id}-${stage+1}`,name:nextNames[region-8][stage],district:r.name.toUpperCase(),region,tool:r.tool,arsenal,lesson:`${['New force','Separated structures','Layered loads','Compound routes','District finale'][tier]} · ${cameras.length} cameras`,hint:stage===0?r.description:tip,tip,shots:par+4,stars:[par+1,par+2],blocks,cameras,difficulty:41+stage,finale:stage===19};
+  }
+  for(const r of nextRegions){r.start=LEVELS.length;r.levels=20;REGIONS.push(r);const region=REGIONS.length-1;for(let stage=0;stage<20;stage++)LEVELS.push(nextLevel(region,stage));}
+  // Cutter stages allow a direct cleanup route as well as a chain-reaction
+  // solution; the player is never forced into one exact cable strike.
+  for(const l of LEVELS.filter(l=>l.region===3)){l.shots=Math.max(l.shots,l.cameras.length+4);l.stars=[Math.max(l.stars[0],l.cameras.length+1),Math.max(l.stars[1],l.cameras.length+2)];}
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);

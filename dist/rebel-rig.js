@@ -7,7 +7,9 @@
   'emp-puck':{name:'DEX',jacket:'#397e83',shade:'#24505c',pants:'#35404b',skin:'#e3ad7b',hair:'#684534',accent:'#6debf0',kind:'goggles'},
   grapple:{name:'JUNE',jacket:'#dfa443',shade:'#96642e',pants:'#344765',skin:'#ca8c5f',hair:'#272833',accent:'#ffdb89',kind:'mechanic'},
   'breach-charge':{name:'SOL',jacket:'#e96536',shade:'#71343b',pants:'#542f3c',skin:'#d99769',hair:'#24222c',accent:'#ff7a52',kind:'mechanic'},
-  'foam-pod':{name:'NIKO',jacket:'#668457',shade:'#314b42',pants:'#556044',skin:'#e0a477',hair:'#202532',accent:'#adff77',kind:'goggles'}
+  'foam-pod':{name:'NIKO',jacket:'#668457',shade:'#314b42',pants:'#556044',skin:'#e0a477',hair:'#202532',accent:'#adff77',kind:'goggles'},
+  'magnet-puck':{name:'VALE',jacket:'#416da8',shade:'#273e68',pants:'#2c354d',skin:'#8f5f48',hair:'#191d2d',accent:'#8bb8ff',kind:'goggles'},
+  airburst:{name:'TESS',jacket:'#a84e8b',shade:'#613356',pants:'#433550',skin:'#d99a75',hair:'#3b2538',accent:'#ff9de1',kind:'scarf'}
  };
  const mix=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}),smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
  // Two-link inverse kinematics: contact points are derived from the actual pulled body.

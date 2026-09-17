@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10172b"><meta name="description" content="Blind Spot — playful, punchy physics puzzles. Turn surveillance towers into a glorious mess."><title>Blind Spot · Eight Regions</title><style>:root{--ink:#10172b;--panel:#152139;--cream:#fff4dd;--lime:#d9ff63;--coral:#ff795c;--teal:#63dbde;--muted:#b4c2cc;--line:#ffffff23;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--cream);background:var(--ink);font-synthesis:none}
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10172b"><meta name="description" content="Blind Spot — playful, punchy physics puzzles. Turn surveillance towers into a glorious mess."><title>Blind Spot · Ten Regions</title><style>:root{--ink:#10172b;--panel:#152139;--cream:#fff4dd;--lime:#d9ff63;--coral:#ff795c;--teal:#63dbde;--muted:#b4c2cc;--line:#ffffff23;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--cream);background:var(--ink);font-synthesis:none}
 *{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.45}button:focus-visible,canvas:focus-visible,input:focus-visible{outline:3px solid var(--lime);outline-offset:4px}[hidden]{display:none!important}#app{position:relative;height:100dvh;min-height:320px;overflow:hidden;isolation:isolate;background:#10172b}#stage{position:absolute;inset:0;display:grid;place-items:center}#game{width:min(100vw,calc(100dvh * 1.77778));height:min(100dvh,calc(100vw / 1.77778));touch-action:none;display:block;outline:none!important}
 .screen{position:absolute;inset:0;z-index:30;display:none;padding:clamp(16px,3vw,42px);background:#10172bec;overflow:auto}.screen.active{display:grid;place-items:center}.screen#menu{background:linear-gradient(100deg,#10172b 40%,#15243cef);padding:0;overflow:auto}.title-layout{position:relative;display:grid;grid-template-columns:1.1fr 1fr;width:min(1150px,94vw);min-height:min(690px,100dvh);align-items:center;gap:4vw;margin:auto}.title-copy{z-index:2;padding:28px 0}.eyebrow{font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--lime);margin:0 0 15px}h1,h2{font-weight:1000;font-family:Impact,'Arial Black',system-ui,sans-serif;letter-spacing:-.045em;line-height:.9;margin:0}h1{font-size:clamp(76px,min(11.5vw,16vh),152px);transform:rotate(-3deg);transform-origin:left bottom;text-shadow:6px 6px 0 #0005}h1 em{color:var(--coral);font-style:normal}h2{font-size:clamp(32px,5vw,58px);line-height:1}.intro{font-size:clamp(20px,2.7vw,32px);font-weight:850;line-height:1.15;margin:24px 0 14px}.description{color:var(--muted);font-size:16px;line-height:1.6;margin:0 0 25px}.menu-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}.primary,.secondary{border:2px solid transparent;padding:14px 22px;border-radius:8px;font-weight:950;font-size:14px;letter-spacing:.035em;min-height:49px;transition:transform .12s,background .12s;box-shadow:0 5px 0 #060c1a}.primary{background:var(--lime);color:var(--ink)}.primary span{margin-left:16px}.primary:hover{background:#eaff9e;transform:translateY(-2px)}.secondary{border-color:#ffffff3a;color:var(--cream);background:#24344d}.secondary:hover{background:#314667}.quiet{border:0;background:transparent;color:var(--muted);padding:12px;font-size:14px}.quiet:hover{color:var(--cream);text-decoration:underline}.build-label{color:#768a9c;font-size:11px;letter-spacing:.18em}.character-card{position:relative;align-self:stretch;min-height:380px;overflow:hidden}.character-card canvas{width:100%;height:100%;object-fit:contain;max-height:96dvh}.character-caption{position:absolute;bottom:9%;left:7%;right:0;transform:rotate(-4deg);padding:18px;background:var(--coral);color:var(--ink);box-shadow:7px 7px 0 #0005}.character-caption span{display:block;font-size:12px;font-weight:950;letter-spacing:.13em;margin-bottom:6px}.character-caption strong{font-size:clamp(18px,2vw,27px);line-height:1.05}.panel{background:#17243b;border:1px solid #ffffff30;border-radius:17px;box-shadow:0 18px 70px #0006;padding:clamp(22px,3vw,40px);width:100%;max-height:92dvh;overflow:auto}.wide{max-width:1100px}.compact{max-width:560px}.center{text-align:center}.panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}.panel-head p:not(.eyebrow){color:var(--muted);margin-bottom:0}.square{flex-shrink:0;border:1px solid #ffffff35;color:var(--cream);background:#152039;border-radius:10px;width:44px;height:44px;font-weight:900;font-size:24px;display:grid;place-items:center}.square:hover{background:#344560}.level-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.level-card{position:relative;border:1px solid #ffffff26;background:#213149;color:var(--cream);border-radius:10px;text-align:left;padding:13px;transition:.15s}.level-card:hover{border-color:var(--lime);transform:translateY(-3px)}.level-card canvas{width:100%;height:90px;background:#101b30;border-radius:5px}.level-card .num{position:absolute;top:19px;left:22px;font-weight:900;font-size:20px;color:var(--lime)}.level-card b{display:block;font-size:15px;margin:10px 0 5px}.level-card small{display:block;color:var(--muted);font-size:12px}.card-stars{display:block;color:#ffdb6d;letter-spacing:4px;font-size:21px;margin-top:8px}.note{font-size:13px;color:var(--muted);margin-bottom:0}.stack{display:grid;gap:12px;margin-top:24px}.panel ol{padding-left:22px;line-height:1.55}.panel li{padding:6px 0}.panel p{line-height:1.5}.materials{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:20px 0}.materials span{padding:13px 4px;border-radius:6px;text-align:center;font-size:11px;font-weight:950;color:#142037}.materials small{display:block;font-size:12px;font-weight:650;margin-top:6px}.wood{background:#e3a258}.glass{background:#67e5ec}.heavy{background:#7486a6}.steel{background:#344860;color:#fff!important}.keys{font-size:13px;color:var(--muted)}#hud{position:absolute;z-index:10;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,96vw);display:flex;gap:16px;align-items:center;padding:10px 14px;background:#101a30ef;border:1px solid #ffffff29;border-radius:14px;box-shadow:0 5px 25px #0003}.level-title{flex:1;min-width:0}.level-title small{display:block;color:var(--teal);font-size:11px;font-weight:900;letter-spacing:.14em;margin-bottom:3px}.level-title strong{font-size:20px;white-space:nowrap}.counter{display:flex;align-items:center;gap:12px;border-left:1px solid #ffffff25;padding-left:18px}.counter small{font-size:10px;font-weight:850;letter-spacing:.1em;max-width:65px}.counter b{font-size:30px;color:var(--lime)}#playFooter{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:min(1160px,94vw);z-index:10;display:flex;align-items:center;gap:14px;padding:10px 16px;background:#101a30e8;border:1px solid #ffffff20;border-radius:12px}#playFooter>div{flex:1;min-width:0}#stateLabel{display:block;color:var(--lime);font-size:12px;letter-spacing:.1em}#hintLabel{display:block;color:#d2dde5;font-size:14px;margin-top:5px}#aimPanel{position:absolute;bottom:103px;left:50%;transform:translateX(-50%);z-index:12;display:flex;align-items:center;gap:20px;padding:16px;background:#15213cf5;border:1px solid var(--teal);border-radius:12px}#aimPanel label{display:grid;grid-template-columns:1fr auto;gap:5px;color:var(--teal);font-size:13px}#aimPanel input{grid-column:1/3;grid-row:2;width:160px;accent-color:var(--lime)}#globalButtons{position:absolute;right:14px;bottom:103px;display:flex;gap:6px;z-index:35}.utility{border:1px solid #ffffff25;background:#10172bd9;color:var(--muted);border-radius:6px;font-size:10px;font-weight:850;padding:9px}.big-stars{font-size:58px;letter-spacing:6px;color:#ffdc70;margin:20px 0 10px;text-shadow:0 4px #90602b}.big-stars .empty{color:#47536b;text-shadow:none}.result-stats{display:flex;justify-content:center;gap:22px;color:var(--teal);font-weight:800;font-size:13px}.result-stats b{display:block;font-size:24px;color:var(--cream)}#toast{pointer-events:none;position:absolute;z-index:50;bottom:120px;left:50%;transform:translate(-50%,20px);max-width:85vw;text-align:center;padding:13px 20px;background:#0d1629f5;border:1px solid var(--teal);border-radius:9px;color:#fff;font-size:15px;opacity:0;transition:.2s}#toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:780px){.title-layout{grid-template-columns:1fr .8fr;gap:0}.character-caption{left:0;font-size:14px}.description{font-size:14px}.level-grid{grid-template-columns:repeat(2,1fr)}#hud{gap:8px;padding:8px}.counter{padding-left:9px;gap:6px}.counter small{display:none}.level-title strong{font-size:16px}.level-title small{font-size:9px}#playFooter{gap:3px;padding:10px}#hintLabel{font-size:12px}#aimPanel{width:90vw;gap:12px}#aimPanel input{width:100%}#aimPanel label{flex:1}.materials{grid-template-columns:repeat(2,1fr)}}
@@ -31,10 +31,10 @@
   <aside id="playFooter" hidden><div><strong id="stateLabel">READY WHEN YOU ARE</strong><span id="hintLabel"></span></div><button id="hintBtn" class="quiet">Need a hint?</button><button id="aimBtn" class="quiet" aria-expanded="false">Fine aim</button></aside>
   <div id="aimPanel" hidden><label>Angle <input id="angleInput" type="range" min="-8" max="78" value="18"><output id="angleValue">18°</output></label><label>Power <input id="powerInput" type="range" min="25" max="100" value="90"><output id="powerValue">90%</output></label><button id="fireBtn" class="primary">THROW <span>→</span></button></div>
   <section id="menu" class="screen active" aria-labelledby="title">
-    <div class="title-layout"><div class="title-copy"><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h1 id="title">BLIND<br><em>SPOT.</em></h1><p class="intro">Big brother.<br>Meet little rock.</p><p class="description">Six rebels. Eight regions. 160 installations.<br>Make a spectacular mess of being watched.</p><div class="menu-actions"><button id="playBtn" class="primary">LET’S BREAK THINGS <span>→</span></button><button id="selectBtn" class="secondary">CHOOSE REGION</button></div><button id="howBtn" class="quiet">How to play</button><div class="campaign-stamp"><span><b>08</b> DISTRICTS</span><span><b>160</b> INSTALLATIONS</span><span><b>06</b> REBELS</span></div><p class="build-label">MORE TO BREAK · 0.18</p></div><div class="character-card"><canvas id="heroArt" width="768" height="1024" aria-label="Mara, the student courier, wearing a coral jacket and lime scarf"></canvas><div class="character-caption"><span>MEET MARA</span><strong>“Your privacy settings?<br>I brought them.”</strong></div></div></div>
+    <div class="title-layout"><div class="title-copy"><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h1 id="title">BLIND<br><em>SPOT.</em></h1><p class="intro">Big brother.<br>Meet little rock.</p><p class="description">Eight rebels. Ten regions. 200 installations.<br>Make a spectacular mess of being watched.</p><div class="menu-actions"><button id="playBtn" class="primary">LET’S BREAK THINGS <span>→</span></button><button id="selectBtn" class="secondary">CHOOSE REGION</button></div><button id="howBtn" class="quiet">How to play</button><div class="campaign-stamp"><span><b>10</b> DISTRICTS</span><span><b>200</b> INSTALLATIONS</span><span><b>08</b> REBELS</span></div><p class="build-label">NEW FORCES · 0.19</p></div><div class="character-card"><canvas id="heroArt" width="768" height="1024" aria-label="Mara, the student courier, wearing a coral jacket and lime scarf"></canvas><div class="character-caption"><span>MEET MARA</span><strong>“Your privacy settings?<br>I brought them.”</strong></div></div></div>
   </section>
-  <section id="levels" class="screen" aria-labelledby="levelsTitle"><div class="panel wide"><div class="panel-head"><div><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h2 id="levelsTitle">Starter City</h2><p id="regionProgress"></p></div><button id="levelsBack" class="square" aria-label="Back to title">×</button></div><label class="region-picker" for="regionSelect">Region <select id="regionSelect"><option value="0">01 · Starter City — Stone</option><option value="1">02 · Color Quarter — Paint</option><option value="2">03 · Signal Heights — EMP</option><option value="3">04 · Iron Docks — Pull Hook</option><option value="4">05 · Junction Yard — Stone + Paint</option><option value="5">06 · Central Works — Full Crew</option></select></label><div id="levelGrid" class="level-grid"></div><p class="note">Every level is open. Look for CONTRAPTION badges on the redesigned puzzles. Stars and your best runs are saved on this device.</p></div></section>
-  <section id="how" class="screen" aria-labelledby="howTitle"><div class="panel compact"><p class="eyebrow">MARA’S FIELD GUIDE</p><h2 id="howTitle">Pull. Release.<br>Watch it fall.</h2><ol><li><b>Grab the glowing stone.</b> Pull left to add power, down to arc higher.</li><li><b>Judge the arc.</b> Fading dots show the beginning. You figure out where the stone lands.</li><li><b>Release.</b> Smash every red camera. Broken mounts and falling debris count too.</li></ol><div class="materials"><span class="wood">WOOD<small>Breaks</small></span><span class="glass">GLASS<small>Shatters</small></span><span class="heavy">CONCRETE<small>Crumbles</small></span><span class="steel">STEEL<small>Stays put</small></span></div><p><b>Region tools activate on impact.</b> Inez paints nearby armored lenses. Dex pulses cameras within 95 pixels and one matching neighbor within 190 pixels. June’s hook pulls a moving object left, then releases.</p><p><b>Tip the round hinges.</b> Hinged decks rotate around their gold hub; break an end brace or shift the weight. <b>Orange power cells burst.</b> Hit one hard or pulse it with a close EMP. Nearby cells can chain, but distant structures stay safe.</p><p>In mixed regions, use LOAD TOOL to choose before each throw. Supplies are limited. Three stars reward fewer tools. Exact goals are shown before every throw.</p><p class="keys">Arrows: aim · Space: throw · R: retry · Esc: pause · M: sound<br>Cancel a drag with Esc or right-click. “Fine aim” gives you sliders.</p><button id="howClose" class="primary">GOT IT <span>→</span></button></div></section>
+  <section id="levels" class="screen" aria-labelledby="levelsTitle"><div class="panel wide"><div class="panel-head"><div><p class="eyebrow">THE CITY IS OURS TO UNWATCH</p><h2 id="levelsTitle">Starter City</h2><p id="regionProgress"></p></div><button id="levelsBack" class="square" aria-label="Back to title">×</button></div><label class="region-picker" for="regionSelect">Region <select id="regionSelect"><option value="0">01 · Starter City — Stone</option><option value="1">02 · Color Quarter — Paint</option><option value="2">03 · Signal Heights — EMP</option><option value="3">04 · Iron Docks — Cable Cutter</option></select></label><div id="levelGrid" class="level-grid"></div><p class="note">Every level is open. Look for CONTRAPTION badges on the redesigned puzzles. Stars and your best runs are saved on this device.</p></div></section>
+  <section id="how" class="screen" aria-labelledby="howTitle"><div class="panel compact"><p class="eyebrow">MARA’S FIELD GUIDE</p><h2 id="howTitle">Pull. Release.<br>Watch it fall.</h2><ol><li><b>Grab the glowing tool.</b> Pull left to add power, down to arc higher.</li><li><b>Judge the arc.</b> Fading dots show the beginning. You figure out where the tool lands.</li><li><b>Release.</b> Smash every red camera. Broken mounts and falling debris count too.</li></ol><div class="materials"><span class="wood">WOOD<small>Breaks</small></span><span class="glass">GLASS<small>Shatters</small></span><span class="heavy">CONCRETE<small>Crumbles</small></span><span class="steel">STEEL<small>Stays put</small></span></div><p><b>Every tool changes the structure differently.</b> Paint coats armored lenses, EMPs pulse nearby circuits, June’s cutter severs supports, charges break clusters, foam lifts, magnets gather loose mass, and airbursts push it apart.</p><p><b>Tip the round hinges.</b> Hinged decks rotate around their gold hub; break an end brace or shift the weight. <b>Orange power cells burst.</b> Hit one hard or pulse it with a close EMP. Nearby cells can chain, but distant structures stay safe.</p><p>In mixed regions, use LOAD TOOL to choose before each throw. Supplies are limited. Three stars reward fewer tools. Exact goals are shown before every throw.</p><p class="keys">Arrows: aim · Space: throw · R: retry · Esc: pause · M: sound<br>Cancel a drag with Esc or right-click. “Fine aim” gives you sliders.</p><button id="howClose" class="primary">GOT IT <span>→</span></button></div></section>
   <section id="pause" class="screen" aria-labelledby="pauseTitle"><div class="panel compact center"><p class="eyebrow">TAKE A BREATHER</p><h2 id="pauseTitle">Nobody’s moving.</h2><p>Physics are paused. Sound, shake and fullscreen controls are below.</p><div class="stack"><button id="resumeBtn" class="primary">BACK TO IT →</button><button id="pauseRestart" class="secondary">RETRY LEVEL</button><button id="pauseLevels" class="secondary">LEVEL SELECT</button><button id="pauseHelp" class="quiet">How to play</button></div></div></section>
   <section id="result" class="screen" aria-labelledby="resultTitle" aria-live="polite"><div class="panel compact center"><p id="resultEyebrow" class="eyebrow"></p><h2 id="resultTitle"></h2><div id="resultStars" class="big-stars"></div><p id="resultDetail"></p><div id="resultStats" class="result-stats"></div><div class="stack"><button id="nextBtn" class="primary"></button><button id="retryBtn" class="secondary">ONE MORE TRY ↻</button><button id="inspectBtn" class="secondary">LOOK AT THE DAMAGE</button><button id="resultLevels" class="quiet">Level select</button></div></div></section>
   <div id="globalButtons"><button id="muteBtn" class="utility" aria-label="Mute sound" title="Sound (M)">SOUND ON</button><button id="motionBtn" class="utility" aria-pressed="false">SHAKE ON</button><button id="fullscreenBtn" class="utility" aria-label="Toggle fullscreen">⛶</button></div>
@@ -81,18 +81,18 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   Object.assign(TOOLS,{
     'paint-can':{...TOOLS['street-stone'],id:'paint-can',name:'Paint Can',color:'#f577d0',density:.006},
     'emp-puck':{...TOOLS['street-stone'],id:'emp-puck',name:'EMP Puck',color:'#65eaf2',density:.007},
-    grapple:{...TOOLS['street-stone'],id:'grapple',name:'Pull Hook',color:'#ffd275',density:.01}
+    grapple:{...TOOLS['street-stone'],id:'grapple',name:'Cable Cutter',color:'#ffd275',density:.0065}
   });
   Object.assign(REBELS,{
     inez:{name:'Inez',role:'Muralist. Makes privacy visible.',tool:'paint-can',portrait:0},
     dex:{name:'Dex',role:'Tinkerer. Unplugs the city.',tool:'emp-puck',portrait:1},
-    june:{name:'June',role:'Mechanic. Pulls the system apart.',tool:'grapple',portrait:2}
+    june:{name:'June',role:'Mechanic. Cuts the system loose.',tool:'grapple',portrait:2}
   });
   REGIONS[0].color='#d9ff63';REGIONS[0].start=0;
   REGIONS.push(
     {id:'color-quarter',name:'Color Quarter',rebel:'inez',tool:'paint-can',start:8,levels:8,color:'#f577d0',description:'Paint bursts coat armored lenses. Get close; splash finishes the job.'},
     {id:'signal-heights',name:'Signal Heights',rebel:'dex',tool:'emp-puck',start:16,levels:8,color:'#65eaf2',description:'EMP pulses jump through matching circuits. Find the reachable node.'},
-    {id:'iron-docks',name:'Iron Docks',rebel:'june',tool:'grapple',start:24,levels:8,color:'#ffd275',description:'Hooks latch on impact and pull left. Swing beams and tear suspension cables.'}
+    {id:'iron-docks',name:'Iron Docks',rebel:'june',tool:'grapple',start:24,levels:8,color:'#ffd275',description:'June’s spinning cutter severs cables, hinges, glass, and wooden joints. Steel sends it ricocheting.'}
   );
   LEVELS.forEach(l=>{l.region=0;l.tool='street-stone'});
   const shelf=(x,y,w=140,material='steel')=>B(x,y,w,20,material,material==='steel');
@@ -116,7 +116,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   add(2,'Cross talk','Two neighboring networks',[shelf(820,600,200),shelf(1120,550,140)],[node(775,571,'A'),node(875,571,'B'),node(1080,521,'A'),node(1160,521,'B')],'Catch both near nodes in the same pulse to shut down both networks.');
   add(2,'Dead zone','Break into the cluster',[B(775,535,20,170,'glass'),...tower(885,120,170),shelf(1140,590)],[node(850,471,'A'),node(930,471,'B'),node(1140,561,'B')],'Pulse between the elevated nodes, or take separate shots.');
   add(2,'Radio silence','Signal Heights finale',[shelf(760,605),...tower(1000,200,180),shelf(1170,595,90)],[node(760,576,'A'),node(950,391,'A'),node(1040,391,'B'),node(1170,566,'B')],'Reach one node of each circuit. Every linked camera follows.');
-  add(3,'Loose ends','Meet June and the pull hook',[suspended(850,520)],[C(850,490)],'Hit the hanging beam. The hook pulls left for a moment and tears strained cables.');
+  add(3,'Loose ends','Meet June and the cable cutter',[suspended(850,520)],[C(850,490)],'Clip either suspension cable by striking the hanging beam. The loose side drops immediately.');
   add(3,'Swing shift','Tip a hanging platform',[suspended(880,480,230)],[C(825,450),C(935,450)],'An off-center hook twists the platform and dumps both cameras.');
   add(3,'Falling inventory','Drop a weight',[suspended(870,430,180),shelf(870,610,180)],[C(870,580),C(870,400)],'Pull the hanging weight down onto the ground camera.');
   add(3,'Two cranes','Choose each anchor',[suspended(775,510,135),suspended(1080,450,160)],[C(775,480),C(1080,420)],'Each crane is independent. Pull one beam, then the other.');
@@ -169,7 +169,7 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     if(motif===1)blocks.push(B(590,570,22,100,'glass'));
     if(motif===2)blocks.push(B(600,572-tier*6,24,96+tier*12,'steel',true));
     if(motif===3&&tier>=1){const x=left-85;blocks.push(B(x,600,20,40,'glass'),B(x,565,88,30,'heavy'));}
-    const tip=mixed?'Choose a tool before throwing. Break the exposed legs; save paint for the armored lens on the far platform.':region===1?'Paint the upper lenses or break their supports. Separate towers need separate splashes.':region===2?'Get the puck within 95 pixels. Circuit jumps stop after one neighbor within 190 pixels. Falling mounts still count.':region===3?'Hook the end of a beam or pull out a wooden leg. Let the weight finish the collapse.':'Aim at glass and narrow legs. Heavy caps and falling beams carry the destruction onward.';
+    const tip=mixed?'Choose a tool before throwing. Break the exposed legs; save paint for the armored lens on the far platform.':region===1?'Paint the upper lenses or break their supports. Separate towers need separate splashes.':region===2?'Get the puck within 95 pixels. Circuit jumps stop after one neighbor within 190 pixels. Falling mounts still count.':region===3?'Cut a suspended beam near one end, slice a hinge, or carve through a wooden leg. Let the released weight finish the collapse.':'Aim at glass and narrow legs. Heavy caps and falling beams carry the destruction onward.';
     const shots=cameras.length+3, arsenal=mixed?(region===4?{'street-stone':cameras.length+1,'paint-can':3}:{grapple:3,'street-stone':3,'paint-can':3,'emp-puck':3}):undefined;
     return{id:`${REGIONS[region].id}-${stage+1}`,name:titles[region][titleIndex],district:REGIONS[region].name.toUpperCase(),region,tool:primary,arsenal,lesson:`${['Supports & timing','Separated targets','Stacked loads','Multiple approaches','District finale'][tier]} · ${cameras.length} cameras`,hint:tip,tip,shots,stars:[cameras.length+1,cameras.length+2],blocks,cameras,difficulty:stage+1};
   }
@@ -276,6 +276,43 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
     return{id:`${r.id}-${stage+1}`,name:expansionNames[region-6][stage],district:r.name.toUpperCase(),region,tool:r.tool,arsenal,lesson:`${['New tool','Separated structures','Layered loads','Compound routes','District finale'][tier]} · ${cameras.length} cameras`,hint:stage===0?r.description:tip,tip,shots:par+3,stars:[par,par+1],blocks,cameras,difficulty:21+stage,finale:stage===19};
   }
   for(const r of expansion){r.start=LEVELS.length;r.levels=20;REGIONS.push(r);const region=REGIONS.length-1;for(let stage=0;stage<20;stage++)LEVELS.push(expansionLevel(region,stage));}
+
+  // New crews append after the established 160 installations. The legacy
+  // grapple id is retained internally so existing solutions and saves migrate.
+  Object.assign(TOOLS,{
+    'magnet-puck':{...TOOLS['street-stone'],id:'magnet-puck',name:'Magnet Puck',color:'#8bb8ff',density:.008,magnetRadius:175},
+    'airburst':{...TOOLS['street-stone'],id:'airburst',name:'Airburst Capsule',color:'#ff9de1',density:.0048,burstRadius:165}
+  });
+  Object.assign(REBELS,{
+    vale:{name:'Vale',role:'Salvage pilot. Makes metal move.',tool:'magnet-puck'},
+    tess:{name:'Tess',role:'Rooftop runner. Weaponizes open air.',tool:'airburst'}
+  });
+  const nextRegions=[
+    {id:'magnet-mile',name:'Magnet Mile',rebel:'vale',tool:'magnet-puck',color:'#8bb8ff',description:'Vale’s puck drags loose beams, concrete, and cameras toward its landing point. Fixed steel anchors the reaction.'},
+    {id:'updraft',name:'Updraft',rebel:'tess',tool:'airburst',color:'#ff9de1',description:'Tess’s capsule releases a broad pressure wave. It moves structures without simply breaking everything it touches.'}
+  ];
+  const nextNames=[
+    ['First attraction','Loose change','Metal meeting','Salvage rights','Heavy draw','Crossed lines','Blue shift','Freight magnet','Anchor point','Moving parts','Scrap balcony','Polar offices','Concrete compass','Cargo cluster','The long pull','Foundry floor','Split attraction','Magnetic field','Salvage skyline','Mile blackout'],
+    ['First gust','Open window','Push comes down','Loose roof','Crosswind','Pressure drop','Pink horizon','Air pocket','Lift and separate','Draft offices','Wide blast','Falling weather','Vent stack','Storm door','Pressure court','High front','Split current','Rooftop warning','Last forecast','Updraft finale']
+  ];
+  function nextLevel(region,stage){
+    const r=REGIONS[region],tier=Math.floor(stage/4),motif=stage%4,count=2+Math.floor(stage/5),blocks=[],cameras=[];
+    const left=700-tier*10,right=1050+tier*18,spacing=(right-left)/Math.max(1,count-1);
+    for(let j=0;j<count;j++){
+      const x=left+j*spacing,height=100+tier*22+((j+motif)%3)*28,width=Math.min(145,spacing-18),mat=(j+stage)%3===0?'glass':j%2?'heavy':'wood';
+      if((motif===1||motif===3)&&j===0){blocks.push(suspended(x,620-height,width,95+tier*10));cameras.push(C(x,590-height));}
+      else {blocks.push(...tower(x,height,width,mat));if(tier>1&&j%2===0)blocks.push(B(x,620-height-37,width*.7,30,'heavy'));cameras.push(C(x,581-height-(tier>1&&j%2===0?30:0)));}
+    }
+    if(motif===2)blocks.push(B(610,555,26,130,'steel',true));
+    const par=Math.max(2,Math.ceil(cameras.length*.75));
+    const arsenal=region===9?{'airburst':par+2,'magnet-puck':2,'grapple':2,'street-stone':2}:undefined;
+    const tip=region===8?'Land beside loose structure. The magnetic snap gathers moving beams, weights, and unbolted cameras; fixed steel remains an anchor.':'Burst beside a platform or weight. The pressure wave shoves every loose object away, so placement decides the direction of collapse.';
+    return{id:`${r.id}-${stage+1}`,name:nextNames[region-8][stage],district:r.name.toUpperCase(),region,tool:r.tool,arsenal,lesson:`${['New force','Separated structures','Layered loads','Compound routes','District finale'][tier]} · ${cameras.length} cameras`,hint:stage===0?r.description:tip,tip,shots:par+4,stars:[par+1,par+2],blocks,cameras,difficulty:41+stage,finale:stage===19};
+  }
+  for(const r of nextRegions){r.start=LEVELS.length;r.levels=20;REGIONS.push(r);const region=REGIONS.length-1;for(let stage=0;stage<20;stage++)LEVELS.push(nextLevel(region,stage));}
+  // Cutter stages allow a direct cleanup route as well as a chain-reaction
+  // solution; the player is never forced into one exact cable strike.
+  for(const l of LEVELS.filter(l=>l.region===3)){l.shots=Math.max(l.shots,l.cameras.length+4);l.stars=[Math.max(l.stars[0],l.cameras.length+1),Math.max(l.stars[1],l.cameras.length+2)];}
   global.BlindSpotData={B,C,LEVELS,MATERIALS,TOOLS,REBELS,REGIONS,WORLD,starsFor};
 })(typeof window!=='undefined'?window:globalThis);
 
@@ -396,11 +433,25 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
         for(const c of this.cameras)if(near.includes(c)||linked.has(c)){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
-      if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
-        const local={x:point.x-target.position.x,y:point.y-target.position.y},cos=Math.cos(-target.angle),sin=Math.sin(-target.angle);
-        const hook=Constraint.create({pointA:{x:Math.max(260,target.position.x-230),y:target.position.y-55},bodyB:target,pointB:{x:local.x*cos-local.y*sin,y:local.x*sin+local.y*cos},length:40,stiffness:.018,damping:.06});
-        this.hooks.push({constraint:hook,until:this.time+1.1});Composite.add(this.engine.world,hook);Sleeping.set(target,false);
-        this.emit('ability',{position:point},{tool:id,radius:50,color:this.tool.color});
+      if(id==='grapple'){
+        // Cable Cutter: release one nearby support rather than attaching a
+        // temporary pulling rope. Keeping the old id preserves saved routes.
+        const attached=[...this.cables,...this.hinges].filter(c=>c.bodyA===target||c.bodyB===target);
+        let cut=attached.sort((a,b)=>{
+          const pa=a.bodyB?Constraint.pointBWorld(a):a.pointA,pb=b.bodyB?Constraint.pointBWorld(b):b.pointA;
+          return Math.hypot(pa.x-point.x,pa.y-point.y)-Math.hypot(pb.x-point.x,pb.y-point.y);
+        })[0];
+        if(cut){Composite.remove(this.engine.world,cut);this.cables=this.cables.filter(c=>c!==cut);this.hinges=this.hinges.filter(c=>c!==cut);if(target&&!target.isStatic)Sleeping.set(target,false)}
+        const g=target.game;
+        if(g&&(g.kind==='block'||g.kind==='debris')&&!target.isStatic){
+          if(g.material==='glass')this.pendingBreak.add(target);
+          else if(g.material==='wood'){g.hp-=58;if(g.hp<=0)this.pendingBreak.add(target)}
+          else if(g.material==='heavy'){g.hp-=24;if(g.hp<=0)this.pendingBreak.add(target)}
+        }
+        if(target.isStatic)Body.setVelocity(projectile,{x:-projectile.velocity.x*.72,y:projectile.velocity.y-1.2});
+        else Body.setVelocity(projectile,{x:projectile.velocity.x*.88,y:projectile.velocity.y*.88});
+        const affected=[];for(const c of this.cameras)if(!c.game.disabled&&!c.game.bolted&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<92){this.disable(c,'MOUNT CUT');affected.push(c)}
+        this.emit('ability',{position:point},{tool:id,radius:92,color:this.tool.color,cut:!!cut,affected});
       }
       if(id==='breach-charge'){
         const radius=TOOLS[id].blastRadius,affected=[];
@@ -415,6 +466,21 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
         foam.game={kind:'foam',tool:id,w:104,h:104};this.foams.push(foam);this.add(foam);Body.setVelocity(foam,{x:0,y:-2.4});
         for(const b of [...this.blocks,...this.cameras])if(!b.isStatic){const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(25,Math.hypot(dx,dy));if(d<radius)Body.applyForce(b,b.position,{x:dx/d*.008,y:-.026*(1-d/radius)})}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected:[]});
+      }
+      if(id==='magnet-puck'){
+        const radius=TOOLS[id].magnetRadius,affected=[];
+        for(const b of [...this.blocks,...this.cameras]){if(b.isStatic)continue;const dx=point.x-b.position.x,dy=point.y-b.position.y,d=Math.max(28,Math.hypot(dx,dy));if(d>=radius)continue;
+          const force=(1-d/radius)*.032,metal=b.game.kind==='camera'||b.game.material==='heavy'?1.35:1;
+          Body.applyForce(b,b.position,{x:dx/d*force*metal,y:dy/d*force*metal});Sleeping.set(b,false);affected.push(b);
+        }
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
+      }
+      if(id==='airburst'){
+        const radius=TOOLS[id].burstRadius,affected=[];
+        for(const b of [...this.blocks,...this.cameras]){if(b.isStatic)continue;const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(24,Math.hypot(dx,dy));if(d>=radius)continue;
+          const force=(1-d/radius)*.038;Body.applyForce(b,b.position,{x:dx/d*force,y:dy/d*force-.006});Sleeping.set(b,false);affected.push(b);
+        }
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
     }
     splatter(point,radius){
@@ -558,7 +624,9 @@ window.BlindSpotAssets={atlas:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgA
   'emp-puck':{name:'DEX',jacket:'#397e83',shade:'#24505c',pants:'#35404b',skin:'#e3ad7b',hair:'#684534',accent:'#6debf0',kind:'goggles'},
   grapple:{name:'JUNE',jacket:'#dfa443',shade:'#96642e',pants:'#344765',skin:'#ca8c5f',hair:'#272833',accent:'#ffdb89',kind:'mechanic'},
   'breach-charge':{name:'SOL',jacket:'#e96536',shade:'#71343b',pants:'#542f3c',skin:'#d99769',hair:'#24222c',accent:'#ff7a52',kind:'mechanic'},
-  'foam-pod':{name:'NIKO',jacket:'#668457',shade:'#314b42',pants:'#556044',skin:'#e0a477',hair:'#202532',accent:'#adff77',kind:'goggles'}
+  'foam-pod':{name:'NIKO',jacket:'#668457',shade:'#314b42',pants:'#556044',skin:'#e0a477',hair:'#202532',accent:'#adff77',kind:'goggles'},
+  'magnet-puck':{name:'VALE',jacket:'#416da8',shade:'#273e68',pants:'#2c354d',skin:'#8f5f48',hair:'#191d2d',accent:'#8bb8ff',kind:'goggles'},
+  airburst:{name:'TESS',jacket:'#a84e8b',shade:'#613356',pants:'#433550',skin:'#d99a75',hair:'#3b2538',accent:'#ff9de1',kind:'scarf'}
  };
  const mix=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t}),smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
  // Two-link inverse kinematics: contact points are derived from the actual pulled body.
@@ -739,7 +807,7 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
       if(e.type==='ability'&&e.tool==='emp-puck')this.electric.push({x:e.x,y:e.y,targets:e.affected||[],age:0});
       if(e.type==='paint')this.paintBurst(e);
       if(e.type==='camera'&&e.reason==='LENS PAINTED'){this.shake=Math.max(this.shake,4);return}
-      if(e.type==='ability'&&e.tool!=='paint-can'){this.burst(e.x,e.y,42,e.color,7);this.rings.push({x:e.x,y:e.y,life:1,color:e.color,radius:e.radius});}
+      if(e.type==='ability'&&e.tool!=='paint-can'){const count=e.tool==='airburst'?70:e.tool==='grapple'?34:42,speed=e.tool==='airburst'?11:7;this.burst(e.x,e.y,count,e.color,speed);this.rings.push({x:e.x,y:e.y,life:1,color:e.color,radius:e.radius});if(e.tool==='grapple')this.labels.push({x:e.x,y:e.y-38,life:.9,text:e.cut?'SUPPORT CUT':'JOINT SLICED',color:'#ffe09a'});}
       if(e.type==='ready')this.readyAge=0;
       if(e.type==='launch'){this.shotAge=0;this.releasePoint={x:e.x??220,y:e.y??490};this.recoil=1;this.burst(220,490,12,'#fff2b8',3)}
       if(e.type==='impact'&&e.strength>3){if(e.y>570){this.dust.push({x:e.x,y:Math.min(615,e.y),age:0,size:Math.min(35,e.strength*2)});this.dust=this.dust.slice(-24);}this.shake=Math.max(this.shake,Math.min(8,e.strength*.4));this.burst(e.x,e.y,Math.min(16,e.strength),'#ffe7b0',3)}
@@ -770,7 +838,7 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
     burst(x,y,count,color,speed){for(let i=0;i<count;i++){const a=Math.random()*TAU,s=Math.random()*speed+1;this.particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,life:.35+Math.random()*.7,color,size:2+Math.random()*4,angle:Math.random()*TAU})}if(this.particles.length>420)this.particles.splice(0,this.particles.length-420)}
     animate(dt){for(const d of this.dust)d.age+=dt;this.dust=this.dust.filter(d=>d.age<.65);this.poseDt=dt;this.shotAge+=dt;this.readyAge+=dt;this.time+=dt;for(const e of this.electric)e.age+=dt;this.electric=this.electric.filter(e=>e.age<1.3);for(const p of this.paintDrops)p.age+=dt;this.paintDrops=this.paintDrops.filter(p=>p.age<p.duration);this.shake*=Math.pow(.001,dt);this.recoil=Math.max(0,this.recoil-dt*3);this.hitFlash=Math.max(0,this.hitFlash-dt);for(const p of this.particles){p.x+=p.vx*dt*60;p.y+=p.vy*dt*60;p.vy+=dt*13;p.life-=dt;p.angle+=dt*3}this.particles=this.particles.filter(p=>p.life>0);for(const l of this.labels){l.life-=dt;l.y-=dt*21}this.labels=this.labels.filter(l=>l.life>0);this.rings.forEach(r=>r.life-=dt);this.rings=this.rings.filter(r=>r.life>0)}
     background(sim){
-      const c=this.ctx,region=sim?.level.region||0,theme=[['#f2b289','#17374b','#e8c38e'],['#bd83ba','#34264a','#f6a6d9'],['#659da9','#132b48','#73e8f0'],['#d39b6d','#243344','#edc388'],['#b87c85','#303751','#ffb497'],['#8187bb','#242b50','#bba5f6'],['#d56f55','#31263c','#ff7958'],['#83a86d','#203c38','#b8f28e']][region];
+      const c=this.ctx,region=sim?.level.region||0,theme=[['#f2b289','#17374b','#e8c38e'],['#bd83ba','#34264a','#f6a6d9'],['#659da9','#132b48','#73e8f0'],['#d39b6d','#243344','#edc388'],['#b87c85','#303751','#ffb497'],['#8187bb','#242b50','#bba5f6'],['#d56f55','#31263c','#ff7958'],['#83a86d','#203c38','#b8f28e'],['#7598c8','#172947','#8bb8ff'],['#c77eae','#34233f','#ff9de1']][region];
       const sky=c.createLinearGradient(0,0,0,620);sky.addColorStop(0,theme[0]);sky.addColorStop(1,theme[1]);c.fillStyle=sky;c.fillRect(0,0,1280,720);
       if(this.art.complete&&this.art.naturalWidth){c.save();c.globalAlpha=.7;c.drawImage(this.art,768,120,768,650,0,0,1280,620);c.restore()}
       const atmosphere=c.createLinearGradient(0,90,0,620);atmosphere.addColorStop(0,theme[1]+'38');atmosphere.addColorStop(.55,theme[1]+'60');atmosphere.addColorStop(1,'#101c368f');c.fillStyle=atmosphere;c.fillRect(0,0,1280,620);
@@ -788,7 +856,7 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
       c.save();c.translate(462,142);c.rotate(-.025);c.fillStyle='#101e32db';rr(c,-98,-27,235,65,7);c.fill();c.fillStyle=theme[2];c.fillRect(-98,-18,3,37);c.textAlign='left';c.font='900 10px system-ui';c.fillText('MINISTRY / SURVEILLANCE DIVISION',-83,-8);c.fillStyle='#f5eddb';c.font='900 17px system-ui';c.fillText(REGIONS[region].name.toUpperCase(),-83,16);c.restore();
     }
     rebel(sim,front=false){
-      const rig=global.BlindSpotRebelRig;let p=this.rebelPose;if(!front||!p){p=rig.stabilize(rig.pose(sim,this.shotAge,this.releasePoint,this.time,this.reduceMotion,this.readyAge),p,this.poseDt||1/60,sim?.state==='aiming'||this.shotAge<.04);this.rebelPose=p;}const texture=['breach-charge','foam-pod'].includes(p.tool)?this.expansionTexture:this.cohesiveTexture;if(texture)global.BlindSpotPaintedSkin.drawCohesive(this.ctx,p,texture,front);else if(this.paintedTexture)global.BlindSpotPaintedSkin.draw(this.ctx,p,this.paintedTexture,front);else rig.draw(this.ctx,p,this.time,this.reduceMotion,front);
+      const rig=global.BlindSpotRebelRig;let p=this.rebelPose;if(!front||!p){p=rig.stabilize(rig.pose(sim,this.shotAge,this.releasePoint,this.time,this.reduceMotion,this.readyAge),p,this.poseDt||1/60,sim?.state==='aiming'||this.shotAge<.04);this.rebelPose=p;}const known=['street-stone','paint-can','emp-puck','grapple','breach-charge','foam-pod'].includes(p.tool),texture=['breach-charge','foam-pod'].includes(p.tool)?this.expansionTexture:known?this.cohesiveTexture:null;if(texture)global.BlindSpotPaintedSkin.drawCohesive(this.ctx,p,texture,front);else rig.draw(this.ctx,p,this.time,this.reduceMotion,front);
       if(!front&&sim?.state==='ready'){const c=this.ctx;c.textAlign='center';c.font='900 11px system-ui';c.fillStyle='#fff1d8';c.fillText('PULL TO AIM',265,423)}
     }
     sling(sim,front=false){
@@ -805,13 +873,17 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
       if(tool==='paint-can'){c.fillStyle='#ef42b7';rr(c,182,557,20,45,5);c.fill();c.strokeStyle='#b8c7d3';c.lineWidth=4;c.beginPath();c.moveTo(192,557);c.lineTo(201,518);c.stroke()}
       if(tool==='breach-charge'){c.fillStyle='#ff704f';rr(c,184,558,18,42,4);c.fill();c.fillStyle='#ffe0a3';c.fillRect(187,563,12,4)}
       if(tool==='foam-pod'){c.fillStyle='#a7ff88';circle(c,192,577,12,'#a7ff88');c.strokeStyle='#eaffdb';c.lineWidth=3;c.stroke()}
+      if(tool==='magnet-puck'){circle(c,192,577,13,'#8bb8ff');circle(c,192,577,6,'#dff0ff')}
+      if(tool==='airburst'){c.fillStyle='#ff9de1';rr(c,181,564,22,28,11);c.fill()}
       if(sim.state==='aiming'){const p=sim.projectile.position;c.strokeStyle=tool==='paint-can'?'#a7bac5':accent;c.lineWidth=tool==='paint-can'?5:2;c.setLineDash(tool==='emp-puck'?[4,5]:[]);c.beginPath();c.moveTo(a.x-20,a.y+5);c.lineTo(p.x,p.y);c.stroke();c.setLineDash([])}
       c.translate(a.x,a.y);c.rotate(tilt);c.fillStyle='#25354d';c.strokeStyle='#111c2e';c.lineWidth=4;rr(c,-28,-23,64,46,7);c.fill();c.stroke();
       if(tool==='paint-can'){c.fillStyle='#8ba7b7';rr(c,15,-25,34,50,5);c.fill();c.fillStyle=accent;rr(c,40,-28,9,56,3);c.fill();c.fillStyle='#172339';c.fillRect(44,-18,5,36)}
       if(tool==='emp-puck'){for(let x=-15;x<=35;x+=12){c.strokeStyle=accent;c.lineWidth=5;c.beginPath();c.moveTo(x,-24);c.lineTo(x,24);c.stroke()}circle(c,-13,0,8,'#d9ffff')}
-      if(tool==='grapple'){c.fillStyle='#ffd275';c.fillRect(-23,-16,40,8);c.fillRect(-23,8,40,8);c.fillStyle='#9daebe';c.fillRect(11,-8,42,16)}
+      if(tool==='grapple'){for(let i=0;i<10;i++){const q=i*TAU/10;c.fillStyle=i%2?'#d9e3e8':'#ffd275';c.beginPath();c.moveTo(Math.cos(q)*26,Math.sin(q)*26);c.lineTo(Math.cos(q+.22)*17,Math.sin(q+.22)*17);c.lineTo(Math.cos(q-.22)*17,Math.sin(q-.22)*17);c.fill()}circle(c,0,0,13,'#26364b');circle(c,0,0,5,'#fff0b0')}
       if(tool==='breach-charge'){c.fillStyle='#ff704f';rr(c,-18,-18,36,36,6);c.fill();c.fillStyle='#ffe19b';c.fillRect(-12,-3,24,6);circle(c,0,-10,4,'#782d2b')}
       if(tool==='foam-pod'){circle(c,0,0,22,'#a7ff88');circle(c,-6,-7,7,'#eaffdc');c.strokeStyle='#456b55';c.lineWidth=3;c.stroke()}
+      if(tool==='magnet-puck'){c.scale(1,.7);circle(c,0,0,23,'#18273d');c.strokeStyle='#8bb8ff';c.lineWidth=7;c.beginPath();c.arc(0,0,17,0,TAU);c.stroke();circle(c,0,0,7,'#e6f3ff')}
+      if(tool==='airburst'){c.fillStyle='#ff9de1';rr(c,-19,-15,38,30,15);c.fill();c.strokeStyle='#572c55';c.lineWidth=4;c.stroke();c.strokeStyle='#fff1fb';c.lineWidth=3;c.beginPath();c.moveTo(-8,-9);c.lineTo(9,8);c.moveTo(9,-9);c.lineTo(-8,8);c.stroke()}
       c.restore();
     }
     block(b,ctx=this.ctx){
@@ -877,9 +949,11 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
         c.strokeStyle='#172339';c.lineWidth=3;c.fillStyle=b.game.spent?'#9f819c':'#dce4ee';rr(c,-14,-15,28,32,4);c.fill();c.stroke();c.fillStyle='#ee42bb';c.fillRect(-12,-5,24,17);circle(c,0,3,6,'#ffb6ee');c.strokeStyle='#9faec1';c.lineWidth=3;c.beginPath();c.arc(0,-8,17,Math.PI,TAU);c.stroke();c.fillStyle='#8d9dac';rr(c,b.game.spent?2:-15,b.game.spent?-23:-18,30,5,2);c.fill();c.restore();return;
       }
       if(b.game?.tool==='emp-puck'){c.scale(1,.68);circle(c,0,0,21,'#102339');c.strokeStyle=b.game.spent?'#4b6b7e':'#65eaf2';c.lineWidth=5;c.beginPath();c.arc(0,0,16,0,TAU);c.stroke();circle(c,0,0,7,b.game.spent?'#34566b':'#e3ffff');c.restore();return}
-      if(b.game?.tool==='grapple'){c.strokeStyle='#182339';c.lineWidth=9;c.beginPath();c.moveTo(-19,0);c.lineTo(16,0);c.moveTo(8,-16);c.lineTo(19,-9);c.lineTo(22,0);c.lineTo(19,9);c.lineTo(8,16);c.stroke();c.strokeStyle='#d5e3ed';c.lineWidth=5;c.stroke();circle(c,-16,0,5,'#ffd275');c.restore();return}
+      if(b.game?.tool==='grapple'){for(let i=0;i<10;i++){const q=i*TAU/10;c.fillStyle=i%2?'#d8e3e9':'#ffd275';c.beginPath();c.moveTo(Math.cos(q)*22,Math.sin(q)*22);c.lineTo(Math.cos(q+.22)*14,Math.sin(q+.22)*14);c.lineTo(Math.cos(q-.22)*14,Math.sin(q-.22)*14);c.fill()}circle(c,0,0,12,'#1b293d');circle(c,0,0,5,'#fff0ae');c.restore();return}
       if(b.game?.tool==='breach-charge'){c.fillStyle='#ff704f';rr(c,-17,-15,34,30,6);c.fill();c.strokeStyle='#512438';c.lineWidth=4;c.stroke();c.fillStyle='#ffe29d';c.fillRect(-11,-3,22,6);circle(c,0,-9,3,b.game.spent?'#673443':'#fff1a8');c.restore();return}
       if(b.game?.tool==='foam-pod'){circle(c,0,0,18,b.game.spent?'#6e9274':'#a7ff88');circle(c,-5,-6,6,'#eaffdc');c.strokeStyle='#355a4a';c.lineWidth=3;c.stroke();c.restore();return}
+      if(b.game?.tool==='magnet-puck'){c.scale(1,.7);circle(c,0,0,22,'#17263b');c.strokeStyle=b.game.spent?'#56677d':'#8bb8ff';c.lineWidth=6;c.beginPath();c.arc(0,0,16,0,TAU);c.stroke();circle(c,0,0,6,'#e8f5ff');c.restore();return}
+      if(b.game?.tool==='airburst'){c.fillStyle=b.game.spent?'#765b72':'#ff9de1';rr(c,-18,-14,36,28,14);c.fill();c.strokeStyle='#542b51';c.lineWidth=3;c.stroke();c.fillStyle='#fff3fb';c.fillRect(-3,-10,6,20);c.restore();return}
       circle(c,0,0,19,'#182339');circle(c,-1,-2,16,'#7f91ac');c.fillStyle='#b6c4d5';c.beginPath();c.moveTo(-10,-7);c.lineTo(0,-13);c.lineTo(8,-7);c.lineTo(3,-2);c.closePath();c.fill();c.strokeStyle=b.game?.color||'#ff8568';c.lineWidth=6;c.beginPath();c.moveTo(-14,-5);c.lineTo(15,7);c.stroke();c.restore();
     }
     draw(sim){const c=this.ctx;c.save();c.clearRect(0,0,1280,720);if(this.shake>.15&&!this.reduceMotion)c.translate((Math.random()-.5)*this.shake,(Math.random()-.5)*this.shake);this.background(sim);this.rebel(sim);this.sling(sim);
@@ -895,8 +969,7 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
           const v=sim.launchVelocity(),power=Math.min(100,Math.round(Math.hypot(v.x,v.y)/(118*.23)*100));c.fillStyle='#10172bf0';rr(c,145,349,150,42,9);c.fill();c.fillStyle='#d9ff63';c.font='900 16px system-ui';c.textAlign='center';c.fillText(`${power}% POWER`,220,375);
         }
         if(sim.state==='flying'){const last=sim.trail.slice(-26),tool=sim.tool.id;
-          if(tool==='grapple'&&!sim.projectile.game.spent){c.strokeStyle='#dfba72';c.lineWidth=2;c.beginPath();c.moveTo(WORLD.anchor.x,WORLD.anchor.y);c.lineTo(sim.projectile.position.x,sim.projectile.position.y);c.stroke()}
-          else last.forEach((p,i)=>{c.globalAlpha=i/30;circle(c,p.x,p.y,tool==='paint-can'?3:2.5*(i/26),TOOLS[tool].color||'#ffde90');if(tool==='emp-puck'&&i%3===0){c.strokeStyle='#65eaf2';c.lineWidth=1.5;c.beginPath();c.moveTo(p.x-5,p.y-6);c.lineTo(p.x+2,p.y);c.lineTo(p.x-3,p.y+5);c.stroke()}});c.globalAlpha=1;
+          last.forEach((p,i)=>{c.globalAlpha=i/30;circle(c,p.x,p.y,tool==='paint-can'?3:2.5*(i/26),TOOLS[tool].color||'#ffde90');if(tool==='emp-puck'&&i%3===0){c.strokeStyle='#65eaf2';c.lineWidth=1.5;c.beginPath();c.moveTo(p.x-5,p.y-6);c.lineTo(p.x+2,p.y);c.lineTo(p.x-3,p.y+5);c.stroke()}});c.globalAlpha=1;
         }
         this.sling(sim,true);this.rebel(sim,true);
 
@@ -945,7 +1018,7 @@ const columns={'street-stone':0,'paint-can':1,'emp-puck':2,grapple:3};
     if(e.type==='launch'){sounds.tone(260,.15,'triangle',.09);sounds.noise(.08,.03);fineAim=false;$('aimPanel').hidden=true;$('aimBtn').setAttribute('aria-expanded','false')}
     if(e.type==='break'&&clock-lastSound>.04){lastSound=clock;if(e.material==='glass'){sounds.tone(1600,.1,'sine',.03);sounds.tone(2250,.16,'sine',.02,.03)}else{sounds.noise(.1,.065);sounds.tone(100,.09,'triangle',.08)}}
     if(e.type==='impact'&&e.strength>3&&clock-lastSound>.12){lastSound=clock;sounds.tone(85,.1,'triangle',.04)}
-    if(e.type==='ability'){if(e.tool==='paint-can')sounds.noise(.28,.12);if(e.tool==='emp-puck'){sounds.tone(1800,.4,'sawtooth',.025);sounds.tone(90,.4,'sine',.05)}if(e.tool==='grapple'){sounds.noise(.09,.08);sounds.tone(240,.5,'triangle',.06)}if(e.tool==='breach-charge'){sounds.noise(.32,.15);sounds.tone(72,.4,'square',.09)}if(e.tool==='foam-pod'){sounds.noise(.22,.07);sounds.tone(310,.35,'sine',.05)}}
+    if(e.type==='ability'){if(e.tool==='paint-can')sounds.noise(.28,.12);if(e.tool==='emp-puck'){sounds.tone(1800,.4,'sawtooth',.025);sounds.tone(90,.4,'sine',.05)}if(e.tool==='grapple'){sounds.noise(.1,.05);sounds.tone(980,.16,'triangle',.055)}if(e.tool==='breach-charge'){sounds.noise(.32,.15);sounds.tone(72,.4,'square',.09)}if(e.tool==='foam-pod'){sounds.noise(.22,.07);sounds.tone(310,.35,'sine',.05)}if(e.tool==='magnet-puck'){sounds.tone(125,.42,'sawtooth',.055);sounds.tone(520,.2,'sine',.035)}if(e.tool==='airburst'){sounds.noise(.38,.1);sounds.tone(84,.32,'sine',.07)}}
     if(e.type==='camera'&&e.reason!=='LENS PAINTED'){sounds.tone(560,.15,'sawtooth',.025);sounds.tone(180,.18,'square',.018,.08)}
     if(e.type==='win'||e.type==='lose')finish(e);
   }

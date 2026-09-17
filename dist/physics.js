@@ -114,11 +114,25 @@
         for(const c of this.cameras)if(near.includes(c)||linked.has(c)){c.game.disabledBy=id;affected.push(c);this.disable(c,id==='paint-can'?'LENS PAINTED':'NETWORK OFFLINE')}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
-      if(id==='grapple'&&!target.isStatic&&target.game?.kind!=='stone'){
-        const local={x:point.x-target.position.x,y:point.y-target.position.y},cos=Math.cos(-target.angle),sin=Math.sin(-target.angle);
-        const hook=Constraint.create({pointA:{x:Math.max(260,target.position.x-230),y:target.position.y-55},bodyB:target,pointB:{x:local.x*cos-local.y*sin,y:local.x*sin+local.y*cos},length:40,stiffness:.018,damping:.06});
-        this.hooks.push({constraint:hook,until:this.time+1.1});Composite.add(this.engine.world,hook);Sleeping.set(target,false);
-        this.emit('ability',{position:point},{tool:id,radius:50,color:this.tool.color});
+      if(id==='grapple'){
+        // Cable Cutter: release one nearby support rather than attaching a
+        // temporary pulling rope. Keeping the old id preserves saved routes.
+        const attached=[...this.cables,...this.hinges].filter(c=>c.bodyA===target||c.bodyB===target);
+        let cut=attached.sort((a,b)=>{
+          const pa=a.bodyB?Constraint.pointBWorld(a):a.pointA,pb=b.bodyB?Constraint.pointBWorld(b):b.pointA;
+          return Math.hypot(pa.x-point.x,pa.y-point.y)-Math.hypot(pb.x-point.x,pb.y-point.y);
+        })[0];
+        if(cut){Composite.remove(this.engine.world,cut);this.cables=this.cables.filter(c=>c!==cut);this.hinges=this.hinges.filter(c=>c!==cut);if(target&&!target.isStatic)Sleeping.set(target,false)}
+        const g=target.game;
+        if(g&&(g.kind==='block'||g.kind==='debris')&&!target.isStatic){
+          if(g.material==='glass')this.pendingBreak.add(target);
+          else if(g.material==='wood'){g.hp-=58;if(g.hp<=0)this.pendingBreak.add(target)}
+          else if(g.material==='heavy'){g.hp-=24;if(g.hp<=0)this.pendingBreak.add(target)}
+        }
+        if(target.isStatic)Body.setVelocity(projectile,{x:-projectile.velocity.x*.72,y:projectile.velocity.y-1.2});
+        else Body.setVelocity(projectile,{x:projectile.velocity.x*.88,y:projectile.velocity.y*.88});
+        const affected=[];for(const c of this.cameras)if(!c.game.disabled&&!c.game.bolted&&Math.hypot(c.position.x-point.x,c.position.y-point.y)<92){this.disable(c,'MOUNT CUT');affected.push(c)}
+        this.emit('ability',{position:point},{tool:id,radius:92,color:this.tool.color,cut:!!cut,affected});
       }
       if(id==='breach-charge'){
         const radius=TOOLS[id].blastRadius,affected=[];
@@ -133,6 +147,21 @@
         foam.game={kind:'foam',tool:id,w:104,h:104};this.foams.push(foam);this.add(foam);Body.setVelocity(foam,{x:0,y:-2.4});
         for(const b of [...this.blocks,...this.cameras])if(!b.isStatic){const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(25,Math.hypot(dx,dy));if(d<radius)Body.applyForce(b,b.position,{x:dx/d*.008,y:-.026*(1-d/radius)})}
         this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected:[]});
+      }
+      if(id==='magnet-puck'){
+        const radius=TOOLS[id].magnetRadius,affected=[];
+        for(const b of [...this.blocks,...this.cameras]){if(b.isStatic)continue;const dx=point.x-b.position.x,dy=point.y-b.position.y,d=Math.max(28,Math.hypot(dx,dy));if(d>=radius)continue;
+          const force=(1-d/radius)*.032,metal=b.game.kind==='camera'||b.game.material==='heavy'?1.35:1;
+          Body.applyForce(b,b.position,{x:dx/d*force*metal,y:dy/d*force*metal});Sleeping.set(b,false);affected.push(b);
+        }
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
+      }
+      if(id==='airburst'){
+        const radius=TOOLS[id].burstRadius,affected=[];
+        for(const b of [...this.blocks,...this.cameras]){if(b.isStatic)continue;const dx=b.position.x-point.x,dy=b.position.y-point.y,d=Math.max(24,Math.hypot(dx,dy));if(d>=radius)continue;
+          const force=(1-d/radius)*.038;Body.applyForce(b,b.position,{x:dx/d*force,y:dy/d*force-.006});Sleeping.set(b,false);affected.push(b);
+        }
+        this.emit('ability',{position:point},{tool:id,radius,color:this.tool.color,affected});
       }
     }
     splatter(point,radius){

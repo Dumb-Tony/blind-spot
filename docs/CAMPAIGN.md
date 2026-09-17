@@ -1,6 +1,6 @@
-# Campaign reference — 0.18
+# Campaign reference — 0.19
 
-160 levels across eight districts; the original 120 identities and saved stars remain intact. Starter City's opening eight installations have broad targets and alternate attack paths.
+200 levels across ten districts; the original 160 identities and saved stars remain intact. Magnet Mile adds attraction puzzles and Updraft adds broad directional pressure, while Iron Docks now uses support-cutting instead of pull ropes.
 
 ## Starter City
 

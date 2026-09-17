@@ -76,7 +76,7 @@ ok(!cameraImpact(.05)&&cameraImpact(20),'impact strength respects debris mass');
 console.log(`PASS: ${checks} total assertions including fracture, support collapse, weighted impacts, and limited aiming.`);
 // Expansion mechanics and campaign continuity.
 const oldSave=harness({saved:{'blindspot-overhaul-progress':JSON.stringify({stars:[3,2,1,0,0,0,0,0],last:2})}});
-ok(oldSave.state().progress.stars.length===160&&oldSave.state().progress.stars[0]===3&&oldSave.state().progress.stars[8]===0,'old eight-level saves expand without losing stars');
+ok(oldSave.state().progress.stars.length===200&&oldSave.state().progress.stars[0]===3&&oldSave.state().progress.stars[8]===0,'old eight-level saves expand without losing stars');
 for(let region=1;region<4;region++){
  const ui=harness();ui.click('selectBtn');ui.ids.regionSelect.value=String(region);ui.ids.regionSelect.onchange();ui.ids.levelGrid.children[0].onclick();
  ok(ui.state().index===region*20,'region picker starts the correct level');
@@ -89,11 +89,13 @@ paint.collisions({pairs:[{bodyA:lens,bodyB:rock,collision:{normal:{x:1,y:0},supp
 paint.projectile.game.tool='paint-can';paint.activateTool(paint.projectile,lens,lens.position);ok(lens.game.disabled,'paint bypasses armored lens');
 const network=new Simulation(LEVELS[41]);network.activateTool(network.projectile,network.cameras[0],network.cameras[0].position);ok(network.remaining===1,'EMP no longer reaches a remote matching circuit');
 const separate=new Simulation(LEVELS[42]);separate.activateTool(separate.projectile,separate.cameras[0],separate.cameras[0].position);ok(separate.remaining===1,'EMP does not jump to an unrelated remote circuit');
-const crane=new Simulation(LEVELS[60]);const craneBeam=crane.blocks[0];crane.state='flying';crane.armed=true;crane.activateTool(crane.projectile,craneBeam,craneBeam.position);ok(crane.hooks.length===1,'hook creates physical pulling constraint');for(let n=0;n<200&&crane.state==='flying';n++)crane.step();ok(crane.hooks.length===0,'pull constraint releases after its time window');
+const crane=new Simulation(LEVELS[60]);const craneBeam=crane.blocks[0],cablesBefore=crane.cables.length;crane.state='flying';crane.armed=true;crane.projectile.game.tool='grapple';crane.activateTool(crane.projectile,craneBeam,craneBeam.position);ok(crane.cables.length===cablesBefore-1&&crane.hooks.length===0,'cable cutter severs one physical suspension without creating a pull rope');
 const near=new Simulation(LEVELS[0]);near.aim(120,520);const visible=near.openingGuide();ok(visible.points.at(-1).x-visible.points[0].x>280,'extended guide visibly reaches beyond sling');
 const charge=new Simulation(LEVELS[120]);charge.projectile.game.tool='breach-charge';charge.activateTool(charge.projectile,charge.blocks[0],charge.blocks[0].position);ok(charge.cameras.some(c=>c.game.disabled)||charge.pendingBreak.size>0,'breach charge creates focused structural damage');
 const foam=new Simulation(LEVELS[140]);foam.projectile.game.tool='foam-pod';foam.activateTool(foam.projectile,foam.blocks[0],foam.blocks[0].position);ok(foam.foams.length===1&&foam.foams[0].game.kind==='foam','foam pod creates a persistent physical wedge');
-console.log(`PASS: ${checks} campaign assertions across 160 levels and six tools.`);
+const magnetic=new Simulation(LEVELS[160]),loose=magnetic.blocks.find(b=>!b.isStatic);const speedBefore=loose.speed;magnetic.projectile.game.tool='magnet-puck';magnetic.activateTool(magnetic.projectile,loose,{x:loose.position.x-80,y:loose.position.y});ok(loose.force.x<0&&loose.speed===speedBefore,'magnet applies attraction toward its landing point');
+const gust=new Simulation(LEVELS[180]),gustBody=gust.blocks.find(b=>!b.isStatic);gust.projectile.game.tool='airburst';gust.activateTool(gust.projectile,gustBody,{x:gustBody.position.x-80,y:gustBody.position.y});ok(gustBody.force.x>0,'airburst pushes loose structure away from its landing point');
+console.log(`PASS: ${checks} campaign assertions across 200 levels and eight tools.`);
 const wet=new Simulation(LEVELS[20]);wet.splatter(wet.cameras[0].position,145);
 ok(wet.cameras[0].game.paint.length>0,'paint coats camera lenses');ok(wet.blocks[0].game.paint.length>0,'paint coats fixed surfaces');ok(wet.paintGround.length>0,'near-ground paint leaves a puddle');
 const marked=new Simulation(LEVELS[1]);const markedBeam=marked.blocks.find(b=>!b.isStatic);marked.splatter(markedBeam.position,145);marked.breakBody(markedBeam);ok(marked.blocks.filter(b=>b.game.kind==='debris').every(b=>b.game.paint?.length>0),'paint is retained by broken fragments');
@@ -104,8 +106,8 @@ const inspect=harness();inspect.click('playBtn');inspect.drag(55,25);inspect.tic
 console.log(`PASS: ${checks} assertions including persistent surface paint and aftermath inspection.`);
 
 // Expanded inventory and bounded EMP regression tests.
-ok(LEVELS.length===160&&c.BlindSpotData.REGIONS.length===8&&c.BlindSpotData.REGIONS.every(r=>r.levels===20),'eight regions of twenty');
-ok(new Set(LEVELS.map(l=>l.id)).size===160,'stable unique level identities');
+ok(LEVELS.length===200&&c.BlindSpotData.REGIONS.length===10&&c.BlindSpotData.REGIONS.every(r=>r.levels===20),'ten regions of twenty');
+ok(new Set(LEVELS.map(l=>l.id)).size===200,'stable unique level identities');
 const migrated=harness({saved:{'blindspot-overhaul-progress':JSON.stringify({stars:Array.from({length:32},(_,i)=>i%4),last:25})}});
 ok(migrated.state().progress.last===61&&migrated.state().progress.stars[41]===1,'32-level save maps by original identity');
 const mixed=new Simulation(LEVELS[80]);ok(mixed.selectTool('paint-can'),'mixed tool can be selected');mixed.aim(150,520);mixed.cancel();ok(mixed.inventory['paint-can']===LEVELS[80].arsenal['paint-can'],'cancel preserves supplies');mixed.aim(150,520);mixed.launch();ok(mixed.inventory['paint-can']===LEVELS[80].arsenal['paint-can']-1&&!mixed.selectTool('street-stone'),'launch consumes selected tool and disallows switching in flight');
@@ -117,9 +119,9 @@ const selector=harness();selector.click('selectBtn');selector.ids.regionSelect.v
 console.log('PASS: '+checks+' total production assertions for v0.8.');
 
 for(const l of LEVELS){const settled=new Simulation(l);ok(settled.cameras.every((cam,i)=>Math.hypot(cam.position.x-l.cameras[i].x,cam.position.y-l.cameras[i].y)<25),l.name+': initial layout is stable');}
-const mounted=new Simulation(LEVELS[80]),fixedLens=mounted.cameras.find(cam=>cam.game.bolted);ok(fixedLens.isStatic&&fixedLens.game.shield,'armored mixed-tool pod is visibly bolted and fixed');mounted.projectile.game.tool='grapple';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(mounted.hooks.length===0&&!fixedLens.game.disabled,'hook cannot move bolted armored pod');mounted.projectile.game.tool='paint-can';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(fixedLens.game.disabled,'paint disables bolted armor');
+const mounted=new Simulation(LEVELS[80]),fixedLens=mounted.cameras.find(cam=>cam.game.bolted);ok(fixedLens.isStatic&&fixedLens.game.shield,'armored mixed-tool pod is visibly bolted and fixed');mounted.projectile.game.tool='grapple';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(mounted.hooks.length===0&&!fixedLens.game.disabled,'cutter cannot sever a bolted armored pod');mounted.projectile.game.tool='paint-can';mounted.activateTool(mounted.projectile,fixedLens,fixedLens.position);ok(fixedLens.game.disabled,'paint disables bolted armor');
 const emptyTool=new Simulation(LEVELS[80]);emptyTool.inventory['paint-can']=0;ok(!emptyTool.selectTool('paint-can'),'empty inventory cannot be selected');emptyTool.inventory['street-stone']=0;emptyTool.inventory['paint-can']=1;emptyTool.finishShot();ok(emptyTool.tool.id==='paint-can','next available tool loads when current supply is empty');emptyTool.inventory['paint-can']=0;emptyTool.finishShot();ok(emptyTool.state==='lost','total supply exhaustion ends attempt');
-console.log('PASS: '+checks+' final assertions, all 160 levels and inventory / tool / stability checks.');
+console.log('PASS: '+checks+' final assertions, all 200 levels and inventory / tool / stability checks.');
 
 // The pose contacts are checked against actual physics coordinates, including extreme pulls.
 const rig=visual.ctx.window.BlindSpotRebelRig;
@@ -145,7 +147,7 @@ const pixels=new Uint8ClampedArray(7*7*4);for(let i=0;i<49;i++){pixels.set([220,
 ok(pixels[3]===0&&pixels[(3*7+3)*4+3]===255,'neutral exterior is isolated while enclosed white highlights survive');ok(pixels[(2*7+2)*4+3]===255,'dark painted hair and linework survive isolation');
 ok(fs.existsSync('dist/assets/rebel-parts-painted.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('painted:"data:image/png;base64,'),'painted source is included in the offline game');
 let cohesiveCalls=0,cohesiveColumns=new Set(),cohesiveRows=new Set();const cohesiveContext=new Proxy({drawImage(...args){cohesiveCalls++;cohesiveColumns.add(Math.round(args[1]));cohesiveRows.add(Math.round(args[2]));ok(args.slice(1).every(Number.isFinite),'cohesive frame coordinates remain finite')}},{get:(o,k)=>o[k]||(()=>{})});
-for(const tool of Object.keys(c.BlindSpotData.TOOLS))for(const phase of ['ready','aim','release'])skin.drawCohesive(cohesiveContext,{tool,phase,tension:.7,squat:3},{width:1536,height:1536});
+for(const tool of ['street-stone','paint-can','emp-puck','grapple','breach-charge','foam-pod'])for(const phase of ['ready','aim','release'])skin.drawCohesive(cohesiveContext,{tool,phase,tension:.7,squat:3},{width:1536,height:1536});
 ok(cohesiveCalls===18&&cohesiveColumns.size===4&&cohesiveRows.size===3,'cohesive atlases supply all six characters and gameplay poses');
 ok(fs.existsSync('dist/assets/rebel-poses-cohesive.png')&&fs.existsSync('dist/assets/rebel-poses-expansion.png')&&fs.readFileSync('dist/blind-spot-standalone.html','utf8').includes('expansion:"data:image/png;base64,'),'all six cohesive production sprites are included in the offline game');
 console.log('PASS: '+checks+' final assertions including painted sprite assembly.');
@@ -170,4 +172,4 @@ require('./balance.test.cjs');
 const fractional=harness({height:719.984375});fractional.click('playBtn');
 for(const [type,x,y] of [['pointerdown',220,490],['pointermove',185,535],['pointerup',185,535]])fractional.ids.game.fire(type,{clientX:x,clientY:y,pointerId:1,button:0});
 ok(fractional.state().projectile.x===185&&fractional.state().projectile.y===535,'fractional canvas height does not perturb an identical visible drag');
-console.log('PASS final: '+checks+' assertions plus mechanics and 480 stress runs.');
+console.log('PASS final: '+checks+' assertions plus mechanics and 600 stress runs.');

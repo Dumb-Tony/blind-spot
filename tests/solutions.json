@@ -1378,8 +1378,8 @@
     "remaining": 0,
     "shots": [
       [
-        65,
-        40
+        60,
+        35
       ]
     ],
     "stars": 3,
@@ -1396,8 +1396,12 @@
     "remaining": 0,
     "shots": [
       [
-        60,
-        35
+        35,
+        85
+      ],
+      [
+        35,
+        45
       ]
     ],
     "stars": 3,
@@ -1414,7 +1418,11 @@
     "remaining": 0,
     "shots": [
       [
-        55,
+        115,
+        15
+      ],
+      [
+        35,
         55
       ]
     ],
@@ -1432,8 +1440,8 @@
     "remaining": 0,
     "shots": [
       [
-        55,
-        55
+        105,
+        45
       ]
     ],
     "stars": 3,
@@ -1450,8 +1458,8 @@
     "remaining": 0,
     "shots": [
       [
-        55,
-        50
+        95,
+        35
       ]
     ],
     "stars": 3,
@@ -1469,12 +1477,20 @@
     "remaining": 0,
     "shots": [
       [
-        115,
-        20
+        45,
+        45
       ],
       [
         55,
         55
+      ],
+      [
+        115,
+        15
+      ],
+      [
+        35,
+        65
       ]
     ],
     "stars": 3,
@@ -1493,8 +1509,12 @@
     "remaining": 0,
     "shots": [
       [
+        85,
+        5
+      ],
+      [
         35,
-        66
+        75
       ]
     ],
     "stars": 3,
@@ -1512,12 +1532,12 @@
     "remaining": 0,
     "shots": [
       [
-        105,
-        35
+        95,
+        55
       ],
       [
-        55,
-        15
+        65,
+        25
       ]
     ],
     "stars": 3,
@@ -1536,8 +1556,24 @@
     "remaining": 0,
     "shots": [
       [
-        85,
-        24
+        105,
+        35
+      ],
+      [
+        35,
+        65
+      ],
+      [
+        65,
+        35
+      ],
+      [
+        65,
+        25
+      ],
+      [
+        35,
+        55
       ]
     ],
     "stars": 3,
@@ -1584,12 +1620,16 @@
     "remaining": 0,
     "shots": [
       [
+        115,
+        5
+      ],
+      [
         45,
         65
       ],
       [
-        65,
-        25
+        35,
+        45
       ]
     ],
     "stars": 3,
@@ -1609,12 +1649,16 @@
     "remaining": 0,
     "shots": [
       [
-        75,
+        105,
         45
       ],
       [
-        55,
-        15
+        45,
+        55
+      ],
+      [
+        35,
+        25
       ]
     ],
     "stars": 3,
@@ -1634,16 +1678,12 @@
     "remaining": 0,
     "shots": [
       [
-        55,
-        55
+        95,
+        25
       ],
       [
-        55,
-        55
-      ],
-      [
-        55,
-        35
+        35,
+        65
       ]
     ],
     "stars": 3,
@@ -1663,8 +1703,12 @@
     "remaining": 0,
     "shots": [
       [
-        39,
-        87
+        35,
+        65
+      ],
+      [
+        35,
+        85
       ]
     ],
     "stars": 3,
@@ -1683,12 +1727,16 @@
     "remaining": 0,
     "shots": [
       [
-        45,
-        65
+        55,
+        45
+      ],
+      [
+        65,
+        55
       ],
       [
         35,
-        25
+        65
       ]
     ],
     "stars": 3,
@@ -1709,12 +1757,16 @@
     "remaining": 0,
     "shots": [
       [
-        35,
-        85
+        105,
+        45
+      ],
+      [
+        95,
+        45
       ],
       [
         35,
-        47
+        75
       ]
     ],
     "stars": 3,
@@ -1736,7 +1788,11 @@
     "shots": [
       [
         85,
-        35
+        45
+      ],
+      [
+        35,
+        65
       ]
     ],
     "stars": 3,
@@ -1757,8 +1813,12 @@
     "remaining": 0,
     "shots": [
       [
-        40,
-        80
+        110,
+        35
+      ],
+      [
+        80,
+        30
       ]
     ],
     "stars": 3,
@@ -2515,13 +2575,13 @@
     "remaining": 0,
     "shots": [
       [
-        105,
-        5,
-        "grapple"
+        115,
+        25,
+        "street-stone"
       ],
       [
-        55,
-        55,
+        35,
+        75,
         "paint-can"
       ]
     ],
@@ -2540,13 +2600,13 @@
     "remaining": 0,
     "shots": [
       [
-        42,
-        57,
-        "grapple"
+        95,
+        35,
+        "street-stone"
       ],
       [
         35,
-        80,
+        85,
         "paint-can"
       ]
     ],
@@ -2566,9 +2626,9 @@
     "remaining": 0,
     "shots": [
       [
-        45,
-        35,
-        "grapple"
+        115,
+        -5,
+        "emp-puck"
       ],
       [
         35,
@@ -2594,8 +2654,8 @@
     "shots": [
       [
         85,
-        25,
-        "grapple"
+        45,
+        "paint-can"
       ],
       [
         35,
@@ -2646,14 +2706,14 @@
     "remaining": 0,
     "shots": [
       [
-        44,
-        65,
-        "grapple"
+        115,
+        15,
+        "paint-can"
       ],
       [
-        115,
-        5,
-        "emp-puck"
+        45,
+        55,
+        "paint-can"
       ],
       [
         35,
@@ -2683,8 +2743,8 @@
         "grapple"
       ],
       [
-        35,
-        85,
+        45,
+        65,
         "paint-can"
       ]
     ],
@@ -2734,14 +2794,19 @@
     "remaining": 0,
     "shots": [
       [
-        45,
-        70,
-        "grapple"
+        95,
+        35,
+        "paint-can"
       ],
       [
-        35,
-        80,
-        "paint-can"
+        65,
+        45,
+        "emp-puck"
+      ],
+      [
+        45,
+        75,
+        "street-stone"
       ]
     ],
     "stars": 3,
@@ -2856,13 +2921,18 @@
     "remaining": 0,
     "shots": [
       [
-        84,
-        43,
-        "grapple"
+        95,
+        35,
+        "paint-can"
+      ],
+      [
+        55,
+        5,
+        "street-stone"
       ],
       [
         35,
-        85,
+        95,
         "paint-can"
       ]
     ],
@@ -3683,6 +3753,806 @@
       0.6,
       0.5,
       1.4
+    ]
+  },
+  {
+    "id": "magnet-mile-1",
+    "level": 161,
+    "name": "First attraction",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-2",
+    "level": 162,
+    "name": "Loose change",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-3",
+    "level": 163,
+    "name": "Metal meeting",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        35,
+        55
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-4",
+    "level": 164,
+    "name": "Salvage rights",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-5",
+    "level": 165,
+    "name": "Heavy draw",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-6",
+    "level": 166,
+    "name": "Crossed lines",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-7",
+    "level": 167,
+    "name": "Blue shift",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        35,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-8",
+    "level": 168,
+    "name": "Freight magnet",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-9",
+    "level": 169,
+    "name": "Anchor point",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        45,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-10",
+    "level": 170,
+    "name": "Moving parts",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        45,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-11",
+    "level": 171,
+    "name": "Scrap balcony",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        35,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-12",
+    "level": 172,
+    "name": "Polar offices",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-13",
+    "level": 173,
+    "name": "Concrete compass",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-14",
+    "level": 174,
+    "name": "Cargo cluster",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-15",
+    "level": 175,
+    "name": "The long pull",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "magnet-mile-16",
+    "level": 176,
+    "name": "Foundry floor",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-17",
+    "level": 177,
+    "name": "Split attraction",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-18",
+    "level": 178,
+    "name": "Magnetic field",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        75,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-19",
+    "level": 179,
+    "name": "Salvage skyline",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        45
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "magnet-mile-20",
+    "level": 180,
+    "name": "Mile blackout",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        35
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-1",
+    "level": 181,
+    "name": "First gust",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-2",
+    "level": 182,
+    "name": "Open window",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "magnet-puck"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-3",
+    "level": 183,
+    "name": "Push comes down",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        45,
+        45,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-4",
+    "level": 184,
+    "name": "Loose roof",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-5",
+    "level": 185,
+    "name": "Crosswind",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "magnet-puck"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-6",
+    "level": 186,
+    "name": "Pressure drop",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-7",
+    "level": 187,
+    "name": "Pink horizon",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        35,
+        45,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-8",
+    "level": 188,
+    "name": "Air pocket",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-9",
+    "level": 189,
+    "name": "Lift and separate",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-10",
+    "level": 190,
+    "name": "Draft offices",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        85,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-11",
+    "level": 191,
+    "name": "Wide blast",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-12",
+    "level": 192,
+    "name": "Falling weather",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-13",
+    "level": 193,
+    "name": "Vent stack",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-14",
+    "level": 194,
+    "name": "Storm door",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        105,
+        45,
+        "magnet-puck"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-15",
+    "level": 195,
+    "name": "Pressure court",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        55,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5
+    ]
+  },
+  {
+    "id": "updraft-16",
+    "level": 196,
+    "name": "High front",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        35,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-17",
+    "level": 197,
+    "name": "Split current",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        25,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-18",
+    "level": 198,
+    "name": "Rooftop warning",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-19",
+    "level": 199,
+    "name": "Last forecast",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        95,
+        45,
+        "airburst"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.6,
+      0.5,
+      0.6,
+      0.5,
+      0.6
+    ]
+  },
+  {
+    "id": "updraft-20",
+    "level": 200,
+    "name": "Updraft finale",
+    "won": true,
+    "remaining": 0,
+    "shots": [
+      [
+        65,
+        35,
+        "magnet-puck"
+      ]
+    ],
+    "stars": 3,
+    "initialCameraShift": [
+      0.4,
+      0.5,
+      0.6,
+      0.5,
+      0.6
     ]
   }
 ]

@@ -1,3 +1,12 @@
+# 0.19 — New forces
+
+- Replaced the Pull Hook with June's Cable Cutter while retaining the internal tool ID for saved routes and campaign continuity.
+- Added cable, hinge, glass, wood and close-range mount cutting, plus visible toothed-disc motion, sparks, cut labels and a distinct metallic sound.
+- Added Vale and the Magnet Puck, which attracts nearby loose structures toward the impact point.
+- Added Tess and the Airburst Capsule, which pushes nearby loose structures away from the impact point.
+- Added Magnet Mile and Updraft: forty progressively layered installations with stable identities and mixed-tool play.
+- Expanded route, stability, inventory, tool-effect and browser coverage to 200 levels and eight tools.
+
 # 0.18 — More to break
 
 - Added Redline Ward and Overgrowth, expanding the campaign from 120 to 160 installations across eight districts.

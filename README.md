@@ -1,4 +1,4 @@
-# Blind Spot — Eight Regions (0.18)
+# Blind Spot — Ten Regions (0.19)
 
 Play: https://dumb-tony.github.io/blind-spot/
 Source: https://github.com/Dumb-Tony/blind-spot
@@ -7,7 +7,7 @@ Open `dist/blind-spot-standalone.html` to play offline. Artwork, physics, styles
 
 ## Much more city
 
-Version 0.18 adds Redline Ward and Overgrowth: forty new installations, Sol and Niko, the Breach Charge and Foam Pod, new district palettes and a six-tool mixed campaign. The game now contains eight regions, 160 levels, six rebels and six mechanically distinct tools.
+Version 0.19 replaces June's Pull Hook with the Cable Cutter and adds Vale's Magnet Puck and Tess's Airburst Capsule. Magnet Mile and Updraft add forty installations, bringing the campaign to ten regions, 200 levels, eight rebels and eight mechanically distinct tools. Existing level IDs and saved stars remain intact.
 
 ## In the scene
 
@@ -21,7 +21,7 @@ Version 0.16 preserves the four painted character designs while replacing rectan
 
 Version 0.15 reshapes Starter City's eight opening installations around broad structural targets and multiple attack paths. Players can hit legs, decks, glass, weights, or cameras directly, with three-star targets that allow cleanup throws. The opening paint and EMP installations add nearby impact surfaces without increasing either tool's range. The first four installations in every district carry an extra recovery throw and mixed-tool supplies where applicable.
 
-Every Starter City installation has three separated winning shot paths in the automated balance audit. Each path wins at least seven of nine trials when both axes vary by four pixels, and each survives a deliberate missed throw. All 160 campaign routes pass in the browser.
+Every Starter City installation has three separated winning shot paths in the automated balance audit. Each path wins at least seven of nine trials when both axes vary by four pixels, and each survives a deliberate missed throw. All 200 campaign routes pass in the browser.
 
 See [the early-game balance report](docs/PLAYTEST-0.15.md).
 
@@ -65,11 +65,15 @@ District lighting, distant architecture, roof edges, material bevels and shadows
 | Starter City | Street Stone | 20 |
 | Color Quarter | Paint Can | 20 |
 | Signal Heights | EMP Puck | 20 |
-| Iron Docks | Pull Hook | 20 |
+| Iron Docks | Cable Cutter | 20 |
 | Junction Yard | Stone + Paint | 20 |
 | Central Works | All four tools | 20 |
+| Redline Ward | Breach Charge | 20 |
+| Overgrowth | Foam Pod + mixed tools | 20 |
+| Magnet Mile | Magnet Puck | 20 |
+| Updraft | Airburst + mixed tools | 20 |
 
-160 installations, 480 possible stars. New stages broaden the playfield occupation, add taller frames and suspended loads, then combine separated targets, heavy caps, fragile upper storeys and ground-level cleanup. The final districts add focused demolition and physical foam construction before combining tools in larger operations.
+200 installations, 600 possible stars. Later stages combine separated targets, heavy caps, fragile upper storeys, suspended loads, magnetic attraction and directional pressure waves.
 
 Choose **LOAD TOOL** before throwing in mixed regions. Each tool has a limited supply, and every throw uses the shared level allowance. Paint or a close EMP pulse defeats bolted armored cameras; ordinary cameras can still fall with their supports. The active rebel and launcher change with your selection.
 
@@ -80,7 +84,9 @@ Drag the glowing tool left and down, then release. The fading guide shows only t
 - **Stone:** impact, support damage and momentum through breakable structures.
 - **Paint:** a visible 145-pixel splash, droplets, drips and persistent surface coverage. Broken painted pieces keep their paint.
 - **EMP:** a **95-pixel pulse**, reduced from 180. Each directly reached circuit node can disable its single nearest matching neighbor within **190 pixels**. That neighbor does not propagate further. Distant matching letters no longer grant map-wide shutdown. Pulse range is measured from contact to lens center; materials do not block the field.
-- **Hook:** grips a movable body and pulls for 1.1 seconds. Off-center hits rotate beams; strained suspension cables tear. Fixed steel and bolted cameras cannot be pulled.
+- **Cable Cutter:** severs the nearest suspension cable or hinge, slices glass and wood, and cuts an unbolted camera mount at close range. Fixed steel makes the cutter ricochet.
+- **Magnet Puck:** pulls nearby loose beams, concrete and unbolted cameras toward the landing point. Fixed steel remains an anchor.
+- **Airburst Capsule:** pushes nearby loose bodies away from the landing point, turning placement into the direction of collapse.
 
 Three stars reward the tested shot target shown before aiming; two and one stars allow extra throws. Inspect the damage after winning to see the painted ruins. All regions remain open. Browser saves from the 8- and 32-level builds migrate to the same original installations.
 
@@ -92,12 +98,12 @@ Three stars reward the tested shot target shown before aiming; two and one stars
 - `dist/rebel-rig.js`: articulated gameplay characters, two-link arm poses and release motion.
 - `dist/renderer.js`, `dist/game.js`: visuals, input, sound, menus and save migration.
 - `docs/GDD.md`, `docs/CAMPAIGN.md`, `docs/TEST_REPORT.md`, `docs/CHANGELOG.md`: design, level reference and validation.
-- `tests/solutions.json`: reproducible winning launches for all 160 levels (spoilers).
+- `tests/solutions.json`: reproducible winning launches for all 200 levels (spoilers).
 
 Run `node scripts/build-standalone.mjs`, then `node tests/production.test.cjs`. No dependency installation is needed. `node scripts/serve.cjs` starts the local preview. `node tests/solve-overhaul.cjs --save` searches and records solutions; it is intentionally slower than the normal regression suite. GitHub Pages runs the build and regression suite before deployment on pushes to `main`.
 
 The `region1-cloud-baseline` tag preserves the recovered cloud original. Earlier versioned ZIPs are historical snapshots. GitHub Pages is the public sharing link.
 
-For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 160 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.
+For the automated browser replay, start the local server and open /qa-physics.html, then select Run all 200 levels. This uses isolated progress, real pointer handlers and an accelerated clock; it renders each result and checks body validity.
 
 The aiming-tolerance review gives 13 sensitive contraption puzzles a cleanup throw within the three-star target. See docs/PLAYTEST-0.12.md for validation and local browser review tools.
